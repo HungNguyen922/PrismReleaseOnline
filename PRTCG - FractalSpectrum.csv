@@ -1,0 +1,160 @@
+Name,Tags,Power,Bulk,Color,Color,Color,Color,Trait (Changes how the card is played),Effect,Effect,Flavor,Image,Collection Group,Inspirations?
+Casting Sky,Cloud,1,2,Cyan,Blue,Red,Pink,,Comboing: 1 DMG per POW 1- Comboing,Set 1,"Leader of the Castings. When the tide is high, waves will crash down on her adversaries.",,1,
+Casting Cirrus,Cloud,2,4,Cyan,Blue,,,,"Stack 3: Look at the top 4 cards of the Public Pile and you may 
+rearrange them.","If the card beneath this is a Casting, deal 1 dmg.",A ribbon dancer who helps coordinate the plans of the Castings.,,1,Ribbon Dancer
+Casting Stratus,Cloud,1,5,Cyan,Blue,,,,"Shove 2 Borders 1: From the Public Pile, send 1 card to the top of each bordering Gate Zone","Sequence Casting: 2 DMG; If the card played on this is a Casting, deal 2 dmg",A trained assassin who lies in wait launch his ambushes.,,1,Samurai Mafia
+Casting Cumulus,Cloud,1,3,Cyan,Blue,,,,Ultimate; The next card played on this deals DMG equal to their POW stat,Sequence Casting: Recall 1,,,1,Pirate
+Casting Nimbus,Cloud,2,1,Cyan,Blue,,,,Gap 1 Faceup,Detonate Castings In-Previous 2;  Casting cards that are within the 2 cards below this one have their effects triggered,,,1,City Girl
+Carapace Coconut,Shelled,4,1,Orange,Blue,Red,Yellow,Counterless,Scrounge 1,Set Self,,,1,Coconut Crab
+Carapace Horseshoe,Shelled,3,5,Orange,Yellow,Blue,,,Rend 3,Block POW 5,,,1,Horseshoe Crab
+Carapace Arrow,Shelled,4,2,Orange,Red,,,,Rend 4,2+ Rends: Shove 1 Empty Gate Zone 1 Rend,,,1,Arrow Crab
+Carapace Hermit,Shelled,2,3,Orange,Yellow,Fuchsia,,,Over-Rend 2: Send the top card of a draw pile to a different draw pile.,Seal Non-OYF,,,1,Hermit Crab
+Carapace Spider,Shelled,5,4,Orange,Red,,,,Rend 5:  Send the top 3 cards of a draw pile to a different draw pile.,Shove 4,,,2,Japanese Spider Crab
+Floral Torch Ginger,Flower,1,5,Pink,Yellow,Green,Fuchsia,,Held: Plays Responsive,,,,2,
+Floral Plum Blossom,Flower,2,3,Pink,Blue,Red,,,Two-Step,Opponent Non-Fill Draw< Gap Opponent 2,,,2,
+Floral Sundew,Flower,1,3,Pink,Yellow,Red,,,Shove 2 Adjacents 1,Any Set Activation< Set Activated,,,2,
+Floral White Lotus,Flower,1,3,Pink,,,,Quick-Set,Armor 3,Faceup: Instant Phase: Draw 1,,,2,
+Floral Rangoon Creeper,Flower,2,2,Pink,Green,,,,Heal 3,Any Single < Gap DP 2,,,2,
+Floral Hibiscus,Flower,3,2,Pink,Orange,,,,Gift 1,Block 2,,,2,
+Tianshi Imperial Throne,Constellation,2,4,Yellow,Fuchsia,Blue,Violet,,Scan All Hands,"Reflect Half; When taking DMG you may burn this to block half the incoming DMG and deal half of it to the Opponent instead.
+",,,2,
+Tianshi Solid Dipper,Constellation,2,4,Yellow,Green,,,,Refresh Self,Scanned: Bounce Opponent Responses,,,2,
+Tianshi Liquid Dipper,Constellation,2,3,Yellow,Blue,,,,Retrieve 1,Scanned: Shove Opponent Hand 1,,,3,
+Tianshi Butcher Shops,Constellation,3,4,Yellow,Red,,,,Gap Opponent 1,Scanned; Recycle Opponent Hand 2,,,3,
+Tianshi Astrologer,Constellation,2,3,Yellow,Green,Fuchsia,,,Scan Opponent 3,Scanned: Heal 3,,,3,
+Tianshi Woman's Bed,Constellation,1,3,Yellow,Blue,Orange,,,Scan 1 Set Slot,Scanned: Steal 1,,,3,
+Weird Death Ball,WDB,5,5,Violet,Fuchsia,Blue,Red,,Instant Phase: Held: Draw 1,Gap Opponent 1,,,3,
+Igniting Resonance,WDB,5,5,Fuchsia,Violet,Cyan,,Double,Draw 1; Add the top card of any draw pile to your hand,,,,3,
+Quaking Stun,WDB,4,4,Fuchsia,Violet,Cyan,,,Shove 1 onto Diagonals,Opponent Drought 2,,,3,
+Lethal Overcharge,WDB,4,4,Fuchsia,Violet,Cyan,,,Leech 1,Drought 1;,,,3,
+Dividing Pike,WDB,3,3,Violet,Fuchsia,,,,Ultimate,Entry: R / B,,,3,
+Xeric Steppes,WDB,3,3,Fuchsia,,,,Quick-Set,Opponent Drought 1,Any Single: Single -1/+1,,,4,
+Jade Orphans,Tile,1,3,Cyan,Violet,Orange,Fuchsia,,Held: Stringing C's in Palette 1 are Jades,,,,4,Silver Wolf
+Jade Kong,Tile,4,4,Cyan,Pink,,,,In Jade String: 3+ Jades Stringing: Jade Play Sequence: 4 DMG,"Lethal< Immortal; If your health would reach 0, this is playable as a Response so that your health cannot go below 1",,,4,Castorice
+Jade Pung ,Tile,3,3,Cyan,Red,,,,Critical: +1 DMG,Scrounge 1,,,4,Tribbie
+Jade Chow,Tile,3,3,Cyan,Violet,,,,POW Step Previous ± 1: 1 DMG,Recall 1,,,4,Seele
+Jade Eyes,Tile,2,2,Cyan,Fuchsia,,,,Set  1,Shift 1 Gated 2,,,4,Jade
+Hidden Jade,Tile,1,1,Cyan,Green,,,Quick-Set,Unload: Pseudo-Pure,In C String: Responseless Gate ,,,4,QQ
+Checkered King,Chess Bug,3,1,Fuchsia,Green,Orange,Yellow,,Held: Held BLK 1s Tandem,2+ Faceup Checkerds: Shove All Gate Zones 1,,,4,Rhino Beetle
+Checkered Queen,Chess Bug,9,1,Fuchsia,Orange,,,,2+ Faceup Checkereds: Two-Step,Shift 1 Border 2,,,4,Bee
+Checkered Wazir,Chess Bug,2,1,Fuchsia,Red,Violet,,,Gap Opponent 1,Border Shift 1,,,5,Centipede
+Checkered Knight,Chess Bug,3,1,Fuchsia,Green,Orange,,Tandem; This card can be Burned along side another card as though it were a Split,Recycle 1 Adjacent 1,,,,5,Praying Mantis
+Checkered Ferz,Chess Bug,2,1,Fuchsia,Blue,Yellow,,,Recycle 1 Diagonal Base 1,Diagonal Shift 1,,,5,Wheel Bug
+Checkered Pawn,Chess Bug,1,1,Fuchsia,Blue,Yellow,,,Block 2,Sequence Checkered Doubles,,,5,Ant
+Flame Spawn,Fire Spirit,3,2,Red,,,,,Red Leader: 1 DMG,Refresh 2,,,5,
+Desert Thorns,Spiky Spirit,1,2,Orange,,,,,O Leader: Steal 1,Exchange 2,,,5,
+Terra Worm,Rock Spirit,2,2,Yellow,,,,,Y Leader: Haunt Self,Scrounge 2,,,5,
+Grassy Capy,Plant Spirit,1,3,Green,,,,,G Leader: Gap DP 1,Draw 2,,,5,
+Vaulting Gull,Winged Spirit,3,3,Cyan,,,,,C Leader: Recall 1,Set 2,,,5,
+Ocean Carp,Aquatic Spirit,2,1,Blue,,,,,B Leader: Shove 1 from Opponent Hand,Stack any Gate 2,,,6,
+Fulgural Spark,Electric Spirit,3,1,Violet,,,,,V Leader: Leech 1,Gap 2,,,6,
+Spectral Ghost,Phantom Spirit,2,3,Fuchsia,,,,,F Leader: Heal 1,Shift 2 Gateds 1,,,6,
+Shimmering Petal,Flower Spirit,1,1,Pink,,,,,Pink Leader: Take 1,Gift 2,,,6,
+Second Chance,Spirit,1,3,Green,Violet,Red,Yellow,,Draw 1,Refresh 3: Send 3 cards in your Hand to the bottom of the deck. Draw 3 cards.,,,6,Mahoraga
+Hidden Inventory,Spirit,2,1,Orange,Green,Red,Cyan,,Retrieve 1,Entry: Non-BRV,,,6,toji
+Cut-In Seasons,Pip,2,2,Yellow,Green,Blue,Red,,"Two-Step; This card counts as both the first and second 
+numbers in a Attack or Defense","Disarm Opponent Single; When played as a response to any effect, negate that effect",,,6,
+Unbreakable Hand,Bizarre Spirit,4,3,Blue,Cyan,Green,Yellow,Gapless,Stack 2,Shove Hand 1,,,6,ZA HANDO
+Consuming Cell,,3,2,Fuchsia,Orange,Blue,Yellow,"Liminal 2; If 2 Adjacent Gates form a Pseudo-Pure or Union and this card shares colors with them, you may play this card to combine those 2 gates into 1",Shift 2 Foreigns Home,,,,6,
+Running Double,Pip,3,2,Yellow,Green,Blue,Red,Quick-Set & Double,Faceup: Detonate Plays In-Column; ,,,,7,2 Headed Dragon Doi Thong
+New Fortune,Food,2,3,Green,Red,Yellow,Orange,,BLK Attack,Defending: Heal 2,,,7,Dim Sum
+Aoshi ,Space Rock,1,1,Orange,Violet,Red,Yellow,,Gift 1,Taking 4+ DMG< Armor 3 & Rend 4 from Base,,,7,Nibiru
+Transcending Flight,Gamble Phantom,4,2,Fuchsia,Orange,Blue,Yellow,,Reset 1,Shove 1 Gate Zone 2,,,7,壅
+Rescue Officer Third Art ,Soldier,3,4,Cyan,Orange,Yellow,,,Recall 1,Recalled DEF 3-: Draw 1,,,7,
+Fort Sand,Structure,2,4,Orange,Green,Cyan,,,"Retrieve 1 from Scan ED 2; From the top 2 cards of your Extra Deck, add 1 card to your hand.",Countering: Gap DP 4,,,7,
+Pele The Barren,Fire Bug,2,1,Violet,Red,Blue,,,Counterless & No Opponent Response: Recycle Self: The Opponent cannot Counter this card.,Opponent Drought 1: The Opponent draws 1 less card next time they would draw a card,,,7,Caconemobius fori
+Descending Lava,Fire Structure,1,5,Cyan,,,,,"Attacking: 1 DMG: When this card is involved in dealing DMG, deal 1 DMG.",,,,7,
+From Beyond the Fog,Spirit,1,1,Cyan,Violet,,,,Held: 3 Played: 1 DMG,Detonate Previous; The card below this has its effects triggered,,,7,
+War Warped Corn,Plant Food,1,2,Red,Orange,,,,0 DMG,"""+1 DMG per War Played this Game",,,8,Khorne
+Eyes of the Overseer,Item,4,1,Cyan,Orange,Fuchsia,,,Scan Opponent Hand 2,Burn 1 Scanned,,,8,Eye of Ender
+Boxout Kangaroo,Martial Beast,3,1,Red,Blue,,,,Take 1 & 2 DMG,"Bounce 1; Send any face up card, excluding Leaders, to the Opponent's hand.",,,8,
+Astral Molten Shell,Fire Aquatic,2,4,Blue,Red,,,,1 DMG,Responded: 1 DMG,,,8,Krakatuga
+Barrage Rush,Martial,4,1,Red,Yellow,Fuchsia,,,Unload: Attack,Effect DMG< 2 DMG,,,8,"Either Stands or Missiles, lol"
+Sacred Summoning,Phantom,2,3,Pink,Yellow,,,,All Players Take 1,Retrieve 1; Add the top card of your Extra Deck to your Hand.,,,8,Al Elric
+Bullet Weaving,Projectile,2,4,Violet,Pink,,,,Chaining: Leech 2,All Players Take 1,,,8,Kafka Ult
+Fusion Cynoros,Boom Ball ,3,2,Cyan,Violet,Pink,,,Chaining: All Players Take # Chaining,Scrounge 1,,,8,
+Borrowed Time,,2,3,Blue,Pink,,,,Take 1 & 1 Pass,Gap Opponent 1,,,8,
+Inferno Fist,Marital Fire,3,1,Red,Pink,,,,Non-R Previous: All Players Take 2,3- HP: Heal 15,,,9,
+Buzzing Flyral,Winged Bug,2,2,Red,Yellow,Fuchsia,,,Shift 2 Gateds 1 Border,1 DMG per Gated POW 2 ;,,,9,Going Viral
+Lion Toothed Shrapnel,Beast Projectile,3,2,Red,Violet,Pink,,,Healthy: Take 3 & Draw 1,Fragile: 5 DMG,,,9,
+Sentinel Sniper,Projectile,3,1,Red,Orange,,,Quick-Set,Faceup: Opponent Single: 1 DMG,Opponent Plays 3+< Recycle Opponent Play,,,9,SL Architect
+Pocket Anurai,Aquatic Projectile,2,2,Blue,Violet,,,Haunt,Faceup: Instant Phase: Fragile: 1 DMG,,,,9,Greninja
+Festering Algae Bloom,Aquatic Plant,1,3,Green,Yellow,Red,,,Heal 2,Gap 1 Gated 2,,,9,
+9Juhs,Aquatic,3,1,Pink,Red,Cyan,,,Overpowered: Opponent Set Self ,Not-Attacking: 1 DMG per Set,,,9,
+Inugami Seasons,,3,4,Orange,Red,Orange,,,Over-Rend 2 Thrice,Ripped: Recall 1,,,9,
+Rummaging Loot,,2,3,Yellow,Green,Orange,,,Rend 2: Create another draw pile using the top 2 cards of the Public Pile,Scrounge 1 / Draw 1,,,9,
+Lovesick Loop,,2,4,Orange,Blue,,,,Opponent Play< Bounce Played,Shift 1 Gated 1,,,10,kion dojima
+Brick Storm,Projectile,2,4,Yellow,Orange,Fuchsia,,,Opponent Drought 2; The Opponent draws 2 less card,"Block 3; When taking DMG, you may burn this to negate 
+3 incoming DMG",,,10,
+Heavy Reroll,Scaled Beast,1,3,Orange,Fuchsia,,,Responsive,"Shift 1 Border 1 Border; Move a bordering card that's
+on top of a gate, to a Gate Zone bordering it.",Responding: Reclaim & Drought 1,,,10,
+Foundation's Indestructible Scales,Scaled Beast,2,5,Orange,Orange,,,Gapless,Played: Steal 1 & Recycle Self,,,,10,SCP 682
+Dragon of the Sunken World,Scaled Beast,4,2,Yellow,Green,,,,Scan Opponent Hand 2,Depths: Haunt 1 Scanned BLK 2-,,,10,Thuong Luong
+Divine Insight,Constellation,2,3,Yellow,Fuchsia,,,Quick-Set,"Block 4: When taking dmg, you may play this to negate 4 incoming dmg",Unload: Scan Opponent Hand 4;,,,10,
+Shield of the Ogrex,Beast,2,4,Pink,Blue,,,,Fortify Opponent Hand 1;,Scrounge 1; Add 1 card on top of a gate to your hand.,,,10,Mitachurl
+Veering Lightning,Electric,1,4,Violet,Orange,,,,5+ DMG< Reflect,Kindling: Snipe 1 Adjacent,,,10,zuko
+Iron Spire,Rock Structure,1,4,Orange,Violet,,,,Block 2,Faceup/ Held: Block Cards can +DMG,,,,
+Surface Tension,Aquatic,0,2,Yellow,Pink,,,,Opponent Play: Disarm Non-Gated Effects,Chaining: Bounce 1 Gate 3,,,,Sundew vs Stratus 
+Garden's Knotweed,Plant Tile,3,4,Orange,Yellow,Pink,,,Opponent Drought 1,Faceup: Disarm Adjacents,,,11,Knotweed
+Tidal Horizon,Aquatic,2,1,Blue,Yellow,,,,Scrounge 1,Faceup/ Sequence: All Players Drawless,,,11,
+Acrozard,Boom Tact ,4,2,Orange,Yellow,Green,,,Yellow Entry,Faceup: DMG Bordering: Block 2,,,11,Yodan Shifour
+Sponge Soak,Aquatic,2,1,Yellow,Blue,,,,Held: Taking DMG: Block 1,Opponent Held Ripped< Drought Opponent 2,,,11,
+Leaves Arisen,Plant,1,3,Green,Red,Cyan,,,Any Single: Stockpile/ Recycle/ Gap/ Set Single & 1 Held,,,,11,
+Sniff Niff,Beast,3,5,Green,Blue,Yellow,,,Draw DEF 4+'s from Scan 4,Heal 3 per Draw,,,11,Sniffer
+Blackhole Shark,Space Fish,2,5,Green,Fuchsia,Violet,,,Gap DP 4; Send the top 4 cards of any draw pile to the gap,Reset 1,,,11,Whale Shark
+Antiviral Xolo,Spiky Aquatic,2,1,Pink,Green,,,,Gap DP 2,Ripped: Heal 2 & 1 Haunt Attacks,,,11,Axolotl
+Verse's Laughing Gleam,Gamble,2,1,Green,Red,Orange,,Quick-Set,Faceup: Fill +1,,,,12,Sparkle
+Fertile Fields,Food,2,4,Green,Fuchsia,Red,,Quick-Set,Faceup: Plays gains Heal 1,Faceup: Column POWs -1 & Column BLKs +1,,,12,
+Death by 1000 Cuts,Bladed,2,2,Green,Orange,,,,Fragile: Gap DP 5,Gap Hand; Send your Hand to the Gap,,,12,Flying Guillotine
+Feitrhross Soothing Tusk,Mythical Arctic,1,5,Pink,Fuchsia,Green,,,Opponent Shift 1 Gated 1,Shove 1 Empty Gate Zone 3,,,12,
+World of Gray,Structure,2,3,Blue,Orange,Yellow,,,Steal 1,Faceup: Recolor Borders BO; Cards in bordering Gate Zones are now color pattern Blue Orange.,,,12,
+Perfect Game,,3,2,Orange,Green,,,Quick-Gap,Exchange upto 2,Gapped: Shove 2 Foreigns 1,,,12,Erwin AOT
+Eye for an Eye,Item,1,3,Yellow,,,,,Scan 2: Look at the top 2 cards of the Public Pile,Scanned: Held: Scan Gate 2/ In-DP: Scan Previous 2,,,12,
+Rotting Heart,Item,1,5,Violet,Red,,,,Refresh 1: Send 1 card in your Hand to the bottom of the deck. Draw 1 cards.,Recycle 1 from Opponent Hand,,,12,
+Ash to Gold,Winged Item,2,3,Red,Yellow,Orange,,,Attack< Recycle 1 Base 3,Attack< +DMG = # R's Recycled,,,12,
+Twilight Totality,Aquatic,1,3,Blue,Fuchsia,,,,Opponent Draw 2,Shut-Down,,,13,
+Explosive Date,Fire,3,2,Red,Violet,,,,Opponent Recyles 1 BLK 4+,Recycle Self,,,13,Reze
+Collapsing Shrine,,2,4,Fuchsia,Pink,,,,Rebuild onto Border,Construct: Draw 2 & Double,,,13,
+Road of the Lost,Structure,3,1,Fuchsia,Yellow,,,,Gated: Absolute Entry,In-Set: Pass: Border Gate Absolute Entry,,,13,
+Nameless Owl,Holo Winged,1,1,Orange,Yellow,,,,Counterless,Armor 0 & Drought 3,,,13,
+Magenta Pose,Bizarre Spirit,1,4,Fuchsia,Yellow,,,,Opponent Play: Shift Opponent Play 1 & Play Attacks,,,,13,20th Century Boy
+Zander Lurking,Aquatic Fish,3,5,Yellow,Blue,Violet,,,Burrow upto 2; You may send this card up to 2 cards down in its Gate,Opponent Parry< Burrow Parry Base 2,,,13,
+Final Frame,Ball,3,6,Blue,Violet,,,,6- HP: Leech = HP,Pass & Gap 2,,,13,Walnut Bowling
+Lurking Bjornveggr Claw,Mythical Arctic,3,3,Blue,Yellow,Orange,,,Opponent 1 Scrounge Gated 3,Shut Down 1 Gated,,,13,Polar Bear
+Rising Phoenix,Mythical Winged,5,2,Red,Orange,,,,Draw 1,Recycle 1 from Diagonal Gates,,,14,
+Raging Horn Nardrifa,Mythical Arctic,5,1,Violet,Red,Cyan,,,Attack: This card Attacks,Take 6,,,14,
+Underworld King,Mythical Phantom,5,4,Green,Cyan,,,,Gap 1,Renew 1,,,14,Mordekaiser
+Myriad Spear Strikes,Bladed,1,5,Fuchsia,Violet,,,,"Morph POW 1-5: When you play this card, choose a number 1-5, that's this card's POW.",Attacking: Gap 2,,,14,
+Angler Sight,Aquatic,4,2,Blue,Green,Violet,,,Stockpile 1,Burrow 1 Border 2,,,14,
+Always Bet on the Strongest,Gamble,4,2,Yellow,Violet,Green,,,Guess Color & Scan 1,Scanned Guess: Drought Opponent 2,,,14,QQ Hakari Dancing
+Tempo Moth,Winged Music,4,1,Red,Orange,Violet,,,Recycle Base 1,O Previous: Reclaim,,,14,
+Tempo Score,Music Structure,2,5,Red,Orange,Violet,,,Two-Step,Gap Opponent 1,,,14,
+Devouring Chainsaw,Bladed Soldier,4,3,Orange,Violet,Yellow,,,Blockless,Chain Ender: Opponent Drought 3,,,14,Denji
+Filthy Feats,Spirit,4,5,Pink,Blue,Cyan,,,Mimic 1 Border,3+ Bounding: Attack,,,15,D4C
+Boros the Archiver,,4,5,Green,Blue,,,,Mimic 1 Effect from Gap,Scrounge 1,,,15,Trayzn the Infinite
+4 Aspects,Boom Tact ,4,4,Red,Yellow,,,,Critical: Opponent Drought 4,Disarm POW 4,,,15,Jigen Dragaon
+Heavy Hand,Item,4,3,Blue,Yellow,,,,Counterless,Blocked: Fill +1,,,15,
+Dual Strike,Martial,3,1,Cyan,Violet,Red,,,Laddering: Play Doubles,Set 1,,,15,
+Washed Over,Item,3,3,Yellow,Blue,,,,Shove Base to Faceup: Send the card at the bottom of this gate to the top of this gate,Renew 1,,,15,
+High Hysteria,,3,1,Violet,Blue,,,,Faceup: Borders Take 2,Sequenceless for 1 Round,,,15,
+Switching Exception,,3,3,Red,Violet,,,,Opponent Non-Attack Play< Swap Play with 1 Held/ Self,Criticaling: +1 DMG,,,15,Aoi todo
+Fusion Hydrakios,Boom Ball,2,4,Blue,Green,Cyan,,,Gap 2 & Drought 1,Heal 4 / Chaining: +3 DMG,,,15,
+Noon Showdown,,3,3,Cyan,Green,,,,All Players Set 2,Rebel Scrounge 1 ,,,16,
+Centireactor,Boom Ball ,3,1,Blue,Green,Cyan,,,Opponent Draw 1,Chaining: Draw 3,,,16,
+Cren,Aquatic,2,2,Blue,Cyan,,,,Stack 2,Instant Phase: Held: Shove 1 & Shoved POW 4+: Fill -1,,,16,
+Onsen Asperitas,Cloud Beast,2,4,Red,Cyan,,,Quick-Set,"Shove 2 Borders 1: From the Public Pile, send 1 card to the top of 2 borderingGate Zones","Unload: Fragile: Double; While active, if you have less HP than the Opponent, it is your action phase again",,,16,
+Fish Fry Frenzy,Aquatic Fish,1,1,Blue,Green,,,Quick-Set,"Faceup: POW 1s Double; While active, Power 1 cards you play are treated as Doubles",Faceup: Effect Double: Take 1,,,16,Goby Wishwashi
+Mirror Monolith,Structure,1,5,Pink,Yellow,Fuchsia,,Quick-Set,Faceup: Attack with BLK instead of POW,,,,16,Pecanolith
+Barnacle Rock,Aquatic,1,4,Pink,Green,,,,Counterless,Held: Pass: Draw 2,,,16,
+Nuevanan Dream,Plant Structure,1,3,Green,Cyan,Fuchsia,,Quick-Set,Heal 1,"Instant Phase: Faceup: Set 1; While active,if you have more HP than the Opponent Set 1 card from your hand.",,,16,
+Borisas ,Boom Tact ,1,4,Pink,Yellow,Red,,,Recoil,Countering: Draw 1,,,16,
+Rescue Officer First Art ,Soldier,1,2,Red,Orange,Yellow,,,Scrounge 1,Scrounged Overpowers Self: Scrounge 1,,,17,Contain
+Mothrenasoyisuh,Winged Bug,2,1,Yellow,Green,Violet,,,Draw 1 / Splitting: Draw 2,,,,17,
+Delivery Pigeon,Winged,2,1,Fuchsia,Green,,,,Shift 1 Gated 1: Choose any card on the top of a Gate and move it onto another Gate 1 spot away. ,"Faceup: Shifts +1 DMG; While this card is 
+on top of a gate, shifted cards can deal +1 DMG.",,,17,
+X Magistaff,Top,2,5,Yellow,,,,,Shifted: Diagonal Shift upto 2,Sequence: Drought 1,,,17,
+Short Breath,,2,3,Yellow,Fuchsia,,,,Border Shift 1,Tour 5: Opponent Drought 4,,,17,Exhaust/ Zheng He
+Shining Ladder,Structure,2,1,Cyan,Red,Yellow,,,Attacks +1 DMG,1 Gated Attacks,,,17,
+Starfruit Showers,Space Plant,2,2,Yellow,Violet,Fuchsia,,,Attack on All Other Gates,Responded: Gap Self,,,17,Shooting Starfruit
+Mystic Wish,Mythical,3,4,Pink,Yellow,Orange,,,Mimic 2 Faceups,Block 2,,,17,Dragon Balls
+ Festering Ganoderma,Plant,3,4,Green,Fuchsia,Red,,,Peak: Gap Base 4,Gapped: Buffer 1,,,17,

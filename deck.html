@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Deck Builder</title>
+</head>
+<body>
+    <div class="banner">
+        <a href="index.html" class="banner-title">PR Deck Builder</a>
+        <a href="gallery.html" class="banner-btn">Gallery</a>
+        <a href="deck.html" class="banner-btn">Deck Builder</a>
+    </div>
+    <div class="content">
+        <div class="deck-builder">
+            <div class="deck-area">
+                <div id="deck-export-wrapper">
+                    <h2 id="deck-title">
+                        Your Deck
+                    </h2>
+                    <div id="deck-cards">
+
+                    </div>
+                </div>
+                <span id="deck-count">(0)</span>
+                <button id="download-deck">Download Deck</button>
+                <button id="copy-deck">Copy Deck</button>
+                <button id="clear-deck">Clear Deck</button>
+            </div>
+
+            <div class="card-pool" id="card-pool">
+                <h2>Card Pool</h2>
+            </div>
+        </div>
+    </div>
+    <script src="renameDeck.js"></script>
+    <script src="allCards.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="deckBuilder.js"></script>
+    <script src="deckExport.js"></script>
+    <script src="deckCopy.js"></script>
+    <script src="deckClear.js"></script>
+
+
+</body>
+</html>
