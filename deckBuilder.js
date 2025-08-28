@@ -98,6 +98,7 @@ function applyFilters() {
     let filtered = allCards.filter(card => {
         const matchesType = typeFilter === "all" || card.Power.includes(typeFilter) || card.Bulk.includes(typeFilter);
         const matchesName = card.Name.toLowerCase().includes(nameSearch) || card.Tags.toLowerCase().includes(nameSearch)
+            || card.Trait.toLowerCase().includes(nameSearch)
             || card.Effect1.toLowerCase().includes(nameSearch) || card.Effect2.toLowerCase().includes(nameSearch);
         return matchesType && matchesName;
     });
