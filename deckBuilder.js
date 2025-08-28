@@ -75,7 +75,6 @@ fetch("allCards.json")
 .then(cardsData => {
     allCards = cardsData;
     renderCards(allCards);
-    console.log("Sample card data:", allCards[0]);
 });
 
 
