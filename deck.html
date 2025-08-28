@@ -29,6 +29,21 @@
                 <button id="clear-deck">Clear Deck</button>
             </div>
 
+            <!-- Filter controls -->
+            <div id="filters">
+                <!-- Example: filter by card type -->
+                <label for="typeFilter">Type:</label>
+                <select id="typeFilter">
+                    <option value="all">All</option>
+                    <option value="Monster">Monster</option>
+                    <option value="Spell">Spell</option>
+                    <option value="Trap">Trap</option>
+                </select>
+
+                <!-- Example: search by name -->
+                <label for="nameSearch">Search:</label>
+                <input type="text" id="nameSearch" placeholder="Card name...">
+            </div>
             <div class="card-pool" id="card-pool">
                 <h2>Card Pool</h2>
             </div>

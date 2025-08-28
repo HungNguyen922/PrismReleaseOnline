@@ -93,3 +93,19 @@ function updateDeckCount() {
     });
     deckCountSpan.innerText = `(${total})`;
 }
+
+function applyFilters() {
+    const typeFilter = document.getElementById("typeFilter").value;
+    const nameSearch = document.getElementById("nameSearch").value.toLowerCase();
+
+    let filtered = allCards.filter(card => {
+        const matchesType = typeFilter === "all" || card.type === typeFilter;
+        const matchesName = card.name.toLowerCase().includes(nameSearch);
+        return matchesType && matchesName;
+    });
+
+    renderCards(filtered);
+}
+
+document.getElementById("typeFilter").addEventListener("change", applyFilters);
+document.getElementById("nameSearch").addEventListener("input", applyFilters);
