@@ -15,16 +15,18 @@ function formatCardName(str) {
         .join("");                        // Join words without spaces
 }
 
-fetch("allCards.json")
-.then(res => res.json())
-.then(cardsData => {
-    cardsData.forEach(card => {
+//Global card storage for filtering
+let allCards = [];
+
+function renderCards(cards) {
+    cardPoolDiv.innerHTML = "<h2>Card Pool</h2>";
+    cards.forEach(card => {
         const cardDiv = document.createElement("div");
         cardDiv.classList.add("card");
 
         const img = document.createElement("img");
-        fileName = 'cardDatabase/' + formatCardName(card.Name) + '.png'; 
-        img.src = fileName 
+        const fileName = 'cardDatabase/' + formatCardName(card.Name) + '.png';
+        img.src = fileName;
         img.alt = card.Name;
         img.draggable = false;
 
@@ -33,51 +35,46 @@ fetch("allCards.json")
 
         cardDiv.appendChild(img);
         cardDiv.appendChild(title);
-
-        // Add card to pool
         cardPoolDiv.appendChild(cardDiv);
 
-        // Click to add card to deck
+        // Click → add to deck
         cardDiv.addEventListener("click", () => {
             if (deckMap[card.Name]) {
-                // Already in deck → increment counter
                 const countSpan = deckMap[card.Name].querySelector(".card-count");
-                let count = parseInt(countSpan.innerText, 10);
-                count++;
-                countSpan.innerText = count;
-                updateDeckCount();
+                countSpan.innerText = parseInt(countSpan.innerText, 10) + 1;
             } else {
-                // Not in deck yet → create card with counter
                 const deckCard = cardDiv.cloneNode(true);
                 deckCard.classList.add("deck-card");
 
-                // Add counter badge
                 const countSpan = document.createElement("span");
                 countSpan.classList.add("card-count");
                 countSpan.innerText = "1";
-
                 deckCard.appendChild(countSpan);
-                deckCards.appendChild(deckCard);
 
-                // Store reference
+                deckCards.appendChild(deckCard);
                 deckMap[card.Name] = deckCard;
 
-                // Optionally: allow removing
                 deckCard.addEventListener("click", () => {
                     let count = parseInt(countSpan.innerText, 10);
                     if (count > 1) {
-                        count--;
-                        countSpan.innerText = count;
+                        countSpan.innerText = count - 1;
                     } else {
                         deckCard.remove();
                         delete deckMap[card.Name];
                     }
                     updateDeckCount();
                 });
-                updateDeckCount();
             }
+            updateDeckCount();
         });
     });
+}
+
+fetch("allCards.json")
+.then(res => res.json())
+.then(cardsData => {
+    allCards = cardsData;
+    renderCards(allCards);
 });
 
 
@@ -99,8 +96,8 @@ function applyFilters() {
     const nameSearch = document.getElementById("nameSearch").value.toLowerCase();
 
     let filtered = allCards.filter(card => {
-        const matchesType = typeFilter === "all" || card.type === typeFilter;
-        const matchesName = card.name.toLowerCase().includes(nameSearch);
+        const matchesType = typeFilter === "all" || card.Color.includes(typeFilter);
+        const matchesName = card.Name.toLowerCase().includes(nameSearch);
         return matchesType && matchesName;
     });
 
