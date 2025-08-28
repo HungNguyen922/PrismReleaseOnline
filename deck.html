@@ -13,45 +13,44 @@
         <a href="deck.html" class="banner-btn">Deck Builder</a>
     </div>
     <div class="content">
-        <div class="deck-builder">
-            <div class="deck-area">
-                <div id="deck-export-wrapper">
-                    <h2 id="deck-title">
-                        Your Deck
-                    </h2>
-                    <div id="deck-cards">
-
-                    </div>
-                </div>
-                <span id="deck-count">(0)</span>
-                <button id="download-deck">Download Deck</button>
-                <button id="copy-deck">Copy Deck</button>
-                <button id="clear-deck">Clear Deck</button>
-            </div>
+      <div class="deck-builder">
+        
+        <div class="deck-area">
+          <div id="deck-export-wrapper">
+            <h2 id="deck-title">Your Deck</h2>
+            <div id="deck-cards"></div>
+          </div>
+          <span id="deck-count">(0)</span>
+          <button id="download-deck">Download Deck</button>
+          <button id="copy-deck">Copy Deck</button>
+          <button id="clear-deck">Clear Deck</button>
         </div>
-        <div class="right-column">
-            <!-- Filter controls -->
-            <div id="filters">
-                <!-- Example: filter by card type -->
-                <label for="typeFilter">Type:</label>
-                <select id="typeFilter">
-                    <option value="all">All</option>
-                    <option value="5">5</option>
-                    <option value="4">4</option>
-                    <option value="3">3</option>
-                    <option value="2">2</option>
-                    <option value="1">1</option>
-                        
-                </select>
     
-                <!-- Example: search by name -->
-                <label for="nameSearch">Search:</label>
-                <input type="text" id="nameSearch" placeholder="Card name...">
-            </div>
-            <div class="card-pool" id="card-pool">
-                <h2>Card Pool</h2>
-            </div>
+        <div class="right-column">
+          <!-- Filter controls -->
+          <div id="filters">
+            <label for="typeFilter">Type:</label>
+            <select id="typeFilter">
+              <option value="all">All</option>
+              <option value="5">5</option>
+              <option value="4">4</option>
+              <option value="3">3</option>
+              <option value="2">2</option>
+              <option value="1">1</option>
+            </select>
+    
+            <label for="nameSearch">Search:</label>
+            <input type="text" id="nameSearch" placeholder="Card name...">
+          </div>
+    
+          <div class="card-pool" id="card-pool">
+            <h2>Card Pool</h2>
+          </div>
         </div>
+    
+      </div>
+    </div>
+
         
     </div>
     <script src="renameDeck.js"></script>
