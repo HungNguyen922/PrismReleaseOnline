@@ -75,6 +75,7 @@ fetch("allCards.json")
 .then(cardsData => {
     allCards = cardsData;
     renderCards(allCards);
+    console.log("Sample card data:", allCards[0]);
 });
 
 
@@ -109,8 +110,6 @@ function applyFilters() {
       ${(card.Effect1 || "")}
       ${(card.Effect2 || "")}
     `.toLowerCase();
-    console.log(card.Effect1);
-    console.log(card.Effect2);
       
     const matchesName = concatenated.includes(nameSearch);
 
