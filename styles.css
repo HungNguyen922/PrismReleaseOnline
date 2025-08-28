@@ -147,19 +147,20 @@ h1 {
 }
 
 .deck-area {
-  flex: none;            /* disable flex grow/shrink */
-  width: 400px;          /* starting width */
-  min-width: 200px;      /* smallest it can shrink */
-  max-width: 70%;        /* don’t let it eat entire screen */
-  resize: horizontal;    /* user can drag horizontally */
-  overflow: auto;        /* needed for resize to work */
+    color: white
+    flex: none;            /* disable flex grow/shrink */
+    width: 400px;          /* starting width */
+    min-width: 200px;      /* smallest it can shrink */
+    max-width: 70%;        /* don’t let it eat entire screen */
+    resize: horizontal;    /* user can drag horizontally */
+    overflow: auto;        /* needed for resize to work */
 }
 
 .right-column {
-  flex: 1;               /* take the rest of the space */
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+    flex: 1;               /* take the rest of the space */
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 }
 
 
