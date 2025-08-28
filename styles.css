@@ -144,11 +144,11 @@ h1 {
     display: flex;
     gap: 20px;
     padding: 20px;
-    flex-direction: collumn;
+    flex-direction: column;
 }
 
-#filter {
-    margin-botton: 1rem;
+#filters {
+    margin-bottom: 1rem;
 }
 
 .deck-area {
