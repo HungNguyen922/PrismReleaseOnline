@@ -6,18 +6,22 @@ const deckMap = {};
 
 // I'm using this so i can convert the incoming card names into the file name format
 function formatCardName(str) {
+    // Decode any URL-encoded characters like %20
+    str = decodeURIComponent(str);
+
     return str
         .trim()
         .split("") // split into individual characters
         .map((char, i, arr) => {
-            // Capitalize if it's the first character or follows a non-letter
+            // Capitalize if it's the first character or follows a non-alphabetical
             if (i === 0 || /[^a-zA-Z]/.test(arr[i - 1])) {
                 return char.toUpperCase();
             } else {
                 return char.toLowerCase();
             }
         })
-        .join(""); // rejoin characters
+        .join("") // remove spaces by joining all characters
+        .replace(/\s+/g, ""); // ensure any leftover spaces are removed
 }
 
 //Global card storage for filtering
