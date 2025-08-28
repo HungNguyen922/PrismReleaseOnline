@@ -8,16 +8,16 @@ const deckMap = {};
 function formatCardName(str) {
     return str
         .trim()
-        .split(/\s+/) // split by spaces
-        .map(word =>
-            word
-                .split("-")                 // split by hyphens
-                .map(subWord =>
-                    subWord.charAt(0).toUpperCase() + subWord.slice(1).toLowerCase()
-                )
-                .join("-")                  // rejoin hyphenated parts
-        )
-        .join(" ");                       // keep spaces between words
+        .split("") // split into individual characters
+        .map((char, i, arr) => {
+            // Capitalize if it's the first character or follows a non-letter
+            if (i === 0 || /[^a-zA-Z]/.test(arr[i - 1])) {
+                return char.toUpperCase();
+            } else {
+                return char.toLowerCase();
+            }
+        })
+        .join(""); // rejoin characters
 }
 
 //Global card storage for filtering
