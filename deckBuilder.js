@@ -92,16 +92,31 @@ function updateDeckCount() {
 }
 
 function applyFilters() {
-    const typeFilter = document.getElementById("typeFilter").value;
-    const nameSearch = document.getElementById("nameSearch").value.toLowerCase();
+  const typeFilter = document.getElementById("typeFilter")?.value;
+  const nameSearch = (document.getElementById("nameSearch")?.value || "").toLowerCase();
 
-    let filtered = allCards.filter(card => {
-        const matchesType = typeFilter === "all" || card.Power.includes(typeFilter) || card.Bulk.includes(typeFilter);
-        const matchesName = card.Name.toLowerCase().includes(nameSearch) || card.Tags.toLowerCase().includes(nameSearch) || card.Trait.toLowerCase().includes(nameSearch) || card.Effect1.toLowerCase().includes(nameSearch) || card.Effect2.toLowerCase().includes(nameSearch);
-        return matchesType && matchesName;
-    });
+  console.log("Type filter:", typeFilter, "Name search:", nameSearch);
 
-    renderCards(filtered);
+  const filtered = (Array.isArray(allCards) ? allCards : []).filter(card => {
+    const matchesType = typeFilter === "all"
+      || (card.Power || "").includes(typeFilter)
+      || (card.Bulk || "").includes(typeFilter);
+
+    const concatenated = `
+      ${(card.Name || "")}
+      ${(card.Tags || "")}
+      ${(card.Trait || "")}
+      ${(card.Effect1 || "")}
+      ${(card.Effect2 || "")}
+    `.toLowerCase();
+
+    const matchesName = concatenated.includes(nameSearch);
+
+    return matchesType && matchesName;
+  });
+
+  console.log("Filtered count:", filtered.length, filtered);
+  renderCards(filtered);
 }
 
 document.getElementById("typeFilter").addEventListener("change", applyFilters);
