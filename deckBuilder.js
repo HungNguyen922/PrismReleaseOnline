@@ -97,7 +97,7 @@ function applyFilters() {
 
   console.log("Type filter:", typeFilter, "Name search:", nameSearch);
 
-  const filtered = (Array.isArray(allCards) ? allCards : []).filter(card => {
+  const filtered = allCards.filter(card => {
     const matchesType = typeFilter === "all"
       || (card.Power || "").includes(typeFilter)
       || (card.Bulk || "").includes(typeFilter);
@@ -109,7 +109,9 @@ function applyFilters() {
       ${(card.Effect1 || "")}
       ${(card.Effect2 || "")}
     `.toLowerCase();
-
+    console.log(card.Effect1);
+    console.log(card.Effect2);
+      
     const matchesName = concatenated.includes(nameSearch);
 
     return matchesType && matchesName;
