@@ -147,7 +147,7 @@ h1 {
 }
 
 .deck-area {
-    color: white
+    color: white;
     flex: none;            /* disable flex grow/shrink */
     width: 400px;          /* starting width */
     min-width: 200px;      /* smallest it can shrink */
