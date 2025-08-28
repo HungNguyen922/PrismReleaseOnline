@@ -1,6 +1,5 @@
 const downloadBtn = document.getElementById("download-deck");
 const deckExportWrapper = document.getElementById("deck-export-wrapper");
-const deckTitle = document.getElementById("deck-title");
 
 downloadBtn.addEventListener("click", () => {
     // Use html2canvas to capture the deck area
