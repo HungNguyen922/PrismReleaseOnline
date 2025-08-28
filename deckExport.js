@@ -8,7 +8,7 @@ downloadBtn.addEventListener("click", () => {
         scale: 5 // optional: higher resolution
     }).then(canvas => {
         const link = document.createElement("a");
-        link.download = deckTitle + '.png';
+        link.download = deckTitle.innerHTML + '.png';
         link.href = canvas.toDataURL("image/png");
         link.click();
     }).catch(err => console.error("Error generating deck image:", err));
