@@ -140,7 +140,7 @@ h1 {
     color: #000;
 }
 
-..deck-builder {
+.deck-builder {
     display: flex;        /* left and right side by side */
     gap: 20px;
     padding: 20px;
