@@ -96,7 +96,7 @@ function applyFilters() {
     const nameSearch = document.getElementById("nameSearch").value.toLowerCase();
 
     let filtered = allCards.filter(card => {
-        const matchesType = typeFilter === "all" || card.Color.includes(typeFilter);
+        const matchesType = typeFilter === "all" || card.Power.includes(typeFilter) || card.Bulk.includes(typeFilter);
         const matchesName = card.Name.toLowerCase().includes(nameSearch);
         return matchesType && matchesName;
     });
