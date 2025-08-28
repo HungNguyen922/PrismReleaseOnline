@@ -99,8 +99,9 @@ function applyFilters() {
 
   const filtered = allCards.filter(card => {
     const matchesType = typeFilter === "all"
-      || (card.Power || "").includes(typeFilter)
-      || (card.Bulk || "").includes(typeFilter);
+      || ((card.Power || "").toString().includes(typeFilter))
+      || ((card.Bulk || "").toString().includes(typeFilter));
+
 
     const concatenated = `
       ${(card.Name || "")}
