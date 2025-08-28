@@ -140,20 +140,15 @@ h1 {
     color: #000;
 }
 
-.deck-builder {
-    display: flex;
+..deck-builder {
+    display: flex;        /* left and right side by side */
     gap: 20px;
     padding: 20px;
-    flex-direction: column;
-}
-
-#filters {
-    margin-bottom: 1rem;
 }
 
 .deck-area {
+    flex: 1;              /* take up space on the left */
     color: white;
-    flex: 1;
     border: 1px solid #ccc;
     border-radius: 8px;
     padding: 10px;
@@ -161,9 +156,23 @@ h1 {
     max-height: 80vh;
 }
 
+.right-column {
+    flex: 2;              /* larger column on the right */
+    display: flex;
+    flex-direction: column;  /* stack filters above card pool */
+    gap: 1rem;
+}
+
+#filters {
+    color: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+}
+
 .card-pool {
+    flex: 1;              /* take remaining space below filters */
     user-select: none;
-    flex: 1;
     border: 1px solid #ccc;
     border-radius: 8px;
     padding: 5px;
@@ -172,9 +181,10 @@ h1 {
     grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
     gap: 5px;
     overflow-y: auto;
-    max-height: 80vh;
+    max-height: 70vh;
     color: white;
 }
+
 
 .card-pool .card {
     width: 100%;
