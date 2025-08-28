@@ -7,12 +7,17 @@ const deckMap = {};
 // I'm using this so i can convert the incoming card names into the file name format
 function formatCardName(str) {
     return str
-        .trim()                           // Remove leading/trailing whitespace
-        .split(/\s+/)                  // Split by spaces or hyphens
-        .map(word =>
-            word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
-        )
-        .join("");                        // Join words without spaces
+        .trim()
+        .split("") // split into characters
+        .map((char, i, arr) => {
+            // Capitalize if first character or after non-letter
+            if (i === 0 || /[^a-zA-Z]/.test(arr[i - 1])) {
+                return char.toUpperCase();
+            } else {
+                return char.toLowerCase();
+            }
+        })
+        .join(""); // join back without spaces
 }
 
 //Global card storage for filtering
