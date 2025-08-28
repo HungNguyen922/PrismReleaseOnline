@@ -3,6 +3,14 @@
   "WorkspaceRootPath": "C:\\Users\\Hung\\source\\repos\\PRDeckBuilder\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Hung\\source\\repos\\PRDeckBuilder\\deckBuilder.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:deckBuilder.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Hung\\source\\repos\\PRDeckBuilder\\deck.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:deck.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Hung\\source\\repos\\PRDeckBuilder\\galleryCards.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:galleryCards.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
@@ -11,20 +19,12 @@
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:gallery.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Hung\\source\\repos\\PRDeckBuilder\\deckBuilder.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:deckBuilder.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Hung\\source\\repos\\PRDeckBuilder\\allCards.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:allCards.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Hung\\source\\repos\\PRDeckBuilder\\gallery.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:gallery.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Hung\\source\\repos\\PRDeckBuilder\\deck.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:deck.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Hung\\source\\repos\\PRDeckBuilder\\allCards.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:allCards.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Hung\\source\\repos\\PRDeckBuilder\\index.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
@@ -38,7 +38,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
@@ -54,32 +54,46 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "deckBuilder.js",
               "DocumentMoniker": "C:\\Users\\Hung\\source\\repos\\PRDeckBuilder\\deckBuilder.js",
               "RelativeDocumentMoniker": "deckBuilder.js",
               "ToolTip": "C:\\Users\\Hung\\source\\repos\\PRDeckBuilder\\deckBuilder.js",
               "RelativeToolTip": "deckBuilder.js",
-              "ViewState": "AQIAAAUAAAAAAAAAAAAWwBEAAAAAAAAA",
+              "ViewState": "AQIAAFsAAAAAAAAAAAAqwHIAAAAEAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-08-23T16:14:59.727Z"
+              "WhenOpened": "2025-08-23T16:14:59.727Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
+              "Title": "deck.html",
+              "DocumentMoniker": "C:\\Users\\Hung\\source\\repos\\PRDeckBuilder\\deck.html",
+              "RelativeDocumentMoniker": "deck.html",
+              "ToolTip": "C:\\Users\\Hung\\source\\repos\\PRDeckBuilder\\deck.html",
+              "RelativeToolTip": "deck.html",
+              "ViewState": "AQIAABUAAAAAAAAAAAAswCYAAAAnAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2025-08-23T16:12:38.347Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "galleryCards.js",
               "DocumentMoniker": "C:\\Users\\Hung\\source\\repos\\PRDeckBuilder\\galleryCards.js",
               "RelativeDocumentMoniker": "galleryCards.js",
               "ToolTip": "C:\\Users\\Hung\\source\\repos\\PRDeckBuilder\\galleryCards.js",
               "RelativeToolTip": "galleryCards.js",
-              "ViewState": "AQIAABQAAAAAAAAAAAAAwBgAAAAxAAAA",
+              "ViewState": "AQIAAAUAAAAAAAAAAAAAABgAAAAxAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
               "WhenOpened": "2025-08-23T16:14:50.131Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "gallery.js",
               "DocumentMoniker": "C:\\Users\\Hung\\source\\repos\\PRDeckBuilder\\gallery.js",
               "RelativeDocumentMoniker": "gallery.js",
@@ -87,7 +101,8 @@
               "RelativeToolTip": "gallery.js",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAACEAAAAbAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-08-23T16:14:49.159Z"
+              "WhenOpened": "2025-08-23T16:14:49.159Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -99,31 +114,21 @@
               "RelativeToolTip": "gallery.html",
               "ViewState": "AQIAAAkAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
-              "WhenOpened": "2025-08-23T16:14:45.403Z"
+              "WhenOpened": "2025-08-23T16:14:45.403Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "deck.html",
-              "DocumentMoniker": "C:\\Users\\Hung\\source\\repos\\PRDeckBuilder\\deck.html",
-              "RelativeDocumentMoniker": "deck.html",
-              "ToolTip": "C:\\Users\\Hung\\source\\repos\\PRDeckBuilder\\deck.html",
-              "RelativeToolTip": "deck.html",
-              "ViewState": "AQIAAA8AAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
-              "WhenOpened": "2025-08-23T16:12:38.347Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
               "Title": "allCards.js",
               "DocumentMoniker": "C:\\Users\\Hung\\source\\repos\\PRDeckBuilder\\allCards.js",
               "RelativeDocumentMoniker": "allCards.js",
               "ToolTip": "C:\\Users\\Hung\\source\\repos\\PRDeckBuilder\\allCards.js",
               "RelativeToolTip": "allCards.js",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAAAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-08-23T16:07:59.578Z"
+              "WhenOpened": "2025-08-23T16:07:59.578Z",
+              "EditorCaption": ""
             }
           ]
         }
