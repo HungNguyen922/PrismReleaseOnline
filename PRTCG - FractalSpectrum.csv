@@ -3,47 +3,47 @@ Casting Sky,Cloud,1,2,Cyan,Blue,Red,Pink,,Comboing: 1 DMG per POW 1- Comboing,Se
 Casting Cirrus,Cloud,2,4,Cyan,Blue,,,,"Stack 3: Look at the top 4 cards of the Public Pile and you may 
 rearrange them.","If the card beneath this is a Casting, deal 1 dmg.",A ribbon dancer who helps coordinate the plans of the Castings.,,1,Ribbon Dancer
 Casting Stratus,Cloud,1,5,Cyan,Blue,,,,"Shove 2 Borders 1: From the Public Pile, send 1 card to the top of each bordering Gate Zone","Sequence Casting: 2 DMG; If the card played on this is a Casting, deal 2 dmg",A trained assassin who lies in wait launch his ambushes.,,1,Samurai Mafia
-Casting Cumulus,Cloud,1,3,Cyan,Blue,,,,Ultimate; The next card played on this deals DMG equal to their POW stat,Sequence Casting: Recall 1,,,1,Pirate
-Casting Nimbus,Cloud,2,1,Cyan,Blue,,,,Gap 1 Faceup,Detonate Castings In-Previous 2;  Casting cards that are within the 2 cards below this one have their effects triggered,,,1,City Girl
-Carapace Coconut,Shelled,4,1,Orange,Blue,Red,Yellow,Counterless,Scrounge 1,Set Self,,,1,Coconut Crab
-Carapace Horseshoe,Shelled,3,5,Orange,Yellow,Blue,,,Rend 3,Block POW 5,,,1,Horseshoe Crab
-Carapace Arrow,Shelled,4,2,Orange,Red,,,,Rend 4,2+ Rends: Shove 1 Empty Gate Zone 1 Rend,,,1,Arrow Crab
-Carapace Hermit,Shelled,2,3,Orange,Yellow,Fuchsia,,,Over-Rend 2: Send the top card of a draw pile to a different draw pile.,Seal Non-OYF,,,1,Hermit Crab
-Carapace Spider,Shelled,5,4,Orange,Red,,,,Rend 5:  Send the top 3 cards of a draw pile to a different draw pile.,Shove 4,,,2,Japanese Spider Crab
-Floral Torch Ginger,Flower,1,5,Pink,Yellow,Green,Fuchsia,,Held: Plays Responsive,,,,2,
-Floral Plum Blossom,Flower,2,3,Pink,Blue,Red,,,Two-Step,Opponent Non-Fill Draw< Gap Opponent 2,,,2,
-Floral Sundew,Flower,1,3,Pink,Yellow,Red,,,Shove 2 Adjacents 1,Any Set Activation< Set Activated,,,2,
-Floral White Lotus,Flower,1,3,Pink,,,,Quick-Set,Armor 3,Faceup: Instant Phase: Draw 1,,,2,
-Floral Rangoon Creeper,Flower,2,2,Pink,Green,,,,Heal 3,Any Single < Gap DP 2,,,2,
-Floral Hibiscus,Flower,3,2,Pink,Orange,,,,Gift 1,Block 2,,,2,
+Casting Cumulus,Cloud,1,3,Cyan,Blue,,,,Ultimate; The next card played on this deals DMG equal to their POW stat,Sequence Casting: Recall 1,"If you're looking for someone, Cumulus knows a guy. He's well connected with every exchange on the Coast.",,1,Pirate
+Casting Nimbus,Cloud,2,1,Cyan,Blue,,,,Gap 1 Faceup,Detonate Castings In-Previous 2;  Casting cards that are within the 2 cards below this one have their effects triggered,"A world class agent in infiltration, she's almosts never seen, but always brings company.",,1,City Girl
+Carapace Coconut,Shelled,4,1,Orange,Blue,Red,Yellow,,Counterless,Scrounge 1 & Set Self,"Some call him a kleptomaniac, he thinks it's just economical",,1,Coconut Crab
+Carapace Horseshoe,Shelled,3,5,Orange,Yellow,Blue,,,Rend 3,Block POW 5,"For being so short, he really knows how to punch up.",,1,Horseshoe Crab
+Carapace Arrow,Shelled,4,2,Orange,Red,,,,Rend 4,2+ Rends: Shove 1 Empty Gate Zone 1 Rend,She's always talking about piercing through the heavens.,,1,Arrow Crab
+Carapace Hermit,Shelled,2,3,Orange,Yellow,Fuchsia,,,Over-Rend 2: Send the top card of a draw pile to a different draw pile.,Seal Non-OYF,Hermit is not very fond of xenos.,,1,Hermit Crab
+Carapace Spider,Shelled,5,4,Orange,Red,,,,Rend 5:  Send the top 3 cards of a draw pile to a different draw pile.,Shove 4,"Like a marionette, you'll always find Spider pulling the strings.",,2,Japanese Spider Crab
+Floral Torch Ginger,Flower,1,5,Pink,Yellow,Green,Fuchsia,,Held: Plays Responsive,,"Under her guidance, her followers can reach their fullest potential.",,2,
+Floral Plum Blossom,Flower,2,3,Pink,Blue,Red,,,Two-Step,Opponent Non-Fill Draw< Gap Opponent 2,She can get just a bit jealous sometimes.,,2,
+Floral Sundew,Flower,1,3,Pink,Yellow,Red,,,Shove 2 Adjacents 1,Any Set Activation< Set Activated,"She might not look it, but she's the most welcoming of the Florals.",,2,
+Floral White Lotus,Flower,1,3,Pink,,,,Quick-Set,Armor 3,Faceup: Instant Phase: Draw 1,In her introspection she knows that it is our union that makes us stronger.,,2,
+Floral Rangoon Creeper,Flower,2,2,Pink,Green,,,,Heal 3,Any Single < Gap DP 2,"If you're down in your luck, Rangoon is always there to lend a hand.",,2,
+Floral Hibiscus,Flower,3,2,Pink,Orange,,,,Gift 1,Block 2,"She may not be easily approachable, but she's definitely not selfish.",,2,
 Tianshi Imperial Throne,Constellation,2,4,Yellow,Fuchsia,Blue,Violet,,Scan All Hands,"Reflect Half; When taking DMG you may burn this to block half the incoming DMG and deal half of it to the Opponent instead.
-",,,2,
-Tianshi Solid Dipper,Constellation,2,4,Yellow,Green,,,,Refresh Self,Scanned: Bounce Opponent Responses,,,2,
-Tianshi Liquid Dipper,Constellation,2,3,Yellow,Blue,,,,Retrieve 1,Scanned: Shove Opponent Hand 1,,,3,
-Tianshi Butcher Shops,Constellation,3,4,Yellow,Red,,,,Gap Opponent 1,Scanned; Recycle Opponent Hand 2,,,3,
-Tianshi Astrologer,Constellation,2,3,Yellow,Green,Fuchsia,,,Scan Opponent 3,Scanned: Heal 3,,,3,
-Tianshi Woman's Bed,Constellation,1,3,Yellow,Blue,Orange,,,Scan 1 Set Slot,Scanned: Steal 1,,,3,
-Weird Death Ball,WDB,5,5,Violet,Fuchsia,Blue,Red,,Instant Phase: Held: Draw 1,Gap Opponent 1,,,3,
-Igniting Resonance,WDB,5,5,Fuchsia,Violet,Cyan,,Double,Draw 1; Add the top card of any draw pile to your hand,,,,3,
-Quaking Stun,WDB,4,4,Fuchsia,Violet,Cyan,,,Shove 1 onto Diagonals,Opponent Drought 2,,,3,
-Lethal Overcharge,WDB,4,4,Fuchsia,Violet,Cyan,,,Leech 1,Drought 1;,,,3,
-Dividing Pike,WDB,3,3,Violet,Fuchsia,,,,Ultimate,Entry: R / B,,,3,
-Xeric Steppes,WDB,3,3,Fuchsia,,,,Quick-Set,Opponent Drought 1,Any Single: Single -1/+1,,,4,
-Jade Orphans,Tile,1,3,Cyan,Violet,Orange,Fuchsia,,Held: Stringing C's in Palette 1 are Jades,,,,4,Silver Wolf
-Jade Kong,Tile,4,4,Cyan,Pink,,,,In Jade String: 3+ Jades Stringing: Jade Play Sequence: 4 DMG,"Lethal< Immortal; If your health would reach 0, this is playable as a Response so that your health cannot go below 1",,,4,Castorice
-Jade Pung ,Tile,3,3,Cyan,Red,,,,Critical: +1 DMG,Scrounge 1,,,4,Tribbie
-Jade Chow,Tile,3,3,Cyan,Violet,,,,POW Step Previous ± 1: 1 DMG,Recall 1,,,4,Seele
-Jade Eyes,Tile,2,2,Cyan,Fuchsia,,,,Set  1,Shift 1 Gated 2,,,4,Jade
-Hidden Jade,Tile,1,1,Cyan,Green,,,Quick-Set,Unload: Pseudo-Pure,In C String: Responseless Gate ,,,4,QQ
-Checkered King,Chess Bug,3,1,Fuchsia,Green,Orange,Yellow,,Held: Held BLK 1s Tandem,2+ Faceup Checkerds: Shove All Gate Zones 1,,,4,Rhino Beetle
-Checkered Queen,Chess Bug,9,1,Fuchsia,Orange,,,,2+ Faceup Checkereds: Two-Step,Shift 1 Border 2,,,4,Bee
-Checkered Wazir,Chess Bug,2,1,Fuchsia,Red,Violet,,,Gap Opponent 1,Border Shift 1,,,5,Centipede
-Checkered Knight,Chess Bug,3,1,Fuchsia,Green,Orange,,Tandem; This card can be Burned along side another card as though it were a Split,Recycle 1 Adjacent 1,,,,5,Praying Mantis
-Checkered Ferz,Chess Bug,2,1,Fuchsia,Blue,Yellow,,,Recycle 1 Diagonal Base 1,Diagonal Shift 1,,,5,Wheel Bug
-Checkered Pawn,Chess Bug,1,1,Fuchsia,Blue,Yellow,,,Block 2,Sequence Checkered Doubles,,,5,Ant
-Flame Spawn,Fire Spirit,3,2,Red,,,,,Red Leader: 1 DMG,Refresh 2,,,5,
-Desert Thorns,Spiky Spirit,1,2,Orange,,,,,O Leader: Steal 1,Exchange 2,,,5,
-Terra Worm,Rock Spirit,2,2,Yellow,,,,,Y Leader: Haunt Self,Scrounge 2,,,5,
+","From that Throne, what else could you do, but enjoy the scenery.",,2,
+Tianshi Solid Dipper,Constellation,2,4,Yellow,Green,,,,Refresh Self,Scanned: Bounce Opponent Responses,"Let her cook? Nah, she'd eat.",,2,
+Tianshi Liquid Dipper,Constellation,2,3,Yellow,Blue,,,,Retrieve 1,Scanned: Shove Opponent Hand 1,Now here is a man that you should let cook.,,3,
+Tianshi Butcher Shops,Constellation,3,4,Yellow,Red,,,,Gap Opponent 1,Scanned; Recycle Opponent Hand 2,"He may be brutal, but he's not one to waste food.",,3,
+Tianshi Astrologer,Constellation,2,3,Yellow,Green,Fuchsia,,,Scan Opponent 3,Scanned: Heal 3,Maybe she'll fortell your future as well.,,3,
+Tianshi Woman's Bed,Constellation,1,3,Yellow,Blue,Orange,,,Scan 1 Set Slot,Scanned: Steal 1,She prefers to keep her lovers close.,,3,
+Weird Death Ball,WDB,5,5,Violet,Fuchsia,Blue,Red,,Instant Phase: Held: Draw 1,Gap Opponent 1,Overhand or Underhand? Crash.,,3,
+Igniting Resonance,WDB,5,5,Fuchsia,Violet,Cyan,,Double,Draw 1; Add the top card of any draw pile to your hand,,I can already feel the blood pumping.,,3,
+Quaking Stun,WDB,4,4,Fuchsia,Violet,Cyan,,,Shove 1 onto Diagonals,Opponent Drought 2,Time it right and the opponent is hit with the nastiest paralysis.,,3,
+Lethal Overcharge,WDB,4,4,Fuchsia,Violet,Cyan,,,Leech 1,Drought 1;,HOLD ON JUST A LITTLE LONGER!,,3,
+Dividing Pike,WDB,3,3,Violet,Fuchsia,,,,Ultimate,Entry: R / B,They never see the Pike Augment coming.,,3,
+Xeric Steppes,WDB,3,3,Fuchsia,,,,Quick-Set,Opponent Drought 1,Any Single: Single -1/+1,Sometimes we just need slow down and relax.,,4,
+Jade Orphans,Tile,1,3,Cyan,Violet,Orange,Fuchsia,,Held: Stringing C's in Palette 1 are Jades,,"Don't underestimate her lonesome. When it all comes together, you better watch your back.",,4,Silver Wolf
+Jade Kong,Tile,4,4,Cyan,Pink,,,,In Jade String: 3+ Jades Stringing: Jade Play Sequence: 4 DMG,"Lethal< Immortal; If your health would reach 0, this is playable as a Response so that your health cannot go below 1",4 of a Kind!,,4,Castorice
+Jade Pung ,Tile,3,3,Cyan,Red,,,,Critical: +1 DMG,Scrounge 1,Triple Threat? How about Triple Teamed.,,4,Tribbie
+Jade Chow,Tile,3,3,Cyan,Violet,,,,POW Step Previous ± 1: 1 DMG,Recall 1,Just reaping the rewards of the sequence.,,4,Seele
+Jade Eyes,Tile,2,2,Cyan,Fuchsia,,,,Set  1,Shift 1 Gated 2,We're halfway there now!,,4,Jade
+Hidden Jade,Tile,1,1,Cyan,Green,,,Quick-Set,Unload: Pseudo-Pure,In C String: Responseless Gate ,They never see it coming and they won't have time to react.,,4,QQ
+Checkered King,Chess Bug,3,1,Fuchsia,Green,Orange,Yellow,,Held: Held BLK 1s Tandem,2+ Faceup Checkerds: Shove All Gate Zones 1,Pesticides won't be enough to stop this swarm.,,4,Rhino Beetle
+Checkered Queen,Chess Bug,9,1,Fuchsia,Orange,,,,2+ Faceup Checkereds: Two-Step,Shift 1 Border 2,"And when the world needed her least, she appeared.",,4,Bee
+Checkered Wazir,Chess Bug,2,1,Fuchsia,Red,Violet,,,Gap Opponent 1,Border Shift 1,Wazir practices death by 1000 jabs.,,5,Centipede
+Checkered Knight,Chess Bug,3,1,Fuchsia,Green,Orange,,Tandem; This card can be Burned along side another card as though it were a Split,Recycle 1 Adjacent 1,,He can come at you from any angle.,,5,Praying Mantis
+Checkered Ferz,Chess Bug,2,1,Fuchsia,Blue,Yellow,,,Recycle 1 Diagonal Base 1,Diagonal Shift 1,She can Drive right past you and you wouldn't notice.,,5,Wheel Bug
+Checkered Pawn,Chess Bug,1,1,Fuchsia,Blue,Yellow,,,Block 2,Sequence Checkered Doubles,One promotion away from world domination.,,5,Ant
+Flame Spawn,Fire Spirit,3,2,Red,,,,,Red Leader: 1 DMG,Refresh 2,"Looks like a banana, tastes burnt.",,5,
+Desert Thorns,Spiky Spirit,1,2,Orange,,,,,O Leader: Steal 1,Exchange 2,It's a bit hard making friends when you can only give them thorns.,,5,
+Terra Worm,Rock Spirit,2,2,Yellow,,,,,Y Leader: Haunt Self,Scrounge 2,The earth giveth and it takes.,,5,
 Grassy Capy,Plant Spirit,1,3,Green,,,,,G Leader: Gap DP 1,Draw 2,,,5,
 Vaulting Gull,Winged Spirit,3,3,Cyan,,,,,C Leader: Recall 1,Set 2,,,5,
 Ocean Carp,Aquatic Spirit,2,1,Blue,,,,,B Leader: Shove 1 from Opponent Hand,Stack any Gate 2,,,6,
@@ -134,7 +134,7 @@ Filthy Feats,Spirit,4,5,Pink,Blue,Cyan,,,Mimic 1 Border,3+ Bounding: Attack,,,15
 Boros the Archiver,,4,5,Green,Blue,,,,Mimic 1 Effect from Gap,Scrounge 1,,,15,Trayzn the Infinite
 4 Aspects,Boom Tact ,4,4,Red,Yellow,,,,Critical: Opponent Drought 4,Disarm POW 4,,,15,Jigen Dragaon
 Heavy Hand,Item,4,3,Blue,Yellow,,,,Counterless,Blocked: Fill +1,,,15,
-Dual Strike,Martial,3,1,Cyan,Violet,Red,,,Laddering: Play Doubles,Set 1,,,15,
+Dual Strike,Martial,2,1,Cyan,Violet,Red,,,Laddering: Play Doubles,Set Base,,,15,
 Washed Over,Item,3,3,Yellow,Blue,,,,Shove Base to Faceup: Send the card at the bottom of this gate to the top of this gate,Renew 1,,,15,
 High Hysteria,,3,1,Violet,Blue,,,,Faceup: Borders Take 2,Sequenceless for 1 Round,,,15,
 Switching Exception,,3,3,Red,Violet,,,,Opponent Non-Attack Play< Swap Play with 1 Held/ Self,Criticaling: +1 DMG,,,15,Aoi todo
