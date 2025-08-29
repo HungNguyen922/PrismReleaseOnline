@@ -14,7 +14,6 @@ function formatCardName(str) {
         )
         .join("");                        // Join words without spaces
 }
-
 //Global card storage for filtering
 let allCards = [];
 
