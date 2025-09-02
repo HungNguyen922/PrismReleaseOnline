@@ -28,13 +28,6 @@ fetch("allCards.json")
 
         cardDiv.appendChild(img);
         cardGrid.appendChild(cardDiv);
-
-        cardDiv.addEventListener('click', () => {
-            modal.style.display = 'flex';
-            modalImg.src = fileName;
-            modalTitle.textContent = cardDiv.dataset.name;
-            modalDescription.textContent = cardDiv.dataset.flavor;
-        });
     });
 });
 
