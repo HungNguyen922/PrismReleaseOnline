@@ -81,42 +81,51 @@ function renderCards(cards) {
         });
         */
     });
-    cardPoolDiv.addEventListener("click", (e) => {
-      const cardEl = e.target.closest(".card");
-      if (!cardEl) return;
-      showActionMenu(cardEl, e);
-    });
-    
-    function showActionMenu(cardEl, clickEvent) {
-      const overlay = document.createElement("div");
-      overlay.className = "card-action-menu";
-      overlay.innerHTML = `
-        <button class="view-btn">View Card</button>
-        <button class="add-btn">Add to Deck</button>
-      `;
-      document.body.appendChild(overlay);
-      const { x, y, width, height } = cardEl.getBoundingClientRect();
-      overlay.style.left = `${x + width + 5}px`;
-      overlay.style.top = `${y + 5}px`;
-    
-      overlay.querySelector(".view-btn").onclick = () => {
-        openModalFor(cardEl);
-        cleanup();
-      };
-      overlay.querySelector(".add-btn").onclick = () => {
-        addToDeck(cardEl);
-        cleanup();
-      };
-    
-      document.addEventListener("click", (evt) => {
-        if (!overlay.contains(evt.target)) cleanup();
+  }
+
+  cardPoolDiv.addEventListener("click", (e) => {
+        const cardEl = e.target.closest(".card");
+        if (!cardEl) return;
+        showActionMenu(cardEl, e);
       });
+      
+  function showActionMenu(cardEl, clickEvent) {
+    const overlay = document.createElement("div");
+    overlay.className = "card-action-menu";
+    overlay.innerHTML = `
+      <button class="view-btn">View Card</button>
+      <button class="add-btn">Add to Deck</button>
+    `;
+    document.body.appendChild(overlay);
     
-      function cleanup() {
-        overlay.remove();
-      }
-    }  
-}
+    const { x, y, width, height } = cardEl.getBoundingClientRect();
+    overlay.style.left = `${x + width + 5}px`;
+    overlay.style.top = `${y + 5}px`;
+  
+    overlay.querySelector(".view-btn").onclick = () => {
+      openModalFor(cardEl);
+      cleanup();
+    };
+    overlay.querySelector(".add-btn").onclick = () => {
+      addToDeck(cardEl);
+      cleanup();
+    };
+  
+    document.addEventListener("click", (evt) => {
+      if (!overlay.contains(evt.target)) cleanup();
+    });
+  
+    function cleanup() {
+      overlay.remove();
+    }
+  }  
+
+
+  // Function to add a card to the deck
+  function addToDeck(cardEl, cardName) {
+      // Logic to add the card to the deck
+      console.log(`Adding ${cardName} to deck`);
+  }
 
 fetch("allCards.json")
 .then(res => res.json())
