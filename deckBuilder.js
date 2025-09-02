@@ -64,16 +64,16 @@ function renderCards(cards) {
                     updateDeckCount();
                 });
                 deckCard.addEventListener("keywdown", (e) => {
-                      if (e.key == 'Q'){
-                        let count = parseInt(countSpan.innerText, 10);
-                        if (count > 1) {
-                            countSpan.innerText = count - 1;
-                        } else {
-                            deckCard.remove();
-                            delete deckMap[card.Name];
-                        }
-                        updateDeckCount();
-                      }
+                  if (e.key == 'q'){
+                    let count = parseInt(countSpan.innerText, 10);
+                    if (count > 1) {
+                        countSpan.innerText = count - 1;
+                    } else {
+                        deckCard.remove();
+                        delete deckMap[card.Name];
+                    }
+                    updateDeckCount();
+                  }
                 });
             }
             updateDeckCount();
