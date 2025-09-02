@@ -18,7 +18,7 @@ function formatCardName(str) {
 cards.forEach(card => {
     card.addEventListener('click', () => {
         modal.style.display = 'flex';
-        fileName = 'cardDatabase/' + formatCardName(card.dataset.name) + '.png'; 
+        fileName = 'cardDatabase/' + formatCardName(card.alt) + '.png'; 
         modalImg.src = fileName;
         modalTitle.textContent = card.dataset.Name;
         modalDescription.textContent = card.dataset.Flavor;
