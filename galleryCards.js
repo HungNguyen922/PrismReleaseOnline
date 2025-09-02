@@ -1,5 +1,4 @@
-const cardGrid = document.querySelector('.card-grid');
-
+// this file puts all the cards onto the gallery site
 // I'm using this so i can convert the incoming card names into the file name format
 function formatCardName(str) {
   return str
