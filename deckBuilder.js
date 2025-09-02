@@ -84,10 +84,11 @@ function renderCards(cards) {
   }
 
   cardPoolDiv.addEventListener("click", (e) => {
-        const cardEl = e.target.closest(".card");
-        if (!cardEl) return;
-        showActionMenu(cardEl, e);
-      });
+    const cardEl = e.target.closest(".card");
+    if (!cardEl) return;
+    console.log("clicked");
+    showActionMenu(cardEl, e);
+  });
       
   function showActionMenu(cardEl, clickEvent) {
     const overlay = document.createElement("div");
