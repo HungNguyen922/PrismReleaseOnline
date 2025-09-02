@@ -32,8 +32,8 @@ fetch("allCards.json")
         cardDiv.addEventListener('click', () => {
             modal.style.display = 'flex';
             modalImg.src = fileName;
-            modalTitle.textContent = cardDiv.dataset.Name;
-            modalDescription.textContent = cardDiv.dataset.Flavor;
+            modalTitle.textContent = cardDiv.dataset.name;
+            modalDescription.textContent = cardDiv.dataset.flavor;
         });
     });
 });
