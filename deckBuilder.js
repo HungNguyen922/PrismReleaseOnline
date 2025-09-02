@@ -6,14 +6,14 @@ const deckMap = {};
 
 // I'm using this so i can convert the incoming card names into the file name format
 function formatCardName(str) {
-    return str
-        .trim()                           // Remove leading/trailing whitespace
-        .split(/\s+/)                  // Split by spaces or hyphens
-        .map(word =>
-            word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
-        )
-        .join("");                        // Join words without spaces
+  return str
+    .trim()
+    // Match a boundary: either start of string, or a separator (space, hyphen, underscore, etc.)
+    .replace(/(?:^|[\s\-\_]+)(\S)/g, (_, char) =>
+      char.toUpperCase()
+    );
 }
+
 //Global card storage for filtering
 let allCards = [];
 
