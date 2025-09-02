@@ -42,7 +42,7 @@ window.addEventListener('click', (e) => {
 });
 
 window.addEventListener('keydown', (e) => {
-  if (e.key === 'Q') {
+  if (e.key === 'q') {
     modal.style.display = 'none';
   }
 });
