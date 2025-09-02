@@ -15,14 +15,17 @@ function formatCardName(str) {
     );
 }
 
-cards.forEach(card => {
-    card.addEventListener('click', () => {
-        modal.style.display = 'flex';
-        fileName = 'cardDatabase/' + formatCardName(card.dataset.name) + '.png'; 
-        modalImg.src = fileName;
-        modalTitle.textContent = card.dataset.name;
-        modalDescription.textContent = card.dataset.flavor;
-    });
+// Event delegation: one listener on the container
+cardGrid.addEventListener('click', (e) => {
+  const card = e.target.closest('.card');
+  if (!card) return;  // Not a card? Ignore.
+
+  modal.style.display = 'flex';
+  const name = card.dataset.name;
+  const fileName = 'cardDatabase/' + formatCardName(name) + '.png';
+  modalImg.src = fileName;
+  modalTitle.textContent = name;
+  modalDescription.textContent = card.dataset.flavor;
 });
 
 closeBtn.addEventListener('click', () => {
