@@ -4,6 +4,7 @@ const modalImg = document.getElementById('modal-img');
 const modalTitle = document.getElementById('modal-title');
 const modalDescription = document.getElementById('modal-description');
 const closeBtn = document.querySelector('.close');
+const cardGrid = document.querySelector'.card-grid');
 
 // I'm using this so i can convert the incoming card names into the file name format
 function formatCardName(str) {
