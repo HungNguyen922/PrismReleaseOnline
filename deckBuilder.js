@@ -37,6 +37,7 @@ function renderCards(cards) {
         cardPoolDiv.appendChild(cardDiv);
 
         // Click → add to deck
+        /*
         cardDiv.addEventListener("click", () => {
             if (deckMap[card.Name]) {
                 const countSpan = deckMap[card.Name].querySelector(".card-count");
@@ -78,6 +79,42 @@ function renderCards(cards) {
             }
             updateDeckCount();
         });
+        */
+        cardPoolDiv.addEventListener("click", (e) => {
+          const cardEl = e.target.closest(".card");
+          if (!cardEl) return;
+          showActionMenu(cardEl, e);
+        });
+        
+        function showActionMenu(cardEl, clickEvent) {
+          const overlay = document.createElement("div");
+          overlay.className = "card-action-menu";
+          overlay.innerHTML = `
+            <button class="view-btn">View Card</button>
+            <button class="add-btn">Add to Deck</button>
+          `;
+          document.body.appendChild(overlay);
+          const { x, y, width, height } = cardEl.getBoundingClientRect();
+          overlay.style.left = `${x + width + 5}px`;
+          overlay.style.top = `${y + 5}px`;
+        
+          overlay.querySelector(".view-btn").onclick = () => {
+            openModalFor(cardEl);
+            cleanup();
+          };
+          overlay.querySelector(".add-btn").onclick = () => {
+            addToDeck(cardEl);
+            cleanup();
+          };
+        
+          document.addEventListener("click", (evt) => {
+            if (!overlay.contains(evt.target)) cleanup();
+          });
+        
+          function cleanup() {
+            overlay.remove();
+          }
+        }  
     });
 }
 
