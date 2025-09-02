@@ -16,7 +16,7 @@ fetch("allCards.json")
     cardsData.forEach(card => {
         const cardDiv = document.createElement('div');
         cardDiv.classList.add('card');
-        cardDiv.dataset.Name = card.Name;
+        cardDiv.dataset.name = card.Name;
         cardDiv.dataset.description = card.Flavor;
         fileName = 'cardDatabase/' + formatCardName(card.Name) + '.png';
         cardDiv.dataset.image = fileName;
