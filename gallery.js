@@ -28,7 +28,7 @@ cardGrid.addEventListener('click', (e) => {
   const fileName = 'cardDatabase/' + formatCardName(name) + '.png';
   modalImg.src = fileName;
   modalTitle.textContent = name;
-  modalDescription.textContent = card.dataset.flavor;
+  modalDescription.textContent = card.dataset.description;
 });
 
 closeBtn.addEventListener('click', () => {
