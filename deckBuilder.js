@@ -112,10 +112,14 @@ function renderCards(cards) {
       addToDeck(cardEl);
       cleanup();
     };
-  
-    document.addEventListener("click", (evt) => {
-      if (!overlay.contains(evt.target)) cleanup();
-    });
+
+    // we need to set a timeout because the same click that triggers the event will bubble up to
+    // the doc and immediately close the element
+    setTimeout(() => {
+      document.addEventListener("click", (evt) => {
+        if (!overlay.contains(evt.target)) cleanup();
+      }, { once: true });
+    }, 0);
   
     function cleanup() {
       overlay.remove();
