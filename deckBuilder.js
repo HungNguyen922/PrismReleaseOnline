@@ -129,7 +129,45 @@ function renderCards(cards) {
 
   // Function to add a card to the deck
   function addToDeck(cardEl, cardName) {
-      // Logic to add the card to the deck
+      if (deckMap[cardName]) {
+                const countSpan = deckMap[cardName].querySelector(".card-count");
+                countSpan.innerText = parseInt(countSpan.innerText, 10) + 1;
+            } else {
+                const deckCard = cardEl.cloneNode(true);
+                deckCard.classList.add("deck-card");
+
+                const countSpan = document.createElement("span");
+                countSpan.classList.add("card-count");
+                countSpan.innerText = "1";
+                deckCard.appendChild(countSpan);
+
+                deckCards.appendChild(deckCard);
+                deckMap[cardName] = deckCard;
+
+                deckCard.addEventListener("click", () => {
+                    let count = parseInt(countSpan.innerText, 10);
+                    if (count > 1) {
+                        countSpan.innerText = count - 1;
+                    } else {
+                        deckCard.remove();
+                        delete deckMap[cardName];
+                    }
+                    updateDeckCount();
+                });
+                deckCard.addEventListener("keywdown", (e) => {
+                  if (e.key == 'q'){
+                    let count = parseInt(countSpan.innerText, 10);
+                    if (count > 1) {
+                        countSpan.innerText = count - 1;
+                    } else {
+                        deckCard.remove();
+                        delete deckMap[cardName];
+                    }
+                    updateDeckCount();
+                  }
+                });
+            }
+            updateDeckCount();
       console.log(`Adding ${cardName} to deck`);
   }
 
