@@ -99,6 +99,16 @@ function renderCards(cards) {
     }
   }  
 
+  // Function to show card popup on screen
+  function openModalFor(cardEl) {
+    modal.style.display = 'flex';
+    const name = card.dataset.name;
+    const fileName = 'cardDatabase/' + formatCardName(name) + '.png';
+    modalImg.src = fileName;
+    modalTitle.textContent = name;
+    modalDescription.textContent = card.dataset.description;
+  }
+
   // Function to add a card to the deck
   function addToDeck(cardEl) {
     const cardName = cardEl.dataset.cardName;
