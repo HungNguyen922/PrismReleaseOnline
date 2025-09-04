@@ -148,7 +148,7 @@ document.addEventListener("keydown", (e) => {
   }
 
   // Q = remove from deck
-  if (key === "q" && hoveredDeckCard) {
+  if (e.key === "q" && hoveredDeckCard) {
     const cardName = hoveredDeckCard.dataset.cardName;
     const countSpan = hoveredDeckCard.querySelector(".card-count");
 
