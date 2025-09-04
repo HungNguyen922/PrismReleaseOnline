@@ -1,5 +1,12 @@
 ﻿const cardPoolDiv = document.getElementById("card-pool");
 const deckCards = document.getElementById("deck-cards");
+const modal = document.getElementById('modal');
+const modalImg = document.getElementById('modal-img');
+const modalTitle = document.getElementById('modal-title');
+const modalDescription = document.getElementById('modal-description');
+const closeBtn = document.querySelector('.close');
+const cardGrid = document.querySelector('.card-grid');
+
 // the card you are hovering in the card pool
 let hoveredCard = null;
 // the card you are hovering in the deck
