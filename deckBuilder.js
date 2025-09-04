@@ -1,10 +1,12 @@
 ﻿const cardPoolDiv = document.getElementById("card-pool");
 const deckCards = document.getElementById("deck-cards");
+// the card you are hovering in the card pool
 let hoveredCard = null;
+// the card you are hovering in the deck
+let hoveredDeckCard = null;
 
 // Keep a lookup so we know if a card is already in the deck
 const deckMap = {};
-
 
 // I'm using this so i can convert the incoming card names into the file name format
 function formatCardName(str) {
@@ -15,6 +17,16 @@ function formatCardName(str) {
       char.toUpperCase()
     );
 }
+
+// this gives me access to hovered card in deck
+deckCards.addEventListener("mousemove", (e) => {
+  hoveredDeckCard = e.target.closest(".deck-card");
+});
+
+// this gives me access to hovered card in pool
+cardPoolDiv.addEventListener("mousemove", (e) => {
+  hoveredCard = e.target.closest(".card");
+});
 
 //Global card storage for filtering
 let allCards = [];
@@ -51,10 +63,6 @@ function renderCards(cards) {
     console.log(cardEl);
     showActionMenu(cardEl, e);
   });
-  
-  cardPoolDiv.addEventListener("mousemove", (e) => {
-    hoveredCard = e.target.closest(".card");
-  });
       
   function showActionMenu(cardEl, clickEvent) {
     const overlay = document.createElement("div");
@@ -90,7 +98,6 @@ function renderCards(cards) {
       overlay.remove();
     }
   }  
-
 
   // Function to add a card to the deck
   function addToDeck(cardEl) {
@@ -138,6 +145,21 @@ fetch("allCards.json")
 document.addEventListener("keydown", (e) => {
   if (e.key.toLowerCase() === "w" && hoveredCard) {
     addToDeck(hoveredCard);
+  }
+
+  // Q = remove from deck
+  if (key === "q" && hoveredDeckCard) {
+    const cardName = hoveredDeckCard.dataset.cardName;
+    const countSpan = hoveredDeckCard.querySelector(".card-count");
+
+    let count = parseInt(countSpan.innerText, 10);
+    if (count > 1) {
+      countSpan.innerText = count - 1;
+    } else {
+      hoveredDeckCard.remove();
+      delete deckMap[cardName];
+    }
+    updateDeckCount();
   }
 });
 
