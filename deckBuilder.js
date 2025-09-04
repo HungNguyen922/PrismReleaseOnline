@@ -91,7 +91,7 @@ function renderCards(cards) {
     const cardEl = e.target.closest(".card");
     if (!cardEl) return;
     console.log("clicked");
-    console.log("cardEl");
+    console.log(cardEl);
     showActionMenu(cardEl, e);
   });
       
