@@ -1,8 +1,10 @@
 ﻿const cardPoolDiv = document.getElementById("card-pool");
 const deckCards = document.getElementById("deck-cards");
+let hoveredCard = null;
 
 // Keep a lookup so we know if a card is already in the deck
 const deckMap = {};
+
 
 // I'm using this so i can convert the incoming card names into the file name format
 function formatCardName(str) {
@@ -39,51 +41,6 @@ function renderCards(cards) {
         cardDiv.appendChild(img);
         cardDiv.appendChild(title);
         cardPoolDiv.appendChild(cardDiv);
-
-        // Click → add to deck
-        /*
-        cardDiv.addEventListener("click", () => {
-            if (deckMap[card.Name]) {
-                const countSpan = deckMap[card.Name].querySelector(".card-count");
-                countSpan.innerText = parseInt(countSpan.innerText, 10) + 1;
-            } else {
-                const deckCard = cardDiv.cloneNode(true);
-                deckCard.classList.add("deck-card");
-
-                const countSpan = document.createElement("span");
-                countSpan.classList.add("card-count");
-                countSpan.innerText = "1";
-                deckCard.appendChild(countSpan);
-
-                deckCards.appendChild(deckCard);
-                deckMap[card.Name] = deckCard;
-
-                deckCard.addEventListener("click", () => {
-                    let count = parseInt(countSpan.innerText, 10);
-                    if (count > 1) {
-                        countSpan.innerText = count - 1;
-                    } else {
-                        deckCard.remove();
-                        delete deckMap[card.Name];
-                    }
-                    updateDeckCount();
-                });
-                deckCard.addEventListener("keywdown", (e) => {
-                  if (e.key == 'q'){
-                    let count = parseInt(countSpan.innerText, 10);
-                    if (count > 1) {
-                        countSpan.innerText = count - 1;
-                    } else {
-                        deckCard.remove();
-                        delete deckMap[card.Name];
-                    }
-                    updateDeckCount();
-                  }
-                });
-            }
-            updateDeckCount();
-        });
-        */
     });
   }
 
@@ -93,6 +50,10 @@ function renderCards(cards) {
     console.log("clicked");
     console.log(cardEl);
     showActionMenu(cardEl, e);
+  });
+  
+  cardPoolDiv.addEventListener("mousemove", (e) => {
+    hoveredCard = e.target.closest(".card");
   });
       
   function showActionMenu(cardEl, clickEvent) {
@@ -174,6 +135,11 @@ fetch("allCards.json")
     renderCards(allCards);
 });
 
+document.addEventListener("keydown", (e) => {
+  if (e.key.toLowerCase() === "w" && hoveredCard) {
+    addToDeck(hoveredCard);
+  }
+});
 
 
 const deckCountSpan = document.getElementById("deck-count");
