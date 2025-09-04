@@ -23,6 +23,10 @@ function renderCards(cards) {
         const cardDiv = document.createElement("div");
         cardDiv.classList.add("card");
 
+        // Attach the raw card data for later
+        cardDiv.dataset.cardName = card.Name;
+        cardDiv.dataset.cardJson = JSON.stringify(card);
+
         const img = document.createElement("img");
         const fileName = 'cardDatabase/' + formatCardName(card.Name) + '.png';
         img.src = fileName;
@@ -128,47 +132,39 @@ function renderCards(cards) {
 
 
   // Function to add a card to the deck
-  function addToDeck(cardEl, cardName) {
-      if (deckMap[cardName]) {
-                const countSpan = deckMap[cardName].querySelector(".card-count");
-                countSpan.innerText = parseInt(countSpan.innerText, 10) + 1;
-            } else {
-                const deckCard = cardEl.cloneNode(true);
-                deckCard.classList.add("deck-card");
-
-                const countSpan = document.createElement("span");
-                countSpan.classList.add("card-count");
-                countSpan.innerText = "1";
-                deckCard.appendChild(countSpan);
-
-                deckCards.appendChild(deckCard);
-                deckMap[cardName] = deckCard;
-
-                deckCard.addEventListener("click", () => {
-                    let count = parseInt(countSpan.innerText, 10);
-                    if (count > 1) {
-                        countSpan.innerText = count - 1;
-                    } else {
-                        deckCard.remove();
-                        delete deckMap[cardName];
-                    }
-                    updateDeckCount();
-                });
-                deckCard.addEventListener("keywdown", (e) => {
-                  if (e.key == 'q'){
-                    let count = parseInt(countSpan.innerText, 10);
-                    if (count > 1) {
-                        countSpan.innerText = count - 1;
-                    } else {
-                        deckCard.remove();
-                        delete deckMap[cardName];
-                    }
-                    updateDeckCount();
-                  }
-                });
-            }
-            updateDeckCount();
-      console.log(`Adding ${cardName} to deck`);
+  function addToDeck(cardEl) {
+    const cardName = cardEl.dataset.cardName;
+    const cardData = JSON.parse(cardEl.dataset.cardJson);
+  
+    console.log(`Adding ${cardName} to deck`, cardData);
+  
+    if (deckMap[cardName]) {
+      const countSpan = deckMap[cardName].querySelector(".card-count");
+      countSpan.innerText = parseInt(countSpan.innerText, 10) + 1;
+    } else {
+      const deckCard = cardEl.cloneNode(true);
+      deckCard.classList.add("deck-card");
+  
+      const countSpan = document.createElement("span");
+      countSpan.classList.add("card-count");
+      countSpan.innerText = "1";
+      deckCard.appendChild(countSpan);
+  
+      deckCards.appendChild(deckCard);
+      deckMap[cardName] = deckCard;
+  
+      deckCard.addEventListener("click", () => {
+        let count = parseInt(countSpan.innerText, 10);
+        if (count > 1) {
+          countSpan.innerText = count - 1;
+        } else {
+          deckCard.remove();
+          delete deckMap[cardName];
+        }
+        updateDeckCount();
+      });
+    }
+    updateDeckCount();
   }
 
 fetch("allCards.json")
