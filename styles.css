@@ -234,25 +234,27 @@ h1 {
 }
 
 .playfield {
-    display: grid;
-    grid-gap: 2px;
-    background: #444; /* gap color */
-    grid-template:
-        "left center right"
-        "left center right"
-        / auto 1fr auto;
-    gap: 10px;
+  display: grid;
+  grid-template-rows: auto 1fr auto; /* top strip variable height, center fills remaining, bottom variable */
+  gap: 10px; /* optional spacing between areas */
 }
 
-.center {
-    display: grid;
-    border: 1px solid #444;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(2, 1fr);
+.top-strip,
+.bottom-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* three equal columns */
+  gap: 5px;
 }
 
-.side {
-    display: grid;
-    border: 1px solid #444;
-    grid-template-rows: repeat(3, auto);
+.center-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, auto);
+  gap: 5px;
+}
+
+.card-slot {
+  border: 2px dashed #888;
+  background-color: #f0f0f0;
+  height: 80px; /* or any consistent size for testing */
 }
