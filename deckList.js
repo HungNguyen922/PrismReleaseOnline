@@ -16,9 +16,11 @@ listBtn.addEventListener('click', async () => {
   try {
     await navigator.clipboard.writeText(deckText);
     console.log('Deck list copied to clipboard!');
+    alert("Deck list copied to clipboard!");
     // Optionally provide user feedback (e.g. visual toast)
   } catch (err) {
     console.error('Clipboard copy failed:', err);
+    alert("Clipboard copy failed");
     // Optionally fallback or notify user
   }
 });
