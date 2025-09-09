@@ -1,5 +1,6 @@
 const listBtn = document.getElementById('list-button')
-    
+const deckName = document.getElementById('deck-title')
+
 listBtn.addEventListener('click', async () => {
   // Build the plaintext deck list
   const lines = Array.from(document.querySelectorAll('#deck-cards .deck-card'))
@@ -10,7 +11,7 @@ listBtn.addEventListener('click', async () => {
       return `${count}, ${name}`;
     });
 
-  const deckText = lines.join('\n');
+  const deckText = deckName + '\n' + lines.join('\n');
 
   // Copy to clipboard
   try {
