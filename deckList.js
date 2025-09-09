@@ -11,7 +11,7 @@ listBtn.addEventListener('click', async () => {
       return `${count}, ${name}`;
     });
 
-  const deckText = deckName + '\n' + lines.join('\n');
+  const deckText = deckName.innerHTML + '\n' + lines.join('\n');
 
   // Copy to clipboard
   try {
