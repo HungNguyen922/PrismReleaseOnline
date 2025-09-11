@@ -196,16 +196,37 @@ document.addEventListener("keydown", (e) => {
   }
 
   // Q = remove from deck
-  if (e.key === "q" && hoveredDeckCard) {
+  if (e.key.toLowerCase() === "q" && hoveredDeckCard) {
     const cardName = hoveredDeckCard.dataset.cardName;
-    const countSpan = hoveredDeckCard.querySelector(".card-count");
 
-    let count = parseInt(countSpan.innerText, 10);
-    if (count > 1) {
-      countSpan.innerText = count - 1;
-    } else {
+    if (hoveredDeckCard.classList.contains("leader-card")) {
+      // removing Leader
+      leaderCard = null;
       hoveredDeckCard.remove();
       delete deckMap[cardName];
+      updateDeckCount();
+      return;
+    }
+
+    if (hoveredDeckCard.classList.contains("extra-card")) {
+      // removing Extra deck card
+      extraDeck = extraDeck.filter(c => c !== cardName);
+      hoveredDeckCard.remove();
+      delete deckMap[cardName];
+      updateDeckCount();
+      return;
+    }
+
+    // normal main-deck card
+    const countSpan = hoveredDeckCard.querySelector(".card-count");
+    if (countSpan) {
+      let count = parseInt(countSpan.innerText, 10);
+      if (count > 1) {
+        countSpan.innerText = count - 1;
+      } else {
+        hoveredDeckCard.remove();
+        delete deckMap[cardName];
+      }
     }
     updateDeckCount();
   }
