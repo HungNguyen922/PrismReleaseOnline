@@ -58,6 +58,8 @@ function loadDeck(cards) {
     deck = shuffle(cards); // initialize and shuffle
     hand = [];
     updateDeckUI();
+    updateLeaderUI();
+    updateExtraUI();
 }
 
 function shuffle(array) {
