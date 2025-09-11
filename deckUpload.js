@@ -88,3 +88,42 @@ function updateExtraUI() {
   }
 }
 
+// I don't know where to put this
+
+document.querySelectorAll(".field-slot").forEach(slot => {
+  // Allow dropping
+  slot.addEventListener("dragover", e => {
+    e.preventDefault(); // required
+    slot.classList.add("hover"); // optional: add highlight
+  });
+
+  slot.addEventListener("dragleave", () => {
+    slot.classList.remove("hover");
+  });
+
+  // Handle drop
+  slot.addEventListener("drop", e => {
+    e.preventDefault();
+    slot.classList.remove("hover");
+
+    const cardIndex = e.dataTransfer.getData("cardIndex");
+    if (cardIndex === "") return;
+
+    const card = hand.splice(cardIndex, 1)[0]; // remove from hand
+    renderHand(); // re-render hand
+
+    // render into slot
+    const cardEl = document.createElement("div");
+    cardEl.classList.add("card");
+
+    const fileName = formatCardName(card);
+    const img = document.createElement("img");
+    img.src = "cardDatabase/" + fileName + ".png";
+    img.alt = card;
+    img.classList.add("card-img");
+
+    cardEl.appendChild(img);
+    slot.innerHTML = ""; // only 1 card per slot (optional)
+    slot.appendChild(cardEl);
+  });
+});
