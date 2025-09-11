@@ -1,4 +1,4 @@
-document.getElementById("draw-slot").addEventListener("click", drawCard);
+document.getElementById("deck-slot").addEventListener("click", drawCard);
 
 function drawCard() {
   if (deck.length === 0) {
