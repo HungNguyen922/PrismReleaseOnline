@@ -132,7 +132,7 @@ function renderCards(cards) {
       leaderCard = cardName;
       const deckCard = deckMap[cardName]
       const countSpan = deckCard.querySelector('.card-count');
-      countSpan.innerText = extraDeck.filter(c => c === cardName).length;
+      countSpan.innerText = 1;
       createSpecialDeckCard(cardEl, cardName, "Leader");
       updateDeckCount();
       return;
