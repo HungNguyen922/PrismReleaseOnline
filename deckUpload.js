@@ -102,58 +102,68 @@ document.addEventListener("DOMContentLoaded", () => {
     slot.addEventListener("drop", e => {
       e.preventDefault();
       slot.classList.remove("hover");
-
+    
       const from = e.dataTransfer.getData("from");
-
       let card;
-
-      // From hand
+    
+      // Handle from hand
       if (from === "hand") {
         const index = e.dataTransfer.getData("cardIndex");
         card = hand.splice(index, 1)[0];
         renderHand();
-      }
-
-      // From another slot
+      } 
+      // Handle from another slot
       else if (from === "slot") {
         const sourceSlotId = e.dataTransfer.getData("slotId");
         const sourceSlot = document.getElementById(sourceSlotId);
         card = sourceSlot.dataset.card;
+    
+        // Push previous card in source slot back to its history
+        if (sourceSlot.dataset.card) {
+          sourceSlot.history.push(sourceSlot.dataset.card);
+        }
+    
         sourceSlot.innerHTML = "";
         sourceSlot.removeAttribute("data-card");
       }
-
+    
       if (!card) return;
-
-      // Save previous card in history if needed
+    
+      // Push current top card to this slot's history
       if (slot.dataset.card) {
         slot.history.push(slot.dataset.card);
       }
-
-      // Place new card
-      const cardEl = document.createElement("div");
-      cardEl.classList.add("card");
-      cardEl.setAttribute("draggable", "true");
-      cardEl.dataset.card = card;
-
-      const img = document.createElement("img");
-      img.src = "cardDatabase/" + formatCardName(card) + ".png";
-      img.alt = card;
-      img.classList.add("card-img");
-
-      cardEl.appendChild(img);
-      slot.innerHTML = "";
-      slot.appendChild(cardEl);
-
-      slot.dataset.card = card;
-
-      cardEl.addEventListener("dragstart", ev => {
-        ev.dataTransfer.setData("from", "slot");
-        ev.dataTransfer.setData("slotId", slot.id);
-        ev.dataTransfer.setData("card", card);
-      });
+    
+      // Set new top card
+      placeCardInSlot(slot, card);
     });
   });
+
+  function placeCardInSlot(slot, card) {
+    const cardEl = document.createElement("div");
+    cardEl.classList.add("card");
+    cardEl.setAttribute("draggable", "true");
+    cardEl.dataset.card = card;
+  
+    const img = document.createElement("img");
+    img.src = "cardDatabase/" + formatCardName(card) + ".png";
+    img.alt = card;
+    img.classList.add("card-img");
+  
+    cardEl.appendChild(img);
+    slot.innerHTML = "";
+    slot.appendChild(cardEl);
+  
+    slot.dataset.card = card;
+  
+    // Drag from slot
+    cardEl.addEventListener("dragstart", ev => {
+      ev.dataTransfer.setData("from", "slot");
+      ev.dataTransfer.setData("slotId", slot.id);
+      ev.dataTransfer.setData("card", card);
+    });
+  }
+
 
   // --- Setup hand drop (from slot back to hand) ---
   const handArea = document.getElementById("hand-area");
@@ -174,6 +184,13 @@ document.addEventListener("DOMContentLoaded", () => {
       // Remove from slot
       sourceSlot.innerHTML = "";
       sourceSlot.removeAttribute("data-card");
+
+      if (slot.history.length > 0) {
+        const prevCard = slot.history.pop();
+        placeCardInSlot(slot, prevCard);
+      } else {
+        slot.dataset.card = null;
+      }
 
       // Add back to hand
       hand.push(card);
