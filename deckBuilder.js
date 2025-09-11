@@ -130,12 +130,12 @@ function renderCards(cards) {
     // --- Leader & Extra Deck logic ---
     if (!leaderCard) {
       leaderCard = cardName;
-      createSpecialDeckCard(cardEl, "Leader");
+      createSpecialDeckCard(cardEl, cardName, "Leader");
       updateDeckCount();
       return;
     } else if (extraDeck.length < 4) {
       extraDeck.push(cardName);
-      createSpecialDeckCard(cardEl, "Extra");
+      createSpecialDeckCard(cardEl, cardName, "Extra");
       updateDeckCount();
       return;
     }
@@ -170,13 +170,13 @@ function renderCards(cards) {
     updateDeckCount();
   }
 
-  function createSpecialDeckCard(cardEl, role) {
+  function createSpecialDeckCard(cardEl, name, role) {
     const deckCard = cardEl.cloneNode(true);
     deckCard.classList.add("deck-card", role.toLowerCase() + "-card");
   
     const countSpan = document.createElement("span");
     countSpan.classList.add("card-count");
-    countSpan.innerText = extraDeck.filter(c => c === cardName).length; // shows duplicates
+    countSpan.innerText = extraDeck.filter(c => c === name).length; // shows duplicates
     deckCard.appendChild(countSpan);
 
     deckCards.appendChild(deckCard);
