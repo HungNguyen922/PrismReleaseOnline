@@ -174,11 +174,6 @@ function renderCards(cards) {
     const deckCard = cardEl.cloneNode(true);
     deckCard.classList.add("deck-card", role.toLowerCase() + "-card");
   
-    const roleBadge = document.createElement("span");
-    roleBadge.classList.add("card-role");
-    roleBadge.innerText = role;
-    deckCard.appendChild(roleBadge);
-
     const countSpan = document.createElement("span");
     countSpan.classList.add("card-count");
     countSpan.innerText = extraDeck.filter(c => c === cardName).length; // shows duplicates
