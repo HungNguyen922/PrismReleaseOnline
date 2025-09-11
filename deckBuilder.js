@@ -130,9 +130,6 @@ function renderCards(cards) {
     // --- Leader & Extra Deck logic ---
     if (!leaderCard) {
       leaderCard = cardName;
-      const deckCard = deckMap[cardName]
-      const countSpan = deckCard.querySelector('.card-count');
-      countSpan.innerText = 1;
       createSpecialDeckCard(cardEl, cardName, "Leader");
       updateDeckCount();
       return;
