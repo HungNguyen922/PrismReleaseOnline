@@ -278,9 +278,14 @@ h1, h3, p {
   gap: 5px;
 }
 
-.deck-upload {
-    position: absolute;
-    top: 35%;
+#deck-upload {
+  position: absolute;
+  top: 20px;   /* adjust as needed */
+}
+
+#upload-button {
+  position: absolute;
+  top: 20px;   /* same vertical alignment */
 }
 
 .card-slot {
