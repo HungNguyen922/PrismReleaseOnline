@@ -260,7 +260,7 @@ h1, h3, p {
   gap: 5px;
 }
 
-.card-slot {
+#card-slot {
   border: 2px dashed #888;
   background-color: #f0f0f0;
   height: 120px; /* or any consistent size for testing */
