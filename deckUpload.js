@@ -1,3 +1,8 @@
+let deck = [];   // cards left in the draw pile
+let leader = null;
+let extraDeck = [];
+let hand = [];   // cards the player has drawn
+
 function parseDeckText(text) {
   const lines = text.trim().split('\n');
   const deckName = lines[0].trim(); // first line is the deck name
@@ -27,13 +32,14 @@ document.getElementById('upload-button').addEventListener('click', () => {
   reader.onload = () => {
     const { deckName, cards } = parseDeckText(reader.result);
     console.log("Loaded deck:", deckName, "with", cards.length, "cards");
+    leader = cards.pop(0);
+    for (let i = 1; i < lines.legnth; i++) {
+      extraDeck.append(cards.pop(0));
+    }
     loadDeck(cards);
   };
   reader.readAsText(file);
 });
-
-let deck = [];   // cards left in the draw pile
-let hand = [];   // cards the player has drawn
 
 function loadDeck(cards) {
     deck = shuffle(cards); // initialize and shuffle
