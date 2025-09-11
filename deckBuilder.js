@@ -219,11 +219,10 @@ document.addEventListener("keydown", (e) => {
   }
 
   // Q = remove from deck
-  if (e.key.toLowerCase() === "q" && hoveredDeckCard) {
-    const cardName = hoveredDeckCard.dataset.cardName;
+  const cardName = hoveredDeckCard.dataset.cardName;
 
     if (hoveredDeckCard.classList.contains("leader-card")) {
-      // removing Leader
+      // remove leader
       leaderCard = null;
       hoveredDeckCard.remove();
       delete deckMap[cardName];
@@ -231,34 +230,28 @@ document.addEventListener("keydown", (e) => {
       return;
     }
 
-    else if (hoveredDeckCard.classList.contains("extra-card")) {
-      // count how many copies of cardName are currently in extraDeck
+    if (hoveredDeckCard.classList.contains("extra-card")) {
       const countInExtra = extraDeck.filter(c => c === cardName).length;
 
       if (countInExtra > 1) {
-        // remove just one copy from extraDeck array
-        // find index of first matching and splice it out
+        // remove one copy
         const idx = extraDeck.indexOf(cardName);
-        if (idx > -1) {
-          extraDeck.splice(idx, 1);
-        }
+        if (idx > -1) extraDeck.splice(idx, 1);
+
         // update UI count
         const countSpan = hoveredDeckCard.querySelector(".card-count");
         countSpan.innerText = countInExtra - 1;
       } else {
-        // exactly one copy → fully remove
-        // remove from extraDeck
+        // exactly one left → remove completely
         extraDeck = extraDeck.filter(c => c !== cardName);
-        // remove UI element
         hoveredDeckCard.remove();
-        // remove from deckMap
         delete deckMap[cardName];
       }
       updateDeckCount();
       return;
     }
 
-    // normal main-deck card
+    // main deck removal logic
     const countSpan = hoveredDeckCard.querySelector(".card-count");
     if (countSpan) {
       let count = parseInt(countSpan.innerText, 10);
