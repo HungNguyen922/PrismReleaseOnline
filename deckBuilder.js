@@ -135,7 +135,15 @@ function renderCards(cards) {
       return;
     } else if (extraDeck.length < 4) {
       extraDeck.push(cardName);
+
+      if (deckMap[cardName] && deckMap[cardName].classList.contains("extra-card")) {
+        const deckCard = deckMap[cardName]
+        const countSpan = deckCard.querySelector('.card-count');
+        countSpan.innerText = extraDeck.filter(c => c === cardName).length;
+      }
+      else {
       createSpecialDeckCard(cardEl, cardName, "Extra");
+      }
       updateDeckCount();
       return;
     }
