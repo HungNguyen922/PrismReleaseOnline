@@ -32,7 +32,7 @@ function renderHand() {
     fileName = formatCardName(card);
     
     const img = document.createElement("img");
-    img.src = fileName;
+    img.src = "cardDatabase/" + fileName + ".png";
     img.alt = card;
     img.classList.add("card-img");
 
