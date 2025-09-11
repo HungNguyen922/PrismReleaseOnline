@@ -185,12 +185,14 @@ document.addEventListener("DOMContentLoaded", () => {
       sourceSlot.innerHTML = "";
       sourceSlot.removeAttribute("data-card");
 
-      if (slot.history.length > 0) {
-        const prevCard = slot.history.pop();
-        placeCardInSlot(slot, prevCard);
+      // Reveal previous card in source slot
+      if (sourceSlot.history.length > 0) {
+        const prevCard = sourceSlot.history.pop();
+        placeCardInSlot(sourceSlot, prevCard);
       } else {
-        slot.dataset.card = null;
+        sourceSlot.dataset.card = null;
       }
+
 
       // Add back to hand
       hand.push(card);
