@@ -281,6 +281,7 @@ h1, h3, p {
 #deck-upload {
   position: absolute;
   top: 30%;   /* adjust as needed */
+  color: #000;
 }
 
 #upload-button {
