@@ -64,10 +64,25 @@ function shuffle(array) {
     return array.sort(() => Math.random() - 0.5);
 }
 
+// --- UI updates ---
 function updateDeckUI() {
-    const slot = document.getElementById("deck-slot");
-    if (!slot) return; // avoid errors if element doesn't exist
+  const slot = document.getElementById("draw-slot");
+  if (slot) {
+    slot.textContent = "Draw Pile (" + deck.length + ")";
+  }
+}
 
-    slot.textContent = "Draw Pile" + ` (${deck.length})`;
+function updateLeaderUI() {
+  const slot = document.getElementById("leader-slot");
+  if (slot) {
+    slot.textContent = leader ? "Leader Ready" : "Leader (drawn)";
+  }
+}
+
+function updateExtraUI() {
+  const slot = document.getElementById("extra-slot");
+  if (slot) {
+    slot.textContent = "Extra Deck (" + extraDeck.length + ")";
+  }
 }
 
