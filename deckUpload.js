@@ -128,3 +128,28 @@ document.querySelectorAll(".field-slot").forEach(slot => {
     slot.appendChild(cardEl);
   });
 });
+
+// making a dynamic health tracker
+let health = 20;
+
+const healthSlot = document.getElementById("health-slot");
+const healthValue = document.getElementById("health-value");
+
+healthSlot.addEventListener("click", e => {
+  const rect = healthSlot.getBoundingClientRect();
+  const clickY = e.clientY - rect.top; // position relative to top of slot
+
+  if (clickY < rect.height / 2) {
+    // top half → increment
+    health++;
+  } else {
+    // bottom half → decrement
+    health--;
+  }
+
+  updateHealthUI();
+});
+
+function updateHealthUI() {
+  healthValue.textContent = health;
+}
