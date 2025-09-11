@@ -336,3 +336,7 @@ h1, h3, p {
   padding: 2px 4px;
   border-radius: 4px;
 }
+
+.health-slot {
+    user-select: none;
+}
