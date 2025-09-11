@@ -49,6 +49,7 @@ document.getElementById('upload-button').addEventListener('click', () => {
       }
     });
 
+    extraDeck = shuffle(extraDeck);
     loadDeck(mainDeck);
   };
   reader.readAsText(file);
