@@ -65,7 +65,7 @@ function shuffle(array) {
 }
 
 function updateDeckUI() {
-    const slot = document.getElementByClassName("deck-slot");
+    const slot = document.getElementById("deck-slot");
     if (!slot) return; // avoid errors if element doesn't exist
 
     slot.textContent = "Draw Pile" + ` (${deck.length})`;
