@@ -124,68 +124,76 @@ function renderCards(cards) {
   const MAX_EXTRA = 4;
 
   function addToDeck(cardEl) {
-    const cardName = cardEl.dataset.cardName;
-  
-    // Leader logic
-    if (!leaderCard) {
-      leaderCard = cardName;
-      createSpecialDeckCard(cardEl, cardName, "Leader");
-      updateDeckCount();
-      return;
-    }
-  
-    // Extra deck logic
-    const currentExtraCount = extraDeck.length; // total copies in extra deck
-  
-    if (currentExtraCount < MAX_EXTRA) {
-      // There's room for another extra card
-      extraDeck.push(cardName);
-  
-      // If there's already an extra UI element
-      if (deckMap[cardName] && deckMap[cardName].classList.contains("extra-card")) {
-        const deckCard = deckMap[cardName];
-        const countSpan = deckCard.querySelector(".card-count");
-        const newCount = extraDeck.filter(c => c === cardName).length;
-        countSpan.innerText = newCount;
-      } else {
-        // No existing extra-card UI, so create one
-        createSpecialDeckCard(cardEl, cardName, "Extra");
-      }
-  
-      updateDeckCount();
-      return;
-    }
-  
-    // If extra deck is full (>= MAX_EXTRA), fall back to main deck
-    addToMainDeck(cardEl, cardName);
+  const cardName = cardEl.dataset.cardName;
+
+  // Leader logic
+  if (!leaderCard) {
+    leaderCard = cardName;
+    const leaderEl = createSpecialDeckCard(cardEl, cardName, "Leader");
+    ensureDeckMapEntry(cardName);
+    deckMap[cardName].leader = leaderEl;
+    updateDeckCount();
+    return;
   }
+
+  // Extra deck logic
+  const currentExtraCount = extraDeck.length;
+
+  if (currentExtraCount < MAX_EXTRA) {
+    // there is room to add another extra
+    extraDeck.push(cardName);
+
+    ensureDeckMapEntry(cardName);
+
+    if (deckMap[cardName].extra) {
+      // update existing extra-card UI
+      const deckCard = deckMap[cardName].extra;
+      const countSpan = deckCard.querySelector(".card-count");
+      const newCount = extraDeck.filter(c => c === cardName).length;
+      countSpan.innerText = newCount;
+    } else {
+      // create a new extra-card UI
+      const extraEl = createSpecialDeckCard(cardEl, cardName, "Extra");
+      deckMap[cardName].extra = extraEl;
+    }
+    updateDeckCount();
+    return;
+  }
+
+  // If extra deck is full, overflow to main deck
+  addToMainDeck(cardEl, cardName);
+}
   
   // Extracted helper for adding into main deck (existing logic)
   function addToMainDeck(cardEl, cardName) {
-    if (deckMap[cardName] &&
-        !deckMap[cardName].classList.contains("leader-card") &&
-        !deckMap[cardName].classList.contains("extra-card")) {
-      // already in main deck
-      const deckCard = deckMap[cardName];
+    ensureDeckMapEntry(cardName);
+  
+    if (deckMap[cardName].main) {
+      // already have main deck UI for this card
+      const deckCard = deckMap[cardName].main;
       const countSpan = deckCard.querySelector(".card-count");
       countSpan.innerText = parseInt(countSpan.innerText, 10) + 1;
     } else {
-      // new main deck UI element
+      // create new main deck UI
       const deckCard = cardEl.cloneNode(true);
-      deckCard.classList.add("deck-card");
+      deckCard.classList.add("deck-card");  // no "extra-card" or "leader-card"
       const countSpan = document.createElement("span");
       countSpan.classList.add("card-count");
       countSpan.innerText = "1";
       deckCard.appendChild(countSpan);
       deckCards.appendChild(deckCard);
-      deckMap[cardName] = deckCard;
+  
+      deckMap[cardName].main = deckCard;
+  
+      // attach removal via click if you have that behavior
       deckCard.addEventListener("click", () => {
         let count = parseInt(countSpan.innerText, 10);
         if (count > 1) {
           countSpan.innerText = count - 1;
         } else {
           deckCard.remove();
-          delete deckMap[cardName];
+          deckMap[cardName].main = null;
+          // If no extra or leader for that card either, you could delete the whole deckMap entry optionally
         }
         updateDeckCount();
       });
@@ -193,6 +201,12 @@ function renderCards(cards) {
     updateDeckCount();
   }
 
+  // Utility to ensure deckMap entry structure exists
+  function ensureDeckMapEntry(cardName) {
+    if (!deckMap[cardName]) {
+      deckMap[cardName] = { leader: null, extra: null, main: null };
+    }
+  }
   function createSpecialDeckCard(cardEl, name, role) {
     const deckCard = cardEl.cloneNode(true);
     deckCard.classList.add("deck-card", role.toLowerCase() + "-card");
@@ -213,57 +227,59 @@ fetch("allCards.json")
     renderCards(allCards);
 });
 
+// Key handling for W = add, Q = remove
 document.addEventListener("keydown", (e) => {
   if (e.key.toLowerCase() === "w" && hoveredCard) {
     addToDeck(hoveredCard);
   }
 
-  // Q = remove from deck
   if (e.key.toLowerCase() === "q" && hoveredDeckCard) {
     const cardName = hoveredDeckCard.dataset.cardName;
 
+    // If leader
     if (hoveredDeckCard.classList.contains("leader-card")) {
       // remove leader
       leaderCard = null;
       hoveredDeckCard.remove();
-      delete deckMap[cardName];
+      if (deckMap[cardName]) deckMap[cardName].leader = null;
       updateDeckCount();
       return;
     }
 
     if (hoveredDeckCard.classList.contains("extra-card")) {
+      // remove one copy or full removal
       const countInExtra = extraDeck.filter(c => c === cardName).length;
-
       if (countInExtra > 1) {
-        // remove one copy
+        // remove one
         const idx = extraDeck.indexOf(cardName);
         if (idx > -1) extraDeck.splice(idx, 1);
 
-        // update UI count
         const countSpan = hoveredDeckCard.querySelector(".card-count");
         countSpan.innerText = countInExtra - 1;
       } else {
-        // exactly one left → remove completely
+        // removing last extra copy
         extraDeck = extraDeck.filter(c => c !== cardName);
         hoveredDeckCard.remove();
-        delete deckMap[cardName];
+        if (deckMap[cardName]) deckMap[cardName].extra = null;
       }
       updateDeckCount();
       return;
     }
 
-    // main deck removal logic
-    const countSpan = hoveredDeckCard.querySelector(".card-count");
-    if (countSpan) {
+    // main-deck removal
+    if (hoveredDeckCard.classList.contains("deck-card")) {
+      // assume it's main if not extra or leader
+      const countSpan = hoveredDeckCard.querySelector(".card-count");
+      if (!countSpan) return;
       let count = parseInt(countSpan.innerText, 10);
       if (count > 1) {
         countSpan.innerText = count - 1;
       } else {
         hoveredDeckCard.remove();
-        delete deckMap[cardName];
+        if (deckMap[cardName]) deckMap[cardName].main = null;
       }
+      updateDeckCount();
     }
-    updateDeckCount();
   }
 });
 
