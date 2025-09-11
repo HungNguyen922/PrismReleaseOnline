@@ -13,6 +13,59 @@ function drawCard() {
   updateDeckUI();
 }
 
+document.getElementById("leader-slot").addEventListener("click", drawLeader);
+
+function drawLeader() {
+  if (!leader) {
+    alert("No leader left to draw!");
+    return;
+  }
+
+  hand.push(leader);
+  leader = null; // can only be drawn once
+
+  renderHand();
+  updateLeaderUI();
+}
+
+// --- NEW: Extra deck draw ---
+document.getElementById("extra-slot").addEventListener("click", drawExtra);
+
+function drawExtra() {
+  if (extraDeck.length === 0) {
+    alert("No more cards in the extra deck!");
+    return;
+  }
+
+  const card = extraDeck.pop(); // take the top (last) card
+  hand.push(card);
+
+  renderHand();
+  updateExtraUI();
+}
+
+// --- UI updates ---
+function updateDeckUI() {
+  const slot = document.getElementById("draw-slot");
+  if (slot) {
+    slot.textContent = "Draw Pile (" + deck.length + ")";
+  }
+}
+
+function updateLeaderUI() {
+  const slot = document.getElementById("leader-slot");
+  if (slot) {
+    slot.textContent = leader ? "Leader Ready" : "Leader (drawn)";
+  }
+}
+
+function updateExtraUI() {
+  const slot = document.getElementById("extra-slot");
+  if (slot) {
+    slot.textContent = "Extra Deck (" + extraDeck.length + ")";
+  }
+}
+
 function formatCardName(str) {
   return str
     .trim()
