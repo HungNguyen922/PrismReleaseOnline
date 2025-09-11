@@ -8,7 +8,18 @@ listBtn.addEventListener('click', async () => {
       const name = card.getAttribute('data-card-name') || '';
       const countEl = card.querySelector('.card-count');
       const count = countEl?.textContent.trim() || '0';
-      return `${count}, ${name}`;
+      let marker = '';
+
+      // Check if the card is a leader
+      if (card.classList.contains('leader-card')) {
+        marker = 'L';
+      }
+      // Check if the card is in the extra deck
+      else if (card.classList.contains('extra-card')) {
+        marker = 'E';
+      }
+      
+      return `${count}, ${name}${marker ? ' (' + marker + ')' : ''}`;
     });
 
   const deckText = deckName.innerHTML + '\n' + lines.join('\n');
