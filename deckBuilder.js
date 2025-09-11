@@ -207,18 +207,25 @@ function renderCards(cards) {
       deckMap[cardName] = { leader: null, extra: null, main: null };
     }
   }
-  function createSpecialDeckCard(cardEl, name, role) {
-    const deckCard = cardEl.cloneNode(true);
-    deckCard.classList.add("deck-card", role.toLowerCase() + "-card");
-  
-    const countSpan = document.createElement("span");
-    countSpan.classList.add("card-count");
-    countSpan.innerText = extraDeck.filter(c => c === name).length; // shows duplicates
-    deckCard.appendChild(countSpan);
 
-    deckCards.appendChild(deckCard);
-    deckMap[cardEl.dataset.cardName] = deckCard;
+  function createSpecialDeckCard(cardEl, cardName, role) {
+  const deckCard = cardEl.cloneNode(true);
+  deckCard.classList.add("deck-card", role.toLowerCase() + "-card");
+  const countSpan = document.createElement("span");
+  countSpan.classList.add("card-count");
+  // If extra role, use extraDeck array to count, else for leader maybe always 1
+  let initialCount = 1;
+  if (role.toLowerCase() === "extra") {
+    initialCount = extraDeck.filter(c => c === cardName).length;
+  } else if (role.toLowerCase() === "leader") {
+    initialCount = 1;
   }
+  countSpan.innerText = initialCount;
+  deckCard.appendChild(countSpan);
+  deckCards.appendChild(deckCard);
+  // You may want to attach click handlers for removal etc. If so, do it here.
+  return deckCard;
+}
 
 fetch("allCards.json")
 .then(res => res.json())
