@@ -220,11 +220,29 @@ document.addEventListener("keydown", (e) => {
       return;
     }
 
-    if (hoveredDeckCard.classList.contains("extra-card")) {
-      // removing Extra deck card
-      extraDeck = extraDeck.filter(c => c !== cardName);
-      hoveredDeckCard.remove();
-      delete deckMap[cardName];
+    else if (hoveredDeckCard.classList.contains("extra-card")) {
+      // count how many copies of cardName are currently in extraDeck
+      const countInExtra = extraDeck.filter(c => c === cardName).length;
+
+      if (countInExtra > 1) {
+        // remove just one copy from extraDeck array
+        // find index of first matching and splice it out
+        const idx = extraDeck.indexOf(cardName);
+        if (idx > -1) {
+          extraDeck.splice(idx, 1);
+        }
+        // update UI count
+        const countSpan = hoveredDeckCard.querySelector(".card-count");
+        countSpan.innerText = countInExtra - 1;
+      } else {
+        // exactly one copy → fully remove
+        // remove from extraDeck
+        extraDeck = extraDeck.filter(c => c !== cardName);
+        // remove UI element
+        hoveredDeckCard.remove();
+        // remove from deckMap
+        delete deckMap[cardName];
+      }
       updateDeckCount();
       return;
     }
