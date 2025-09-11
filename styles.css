@@ -241,13 +241,13 @@ h1, h3, p {
 .top-strip,
 .bottom-strip {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* three equal columns */
+  grid-template-columns: repeat(3, 90px); /* three equal columns */
   gap: 5px;
 }
 
 .center-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, 90px);
   grid-template-rows: repeat(2, auto);
   gap: 5px;
 }
