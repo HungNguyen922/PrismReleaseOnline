@@ -121,66 +121,77 @@ function renderCards(cards) {
   }
 
   // Function to add a card to the deck
+  const MAX_EXTRA = 4;
+
   function addToDeck(cardEl) {
     const cardName = cardEl.dataset.cardName;
-    const cardData = JSON.parse(cardEl.dataset.cardJson);
   
-    console.log(`Adding ${cardName} to deck`, cardData);
-
-    // --- Leader & Extra Deck logic ---
+    // Leader logic
     if (!leaderCard) {
       leaderCard = cardName;
       createSpecialDeckCard(cardEl, cardName, "Leader");
       updateDeckCount();
       return;
-    } else if (extraDeck.length < 4) {
-      console.log(extraDeck.length);
+    }
+  
+    // Extra deck logic
+    const currentExtraCount = extraDeck.length; // total copies in extra deck
+  
+    if (currentExtraCount < MAX_EXTRA) {
+      // There's room for another extra card
       extraDeck.push(cardName);
-
+  
+      // If there's already an extra UI element
       if (deckMap[cardName] && deckMap[cardName].classList.contains("extra-card")) {
-        const deckCard = deckMap[cardName]
-        const countSpan = deckCard.querySelector('.card-count');
-        countSpan.innerText = extraDeck.filter(c => c === cardName).length;
+        const deckCard = deckMap[cardName];
+        const countSpan = deckCard.querySelector(".card-count");
+        const newCount = extraDeck.filter(c => c === cardName).length;
+        countSpan.innerText = newCount;
+      } else {
+        // No existing extra-card UI, so create one
+        createSpecialDeckCard(cardEl, cardName, "Extra");
       }
-      else {
-      createSpecialDeckCard(cardEl, cardName, "Extra");
-      }
+  
       updateDeckCount();
       return;
     }
-    // ---------------------------------
-      
-    if (deckMap[cardName] && !deckMap[cardName].classList.contains("leader-card") && !deckMap[cardName].classList.contains("extra-card")) {
+  
+    // If extra deck is full (>= MAX_EXTRA), fall back to main deck
+    addToMainDeck(cardEl, cardName);
+  }
+  
+  // Extracted helper for adding into main deck (existing logic)
+  function addToMainDeck(cardEl, cardName) {
+    if (deckMap[cardName] &&
+        !deckMap[cardName].classList.contains("leader-card") &&
+        !deckMap[cardName].classList.contains("extra-card")) {
       // already in main deck
       const deckCard = deckMap[cardName];
       const countSpan = deckCard.querySelector(".card-count");
       countSpan.innerText = parseInt(countSpan.innerText, 10) + 1;
-  } else {
-    // create new main-deck card
-    const deckCard = cardEl.cloneNode(true);
-    deckCard.classList.add("deck-card"); // no special "extra" or "leader" class
-    const countSpan = document.createElement("span");
-    countSpan.classList.add("card-count");
-    countSpan.innerText = "1";
-    deckCard.appendChild(countSpan);
-
-    deckCards.appendChild(deckCard);
-    deckMap[cardName] = deckCard;
-
-    // also attach click handler to remove or decrement, etc., same as existing main deck logic
-    deckCard.addEventListener("click", () => {
-      let count = parseInt(countSpan.innerText, 10);
-      if (count > 1) {
-        countSpan.innerText = count - 1;
-      } else {
-        deckCard.remove();
-        delete deckMap[cardName];
-      }
-      updateDeckCount();
-    });
+    } else {
+      // new main deck UI element
+      const deckCard = cardEl.cloneNode(true);
+      deckCard.classList.add("deck-card");
+      const countSpan = document.createElement("span");
+      countSpan.classList.add("card-count");
+      countSpan.innerText = "1";
+      deckCard.appendChild(countSpan);
+      deckCards.appendChild(deckCard);
+      deckMap[cardName] = deckCard;
+      deckCard.addEventListener("click", () => {
+        let count = parseInt(countSpan.innerText, 10);
+        if (count > 1) {
+          countSpan.innerText = count - 1;
+        } else {
+          deckCard.remove();
+          delete deckMap[cardName];
+        }
+        updateDeckCount();
+      });
+    }
+    updateDeckCount();
   }
-  updateDeckCount();
-}
 
   function createSpecialDeckCard(cardEl, name, role) {
     const deckCard = cardEl.cloneNode(true);
