@@ -235,6 +235,8 @@ h1, h3, p {
 .playfield {
   display: grid;
   grid-template-rows: auto 1fr auto; /* top strip variable height, center fills remaining, bottom variable */
+  align-items: center;
+  justify-content: center;
   gap: 10px; /* optional spacing between areas */
 }
 
