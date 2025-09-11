@@ -44,3 +44,10 @@ function loadDeck(cards) {
 function shuffle(array) {
     return array.sort(() => Math.random() - 0.5);
 }
+
+function updateDeckUI() {
+    const slot = document.getElementById("draw-slot");
+    if (!slot) return; // avoid errors if element doesn't exist
+
+    slot.textContent = "Draw Pile" + `(${deck.length})`;
+}
