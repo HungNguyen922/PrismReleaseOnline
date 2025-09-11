@@ -6,6 +6,8 @@ clearBtn.addEventListener("click", () => {
 
     // Reset tracking map
     for (let key in deckMap) delete deckMap[key];
+    leaderCard = null;
+    extraDeck = [];
 
     // Reset deck counter
     deckCountSpan.innerText = "(0)";
