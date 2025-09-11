@@ -68,7 +68,7 @@ function shuffle(array) {
 
 // --- UI updates ---
 function updateDeckUI() {
-  const slot = document.getElementById("draw-slot");
+  const slot = document.getElementById("deck-slot");
   if (slot) {
     slot.textContent = "Draw Pile (" + deck.length + ")";
   }
