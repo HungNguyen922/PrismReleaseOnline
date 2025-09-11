@@ -55,25 +55,24 @@ function formatCardName(str) {
 
 function renderHand() {
   const handArea = document.getElementById("hand-area");
-  handArea.innerHTML = ""; // clear old hand
+  handArea.innerHTML = "";
 
   hand.forEach((card, index) => {
     const cardEl = document.createElement("div");
     cardEl.classList.add("card");
-    cardEl.setAttribute("draggable", "true"); // ✅ make draggable
-    cardEl.dataset.index = index; // store position in hand
-
-    const fileName = formatCardName(card);
+    cardEl.setAttribute("draggable", "true");
+    cardEl.dataset.index = index; // track card in hand
+    cardEl.dataset.from = "hand";
 
     const img = document.createElement("img");
-    img.src = "cardDatabase/" + fileName + ".png";
+    img.src = "cardDatabase/" + formatCardName(card) + ".png";
     img.alt = card;
     img.classList.add("card-img");
 
     cardEl.appendChild(img);
 
-    // --- Drag start ---
     cardEl.addEventListener("dragstart", e => {
+      e.dataTransfer.setData("from", "hand");
       e.dataTransfer.setData("cardIndex", index);
     });
 
