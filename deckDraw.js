@@ -13,6 +13,15 @@ function drawCard() {
   updateDeckUI();
 }
 
+function formatCardName(str) {
+  return str
+    .trim()
+    // Match a boundary: either start of string, or a separator (space, hyphen, underscore, etc.)
+    .replace(/(?:^|[\s\-\_]+)(\S)/g, (_, char) =>
+      char.toUpperCase()
+    );
+}
+
 function renderHand() {
   const handArea = document.getElementById("hand-area");
   handArea.innerHTML = ""; // clear old hand
@@ -20,7 +29,14 @@ function renderHand() {
   hand.forEach(card => {
     const cardEl = document.createElement("div");
     cardEl.classList.add("card");
-    cardEl.textContent = card;
+    fileName = formatCardName(card);
+    
+    const img = document.createElement("img");
+    img.src = fileName;
+    img.alt = card;
+    img.classList.add("card-img");
+
+    cardEl.appendChild(img);
     handArea.appendChild(cardEl);
   });
 }
