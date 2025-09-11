@@ -150,34 +150,37 @@ function renderCards(cards) {
     }
     // ---------------------------------
       
-    if (deckMap[cardName]) {
-      const countSpan = deckMap[cardName].querySelector(".card-count");
+    if (deckMap[cardName] && !deckMap[cardName].classList.contains("leader-card") && !deckMap[cardName].classList.contains("extra-card")) {
+      // already in main deck
+      const deckCard = deckMap[cardName];
+      const countSpan = deckCard.querySelector(".card-count");
       countSpan.innerText = parseInt(countSpan.innerText, 10) + 1;
-    } else {
-      const deckCard = cardEl.cloneNode(true);
-      deckCard.classList.add("deck-card");
-  
-      const countSpan = document.createElement("span");
-      countSpan.classList.add("card-count");
-      countSpan.innerText = "1";
-      deckCard.appendChild(countSpan);
-  
-      deckCards.appendChild(deckCard);
-      deckMap[cardName] = deckCard;
-  
-      deckCard.addEventListener("click", () => {
-        let count = parseInt(countSpan.innerText, 10);
-        if (count > 1) {
-          countSpan.innerText = count - 1;
-        } else {
-          deckCard.remove();
-          delete deckMap[cardName];
-        }
-        updateDeckCount();
-      });
-    }
-    updateDeckCount();
+  } else {
+    // create new main-deck card
+    const deckCard = cardEl.cloneNode(true);
+    deckCard.classList.add("deck-card"); // no special "extra" or "leader" class
+    const countSpan = document.createElement("span");
+    countSpan.classList.add("card-count");
+    countSpan.innerText = "1";
+    deckCard.appendChild(countSpan);
+
+    deckCards.appendChild(deckCard);
+    deckMap[cardName] = deckCard;
+
+    // also attach click handler to remove or decrement, etc., same as existing main deck logic
+    deckCard.addEventListener("click", () => {
+      let count = parseInt(countSpan.innerText, 10);
+      if (count > 1) {
+        countSpan.innerText = count - 1;
+      } else {
+        deckCard.remove();
+        delete deckMap[cardName];
+      }
+      updateDeckCount();
+    });
   }
+  updateDeckCount();
+}
 
   function createSpecialDeckCard(cardEl, name, role) {
     const deckCard = cardEl.cloneNode(true);
