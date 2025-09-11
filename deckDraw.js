@@ -57,17 +57,26 @@ function renderHand() {
   const handArea = document.getElementById("hand-area");
   handArea.innerHTML = ""; // clear old hand
 
-  hand.forEach(card => {
+  hand.forEach((card, index) => {
     const cardEl = document.createElement("div");
     cardEl.classList.add("card");
-    fileName = formatCardName(card);
-    
+    cardEl.setAttribute("draggable", "true"); // ✅ make draggable
+    cardEl.dataset.index = index; // store position in hand
+
+    const fileName = formatCardName(card);
+
     const img = document.createElement("img");
     img.src = "cardDatabase/" + fileName + ".png";
     img.alt = card;
     img.classList.add("card-img");
 
     cardEl.appendChild(img);
+
+    // --- Drag start ---
+    cardEl.addEventListener("dragstart", e => {
+      e.dataTransfer.setData("cardIndex", index);
+    });
+
     handArea.appendChild(cardEl);
   });
 }
