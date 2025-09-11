@@ -133,7 +133,7 @@ function renderCards(cards) {
       createSpecialDeckCard(cardEl, "Leader");
       updateDeckCount();
       return;
-    } else if (extraDeck.length < 4 && !deckMap[cardName]) {
+    } else if (extraDeck.length < 4) {
       extraDeck.push(cardName);
       createSpecialDeckCard(cardEl, "Extra");
       updateDeckCount();
