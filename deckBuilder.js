@@ -219,7 +219,8 @@ document.addEventListener("keydown", (e) => {
   }
 
   // Q = remove from deck
-  const cardName = hoveredDeckCard.dataset.cardName;
+  if (e.key.toLowerCase() === "q" && hoveredDeckCard) {
+    const cardName = hoveredDeckCard.dataset.cardName;
 
     if (hoveredDeckCard.classList.contains("leader-card")) {
       // remove leader
