@@ -71,6 +71,7 @@ h1, h3, p {
     width: 100%;         /*allows it to shrink in grid*/
     display: flex;
     flex-direction: column;
+    cursor: grab;
 }
 
 .card img {
@@ -79,6 +80,22 @@ h1, h3, p {
     width: 100%;
     height: auto;
     display: block;
+}
+
+.field-slot {
+  width: 120px;
+  height: 180px;
+  border: 2px dashed #aaa;
+  border-radius: 10px;
+  margin: 10px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.field-slot.hover {
+  border-color: gold;
+  background: rgba(255, 215, 0, 0.1);
 }
 
 .modal {
