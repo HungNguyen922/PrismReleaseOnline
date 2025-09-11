@@ -130,7 +130,7 @@ document.querySelectorAll(".field-slot").forEach(slot => {
 });
 
 // making a dynamic health tracker
-let health = 20;
+let health = 15;
 
 const healthSlot = document.getElementById("health-slot");
 const healthValue = document.getElementById("health-value");
