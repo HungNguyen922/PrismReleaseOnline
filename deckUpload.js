@@ -31,12 +31,25 @@ document.getElementById('upload-button').addEventListener('click', () => {
   const reader = new FileReader();
   reader.onload = () => {
     const { deckName, cards } = parseDeckText(reader.result);
+
     console.log("Loaded deck:", deckName, "with", cards.length, "cards");
-    leader = cards.pop(0);
-    for (let i = 1; i < lines.legnth; i++) {
-      extraDeck.append(cards.pop(0));
-    }
-    loadDeck(cards);
+
+    // Sort cards into leader, extra, and main deck
+    leader = null;
+    extraDeck = [];
+    const mainDeck = [];
+
+    cards.forEach(card => {
+      if (card.endsWith("(L)")) {
+        leader = card.replace("(L)", "").trim();
+      } else if (card.endsWith("(E)")) {
+        extraDeck.push(card.replace("(E)", "").trim());
+      } else {
+        mainDeck.push(card.trim());
+      }
+    });
+
+    loadDeck(mainDeck);
   };
   reader.readAsText(file);
 });
@@ -55,5 +68,6 @@ function updateDeckUI() {
     const slot = document.getElementById("draw-slot");
     if (!slot) return; // avoid errors if element doesn't exist
 
-    slot.textContent = "Draw Pile" + `(${deck.length})`;
+    slot.textContent = "Draw Pile" + ` (${deck.length})`;
 }
+
