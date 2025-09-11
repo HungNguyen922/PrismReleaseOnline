@@ -92,41 +92,87 @@ function updateExtraUI() {
 // I don't know where to put this
 
 document.querySelectorAll(".field-slot").forEach(slot => {
-  // Allow dropping
-  slot.addEventListener("dragover", e => {
-    e.preventDefault(); // required
-    slot.classList.add("hover"); // optional: add highlight
-  });
+  slot.history = []; // optional if tracking history
 
-  slot.addEventListener("dragleave", () => {
-    slot.classList.remove("hover");
-  });
+  slot.addEventListener("dragover", e => e.preventDefault());
+  slot.addEventListener("dragleave", () => slot.classList.remove("hover"));
 
-  // Handle drop
   slot.addEventListener("drop", e => {
     e.preventDefault();
     slot.classList.remove("hover");
 
-    const cardIndex = e.dataTransfer.getData("cardIndex");
-    if (cardIndex === "") return;
+    const from = e.dataTransfer.getData("from");
 
-    const card = hand.splice(cardIndex, 1)[0]; // remove from hand
-    renderHand(); // re-render hand
+    let card;
 
-    // render into slot
+    // From hand
+    if (from === "hand") {
+      const index = e.dataTransfer.getData("cardIndex");
+      card = hand.splice(index, 1)[0];
+      renderHand();
+    }
+
+    // From another slot
+    else if (from === "slot") {
+      const sourceSlotId = e.dataTransfer.getData("slotId");
+      const sourceSlot = document.getElementById(sourceSlotId);
+      card = sourceSlot.dataset.card;
+      sourceSlot.innerHTML = "";
+      sourceSlot.removeAttribute("data-card");
+    }
+
+    if (!card) return;
+
+    // Save previous card in history if needed
+    if (slot.dataset.card) {
+      slot.history.push(slot.dataset.card);
+    }
+
+    // Place new card
     const cardEl = document.createElement("div");
     cardEl.classList.add("card");
+    cardEl.setAttribute("draggable", "true");
+    cardEl.dataset.card = card;
 
-    const fileName = formatCardName(card);
     const img = document.createElement("img");
-    img.src = "cardDatabase/" + fileName + ".png";
+    img.src = "cardDatabase/" + formatCardName(card) + ".png";
     img.alt = card;
     img.classList.add("card-img");
 
     cardEl.appendChild(img);
-    slot.innerHTML = ""; // only 1 card per slot (optional)
+    slot.innerHTML = "";
     slot.appendChild(cardEl);
+
+    slot.dataset.card = card;
+
+    cardEl.addEventListener("dragstart", ev => {
+      ev.dataTransfer.setData("from", "slot");
+      ev.dataTransfer.setData("slotId", slot.id);
+      ev.dataTransfer.setData("card", card);
+    });
   });
+});
+
+// you can add cards to hand by dragging them
+
+const handArea = document.getElementById("hand-area");
+
+handArea.addEventListener("dragover", e => e.preventDefault());
+
+handArea.addEventListener("drop", e => {
+  e.preventDefault();
+  const from = e.dataTransfer.getData("from");
+
+  if (from === "slot") {
+    const card = e.dataTransfer.getData("card");
+    hand.push(card);
+    renderHand();
+
+    const sourceSlotId = e.dataTransfer.getData("slotId");
+    const sourceSlot = document.getElementById(sourceSlotId);
+    sourceSlot.innerHTML = "";
+    sourceSlot.removeAttribute("data-card");
+  }
 });
 
 // making a dynamic health tracker
