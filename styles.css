@@ -254,6 +254,12 @@ h1, h3, p {
   gap: 5px;
 }
 
+.draw-pile {
+  display: grid;
+  grid-template-columns: repeat(3, 90px);
+  gap: 5px;
+}
+
 .card-slot {
   border: 2px dashed #888;
   background-color: #f0f0f0;
