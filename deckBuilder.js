@@ -15,6 +15,10 @@ let hoveredDeckCard = null;
 // Keep a lookup so we know if a card is already in the deck
 const deckMap = {};
 
+// Keep track of the Leader and extra deck
+let leaderCard = null;
+let extraDeck = [];
+
 // I'm using this so i can convert the incoming card names into the file name format
 function formatCardName(str) {
   return str
@@ -122,7 +126,21 @@ function renderCards(cards) {
     const cardData = JSON.parse(cardEl.dataset.cardJson);
   
     console.log(`Adding ${cardName} to deck`, cardData);
-  
+
+    // --- Leader & Extra Deck logic ---
+    if (!leaderCard) {
+      leaderCard = cardName;
+      createSpecialDeckCard(cardEl, "Leader");
+      updateDeckCount();
+      return;
+    } else if (extraDeck.length < 4 && !deckMap[cardName]) {
+      extraDeck.push(cardName);
+      createSpecialDeckCard(cardEl, "Extra");
+      updateDeckCount();
+      return;
+    }
+    // ---------------------------------
+      
     if (deckMap[cardName]) {
       const countSpan = deckMap[cardName].querySelector(".card-count");
       countSpan.innerText = parseInt(countSpan.innerText, 10) + 1;
@@ -150,6 +168,19 @@ function renderCards(cards) {
       });
     }
     updateDeckCount();
+  }
+
+  function createSpecialDeckCard(cardEl, role) {
+    const deckCard = cardEl.cloneNode(true);
+    deckCard.classList.add("deck-card", role.toLowerCase() + "-card");
+  
+    const roleBadge = document.createElement("span");
+    roleBadge.classList.add("card-role");
+    roleBadge.innerText = role;
+    deckCard.appendChild(roleBadge);
+  
+    deckCards.appendChild(deckCard);
+    deckMap[cardEl.dataset.cardName] = deckCard;
   }
 
 fetch("allCards.json")
