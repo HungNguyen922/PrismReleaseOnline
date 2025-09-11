@@ -280,12 +280,13 @@ h1, h3, p {
 
 #deck-upload {
   position: absolute;
-  top: 20px;   /* adjust as needed */
+  top: 30%;   /* adjust as needed */
 }
 
 #upload-button {
   position: absolute;
-  top: 20px;   /* same vertical alignment */
+  top: 30%;   /* same vertical alignment */
+  left: 13.5%
 }
 
 .card-slot {
