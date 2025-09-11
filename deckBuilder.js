@@ -178,7 +178,12 @@ function renderCards(cards) {
     roleBadge.classList.add("card-role");
     roleBadge.innerText = role;
     deckCard.appendChild(roleBadge);
-  
+
+    const countSpan = document.createElement("span");
+    countSpan.classList.add("card-count");
+    countSpan.innerText = extraDeck.filter(c => c === cardName).length; // shows duplicates
+    deckCard.appendChild(countSpan);
+
     deckCards.appendChild(deckCard);
     deckMap[cardEl.dataset.cardName] = deckCard;
   }
