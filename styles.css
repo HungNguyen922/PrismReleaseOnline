@@ -274,9 +274,13 @@ h1, h3, p {
   display: grid;
   grid-template-columns: repeat(4, 90px);
   position: absolute;
-  top: 50fr;   /* distance from top */
-  left: 20px;  /* distance from left */
+  top: 35%;   /* distance from top */
   gap: 5px;
+}
+
+.deck-upload {
+    position: absolute;
+    top: 35%;
 }
 
 .card-slot {
