@@ -134,6 +134,7 @@ function renderCards(cards) {
       updateDeckCount();
       return;
     } else if (extraDeck.length < 4) {
+      console.log(extraDeck.length);
       extraDeck.push(cardName);
 
       if (deckMap[cardName] && deckMap[cardName].classList.contains("extra-card")) {
