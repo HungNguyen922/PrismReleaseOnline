@@ -272,7 +272,7 @@ h1, h3, p {
 
 .draw-pile {
   display: grid;
-  grid-template-columns: repeat(4, 90px);
+  grid-template-columns: repeat(3, 90px);
   position: absolute;
   top: 35%;   /* distance from top */
   gap: 5px;
