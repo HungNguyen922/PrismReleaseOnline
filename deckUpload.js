@@ -95,11 +95,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // --- Setup field slots ---
   document.querySelectorAll(".field-slot").forEach(slot => {
     slot.history = []; // optional if tracking history
-    const destinationSlot = slot; // the slot receiving the drop
-    const sourceSlotId = e.dataTransfer.getData("slotId");
-    const sourceSlot = document.getElementById(sourceSlotId);
-
-
+    
     slot.addEventListener("dragover", e => e.preventDefault());
     slot.addEventListener("dragleave", () => slot.classList.remove("hover"));
 
@@ -121,7 +117,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const sourceSlot = document.getElementById(sourceSlotId);
         card = removeTopCardFromSlot(sourceSlot);
       }
-
     
       if (!card) return;
     
