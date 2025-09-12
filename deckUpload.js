@@ -95,6 +95,10 @@ document.addEventListener("DOMContentLoaded", () => {
   // --- Setup field slots ---
   document.querySelectorAll(".field-slot").forEach(slot => {
     slot.history = []; // optional if tracking history
+    const destinationSlot = slot; // the slot receiving the drop
+    const sourceSlotId = e.dataTransfer.getData("slotId");
+    const sourceSlot = document.getElementById(sourceSlotId);
+
 
     slot.addEventListener("dragover", e => e.preventDefault());
     slot.addEventListener("dragleave", () => slot.classList.remove("hover"));
@@ -108,15 +112,16 @@ document.addEventListener("DOMContentLoaded", () => {
     
       // Handle from hand
       if (from === "hand") {
-        const card = removeTopCardFromSlot(sourceSlot);
-        placeCardInSlot(destinationSlot, card);
+        const index = e.dataTransfer.getData("cardIndex");
+        card = hand.splice(index, 1)[0];
         renderHand();
       } 
-      // Handle from another slot
       else if (from === "slot") {
-        const card = removeTopCardFromSlot(sourceSlot);
-        placeCardInSlot(destinationSlot, card);
+        const sourceSlotId = e.dataTransfer.getData("slotId");
+        const sourceSlot = document.getElementById(sourceSlotId);
+        card = removeTopCardFromSlot(sourceSlot);
       }
+
     
       if (!card) return;
     
@@ -169,7 +174,6 @@ document.addEventListener("DOMContentLoaded", () => {
     return topCard;
   }
 
-
   // --- Setup hand drop (from slot back to hand) ---
   const handArea = document.getElementById("hand-area");
 
@@ -197,7 +201,6 @@ document.addEventListener("DOMContentLoaded", () => {
       } else {
         sourceSlot.dataset.card = null;
       }
-
 
       // Add back to hand
       hand.push(card);
