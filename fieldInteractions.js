@@ -1,9 +1,7 @@
-// I don't know where to put this
-
 document.addEventListener("DOMContentLoaded", () => {
   // --- Setup field slots ---
   document.querySelectorAll(".field-slot").forEach(slot => {
-    slot.history = []; // optional if tracking history
+    slot.history = []; // tracking gate history
     
     slot.addEventListener("dragover", e => e.preventDefault());
     slot.addEventListener("dragleave", () => slot.classList.remove("hover"));
@@ -21,6 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
         card = hand.splice(index, 1)[0];
         renderHand();
       } 
+      // from another slot
       else if (from === "slot") {
         const sourceSlotId = e.dataTransfer.getData("slotId");
         const sourceSlot = document.getElementById(sourceSlotId);
