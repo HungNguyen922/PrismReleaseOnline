@@ -295,6 +295,8 @@ h1, h3, p {
   background-color: #f0f0f0;
   height: 120px; /* or any consistent size for testing */
   width: 90px;
+  justify-content: center;
+  align-items: center;
 }
 
 .hand {
