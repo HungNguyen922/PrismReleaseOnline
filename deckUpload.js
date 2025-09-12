@@ -117,14 +117,16 @@ document.addEventListener("DOMContentLoaded", () => {
         const sourceSlotId = e.dataTransfer.getData("slotId");
         const sourceSlot = document.getElementById(sourceSlotId);
         card = sourceSlot.dataset.card;
-    
-        // Push previous card in source slot back to its history
-        if (sourceSlot.dataset.card) {
-          sourceSlot.history.push(sourceSlot.dataset.card);
-        }
-    
+      
+        // Remove top card from the source slot
         sourceSlot.innerHTML = "";
         sourceSlot.removeAttribute("data-card");
+      
+        // Reveal previous card in the source slot (pop from history)
+        if (sourceSlot.history.length > 0) {
+          const prevCard = sourceSlot.history.pop();
+          placeCardInSlot(sourceSlot, prevCard);
+        }
       }
     
       if (!card) return;
