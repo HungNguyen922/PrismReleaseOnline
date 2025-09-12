@@ -108,25 +108,14 @@ document.addEventListener("DOMContentLoaded", () => {
     
       // Handle from hand
       if (from === "hand") {
-        const index = e.dataTransfer.getData("cardIndex");
-        card = hand.splice(index, 1)[0];
+        const card = removeTopCardFromSlot(sourceSlot);
+        placeCardInSlot(destinationSlot, card);
         renderHand();
       } 
       // Handle from another slot
       else if (from === "slot") {
-        const sourceSlotId = e.dataTransfer.getData("slotId");
-        const sourceSlot = document.getElementById(sourceSlotId);
-        card = sourceSlot.dataset.card;
-      
-        // Remove top card from the source slot
-        sourceSlot.innerHTML = "";
-        sourceSlot.removeAttribute("data-card");
-      
-        // Reveal previous card in the source slot (pop from history)
-        if (sourceSlot.history.length > 0) {
-          const prevCard = sourceSlot.history.pop();
-          placeCardInSlot(sourceSlot, prevCard);
-        }
+        const card = removeTopCardFromSlot(sourceSlot);
+        placeCardInSlot(destinationSlot, card);
       }
     
       if (!card) return;
@@ -164,6 +153,20 @@ document.addEventListener("DOMContentLoaded", () => {
       ev.dataTransfer.setData("slotId", slot.id);
       ev.dataTransfer.setData("card", card);
     });
+  }
+
+  function removeTopCardFromSlot(slot) {
+    const topCard = slot.dataset.card;
+    slot.innerHTML = "";
+    slot.removeAttribute("data-card");
+  
+    let prevCard = null;
+    if (slot.history.length > 0) {
+      prevCard = slot.history.pop();
+      placeCardInSlot(slot, prevCard);
+    }
+  
+    return topCard;
   }
 
 
