@@ -51,14 +51,24 @@
       <div id="gap-slot" class="card-slot field-slot">Gap</div>
       <div id="deck-slot" class="card-slot">Draw Pile</div>
       <!-- Pop-up option for deck slot -->
-          <div id="deck-popup" style="
-              display: none;
-              position: absolute;
-              background: white;
-              border: 1px solid #333;
-              padding: 5px;
-              z-index: 1000;
-         ">
+      <div id="deck-popup" style="
+          display: none;
+          position: absolute;
+          background: white;
+          border: 1px solid #333;
+          padding: 5px;
+          z-index: 1000;
+     ">
+      <!-- Modal for confirming send-to-bottom -->
+      <dialog id="confirm-dialog">
+        <form method="dialog" id="confirm-form">
+          <p>Send this card to the bottom of the draw pile?</p>
+          <menu>
+            <button id="confirm-ok" value="ok">Send to bottom</button>
+            <button id="confirm-cancel" value="cancel">Cancel</button>
+          </menu>
+        </form>
+      </dialog>
   <button id="send-bottom-btn">Send to bottom of draw pile</button>
 </div>
     </div>
