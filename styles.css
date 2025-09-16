@@ -342,3 +342,14 @@ h1, h3, p {
 .health-slot {
     user-select: none;
 }
+
+/* in styles.css */
+.card-slot.hover {
+  border: 2px solid #00f;  /* or any color / style you like */
+  background-color: #eef;
+}
+
+#deck-popup {
+  /* you can also use a class instead of inline style */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
