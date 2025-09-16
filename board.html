@@ -58,21 +58,21 @@
           border: 1px solid #333;
           padding: 5px;
           z-index: 1000;
-     ">
-      <!-- Modal for confirming send-to-bottom -->
-      <dialog id="confirm-dialog">
-        <form method="dialog" id="confirm-form">
+      ">
+          <button id="send-bottom-btn">Send to bottom of draw pile</button>
+      </div>
+    </div>
+    <div id="hand-area" class="hand"></div>
+    <!-- Confirmation dialog for sending to bottom -->
+    <dialog id="confirm-dialog">
+      <form method="dialog" id="confirm-form">
           <p>Send this card to the bottom of the draw pile?</p>
           <menu>
             <button id="confirm-ok" value="ok">Send to bottom</button>
             <button id="confirm-cancel" value="cancel">Cancel</button>
           </menu>
-        </form>
-      </dialog>
-  <button id="send-bottom-btn">Send to bottom of draw pile</button>
-</div>
-    </div>
-    <div id="hand-area" class="hand"></div>
+      </form>
+  </dialog>
     <script src="deckUpload.js"></script>
     <script src="fieldInteractions.js"></script>
     <script src="deckDraw.js"></script>
