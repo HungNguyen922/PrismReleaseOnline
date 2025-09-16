@@ -1,11 +1,14 @@
 document.addEventListener("DOMContentLoaded", () => {
   const deckSlot = document.getElementById("deck-slot");
-  const deckPopup = document.getElementById("deck-popup");
-  const sendBottomBtn = document.getElementById("send-bottom-btn");
+  const confirmDialog = document.getElementById("confirm-dialog");
+  const confirmForm = document.getElementById("confirm-form");
+  const confirmOkBtn = document.getElementById("confirm-ok");
+  const confirmCancelBtn = document.getElementById("confirm-cancel");
 
-  let draggedCardInfo = null;
+  let draggedCardInfo = null;  // will store from / cardIndex / slotId / card etc
 
-  // allow drop
+  // Modify deckSlot drop & dragenter logic
+
   deckSlot.addEventListener("dragover", e => {
     e.preventDefault();
     deckSlot.classList.add("hover");
@@ -15,75 +18,73 @@ document.addEventListener("DOMContentLoaded", () => {
     e.preventDefault();
     deckSlot.classList.add("hover");
 
-    // capture data from dataTransfer, might include:
-    const from = e.dataTransfer.getData("from");         // "hand" or "slot"
-    const cardIndex = e.dataTransfer.getData("cardIndex"); // valid if from hand
-    const slotId = e.dataTransfer.getData("slotId");     // valid if from slot
-    const card = e.dataTransfer.getData("card");         // the card ID/name maybe
+    // capture draggedCard info either from dataTransfer or from a global set at dragstart
+    const from = e.dataTransfer.getData("from");
+    const cardIndex = e.dataTransfer.getData("cardIndex");
+    const slotId = e.dataTransfer.getData("slotId");
+    const card = e.dataTransfer.getData("card");
 
     draggedCardInfo = { from, cardIndex, slotId, card };
 
-    // position the popup — you can adjust offsets
-    const rect = deckSlot.getBoundingClientRect();
-    deckPopup.style.left = `${rect.right + 5}px`;
-    deckPopup.style.top = `${rect.top}px`;
-    deckPopup.style.display = "block";
+    // Nothing else yet — wait for drop
   });
 
   deckSlot.addEventListener("dragleave", e => {
     deckSlot.classList.remove("hover");
-    deckPopup.style.display = "none";
   });
 
   deckSlot.addEventListener("drop", e => {
     e.preventDefault();
     deckSlot.classList.remove("hover");
-    deckPopup.style.display = "none";
 
-    if (draggedCardInfo) {
-      sendCardToBottom(draggedCardInfo);
-      draggedCardInfo = null;
+    // show confirm modal
+    if (!draggedCardInfo) {
+      return;
     }
+    confirmDialog.showModal();
   });
 
-  sendBottomBtn.addEventListener("click", e => {
-    e.preventDefault();
-    if (draggedCardInfo) {
+  // Handle the dialog result
+
+  confirmForm.addEventListener("close", e => {
+    // The <dialog> close event fires when the form inside is "submitted" or a button with formmethod=dialog is clicked
+    // check which button was used via returnValue
+    const result = confirmDialog.returnValue;  // this gives the value of the clicked button
+
+    if (result === "ok") {
+      // user confirmed send to bottom
       sendCardToBottom(draggedCardInfo);
-      deckPopup.style.display = "none";
-      draggedCardInfo = null;
-    }
+    } 
+    // if cancel, do nothing
+
+    // clean up
+    draggedCardInfo = null;
   });
 
-  // ==== sendCardToBottom function ====
-
-  // make sure you have a drawPile array somewhere; e.g. at top:
-  // let drawPile = []; Or whatever your code uses.
-
+  // You may want to also handle ESC key or clicking outside to cancel (showModal generally handles ESC)
+  
+  // existing sendCardToBottom function, drawPile, etc...
+  
   function sendCardToBottom(info) {
     let removed = null;
     if (info.from === "hand") {
-      // remove from hand
       removed = hand.splice(info.cardIndex, 1)[0];
       renderHand();
     } else if (info.from === "slot") {
       const sourceSlot = document.getElementById(info.slotId);
       removed = removeTopCardFromSlot(sourceSlot);
     }
-
-    // If we didn't get removed by above but info.card exists:
     if (!removed && info.card) {
       removed = info.card;
     }
-
     if (!removed) {
       console.warn("No card to send to bottom:", info);
       return;
     }
-
     deck.push(removed);
-    updateDeckUI();  // implement this to show count or top card, etc.
+    updateDeckUI();
   }
+
 
   // ==== End deck-slot integration ====
   
