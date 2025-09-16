@@ -2,89 +2,99 @@ document.addEventListener("DOMContentLoaded", () => {
   const deckSlot = document.getElementById("deck-slot");
   const confirmDialog = document.getElementById("confirm-dialog");
   const confirmForm = document.getElementById("confirm-form");
-  const confirmOkBtn = document.getElementById("confirm-ok");
-  const confirmCancelBtn = document.getElementById("confirm-cancel");
 
-  let draggedCardInfo = null;  // will store from / cardIndex / slotId / card etc
-
-  // Modify deckSlot drop & dragenter logic
-
-  deckSlot.addEventListener("dragover", e => {
-    e.preventDefault();
-    deckSlot.classList.add("hover");
-  });
+  let draggedCardInfo = null;
 
   deckSlot.addEventListener("dragenter", e => {
     e.preventDefault();
-    deckSlot.classList.add("hover");
-
-    // capture draggedCard info either from dataTransfer or from a global set at dragstart
+    // store card info globally (or in draggedCardInfo)
     const from = e.dataTransfer.getData("from");
     const cardIndex = e.dataTransfer.getData("cardIndex");
     const slotId = e.dataTransfer.getData("slotId");
     const card = e.dataTransfer.getData("card");
-
-    draggedCardInfo = { from, cardIndex, slotId, card };
-
-    // Nothing else yet — wait for drop
+    console.log("dragenter: ", { from, cardIndex, slotId, card });
+    draggedCardInfo = { from, cardIndex: parseInt(cardIndex,10), slotId, card };
   });
 
-  deckSlot.addEventListener("dragleave", e => {
-    deckSlot.classList.remove("hover");
+  deckSlot.addEventListener("dragover", e => {
+    e.preventDefault();
   });
 
   deckSlot.addEventListener("drop", e => {
     e.preventDefault();
-    deckSlot.classList.remove("hover");
-
-    // show confirm modal
+    console.log("drop: draggedCardInfo =", draggedCardInfo);
     if (!draggedCardInfo) {
+      console.warn("No dragged info, can’t open confirm");
       return;
     }
-    confirmDialog.showModal();
+    if (confirmDialog && typeof confirmDialog.showModal === "function") {
+      confirmDialog.showModal();
+    } else {
+      // fallback
+      const yes = window.confirm("Send this card to the bottom?");
+      if (yes) {
+        sendCardToBottom(draggedCardInfo);
+      }
+      draggedCardInfo = null;
+    }
   });
 
-  // Handle the dialog result
-
   confirmForm.addEventListener("close", e => {
-    // The <dialog> close event fires when the form inside is "submitted" or a button with formmethod=dialog is clicked
-    // check which button was used via returnValue
-    const result = confirmDialog.returnValue;  // this gives the value of the clicked button
+    console.log("dialog closed, returnValue =", confirmDialog.returnValue);
+    console.log("draggedCardInfo at close =", draggedCardInfo);
 
-    if (result === "ok") {
-      // user confirmed send to bottom
+    if (confirmDialog.returnValue === "ok") {
       sendCardToBottom(draggedCardInfo);
-    } 
-    // if cancel, do nothing
+    }
 
-    // clean up
     draggedCardInfo = null;
   });
 
-  // You may want to also handle ESC key or clicking outside to cancel (showModal generally handles ESC)
-  
-  // existing sendCardToBottom function, drawPile, etc...
-  
   function sendCardToBottom(info) {
+    console.log("sendCardToBottom called with:", info);
     let removed = null;
+
     if (info.from === "hand") {
-      removed = hand.splice(info.cardIndex, 1)[0];
-      renderHand();
+      const idx = info.cardIndex;
+      if (Number.isInteger(idx) && idx >= 0 && idx < hand.length) {
+        removed = hand.splice(idx, 1)[0];
+        console.log("Removed from hand:", removed);
+        renderHand();
+      } else {
+        console.warn("Invalid cardIndex:", idx);
+      }
     } else if (info.from === "slot") {
-      const sourceSlot = document.getElementById(info.slotId);
-      removed = removeTopCardFromSlot(sourceSlot);
+      if (info.slotId) {
+        const sourceSlot = document.getElementById(info.slotId);
+        if (sourceSlot) {
+          removed = removeTopCardFromSlot(sourceSlot);
+          console.log("Removed from slot:", removed);
+        } else {
+          console.warn("sourceSlot not found:", info.slotId);
+        }
+      }
     }
+
+    // fallback if above didn’t remove
     if (!removed && info.card) {
       removed = info.card;
+      console.log("Fallback: using info.card:", removed);
     }
+
     if (!removed) {
-      console.warn("No card to send to bottom:", info);
+      console.warn("Nothing removed, nothing to push");
       return;
     }
-    deck.push(removed);
-    updateDeckUI();
-  }
 
+    // push to bottom
+    if (!Array.isArray(deck)) {
+      console.error("drawPile not defined or not array");
+    } else {
+      deck.push(removed);
+      console.log("Card pushed to drawPile:", removed);
+      updateDeckUI && updateDeckUI();
+    }
+  }
 
   // ==== End deck-slot integration ====
   
