@@ -353,3 +353,20 @@ h1, h3, p {
   /* you can also use a class instead of inline style */
   box-shadow: 0 2px 5px rgba(0,0,0,0.3);
 }
+
+/* maybe in styles.css */
+dialog#confirm-dialog {
+  border: solid 1px #333;
+  padding: 1em;
+  border-radius: 4px;
+}
+
+dialog::backdrop {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+#confirm-form menu {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1em;
+}
