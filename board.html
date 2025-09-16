@@ -50,6 +50,17 @@
       <div id="extra-slot" class="card-slot">Extra Deck</div>
       <div id="gap-slot" class="card-slot field-slot">Gap</div>
       <div id="deck-slot" class="card-slot">Draw Pile</div>
+      <!-- Pop-up option for deck slot -->
+          <div id="deck-popup" style="
+              display: none;
+              position: absolute;
+              background: white;
+              border: 1px solid #333;
+              padding: 5px;
+              z-index: 1000;
+         ">
+  <button id="send-bottom-btn">Send to bottom of draw pile</button>
+</div>
     </div>
     <div id="hand-area" class="hand"></div>
     <script src="deckUpload.js"></script>
