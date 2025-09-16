@@ -1,4 +1,92 @@
 document.addEventListener("DOMContentLoaded", () => {
+  const deckSlot = document.getElementById("deck-slot");
+  const deckPopup = document.getElementById("deck-popup");
+  const sendBottomBtn = document.getElementById("send-bottom-btn");
+
+  let draggedCardInfo = null;
+
+  // allow drop
+  deckSlot.addEventListener("dragover", e => {
+    e.preventDefault();
+    deckSlot.classList.add("hover");
+  });
+
+  deckSlot.addEventListener("dragenter", e => {
+    e.preventDefault();
+    deckSlot.classList.add("hover");
+
+    // capture data from dataTransfer, might include:
+    const from = e.dataTransfer.getData("from");         // "hand" or "slot"
+    const cardIndex = e.dataTransfer.getData("cardIndex"); // valid if from hand
+    const slotId = e.dataTransfer.getData("slotId");     // valid if from slot
+    const card = e.dataTransfer.getData("card");         // the card ID/name maybe
+
+    draggedCardInfo = { from, cardIndex, slotId, card };
+
+    // position the popup — you can adjust offsets
+    const rect = deckSlot.getBoundingClientRect();
+    deckPopup.style.left = `${rect.right + 5}px`;
+    deckPopup.style.top = `${rect.top}px`;
+    deckPopup.style.display = "block";
+  });
+
+  deckSlot.addEventListener("dragleave", e => {
+    deckSlot.classList.remove("hover");
+    deckPopup.style.display = "none";
+  });
+
+  deckSlot.addEventListener("drop", e => {
+    e.preventDefault();
+    deckSlot.classList.remove("hover");
+    deckPopup.style.display = "none";
+
+    if (draggedCardInfo) {
+      sendCardToBottom(draggedCardInfo);
+      draggedCardInfo = null;
+    }
+  });
+
+  sendBottomBtn.addEventListener("click", e => {
+    e.preventDefault();
+    if (draggedCardInfo) {
+      sendCardToBottom(draggedCardInfo);
+      deckPopup.style.display = "none";
+      draggedCardInfo = null;
+    }
+  });
+
+  // ==== sendCardToBottom function ====
+
+  // make sure you have a drawPile array somewhere; e.g. at top:
+  // let drawPile = []; Or whatever your code uses.
+
+  function sendCardToBottom(info) {
+    let removed = null;
+    if (info.from === "hand") {
+      // remove from hand
+      removed = hand.splice(info.cardIndex, 1)[0];
+      renderHand();
+    } else if (info.from === "slot") {
+      const sourceSlot = document.getElementById(info.slotId);
+      removed = removeTopCardFromSlot(sourceSlot);
+    }
+
+    // If we didn't get removed by above but info.card exists:
+    if (!removed && info.card) {
+      removed = info.card;
+    }
+
+    if (!removed) {
+      console.warn("No card to send to bottom:", info);
+      return;
+    }
+
+    deck.push(removed);
+    updateDeckUI();  // implement this to show count or top card, etc.
+  }
+
+  // ==== End deck-slot integration ====
+  
   // --- Setup field slots ---
   document.querySelectorAll(".field-slot").forEach(slot => {
     slot.history = []; // tracking gate history
