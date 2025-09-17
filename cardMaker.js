@@ -1,6 +1,34 @@
 const canvas = document.getElementById("cardCanvas");
 const ctx = canvas.getContext("2d");
 
+// Your 10 chosen colors (hex + label)
+const colorOptions = [
+  {name: "Red", value: "#FF0000"},
+  {name: "Green", value: "#00FF00"},
+  {name: "Blue", value: "#0000FF"},
+  {name: "Yellow", value: "#FFFF00"},
+  {name: "Purple", value: "#800080"},
+  {name: "Orange", value: "#FFA500"},
+  {name: "Cyan", value: "#00FFFF"},
+  {name: "Magenta", value: "#FF00FF"},
+  {name: "Gray", value: "#808080"},
+  {name: "Black", value: "#000000"}
+];
+
+// Populate dropdowns
+function populateDropdowns() {
+  ["color1", "color2", "color3", "color4"].forEach(id => {
+    const select = document.getElementById(id);
+    colorOptions.forEach(opt => {
+      const option = document.createElement("option");
+      option.value = opt.value;
+      option.textContent = opt.name;
+      select.appendChild(option);
+    });
+    select.value = colorOptions[0].value; // default
+  });
+}
+
 function drawCard() {
   const power = document.getElementById("power").value;
   const bulk = document.getElementById("bulk").value;
@@ -41,5 +69,6 @@ function downloadCard() {
   link.click();
 }
 
-// Initial draw
+// Initialize
+populateDropdowns();
 drawCard();
