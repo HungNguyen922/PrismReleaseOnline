@@ -6,67 +6,31 @@
   <title>Card Creator</title>
 </head>
 <body>
-  <h1>Card Creator</h1>
+    <div class="banner">
+        <a href="index.html" class="banner-title">PR Deck Builder</a>
+        <a href="gallery.html" class="banner-btn">Gallery</a>
+        <a href="deck.html" class="banner-btn">Deck Builder</a>
+        <a href="board.html" class="banner-btn">Game Board</a>
+        <a href="maker.html" class="banner-btn">Card Maker</a>
+    </div>
+    <div class="content">
   
-  <div id="controls">
-    <label>Power: <input type="number" id="power" value="10"></label>
-    <label>Bulk: <input type="number" id="bulk" value="5"></label><br><br>
-    <label>Color 1: <input type="color" id="color1" value="#ff0000"></label>
-    <label>Color 2: <input type="color" id="color2" value="#00ff00"></label>
-    <label>Color 3: <input type="color" id="color3" value="#0000ff"></label>
-    <label>Color 4: <input type="color" id="color4" value="#ffff00"></label><br><br>
-    <button onclick="drawCard()">Update Card</button>
-    <button onclick="downloadCard()">Download PNG</button>
-  </div>
+      <h1>Card Creator</h1>
   
-  <canvas id="cardCanvas" width="400" height="600"></canvas>
-  
-  <script>
-    const canvas = document.getElementById("cardCanvas");
-    const ctx = canvas.getContext("2d");
+      <div id="controls">
+        <label>Power: <input type="number" id="power" value="10"></label>
+        <label>Bulk: <input type="number" id="bulk" value="5"></label><br><br>
+        <label>Color 1: <input type="color" id="color1" value="#ff0000"></label>
+        <label>Color 2: <input type="color" id="color2" value="#00ff00"></label>
+        <label>Color 3: <input type="color" id="color3" value="#0000ff"></label>
+        <label>Color 4: <input type="color" id="color4" value="#ffff00"></label><br><br>
+        <button onclick="drawCard()">Update Card</button>
+        <button onclick="downloadCard()">Download PNG</button>
+      </div>
+      
+      <canvas id="cardCanvas" width="400" height="600"></canvas>
+    </div>
+    <script src="cardMaker.js"></script>
     
-    function drawCard() {
-      const power = document.getElementById("power").value;
-      const bulk = document.getElementById("bulk").value;
-      const colors = [
-        document.getElementById("color1").value,
-        document.getElementById("color2").value,
-        document.getElementById("color3").value,
-        document.getElementById("color4").value,
-      ];
-      
-      // Background
-      ctx.fillStyle = "#fff";
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      
-      // Colored stripes
-      const stripeHeight = canvas.height / colors.length;
-      colors.forEach((c, i) => {
-        ctx.fillStyle = c;
-        ctx.fillRect(0, i * stripeHeight, canvas.width, stripeHeight);
-      });
-      
-      // Overlay card border
-      ctx.strokeStyle = "#000";
-      ctx.lineWidth = 8;
-      ctx.strokeRect(0, 0, canvas.width, canvas.height);
-      
-      // Text
-      ctx.fillStyle = "#000";
-      ctx.font = "40px Arial";
-      ctx.fillText("Power: " + power, 30, 80);
-      ctx.fillText("Bulk: " + bulk, 30, 140);
-    }
-    
-    function downloadCard() {
-      const link = document.createElement("a");
-      link.download = "card.png";
-      link.href = canvas.toDataURL("image/png");
-      link.click();
-    }
-    
-    // Initial draw
-    drawCard();
-  </script>
 </body>
 </html>
