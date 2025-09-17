@@ -88,8 +88,8 @@ function drawCard() {
   // power & bulk text
   ctx.font = "bold 60px Fjalla";
   ctx.textAlign = "center";
-  ctx.fillText(power, 100, 100);
-  ctx.fillText(bulk, 100, 200);
+  ctx.fillText(power, 75, 75);
+  ctx.fillText(bulk, 75, 150);
 
   // color icons (right side stacked)
   const positions = [
