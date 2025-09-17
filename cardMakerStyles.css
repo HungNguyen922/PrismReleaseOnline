@@ -9,3 +9,8 @@
   width: 20%;
   height: 20%;
 }
+
+@font-face {
+  font-family: 'Fjalla';
+  src: url('cardAssets/FjallaOne-Regular.ttf') format('truetype');
+}
