@@ -120,3 +120,85 @@ window.onload = () => {
   populateDropdowns();
   drawCard();
 };
+
+let userArt = null;
+let artX = 150, artY = 200;      // default position
+let artW = 450, artH = 450;      // default size (scaled to your template)
+let isDragging = false;
+let dragStart = {x:0, y:0};
+
+// Upload image
+document.getElementById("artUpload").addEventListener("change", (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = (event) => {
+    userArt = new Image();
+    userArt.src = event.target.result;
+    userArt.onload = () => drawCard();
+  };
+  reader.readAsDataURL(file);
+});
+
+// Draw card
+function drawCard() {
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+
+  // background (example)
+  ctx.fillStyle = "#ddd";
+  ctx.fillRect(0,0,canvas.width,canvas.height);
+
+  // draw art if loaded
+  if (userArt) {
+    ctx.drawImage(userArt, artX, artY, artW, artH);
+  }
+
+  // placeholder for border
+  ctx.strokeStyle = "black";
+  ctx.lineWidth = 8;
+  ctx.strokeRect(0,0,canvas.width,canvas.height);
+}
+
+// Dragging logic
+canvas.addEventListener("mousedown", (e) => {
+  if (!userArt) return;
+  const rect = canvas.getBoundingClientRect();
+  const mouseX = e.clientX - rect.left;
+  const mouseY = e.clientY - rect.top;
+
+  if (mouseX > artX && mouseX < artX + artW &&
+      mouseY > artY && mouseY < artY + artH) {
+    isDragging = true;
+    dragStart.x = mouseX - artX;
+    dragStart.y = mouseY - artY;
+  }
+});
+
+canvas.addEventListener("mousemove", (e) => {
+  if (!isDragging) return;
+  const rect = canvas.getBoundingClientRect();
+  const mouseX = e.clientX - rect.left;
+  const mouseY = e.clientY - rect.top;
+
+  artX = mouseX - dragStart.x;
+  artY = mouseY - dragStart.y;
+  drawCard();
+});
+
+canvas.addEventListener("mouseup", () => {
+  isDragging = false;
+});
+
+// Zoom controls
+document.addEventListener("keydown", (e) => {
+  if (!userArt) return;
+  if (e.key === "+") { // zoom in
+    artW *= 1.1;
+    artH *= 1.1;
+  }
+  if (e.key === "-") { // zoom out
+    artW *= 0.9;
+    artH *= 0.9;
+  }
+  drawCard();
+});
