@@ -82,13 +82,13 @@ function drawCard() {
   ctx.fillText(name, centerX, 80);
 
   // power + bulk icons
-  ctx.drawImage(loaded.powerIcon, 20, 20, 80, 80);
-  ctx.drawImage(loaded.bulkIcon, 20, 95, 80, 80);
+  ctx.drawImage(loaded.powerIcon, 25, 25, 80, 80);
+  ctx.drawImage(loaded.bulkIcon, 25, 100, 80, 80);
 
   // power & bulk text
   ctx.font = "bold 60px Fjalla";
   ctx.textAlign = "center";
-  ctx.fillText(power, 40, 40);
+  ctx.fillText(power, 30, 40);
   ctx.fillText(bulk, 30, 50);
 
   // color icons (right side stacked)
