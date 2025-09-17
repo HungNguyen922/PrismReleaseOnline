@@ -20,15 +20,28 @@
       <div id="controls">
         <label>Power: <input type="number" id="power" value="10"></label>
         <label>Bulk: <input type="number" id="bulk" value="5"></label><br><br>
-        <label>Color 1: <input type="color" id="color1" value="#ff0000"></label>
-        <label>Color 2: <input type="color" id="color2" value="#00ff00"></label>
-        <label>Color 3: <input type="color" id="color3" value="#0000ff"></label>
-        <label>Color 4: <input type="color" id="color4" value="#ffff00"></label><br><br>
+        <label>Color 1: 
+          <select id="color1"></select>
+        </label>
+        <label>Color 2: 
+          <select id="color2"></select>
+        </label>
+        <label>Color 3: 
+          <select id="color3"></select>
+        </label>
+        <label>Color 4: 
+          <select id="color4"></select>
+        </label>
+        <br><br>
+        
         <button onclick="drawCard()">Update Card</button>
         <button onclick="downloadCard()">Download PNG</button>
       </div>
       
       <canvas id="cardCanvas" width="400" height="600"></canvas>
+      <div>
+        <img>
+      </div>
     </div>
     <script src="cardMaker.js"></script>
     
