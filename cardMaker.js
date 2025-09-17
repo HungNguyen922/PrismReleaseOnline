@@ -76,7 +76,7 @@ function drawCard() {
 
   // name text
   ctx.fillStyle = "black";
-  ctx.font = "bold 55px Arial";
+  ctx.font = "bold 55px Fjalla";
   ctx.textAlign = "left";
   ctx.fillText(name, 180, 95);
 
@@ -85,7 +85,7 @@ function drawCard() {
   ctx.drawImage(loaded.bulkIcon, 10, 85, 80, 80);
 
   // power & bulk text
-  ctx.font = "bold 60px Arial";
+  ctx.font = "bold 60px Fjalla";
   ctx.textAlign = "center";
   ctx.fillText(power, 90, 105);
   ctx.fillText(bulk, 90, 235);
