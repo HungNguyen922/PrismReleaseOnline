@@ -1,4 +1,5 @@
 #cardBase {
   height: 30vw
   width: 15vw;
+  object-fit: cover;
 }
