@@ -81,8 +81,8 @@ function drawCard() {
   ctx.fillText(name, 180, 95);
 
   // power + bulk icons
-  ctx.drawImage(loaded.powerIcon, 10, 10, 100, 100);
-  ctx.drawImage(loaded.bulkIcon, 10, 85, 100, 100);
+  ctx.drawImage(loaded.powerIcon, 10, 10, 80, 80);
+  ctx.drawImage(loaded.bulkIcon, 10, 85, 80, 80);
 
   // power & bulk text
   ctx.font = "bold 60px Arial";
