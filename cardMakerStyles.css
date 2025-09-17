@@ -3,3 +3,7 @@
   width: 35vw;
   object-fit: cover;
 }
+
+.Palette {
+  position: absolute;
+}
