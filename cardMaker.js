@@ -92,10 +92,10 @@ function drawCard() {
 
   // color icons (right side stacked)
   const positions = [
-    {x: 640, y: 20},
-    {x: 630, y: 60},
-    {x: 620, y: 100},
-    {x: 610, y: 140}
+    {x: 645, y: 25},
+    {x: 645, y: 100},
+    {x: 645, y: 175},
+    {x: 645, y: 250}
   ];
   colors.forEach((c,i) => {
     if (!c) return;
