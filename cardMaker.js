@@ -1,5 +1,6 @@
 const canvas = document.getElementById("cardCanvas");
 const ctx = canvas.getContext("2d");
+ctx.textAlign = "center";
 
 // === Load your assets ===
 const assets = {
@@ -78,7 +79,8 @@ function drawCard() {
   ctx.fillStyle = "black";
   ctx.font = "bold 55px Fjalla";
   ctx.textAlign = "left";
-  ctx.fillText(name, 180, 95);
+  const centerX = canvas.width / 2;
+  ctx.fillText(name, centerX, 70);
 
   // power + bulk icons
   ctx.drawImage(loaded.powerIcon, 10, 10, 80, 80);
