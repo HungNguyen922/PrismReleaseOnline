@@ -14,3 +14,7 @@
   font-family: 'Fjalla';
   src: url('cardAssets/FjallaOne-Regular.ttf') format('truetype');
 }
+
+#controls {
+  align-content: center;
+}
