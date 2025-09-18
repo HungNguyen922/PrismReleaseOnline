@@ -85,7 +85,7 @@ function drawCard() {
   // power & bulk text
   const power = document.getElementById("power").value;
   const bulk = document.getElementById("bulk").value;
-  ctx.font = "bold 70px Fjalla";
+  ctx.font = "70px Fjalla";
   ctx.textAlign = "center";
   ctx.lineWidth = 10;                // thickness of the outline
   ctx.strokeStyle = "white";        // outline color
