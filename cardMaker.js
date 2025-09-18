@@ -165,12 +165,25 @@ function wrapText(ctx, text, x, y, maxWidth, lineHeight) {
   });
 }
 
+// I'm using this so i can convert the incoming card names into the file name format
+function formatCardName(str) {
+  return str
+    .trim()
+    // Match a boundary: either start of string, or a separator (space, hyphen, underscore, etc.)
+    .replace(/(?:^|[\s\-\_]+)(\S)/g, (_, char) =>
+      char.toUpperCase()
+    );
+}
+
 function downloadCard() {
+  const rawName = document.getElementById("cardName").value || "card";
+  const safeName = formatCardName(rawName);
   const link = document.createElement("a");
-  link.download = "card.png";
+  link.download = safeName + ".png";
   link.href = canvas.toDataURL("image/png");
   link.click();
 }
+
 
 function attachLiveUpdates() {
   document.getElementById("cardName").addEventListener("input", drawCard);
