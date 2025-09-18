@@ -89,9 +89,9 @@ function drawCard() {
   ctx.textAlign = "center";
   ctx.lineWidth = 5;                // thickness of the outline
   ctx.strokeStyle = "white";        // outline color
-  ctx.strokeText(name, canvas.width / 2, 80);
+  ctx.strokeText(power, 75, 75);
   ctx.fillText(power, 75, 75);
-   ctx.strokeText(name, canvas.width / 2, 80);
+   ctx.strokeText(bulk, 75, 150);
   ctx.fillText(bulk, 75, 150);
 
   // color icons
