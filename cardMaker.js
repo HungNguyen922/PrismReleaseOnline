@@ -128,7 +128,7 @@ function drawCard() {
   ];
   
   const textYStart = 700;   // adjust based on your card size
-  const lineHeight = 40;    // space between lines
+  const lineHeight = 100;    // space between lines
   effectLines.forEach((line, i) => {
     const y = textYStart + i * lineHeight;
     if (line.trim() !== "") {
