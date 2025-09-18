@@ -370,3 +370,8 @@ dialog::backdrop {
   justify-content: space-between;
   margin-top: 1em;
 }
+
+@font-face {
+  font-family: 'Fjalla';
+  src: url('cardAssets/FjallaOne-Regular.ttf') format('truetype');
+}
