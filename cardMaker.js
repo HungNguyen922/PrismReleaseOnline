@@ -125,9 +125,20 @@ function downloadCard() {
   link.click();
 }
 
+function attachLiveUpdates() {
+  document.getElementById("cardName").addEventListener("input", drawCard);
+  document.getElementById("power").addEventListener("input", drawCard);
+  document.getElementById("bulk").addEventListener("input", drawCard);
+
+  ["color1","color2","color3","color4"].forEach(id => {
+    document.getElementById(id).addEventListener("change", drawCard);
+  });
+}
+
 // init
 window.onload = () => {
   populateDropdowns();
+  attachLiveUpdates()
   drawCard();
 };
 
