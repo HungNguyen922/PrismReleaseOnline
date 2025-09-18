@@ -117,7 +117,6 @@ function drawCard() {
   ctx.drawImage(loaded.border, 0, 0, canvas.width, canvas.height);
 }
 
-
 function downloadCard() {
   const link = document.createElement("a");
   link.download = "card.png";
@@ -130,6 +129,15 @@ window.onload = () => {
   populateDropdowns();
   drawCard();
 };
+
+function isInsideArt(mx, my, padding = 10) {
+  const left = Math.min(artX, artX + artW) - padding;
+  const right = Math.max(artX, artX + artW) + padding;
+  const top = Math.min(artY, artY + artH) - padding;
+  const bottom = Math.max(artY, artY + artH) + padding;
+
+  return mx >= left && mx <= right && my >= top && my <= bottom;
+}
 
 let userArt = null;
 let artX = 150, artY = 200;      // default position
@@ -157,12 +165,11 @@ canvas.addEventListener("mousedown", (e) => {
   const mouseX = e.clientX - rect.left;
   const mouseY = e.clientY - rect.top;
 
-  if (mouseX > artX && mouseX < artX + artW &&
-      mouseY > artY && mouseY < artY + artH) {
-    isDragging = true;
-    dragStart.x = mouseX - artX;
-    dragStart.y = mouseY - artY;
-  }
+  if (userArt && isInsideArt(mouseX, mouseY)) {
+  isDragging = true;
+  dragStart.x = mouseX - artX;
+  dragStart.y = mouseY - artY;
+}
 });
 
 canvas.addEventListener("mousemove", (e) => {
