@@ -5,8 +5,8 @@ const ctx = canvas.getContext("2d");
 const assets = {
   background: "cardAssets/cardBase.png",
   border: "cardAssets/cardGutter.png",
-  powerIcon: "cardAssets/POW/1.png",
-  bulkIcon: "cardAssets/BLK/1.png",
+  powerIcon: "cardAssets/POW.png",
+  bulkIcon: "cardAssets/BLK.png",
   colors: {
     Red: "cardAssets/Palette/R.png",
     Orange: "cardAssets/Palette/O.png",
