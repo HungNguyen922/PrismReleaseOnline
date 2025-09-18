@@ -153,7 +153,27 @@ document.getElementById("artUpload").addEventListener("change", (e) => {
   reader.onload = (event) => {
     userArt = new Image();
     userArt.src = event.target.result;
-    userArt.onload = () => drawCard();
+    userArt.onload = () => {
+    const aspect = userArt.width / userArt.height;
+    const frameW = 450;
+    const frameH = 450;
+  
+    if (aspect > 1) {
+      // wider than tall → fit width
+      artW = frameW;
+      artH = frameW / aspect;
+    } else {
+      // taller than wide → fit height
+      artH = frameH;
+      artW = frameH * aspect;
+    }
+  
+    // center inside your frame
+    artX = 150 + (frameW - artW) / 2;
+    artY = 200 + (frameH - artH) / 2;
+  
+    drawCard();
+  };
   };
   reader.readAsDataURL(file);
 });
