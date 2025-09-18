@@ -128,7 +128,7 @@ function drawCard() {
   ];
   
   const textYStart = 645;   // adjust based on your card size
-  const lineHeight = 75;    // space between lines
+  const lineHeight = 60;    // space between lines
   const maxTextWidth = 700; // maximum width before wrapping
   
   effectLines.forEach((line, i) => {
