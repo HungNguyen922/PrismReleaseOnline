@@ -73,6 +73,9 @@ function drawCard() {
   ctx.fillStyle = "black";
   ctx.font = "56px Fjalla";
   ctx.textAlign = "center";
+  ctx.lineWidth = 5;                // thickness of the outline
+  ctx.strokeStyle = "white";        // outline color
+  ctx.strokeText(name, canvas.width / 2, 80);
   ctx.fillText(name, canvas.width / 2, 80);
 
   // power + bulk icons
@@ -83,7 +86,12 @@ function drawCard() {
   const power = document.getElementById("power").value;
   const bulk = document.getElementById("bulk").value;
   ctx.font = "bold 60px Fjalla";
+  ctx.textAlign = "center";
+  ctx.lineWidth = 5;                // thickness of the outline
+  ctx.strokeStyle = "white";        // outline color
+  ctx.strokeText(name, canvas.width / 2, 80);
   ctx.fillText(power, 75, 75);
+   ctx.strokeText(name, canvas.width / 2, 80);
   ctx.fillText(bulk, 75, 150);
 
   // color icons
