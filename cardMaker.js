@@ -13,15 +13,15 @@ const assets = {
     Yellow: "cardAssets/Palette/Y.png",
     
     Green: "cardAssets/Palette/G.png",
-    Turquoise: "cardAssets/Palette/T.png",
     Cyan: "cardAssets/Palette/C.png",
-    
     Blue: "cardAssets/Palette/B.png",
+    
     Violet: "cardAssets/Palette/V.png",
     Magenta: "cardAssets/Palette/M.png",
+    Pink: "cardAssets/Palette/P.png",
     
     White: "cardAssets/Palette/W.png",
-    Black: "cardAssets/Palette/B.png"
+    Black: "cardAssets/Palette/K.png"
   }
 };
 
