@@ -58,55 +58,57 @@ function populateDropdowns() {
 }
 
 function drawCard() {
-  const name = document.getElementById("cardName").value;
-  const power = document.getElementById("power").value;
-  const bulk = document.getElementById("bulk").value;
-  const colors = [
-    document.getElementById("color1").value,
-    document.getElementById("color2").value,
-    document.getElementById("color3").value,
-    document.getElementById("color4").value
-  ];
-
-  // clear
-  ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
 
   // background
-  ctx.drawImage(loaded.background, 0,0, canvas.width, canvas.height);
+  ctx.drawImage(loaded.background, 0, 0, canvas.width, canvas.height);
+
+  // uploaded user art
+  if (userArt) {
+    ctx.drawImage(userArt, artX, artY, artW, artH);
+  }
 
   // name text
+  const name = document.getElementById("cardName").value;
   ctx.fillStyle = "black";
   ctx.font = "56px Fjalla";
   ctx.textAlign = "center";
-  const centerX = canvas.width / 2;
-  ctx.fillText(name, centerX, 80);
+  ctx.fillText(name, canvas.width / 2, 80);
 
   // power + bulk icons
   ctx.drawImage(loaded.powerIcon, 25, 25, 80, 80);
   ctx.drawImage(loaded.bulkIcon, 25, 100, 80, 80);
 
   // power & bulk text
+  const power = document.getElementById("power").value;
+  const bulk = document.getElementById("bulk").value;
   ctx.font = "bold 60px Fjalla";
-  ctx.textAlign = "center";
   ctx.fillText(power, 75, 75);
   ctx.fillText(bulk, 75, 150);
 
-  // color icons (right side stacked)
+  // color icons
+  const colors = [
+    document.getElementById("color1").value,
+    document.getElementById("color2").value,
+    document.getElementById("color3").value,
+    document.getElementById("color4").value
+  ];
   const positions = [
     {x: 645, y: 25},
     {x: 645, y: 100},
     {x: 645, y: 175},
     {x: 645, y: 250}
   ];
-  colors.forEach((c,i) => {
+  colors.forEach((c, i) => {
     if (!c) return;
     const img = loaded.colors[c];
     ctx.drawImage(img, positions[i].x, positions[i].y, 80, 80);
   });
 
   // border on top
-  ctx.drawImage(loaded.border, 0,0, canvas.width, canvas.height);
+  ctx.drawImage(loaded.border, 0, 0, canvas.width, canvas.height);
 }
+
 
 function downloadCard() {
   const link = document.createElement("a");
@@ -139,25 +141,6 @@ document.getElementById("artUpload").addEventListener("change", (e) => {
   };
   reader.readAsDataURL(file);
 });
-
-// Draw card
-function drawCard() {
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-
-  // background (example)
-  ctx.fillStyle = "#ddd";
-  ctx.fillRect(0,0,canvas.width,canvas.height);
-
-  // draw art if loaded
-  if (userArt) {
-    ctx.drawImage(userArt, artX, artY, artW, artH);
-  }
-
-  // placeholder for border
-  ctx.strokeStyle = "black";
-  ctx.lineWidth = 8;
-  ctx.strokeRect(0,0,canvas.width,canvas.height);
-}
 
 // Dragging logic
 canvas.addEventListener("mousedown", (e) => {
