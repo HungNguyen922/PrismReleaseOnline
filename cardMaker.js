@@ -8,6 +8,7 @@ const assets = {
   powerIcon: "cardAssets/POW.png",
   bulkIcon: "cardAssets/BLK.png",
   colors: {
+    None: "",
     Red: "cardAssets/Palette/R.png",
     Orange: "cardAssets/Palette/O.png",
     Yellow: "cardAssets/Palette/Y.png",
