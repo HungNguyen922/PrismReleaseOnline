@@ -85,14 +85,14 @@ function drawCard() {
   // power & bulk text
   const power = document.getElementById("power").value;
   const bulk = document.getElementById("bulk").value;
-  ctx.font = "bold 60px Fjalla";
+  ctx.font = "bold 70px Fjalla";
   ctx.textAlign = "center";
   ctx.lineWidth = 5;                // thickness of the outline
   ctx.strokeStyle = "white";        // outline color
-  ctx.strokeText(power, 75, 75);
-  ctx.fillText(power, 75, 75);
-  ctx.strokeText(bulk, 75, 150);
-  ctx.fillText(bulk, 75, 150);
+  ctx.strokeText(power, 70, 80);
+  ctx.fillText(power, 70, 80);
+  ctx.strokeText(bulk, 70, 160);
+  ctx.fillText(bulk, 70, 160);
 
   // color icons
   const colors = [
