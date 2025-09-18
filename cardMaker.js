@@ -114,6 +114,29 @@ function drawCard() {
     ctx.drawImage(img, positions[i].x, positions[i].y, 80, 80);
   });
 
+  // === card text (effects / traits) ===
+  ctx.font = "50px 'Fjalla";
+  ctx.textAlign = "center";
+  ctx.fillStyle = "black";
+  ctx.lineWidth = 5;
+  ctx.strokeStyle = "white";
+  
+  const effectLines = [
+    document.getElementById("line1").value,
+    document.getElementById("line2").value,
+    document.getElementById("line3").value
+  ];
+  
+  const textYStart = 700;   // adjust based on your card size
+  const lineHeight = 40;    // space between lines
+  effectLines.forEach((line, i) => {
+    const y = textYStart + i * lineHeight;
+    if (line.trim() !== "") {
+      ctx.strokeText(line, canvas.width / 2, y);
+      ctx.fillText(line, canvas.width / 2, y);
+    }
+  });
+
   // border on top
   ctx.drawImage(loaded.border, 0, 0, canvas.width, canvas.height);
 }
@@ -132,6 +155,10 @@ function attachLiveUpdates() {
 
   ["color1","color2","color3","color4"].forEach(id => {
     document.getElementById(id).addEventListener("change", drawCard);
+  });
+
+  ["line1","line2","line3"].forEach(id => {
+    document.getElementById(id).addEventListener("input", drawCard);
   });
 }
 
