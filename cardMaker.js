@@ -91,7 +91,7 @@ function drawCard() {
   ctx.strokeStyle = "white";        // outline color
   ctx.strokeText(power, 75, 75);
   ctx.fillText(power, 75, 75);
-   ctx.strokeText(bulk, 75, 150);
+  ctx.strokeText(bulk, 75, 150);
   ctx.fillText(bulk, 75, 150);
 
   // color icons
