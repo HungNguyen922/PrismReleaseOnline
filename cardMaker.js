@@ -115,11 +115,11 @@ function drawCard() {
   });
 
   // === card text (effects / traits) ===
-  ctx.font = "50px 'Fjalla";
+  ctx.font = "40px 'Fjalla";
   ctx.textAlign = "center";
-  ctx.fillStyle = "black";
+  ctx.fillStyle = "white";
   ctx.lineWidth = 5;
-  ctx.strokeStyle = "white";
+  ctx.strokeStyle = "black";
   
   const effectLines = [
     document.getElementById("line1").value,
