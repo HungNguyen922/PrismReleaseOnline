@@ -138,8 +138,11 @@ function attachLiveUpdates() {
 // init
 window.onload = () => {
   populateDropdowns();
-  attachLiveUpdates()
-  drawCard();
+  attachLiveUpdates();
+  
+  document.fonts.ready.then(() => {
+    drawCard(); // ensures the font is loaded before first render
+  });
 };
 
 function isInsideArt(mx, my, padding = 10) {
