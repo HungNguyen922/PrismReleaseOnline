@@ -128,17 +128,41 @@ function drawCard() {
   ];
   
   const textYStart = 700;   // adjust based on your card size
-  const lineHeight = 100;    // space between lines
+  const lineHeight = 150;    // space between lines
+  const maxTextWidth = 500; // maximum width before wrapping
+  
   effectLines.forEach((line, i) => {
-    const y = textYStart + i * lineHeight;
     if (line.trim() !== "") {
-      ctx.strokeText(line, canvas.width / 2, y);
-      ctx.fillText(line, canvas.width / 2, y);
+      const y = textYStart + i * (lineHeight * 2); // leave space between blocks
+      wrapText(ctx, line, canvas.width / 2, y, maxTextWidth, lineHeight);
     }
   });
 
   // border on top
   ctx.drawImage(loaded.border, 0, 0, canvas.width, canvas.height);
+}
+
+function wrapText(ctx, text, x, y, maxWidth, lineHeight) {
+  const words = text.split(" ");
+  let line = "";
+  const lines = [];
+
+  for (let n = 0; n < words.length; n++) {
+    const testLine = line + words[n] + " ";
+    const testWidth = ctx.measureText(testLine).width;
+    if (testWidth > maxWidth && n > 0) {
+      lines.push(line.trim());
+      line = words[n] + " ";
+    } else {
+      line = testLine;
+    }
+  }
+  lines.push(line.trim());
+
+  lines.forEach((l, i) => {
+    ctx.strokeText(l, x, y + i * lineHeight);
+    ctx.fillText(l, x, y + i * lineHeight);
+  });
 }
 
 function downloadCard() {
