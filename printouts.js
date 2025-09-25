@@ -41,8 +41,9 @@ exportBtn.addEventListener('click', () => {
 
 async function exportPDFHighPrecision(images) {
   const { jsPDF } = window.jspdf;
-  const pageW = 8.5 * 72;
-  const pageH = 11 * 72;
+
+  const pageW = 8.5 * 72;  // 612 pts
+  const pageH = 11 * 72;   // 792 pts
   const doc = new jsPDF({
     unit: 'pt',
     format: [pageW, pageH]
@@ -50,10 +51,25 @@ async function exportPDFHighPrecision(images) {
 
   const cols = 3;
   const rows = 3;
-  const rawCellW = pageW / cols;
+
+  // Compute integer widths for columns
+  const baseW = Math.floor(pageW / cols);            // e.g. 612 / 3 = 204
+  const extra = pageW - baseW * cols;                // leftover pts
+  // Build array of widths so that the first `extra` columns get +1 pt
+  const cellWidths = Array(cols).fill(baseW).map((w, c) => w + (c < extra ? 1 : 0));
+
+  // Compute x offsets for each column
+  const xOffsets = [];
+  let cumX = 0;
+  for (let c = 0; c < cols; c++) {
+    xOffsets.push(cumX);
+    cumX += cellWidths[c];
+  }
+
+  // You may or may not want the same trick for heights — for vertical you can keep fractional
   const cellH = pageH / rows;
 
-  // Preload images
+  // Load images
   const imgs = await Promise.all(images.map(src => {
     return new Promise((resolve, reject) => {
       const img = new Image();
@@ -63,34 +79,30 @@ async function exportPDFHighPrecision(images) {
     });
   }));
 
-  let accumulatedX = 0;
-
   for (let idx = 0; idx < imgs.length && idx < cols * rows; idx++) {
     const img = imgs[idx];
     const col = idx % cols;
     const row = Math.floor(idx / cols);
 
-    // Determine x0 by snapping to accumulated
-    const x0 = accumulatedX;
-    // Next’s accumulation
-    accumulatedX += rawCellW;
-
+    const cellW = cellWidths[col];
+    const x0 = xOffsets[col];
     const y0 = row * cellH;
 
-    // CONTAIN scaling
-    const scaleX = rawCellW / img.width;
+    // Use contain scaling
+    const scaleX = cellW / img.width;
     const scaleY = cellH / img.height;
     const scale = Math.min(scaleX, scaleY);
 
     const drawW = img.width * scale;
     const drawH = img.height * scale;
 
-    let offsetX = x0 + (rawCellW - drawW) / 2;
+    let offsetX = x0 + (cellW - drawW) / 2;
     let offsetY = y0 + (cellH - drawH) / 2;
 
+    // Clamp inside the cell
     if (offsetX < x0) offsetX = x0;
     if (offsetY < y0) offsetY = y0;
-    if (offsetX + drawW > x0 + rawCellW) offsetX = (x0 + rawCellW) - drawW;
+    if (offsetX + drawW > x0 + cellW) offsetX = (x0 + cellW) - drawW;
     if (offsetY + drawH > y0 + cellH) offsetY = (y0 + cellH) - drawH;
 
     const rx = Math.round(offsetX);
@@ -101,5 +113,5 @@ async function exportPDFHighPrecision(images) {
     doc.addImage(img, 'PNG', rx, ry, rw, rh);
   }
 
-  doc.save('snapcolumns.pdf');
+  doc.save('printoutSheet.pdf');
 }
