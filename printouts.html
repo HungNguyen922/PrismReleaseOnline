@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <title>Prism Release Card Printouts</title>
+    <style>
+      /* Optional: show previews of the card images so user can see the grid before export */
+      #preview-grid {
+        display: grid;
+        grid-template-columns: repeat(3, auto);
+        grid-gap: 8px;
+        margin-bottom: 16px;
+      }
+      #preview-grid img {
+        width: 100px; /* small preview size */
+        height: auto;
+        object-fit: contain;
+        border: 1px solid #ccc;
+      }
+    </style>
+</head>
+<body>
+    <div class="banner">
+        <a href="index.html" class="banner-title">PR Deck Builder</a>
+        <a href="gallery.html" class="banner-btn">Gallery</a>
+        <a href="deck.html" class="banner-btn">Deck Builder</a>
+        <a href="board.html" class="banner-btn">Game Board</a>
+        <a href="maker.html" class="banner-btn">Card Maker</a>
+      <a href="printouts.html" class="banner-btn">Card Maker</a>
+    </div>
+    <div class="content">
+      <h1>Export Cards to Print Sheet</h1>
+
+      <!-- Input for selecting up to 9 images (file inputs) -->
+      <input type="file" id="card-input" accept="image/*" multiple />
+    
+      <!-- Preview grid -->
+      <div id="preview-grid"></div>
+    
+      <!-- Button to trigger PDF export -->
+      <button id="export-btn">Export to PDF</button>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+
+</body>
+</html>
