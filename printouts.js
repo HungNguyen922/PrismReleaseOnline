@@ -38,7 +38,7 @@ async function exportCardsToPDF(images) {
   const cols = 3, rows = 3;
   const pageW_in = 8.5, pageH_in = 11;
   const cardW_in = 2.5, cardH_in = 3.5;
-  const margin_in = 0.0, gutter_in = 0.0;
+  const margin_in = 0.2, gutter_in = 0.08;
 
   const doc = new jsPDF({
     unit: 'in',
