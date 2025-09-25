@@ -36,13 +36,13 @@ exportBtn.addEventListener('click', () => {
 async function exportCardsToPDF(images) {
   const { jsPDF } = window.jspdf;
   const cols = 3, rows = 3;
-  const pageW_in = 8.5, pageH_in = 11;
+  const pageW = 8.5, pageH = 11;
   const cardW_in = 2.5, cardH_in = 3.5;
   const margin_in = 0.0, gutter_in = 0.0;
 
   const doc = new jsPDF({
     unit: 'in',
-    format: [pageW_in, pageH_in]
+    format: [pageW, pageH]
   });
 
   // Preload images
@@ -55,8 +55,6 @@ async function exportCardsToPDF(images) {
     });
   }));
 
-  const usableW = pageW_in - 2 * margin_in;
-  const usableH = pageH_in - 2 * margin_in;
   const cellW = pageW / cols;  // = 8.5 / 3
   const cellH = pageH / rows; // = 11 / 3
 
