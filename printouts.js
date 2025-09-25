@@ -23,11 +23,11 @@ exportBtn.addEventListener('click', () => {
   exportPDFHighPrecision(imageSrcs);
 });
 
-async function exportPDFHighPrecision(images) {
+async function exportPDFNoOverlap(images) {
   const { jsPDF } = window.jspdf;
 
-  const pageW = 8.5 * 72;  // 612 pts
-  const pageH = 11 * 72;   // 792 pts
+  const pageW = 8.5 * 72;
+  const pageH = 11 * 72;
   const doc = new jsPDF({
     unit: 'pt',
     format: [pageW, pageH]
@@ -55,34 +55,34 @@ async function exportPDFHighPrecision(images) {
     const x0 = col * cellW;
     const y0 = row * cellH;
 
+    // Use "contain" scaling so image fully sits within the cell (no bleed)
     const scaleX = cellW / img.width;
     const scaleY = cellH / img.height;
-    const scale = Math.max(scaleX, scaleY);
+    const scale = Math.min(scaleX, scaleY);  // “contain” scaling
 
-    let drawW = img.width * scale;
-    let drawH = img.height * scale;
+    const drawW = img.width * scale;
+    const drawH = img.height * scale;
 
     let offsetX = x0 + (cellW - drawW) / 2;
     let offsetY = y0 + (cellH - drawH) / 2;
 
-    // Clamp so no part draws outside the page
-    if (offsetY < 0) {
-      // move down or shrink
-      drawH = drawH + offsetY;  // reduces height
-      offsetY = 0;
+    // Clamp offsetY so it doesn't go above the cell top
+    if (offsetY < y0) {
+      offsetY = y0;
     }
-    if (offsetY + drawH > pageH) {
-      drawH = pageH - offsetY;
-    }
-    if (offsetX < 0) {
-      drawW = drawW + offsetX;
-      offsetX = 0;
-    }
-    if (offsetX + drawW > pageW) {
-      drawW = pageW - offsetX;
+    // And clamp so the bottom doesn't exceed the cell bottom
+    if (offsetY + drawH > y0 + cellH) {
+      offsetY = (y0 + cellH) - drawH;
     }
 
-    // Round to avoid fractional pts
+    // Similarly clamp for X if needed
+    if (offsetX < x0) {
+      offsetX = x0;
+    }
+    if (offsetX + drawW > x0 + cellW) {
+      offsetX = (x0 + cellW) - drawW;
+    }
+
     const rx = Math.round(offsetX);
     const ry = Math.round(offsetY);
     const rw = Math.round(drawW);
@@ -91,5 +91,5 @@ async function exportPDFHighPrecision(images) {
     doc.addImage(img, 'PNG', rx, ry, rw, rh);
   }
 
-  doc.save('printoutSheet.pdf');
+  doc.save('printouts.pdf');
 }
