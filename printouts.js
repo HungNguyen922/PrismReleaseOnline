@@ -47,49 +47,37 @@ async function exportPDFNoOverlap(images) {
     });
   }));
 
-  for (let idx = 0; idx < imgs.length && idx < cols * rows; idx++) {
-    const img = imgs[idx];
-    const col = idx % cols;
-    const row = Math.floor(idx / cols);
+ for (let idx = 0; idx < imgs.length && idx < cols * rows; idx++) {
+  const img = imgs[idx];
+  const col = idx % cols;
+  const row = Math.floor(idx / cols);
 
-    const x0 = col * cellW;
-    const y0 = row * cellH;
+  const x0 = col * cellW;
+  const y0 = row * cellH;
 
-    // Use "contain" scaling so image fully sits within the cell (no bleed)
-    const scaleX = cellW / img.width;
-    const scaleY = cellH / img.height;
-    const scale = Math.min(scaleX, scaleY);  // “contain” scaling
+  // CONTAIN: ensure the image fits fully inside the cell (no bleed)
+  const scaleX = cellW / img.width;
+  const scaleY = cellH / img.height;
+  const scale = Math.min(scaleX, scaleY);  // <<< changed
 
-    const drawW = img.width * scale;
-    const drawH = img.height * scale;
+  const drawW = img.width * scale;
+  const drawH = img.height * scale;
 
-    let offsetX = x0 + (cellW - drawW) / 2;
-    let offsetY = y0 + (cellH - drawH) / 2;
+  // center inside the cell
+  let offsetX = x0 + (cellW - drawW) / 2;
+  let offsetY = y0 + (cellH - drawH) / 2;
 
-    // Clamp offsetY so it doesn't go above the cell top
-    if (offsetY < y0) {
-      offsetY = y0;
-    }
-    // And clamp so the bottom doesn't exceed the cell bottom
-    if (offsetY + drawH > y0 + cellH) {
-      offsetY = (y0 + cellH) - drawH;
-    }
+  // Clamp to the cell (not the whole page)
+  if (offsetX < x0) offsetX = x0;
+  if (offsetY < y0) offsetY = y0;
+  if (offsetX + drawW > x0 + cellW) offsetX = (x0 + cellW) - drawW;
+  if (offsetY + drawH > y0 + cellH) offsetY = (y0 + cellH) - drawH;
 
-    // Similarly clamp for X if needed
-    if (offsetX < x0) {
-      offsetX = x0;
-    }
-    if (offsetX + drawW > x0 + cellW) {
-      offsetX = (x0 + cellW) - drawW;
-    }
+  // Round to avoid fractional drift
+  const rx = Math.round(offsetX);
+  const ry = Math.round(offsetY);
+  const rw = Math.round(drawW);
+  const rh = Math.round(drawH);
 
-    const rx = Math.round(offsetX);
-    const ry = Math.round(offsetY);
-    const rw = Math.round(drawW);
-    const rh = Math.round(drawH);
-
-    doc.addImage(img, 'PNG', rx, ry, rw, rh);
-  }
-
-  doc.save('printouts.pdf');
+  doc.addImage(img, 'PNG', rx, ry, rw, rh);
 }
