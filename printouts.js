@@ -51,10 +51,25 @@ async function exportPDFHighPrecision(images) {
 
   const cols = 3;
   const rows = 3;
-  const cellW = pageW / cols;
+
+  // Compute integer widths for columns
+  const baseW = Math.floor(pageW / cols);            // e.g. 612 / 3 = 204
+  const extra = pageW - baseW * cols;                // leftover pts
+  // Build array of widths so that the first `extra` columns get +1 pt
+  const cellWidths = Array(cols).fill(baseW).map((w, c) => w + (c < extra ? 1 : 0));
+
+  // Compute x offsets for each column
+  const xOffsets = [];
+  let cumX = 0;
+  for (let c = 0; c < cols; c++) {
+    xOffsets.push(cumX);
+    cumX += cellWidths[c];
+  }
+
+  // You may or may not want the same trick for heights — for vertical you can keep fractional
   const cellH = pageH / rows;
 
-  // Load Image objects (with width/height)
+  // Load images
   const imgs = await Promise.all(images.map(src => {
     return new Promise((resolve, reject) => {
       const img = new Image();
@@ -69,10 +84,11 @@ async function exportPDFHighPrecision(images) {
     const col = idx % cols;
     const row = Math.floor(idx / cols);
 
-    const x0 = col * cellW;
+    const cellW = cellWidths[col];
+    const x0 = xOffsets[col];
     const y0 = row * cellH;
 
-    // Use "contain" scaling so image stays inside the cell
+    // Use contain scaling
     const scaleX = cellW / img.width;
     const scaleY = cellH / img.height;
     const scale = Math.min(scaleX, scaleY);
@@ -83,13 +99,12 @@ async function exportPDFHighPrecision(images) {
     let offsetX = x0 + (cellW - drawW) / 2;
     let offsetY = y0 + (cellH - drawH) / 2;
 
-    // Clamp into the cell
+    // Clamp inside the cell
     if (offsetX < x0) offsetX = x0;
     if (offsetY < y0) offsetY = y0;
     if (offsetX + drawW > x0 + cellW) offsetX = (x0 + cellW) - drawW;
     if (offsetY + drawH > y0 + cellH) offsetY = (y0 + cellH) - drawH;
 
-    // Round values
     const rx = Math.round(offsetX);
     const ry = Math.round(offsetY);
     const rw = Math.round(drawW);
@@ -98,6 +113,5 @@ async function exportPDFHighPrecision(images) {
     doc.addImage(img, 'PNG', rx, ry, rw, rh);
   }
 
-  // **You must save the document** for download
   doc.save('printoutSheet.pdf');
 }
