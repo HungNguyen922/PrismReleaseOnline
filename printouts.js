@@ -26,23 +26,18 @@ exportBtn.addEventListener('click', () => {
 async function exportPDFHighPrecision(images) {
   const { jsPDF } = window.jspdf;
 
-  // Use points unit for higher precision (1 in = 72 points)
-  const doc = new jsPDF({
-    unit: 'pt',
-    format: [8.5 * 72, 11 * 72]  // [612, 792] points
-  });
-
   const pageW = 8.5 * 72;  // 612 pts
   const pageH = 11 * 72;   // 792 pts
+  const doc = new jsPDF({
+    unit: 'pt',
+    format: [pageW, pageH]
+  });
 
   const cols = 3;
   const rows = 3;
+  const cellW = pageW / cols;
+  const cellH = pageH / rows;
 
-  // Compute cell sizes in points
-  const cellW = pageW / cols;  // 204 pts each if exact
-  const cellH = pageH / rows;  // 264 pts each if exact
-
-  // Load images
   const imgs = await Promise.all(images.map(src => {
     return new Promise((resolve, reject) => {
       const img = new Image();
@@ -60,26 +55,41 @@ async function exportPDFHighPrecision(images) {
     const x0 = col * cellW;
     const y0 = row * cellH;
 
-    // OPTION A: Fill the full cell (cover) → image might be cropped
-    // OPTION B: Contain inside cell → might leave internal whitespace
-
-    // For "touching" columns, the *cell boundaries* must touch. So layout uses exact cellW, no gutter.
-
-    // If you want images to also touch (no internal whitespace), use cover scaling:
-
     const scaleX = cellW / img.width;
     const scaleY = cellH / img.height;
-    const scale = Math.max(scaleX, scaleY);  // ensures image covers the whole cell
+    const scale = Math.max(scaleX, scaleY);
 
-    const drawW = img.width * scale;
-    const drawH = img.height * scale;
+    let drawW = img.width * scale;
+    let drawH = img.height * scale;
 
-    const offsetX = x0 + (cellW - drawW) / 2;
-    const offsetY = y0 + (cellH - drawH) / 2;
+    let offsetX = x0 + (cellW - drawW) / 2;
+    let offsetY = y0 + (cellH - drawH) / 2;
 
-    // Using drawImage; format might be 'PNG' if using PNG images
-    doc.addImage(img, 'PNG', offsetX, offsetY, drawW, drawH);
+    // Clamp so no part draws outside the page
+    if (offsetY < 0) {
+      // move down or shrink
+      drawH = drawH + offsetY;  // reduces height
+      offsetY = 0;
+    }
+    if (offsetY + drawH > pageH) {
+      drawH = pageH - offsetY;
+    }
+    if (offsetX < 0) {
+      drawW = drawW + offsetX;
+      offsetX = 0;
+    }
+    if (offsetX + drawW > pageW) {
+      drawW = pageW - offsetX;
+    }
+
+    // Round to avoid fractional pts
+    const rx = Math.round(offsetX);
+    const ry = Math.round(offsetY);
+    const rw = Math.round(drawW);
+    const rh = Math.round(drawH);
+
+    doc.addImage(img, 'PNG', rx, ry, rw, rh);
   }
 
-  doc.save('cards_no_gap_highprecision.pdf');
+  doc.save('printoutSheet.pdf');
 }
