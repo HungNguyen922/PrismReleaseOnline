@@ -39,7 +39,7 @@ exportBtn.addEventListener('click', () => {
   exportPDFHighPrecision(imageSrcs);
 });
 
-async function exportPDFSnapColumns(images) {
+async function exportPDFHighPrecision(images) {
   const { jsPDF } = window.jspdf;
   const pageW = 8.5 * 72;
   const pageH = 11 * 72;
