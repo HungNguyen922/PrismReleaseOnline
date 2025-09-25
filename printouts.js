@@ -57,16 +57,16 @@ async function exportCardsToPDF(images) {
 
   const usableW = pageW_in - 2 * margin_in;
   const usableH = pageH_in - 2 * margin_in;
-  const cellW = (usableW - gutter_in * (cols - 1)) / cols;
-  const cellH = (usableH - gutter_in * (rows - 1)) / rows;
+  const cellW = pageW / cols;  // = 8.5 / 3
+  const cellH = pageH / rows; // = 11 / 3
 
   for (let i = 0; i < imgs.length && i < cols * rows; i++) {
     const img = imgs[i];
     const col = i % cols;
     const row = Math.floor(i / cols);
 
-    const x0 = margin_in + col * (cellW + gutter_in);
-    const y0 = margin_in + row * (cellH + gutter_in);
+    const x0 = col * cellW;
+    const y0 = row * cellH;
 
     const imgAspect = img.width / img.height;
     const cellAspect = cellW / cellH;
