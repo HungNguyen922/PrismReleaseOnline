@@ -1,24 +1,15 @@
 const inputEl = document.getElementById('card-input');
-const previewGrid = document.getElementById('preview-grid');
 const exportBtn = document.getElementById('export-btn');
-
-let imageSrcs = [];  // array of data URLs or object URLs
+let imageSrcs = [];
 
 inputEl.addEventListener('change', (ev) => {
-  imageSrcs = [];  // reset
-  previewGrid.innerHTML = '';
-
+  imageSrcs = [];
   const files = ev.target.files;
   for (let i = 0; i < files.length && i < 9; i++) {
     const file = files[i];
     const reader = new FileReader();
     reader.onload = (e) => {
-      const dataUrl = e.target.result;
-      imageSrcs.push(dataUrl);
-
-      const img = document.createElement('img');
-      img.src = dataUrl;
-      previewGrid.appendChild(img);
+      imageSrcs.push(e.target.result);
     };
     reader.readAsDataURL(file);
   }
@@ -26,63 +17,69 @@ inputEl.addEventListener('change', (ev) => {
 
 exportBtn.addEventListener('click', () => {
   if (imageSrcs.length === 0) {
-    alert('Please select at least one card image.');
+    alert("Please select images");
     return;
   }
-  exportCardsToPDF(imageSrcs);
+  exportPDFHighPrecision(imageSrcs);
 });
 
-// The exportCardsToPDF function from earlier
-async function exportCardsToPDF(images) {
+async function exportPDFHighPrecision(images) {
   const { jsPDF } = window.jspdf;
-  const cols = 3, rows = 3;
-  const pageW = 8.5, pageH = 11;
-  const cardW_in = 2.5, cardH_in = 3.5;
-  const margin_in = 0.0, gutter_in = 0.0;
 
+  // Use points unit for higher precision (1 in = 72 points)
   const doc = new jsPDF({
-    unit: 'in',
-    format: [pageW, pageH]
+    unit: 'pt',
+    format: [8.5 * 72, 11 * 72]  // [612, 792] points
   });
 
-  // Preload images
+  const pageW = 8.5 * 72;  // 612 pts
+  const pageH = 11 * 72;   // 792 pts
+
+  const cols = 3;
+  const rows = 3;
+
+  // Compute cell sizes in points
+  const cellW = pageW / cols;  // 204 pts each if exact
+  const cellH = pageH / rows;  // 264 pts each if exact
+
+  // Load images
   const imgs = await Promise.all(images.map(src => {
     return new Promise((resolve, reject) => {
       const img = new Image();
       img.onload = () => resolve(img);
-      img.onerror = (err) => reject(err);
+      img.onerror = reject;
       img.src = src;
     });
   }));
 
-  const cellW = pageW / cols;  // = 8.5 / 3
-  const cellH = pageH / rows; // = 11 / 3
-
-  for (let i = 0; i < imgs.length && i < cols * rows; i++) {
-    const img = imgs[i];
-    const col = i % cols;
-    const row = Math.floor(i / cols);
+  for (let idx = 0; idx < imgs.length && idx < cols * rows; idx++) {
+    const img = imgs[idx];
+    const col = idx % cols;
+    const row = Math.floor(idx / cols);
 
     const x0 = col * cellW;
     const y0 = row * cellH;
 
-    const imgAspect = img.width / img.height;
-    const cellAspect = cellW / cellH;
+    // OPTION A: Fill the full cell (cover) → image might be cropped
+    // OPTION B: Contain inside cell → might leave internal whitespace
 
-    let drawW, drawH;
-    if (imgAspect > cellAspect) {
-      drawW = cellW;
-      drawH = drawW / imgAspect;
-    } else {
-      drawH = cellH;
-      drawW = drawH * imgAspect;
-    }
+    // For "touching" columns, the *cell boundaries* must touch. So layout uses exact cellW, no gutter.
+
+    // If you want images to also touch (no internal whitespace), use cover scaling:
+
+    const scaleX = cellW / img.width;
+    const scaleY = cellH / img.height;
+    const scale = Math.max(scaleX, scaleY);  // ensures image covers the whole cell
+
+    const drawW = img.width * scale;
+    const drawH = img.height * scale;
 
     const offsetX = x0 + (cellW - drawW) / 2;
     const offsetY = y0 + (cellH - drawH) / 2;
 
+    // Using drawImage; format might be 'PNG' if using PNG images
     doc.addImage(img, 'PNG', offsetX, offsetY, drawW, drawH);
   }
 
-  doc.save('card_sheet.pdf');
+  doc.save('cards_no_gap_highprecision.pdf');
 }
