@@ -23,7 +23,7 @@ exportBtn.addEventListener('click', () => {
   exportPDFHighPrecision(imageSrcs);
 });
 
-async function exportPDFNoOverlap(images) {
+async function exportPDFHighPrecision(images) {
   const { jsPDF } = window.jspdf;
 
   const pageW = 8.5 * 72;
