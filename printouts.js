@@ -10,8 +10,7 @@ inputEl.addEventListener('change', (ev) => {
   for (let i = 0; i < files.length && i < 9; i++) {
     const file = files[i];
     const reader = new FileReader();
-
-    let p = new Promise((resolve, reject) => {
+    const p = new Promise((resolve, reject) => {
       reader.onload = (e) => {
         imageSrcs.push(e.target.result);
         resolve();
@@ -22,13 +21,13 @@ inputEl.addEventListener('change', (ev) => {
     reader.readAsDataURL(file);
   }
 
-  // Optionally wait until all images are loaded before enabling export button
-  Promise.all(loadPromises).then(() => {
-    // All data URLs loaded
-    console.log("All images read, ready to export:", imageSrcs.length);
-  }).catch(err => {
-    console.warn("Failed reading some images:", err);
-  });
+  Promise.all(loadPromises)
+    .then(() => {
+      console.log("All images read, ready to export:", imageSrcs.length);
+    })
+    .catch(err => {
+      console.warn("Failed reading some images:", err);
+    });
 });
 
 exportBtn.addEventListener('click', () => {
@@ -41,9 +40,13 @@ exportBtn.addEventListener('click', () => {
 
 async function exportPDFHighPrecision(images) {
   const { jsPDF } = window.jspdf;
+  if (typeof jsPDF !== 'function') {
+    console.error("jsPDF is not loaded or not in window.jspdf");
+    return;
+  }
 
-  const pageW = 8.5 * 72;  // 612 pts
-  const pageH = 11 * 72;   // 792 pts
+  const pageW = 8.5 * 72;   // 612 pts
+  const pageH = 11 * 72;    // 792 pts
   const doc = new jsPDF({
     unit: 'pt',
     format: [pageW, pageH]
@@ -52,43 +55,42 @@ async function exportPDFHighPrecision(images) {
   const cols = 3;
   const rows = 3;
 
-  // Compute integer widths for columns
-  const baseW = Math.floor(pageW / cols);            // e.g. 612 / 3 = 204
-  const extra = pageW - baseW * cols;                // leftover pts
-  // Build array of widths so that the first `extra` columns get +1 pt
-  const cellWidths = Array(cols).fill(baseW).map((w, c) => w + (c < extra ? 1 : 0));
+  // The physical size you want per card
+  const CARD_W = 2.5 * 72;  // 180 pts
+  const CARD_H = 3.5 * 72;  // 252 pts
 
-  // Compute x offsets for each column
-  const xOffsets = [];
-  let cumX = 0;
-  for (let c = 0; c < cols; c++) {
-    xOffsets.push(cumX);
-    cumX += cellWidths[c];
-  }
+  // If you want gutters, set these; otherwise zero
+  const marginX = 0;
+  const marginY = 0;
 
-  // You may or may not want the same trick for heights — for vertical you can keep fractional
-  const cellH = pageH / rows;
+  // Center the entire grid on page (optional)
+  const totalGridW = cols * CARD_W + (cols - 1) * marginX;
+  const totalGridH = rows * CARD_H + (rows - 1) * marginY;
+  const startX = (pageW - totalGridW) / 2;
+  const startY = (pageH - totalGridH) / 2;
 
-  // Load images
+  // Load images into Image objects
   const imgs = await Promise.all(images.map(src => {
     return new Promise((resolve, reject) => {
       const img = new Image();
       img.onload = () => resolve(img);
-      img.onerror = reject;
+      img.onerror = (err) => {
+        console.error("Image load error:", err, src);
+        resolve(null);  // resolve null to not break all
+      };
       img.src = src;
     });
   }));
 
-   for (let idx = 0; idx < imgs.length && idx < cols * rows; idx++) {
+  for (let idx = 0; idx < imgs.length && idx < cols * rows; idx++) {
     const img = imgs[idx];
+    if (!img) continue;  // skip failed ones
     const col = idx % cols;
     const row = Math.floor(idx / cols);
 
-    // Compute the top-left “ideal” position for this card cell
-    const x0 = col * (CARD_W + marginX);
-    const y0 = row * (CARD_H + marginY);
+    const x0 = startX + col * (CARD_W + marginX);
+    const y0 = startY + row * (CARD_H + marginY);
 
-    // Compute scale so the image fits within the card’s dimensions, but doesn’t upscale
     const scaleX = CARD_W / img.width;
     const scaleY = CARD_H / img.height;
     const scale = Math.min(scaleX, scaleY, 1);
@@ -96,13 +98,14 @@ async function exportPDFHighPrecision(images) {
     const drawW = img.width * scale;
     const drawH = img.height * scale;
 
-    // Center the image within the card cell
     const offsetX = x0 + (CARD_W - drawW) / 2;
     const offsetY = y0 + (CARD_H - drawH) / 2;
 
     doc.addImage(img, 'PNG',
-      Math.round(offsetX), Math.round(offsetY),
-      Math.round(drawW), Math.round(drawH));
+      Math.round(offsetX),
+      Math.round(offsetY),
+      Math.round(drawW),
+      Math.round(drawH));
   }
 
   doc.save('cards_sheet.pdf');
