@@ -79,42 +79,31 @@ async function exportPDFHighPrecision(images) {
     });
   }));
 
-  for (let idx = 0; idx < imgs.length && idx < cols * rows; idx++) {
+   for (let idx = 0; idx < imgs.length && idx < cols * rows; idx++) {
     const img = imgs[idx];
     const col = idx % cols;
     const row = Math.floor(idx / cols);
 
-    const cellW = cellWidths[col];
-    const x0 = xOffsets[col];
-    const y0 = row * cellH;
+    // Compute the top-left “ideal” position for this card cell
+    const x0 = col * (CARD_W + marginX);
+    const y0 = row * (CARD_H + marginY);
 
-    const TARGET_W = 2.5 * 72; // 180
-    const TARGET_H = 3.5 * 72; // 252
-    
-    // compute scale so image fits inside target, not entire cell
-    const scaleX = TARGET_W / img.width;
-    const scaleY = TARGET_H / img.height;
-    const scale = Math.min(scaleX, scaleY, 1); // also prevent upscaling
-    
+    // Compute scale so the image fits within the card’s dimensions, but doesn’t upscale
+    const scaleX = CARD_W / img.width;
+    const scaleY = CARD_H / img.height;
+    const scale = Math.min(scaleX, scaleY, 1);
+
     const drawW = img.width * scale;
     const drawH = img.height * scale;
 
-    let offsetX = x0 + (cellW - drawW) / 2;
-    let offsetY = y0 + (cellH - drawH) / 2;
+    // Center the image within the card cell
+    const offsetX = x0 + (CARD_W - drawW) / 2;
+    const offsetY = y0 + (CARD_H - drawH) / 2;
 
-    // Clamp inside the cell
-    if (offsetX < x0) offsetX = x0;
-    if (offsetY < y0) offsetY = y0;
-    if (offsetX + drawW > x0 + cellW) offsetX = (x0 + cellW) - drawW;
-    if (offsetY + drawH > y0 + cellH) offsetY = (y0 + cellH) - drawH;
-
-    const rx = Math.round(offsetX);
-    const ry = Math.round(offsetY);
-    const rw = Math.round(drawW);
-    const rh = Math.round(drawH);
-
-    doc.addImage(img, 'PNG', rx, ry, rw, rh);
+    doc.addImage(img, 'PNG',
+      Math.round(offsetX), Math.round(offsetY),
+      Math.round(drawW), Math.round(drawH));
   }
 
-  doc.save('printoutSheet.pdf');
+  doc.save('cards_sheet.pdf');
 }
