@@ -88,11 +88,14 @@ async function exportPDFHighPrecision(images) {
     const x0 = xOffsets[col];
     const y0 = row * cellH;
 
-    // Use contain scaling
-    const scaleX = cellW / img.width;
-    const scaleY = cellH / img.height;
-    const scale = Math.min(scaleX, scaleY);
-
+    const TARGET_W = 2.5 * 72; // 180
+    const TARGET_H = 3.5 * 72; // 252
+    
+    // compute scale so image fits inside target, not entire cell
+    const scaleX = TARGET_W / img.width;
+    const scaleY = TARGET_H / img.height;
+    const scale = Math.min(scaleX, scaleY, 1); // also prevent upscaling
+    
     const drawW = img.width * scale;
     const drawH = img.height * scale;
 
