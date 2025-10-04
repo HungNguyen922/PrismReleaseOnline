@@ -69,15 +69,21 @@ function drawCard() {
     ctx.drawImage(userArt, artX, artY, artW, artH);
   }
 
-  // name text
   const name = document.getElementById("cardName").value;
-  ctx.fillStyle = "black";
-  ctx.font = "56px Fjalla";
-  ctx.textAlign = "center";
-  ctx.lineWidth = 10;                // thickness of the outline
-  ctx.strokeStyle = "white";        // outline color
-  ctx.strokeText(name, canvas.width / 2, 80);
-  ctx.fillText(name, canvas.width / 2, 80);
+const nameLines = name.split("\n"); // allow manual newlines from textarea
+ctx.fillStyle = "black";
+ctx.font = "56px Fjalla";
+ctx.textAlign = "center";
+ctx.lineWidth = 10;
+ctx.strokeStyle = "white";
+
+const nameStartY = 80;  // top line position
+const nameLineHeight = 60; // spacing between name lines
+nameLines.forEach((line, i) => {
+  const y = nameStartY + i * nameLineHeight;
+  ctx.strokeText(line, canvas.width / 2, y);
+  ctx.fillText(line, canvas.width / 2, y);
+});
 
   // power + bulk icons
   ctx.drawImage(loaded.powerIcon, 25, 25, 80, 80);
