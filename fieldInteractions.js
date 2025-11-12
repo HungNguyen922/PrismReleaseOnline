@@ -117,6 +117,9 @@ document.addEventListener("DOMContentLoaded", () => {
         const index = e.dataTransfer.getData("cardIndex");
         card = hand.splice(index, 1)[0];
         renderHand();
+        const cardId = e.dataTransfer.getData("text/plain");
+        const slotId = e.target.id;
+        placeCard(slotId, cardId); // shared across all players now
       } 
       // from another slot
       else if (from === "slot") {
