@@ -4,23 +4,50 @@ import { io } from "https://cdn.socket.io/4.7.5/socket.io.esm.min.js";
 const socket = io("https://prismserver-mejw.onrender.com");
 const gameId = prompt("Enter Game ID:") || "sandbox";
 
-// Local copy of the game state
-let gameState = { board: {}, hands: {}, decks: {} };
+// Store the shared game state
+let gameState = {
+  slots: {},  // field positions → card info
+  hands: {},
+  decks: {}
+};
 
 socket.emit("joinGame", gameId);
 
 socket.on("gameState", (state) => {
   gameState = state;
-  console.log("Updated game state:", gameState);
-  renderBoard(gameState); // TODO: draw this in your UI
+  renderBoard(gameState);
 });
 
-// Example: when you move a card
-function updateBoard(newBoard) {
-  gameState.board = newBoard;
-  socket.emit("updateGame", {
-    gameId,
-    newState: { board: updatedBoard },
-  });
+// Example function: send new state to server
+function updateServerState() {
+  socket.emit("updateGame", { gameId, newState: gameState });
 }
 
+// ====== Hooks into your UI ======
+
+// When a card is placed in a slot
+function placeCard(slotId, cardId) {
+  gameState.slots[slotId] = cardId;
+  updateServerState();
+}
+
+// When a card is removed
+function removeCard(slotId) {
+  delete gameState.slots[slotId];
+  updateServerState();
+}
+
+// Example rendering
+function renderBoard(state) {
+  for (const [slotId, cardId] of Object.entries(state.slots)) {
+    const slot = document.getElementById(slotId);
+    if (!slot) continue;
+
+    slot.innerHTML = cardId
+      ? `<div class="card">${cardId}</div>`
+      : "";
+  }
+}
+
+window.placeCard = placeCard; // expose for your existing scripts
+window.removeCard = removeCard;
