@@ -1,7 +1,7 @@
 // socketClient.js
 import { io } from "https://cdn.socket.io/4.7.5/socket.io.esm.min.js";
 
-const socket = io("http://localhost:3000"); // replace with your server or Render URL
+const socket = io("https://prismserver-mejw.onrender.com"); // replace with your server or Render URL
 const gameId = prompt("Enter game ID to join:") || "test";
 
 socket.emit("joinGame", gameId);
