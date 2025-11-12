@@ -18,6 +18,9 @@ socket.on("gameState", (state) => {
 // Example: when you move a card
 function updateBoard(newBoard) {
   gameState.board = newBoard;
-  socket.emit("updateGame", { gameId, newState: gameState });
+  socket.emit("updateGame", {
+    gameId,
+    newState: { board: updatedBoard },
+  });
 }
 
