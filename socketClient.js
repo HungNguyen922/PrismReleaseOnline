@@ -1,31 +1,23 @@
 // socketClient.js
 import { io } from "https://cdn.socket.io/4.7.5/socket.io.esm.min.js";
 
-const socket = io("https://prismserver-mejw.onrender.com"); // replace with your server or Render URL
-const gameId = prompt("Enter game ID to join:") || "test";
+const socket = io("https://prismserver-mejw.onrender.com");
+const gameId = prompt("Enter Game ID:") || "sandbox";
+
+// Local copy of the game state
+let gameState = { board: {}, hands: {}, decks: {} };
 
 socket.emit("joinGame", gameId);
 
 socket.on("gameState", (state) => {
-  console.log("Updated game state:", state);
-  // TODO: render this on the board
+  gameState = state;
+  console.log("Updated game state:", gameState);
+  renderBoard(gameState); // TODO: draw this in your UI
 });
 
-let gameState = {
-  players: {
-    p1: { deck: [], hand: [] },
-    p2: { deck: [], hand: [] },
-  },
-};
-
-// Example: when you draw a card
-export function drawCard(playerId) {
-  const player = gameState.players[playerId];
-  if (!player || player.deck.length === 0) return;
-
-  // Draw top card from deck into hand
-  player.hand.push(player.deck.pop());
-
-  // Sync with server
+// Example: when you move a card
+function updateBoard(newBoard) {
+  gameState.board = newBoard;
   socket.emit("updateGame", { gameId, newState: gameState });
 }
+
