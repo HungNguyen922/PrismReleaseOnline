@@ -320,3 +320,42 @@ clearBoardBtn.addEventListener("click", () => {
     decks: window.gameState.decks
   });
 });
+
+const shuffleDecksBtn = document.getElementById("shuffle-decks-btn");
+
+shuffleDecksBtn.addEventListener("click", () => {
+  if (!window.gameState || !window.socket) return;
+
+  if (!confirm("Shuffle all players' decks into a single draw pile?")) return;
+
+  let combinedDeck = [];
+
+  // Combine all players' decks
+  if (window.gameState.decks) {
+    for (const playerId in window.gameState.decks) {
+      combinedDeck = combinedDeck.concat(window.gameState.decks[playerId]);
+      window.gameState.decks[playerId] = []; // clear each player's deck
+    }
+  }
+
+  // Shuffle combined deck (Fisher–Yates)
+  for (let i = combinedDeck.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [combinedDeck[i], combinedDeck[j]] = [combinedDeck[j], combinedDeck[i]];
+  }
+
+  // Set shared draw pile
+  window.gameState.drawPile = combinedDeck;
+
+  // Optionally update local deck if needed
+  window.deck = combinedDeck;
+
+  // Emit updated state to server for all players
+  updateServerState({
+    drawPile: window.gameState.drawPile,
+    decks: window.gameState.decks
+  });
+
+  alert("All decks shuffled together into a single draw pile!");
+});
+
