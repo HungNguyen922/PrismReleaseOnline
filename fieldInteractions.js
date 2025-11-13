@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (info.from === "hand") {
       const idx = info.cardIndex;
       if (Number.isInteger(idx) && idx >= 0 && idx < hand.length) {
-        removed = hand.splice(idx, 1);
+        removed = hand.splice(idx, 1)[0];
         console.log("Removed from hand:", removed);
         renderHand();
       } else {
