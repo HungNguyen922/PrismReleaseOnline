@@ -64,6 +64,20 @@
           <button id="send-bottom-btn">Send to bottom of draw pile</button>
       </div>
     </div>
+    <button id="clear-board-btn" style="
+        position: fixed;
+        top: 50%;
+        right: 0;
+        transform: translateY(-50%);
+        padding: 10px 15px;
+        background-color: orange;
+        color: white;
+        font-weight: bold;
+        border: none;
+        border-radius: 5px 0 0 5px;
+        cursor: pointer;
+        z-index: 1000;
+    ">Clear Board</button>
     <div id="hand-area" class="hand"></div>
     <!-- Confirmation dialog for sending to bottom -->
     <dialog id="confirm-dialog">
