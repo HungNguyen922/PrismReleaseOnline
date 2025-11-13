@@ -19,23 +19,30 @@ socket.on("gameState", (state) => {
 });
 
 // Example function: send new state to server
-function updateServerState() {
-  socket.emit("updateGame", { gameId, newState: gameState });
+function updateServerState(partialState) {
+  if (!window.socket || !window.gameId) return;
+  window.socket.emit("updateGame", {
+    gameId: window.gameId,
+    newState: partialState
+  });
 }
+
 
 // ====== Hooks into your UI ======
 
 // When a card is placed in a slot
 function placeCard(slotId, cardId) {
   gameState.slots[slotId] = cardId;
-  updateServerState();
+  updateServerState({ slots: gameState.slots }); // pass the updated slots
 }
+
 
 // When a card is removed
 function removeCard(slotId) {
   delete gameState.slots[slotId];
-  updateServerState();
+  updateServerState({ slots: gameState.slots }); // pass the updated slots
 }
+
 
 // Example rendering
 function renderBoard(state) {
