@@ -166,10 +166,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // 🔁 Update local + server state
     if (window.gameState && window.socket) {
       window.gameState.slots[slot.id] = card;
-      window.socket.emit("updateGame", {
-        gameId: window.gameId,
-        newState: { slots: window.gameState.slots }
-      });
+      updateServerState({ slots: window.gameState.slots });
     }
   }
 
@@ -186,10 +183,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (window.gameState && window.socket) {
       window.gameState.slots[slot.id] = slot.dataset.card || null;
-      window.socket.emit("updateGame", {
-        gameId: window.gameId,
-        newState: { slots: window.gameState.slots }
-      });
+      updateServerState({ slots: window.gameState.slots });
     }
   
     return topCard;
