@@ -275,3 +275,27 @@ healthSlot.addEventListener("click", e => {
 function updateHealthUI() {
   healthValue.textContent = health;
 }
+
+const clearBoardBtn = document.getElementById("clear-board-btn");
+
+clearBoardBtn.addEventListener("click", () => {
+  if (!window.gameState || !window.socket) return;
+
+  if (!confirm("Are you sure you want to clear the board? This will remove all cards.")) return;
+
+  // Clear all field slots
+  document.querySelectorAll(".field-slot").forEach(slot => {
+    slot.innerHTML = "";
+    slot.dataset.card = null;
+    slot.history = [];
+  });
+
+  // Reset gameState slots
+  for (const slotId in window.gameState.slots) {
+    window.gameState.slots[slotId] = null;
+  }
+
+  // Emit updated state to server
+  updateServerState({ slots: window.gameState.slots });
+});
+
