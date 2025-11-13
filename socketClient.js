@@ -39,15 +39,15 @@ function removeCard(slotId) {
 
 // Example rendering
 function renderBoard(state) {
+  if (!state || !state.slots) return; // <- safely ignore bad data
+
   for (const [slotId, cardId] of Object.entries(state.slots)) {
     const slot = document.getElementById(slotId);
     if (!slot) continue;
-
-    slot.innerHTML = cardId
-      ? `<div class="card">${cardId}</div>`
-      : "";
+    slot.innerHTML = cardId ? `<div class="card">${cardId}</div>` : "";
   }
 }
+
 
 window.placeCard = placeCard; // expose for your existing scripts
 window.removeCard = removeCard;
