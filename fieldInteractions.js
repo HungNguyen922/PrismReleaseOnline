@@ -136,7 +136,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     
       // Set new top card
-      placeCardInSlot(slot, card);
+      placeCardInSlot(slot, cardId);
     });
   });
 
