@@ -19,13 +19,14 @@ socket.on("gameState", (state) => {
 });
 
 // Example function: send new state to server
-function updateServerState(partialState) {
+window.updateServerState = function(partialState) {
   if (!window.socket || !window.gameId) return;
   window.socket.emit("updateGame", {
     gameId: window.gameId,
     newState: partialState
   });
-}
+};
+
 
 
 // ====== Hooks into your UI ======
