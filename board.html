@@ -64,7 +64,8 @@
           <button id="send-bottom-btn">Send to bottom of draw pile</button>
       </div>
     </div>
-    <button id="clear-board-btn" style="
+    <div class="board-controls" style="position: fixed; right: 10px; top: 100px;">
+      <button id="clear-board-btn" style="
         position: fixed;
         top: 50%;
         right: 0;
@@ -78,6 +79,9 @@
         cursor: pointer;
         z-index: 1000;
     ">Clear Board</button>
+      <button id="shuffle-decks-btn">Shuffle All Decks</button>
+    </div>
+    
     <div id="hand-area" class="hand"></div>
     <!-- Confirmation dialog for sending to bottom -->
     <dialog id="confirm-dialog">
