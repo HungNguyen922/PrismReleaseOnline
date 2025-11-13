@@ -154,7 +154,6 @@ document.addEventListener("DOMContentLoaded", () => {
     cardEl.appendChild(img);
     slot.innerHTML = "";
     slot.appendChild(cardEl);
-  
     slot.dataset.card = card;
   
     // Drag from slot
@@ -163,6 +162,15 @@ document.addEventListener("DOMContentLoaded", () => {
       ev.dataTransfer.setData("slotId", slot.id);
       ev.dataTransfer.setData("card", card);
     });
+
+    // 🔁 Update local + server state
+    if (window.gameState && window.socket) {
+      window.gameState.slots[slot.id] = card;
+      window.socket.emit("updateGame", {
+        gameId: window.gameId,
+        newState: { slots: window.gameState.slots }
+      });
+    }
   }
 
   function removeTopCardFromSlot(slot) {
@@ -174,6 +182,14 @@ document.addEventListener("DOMContentLoaded", () => {
     if (slot.history.length > 0) {
       prevCard = slot.history.pop();
       placeCardInSlot(slot, prevCard);
+    }
+
+    if (window.gameState && window.socket) {
+      window.gameState.slots[slot.id] = slot.dataset.card || null;
+      window.socket.emit("updateGame", {
+        gameId: window.gameId,
+        newState: { slots: window.gameState.slots }
+      });
     }
   
     return topCard;
@@ -242,7 +258,7 @@ function renderHand() {
 }
 
 // making a dynamic health tracker
-let health = 15;
+let health = 20;
 
 const healthSlot = document.getElementById("health-slot");
 const healthValue = document.getElementById("health-value");
