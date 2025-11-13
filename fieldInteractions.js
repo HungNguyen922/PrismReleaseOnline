@@ -281,9 +281,9 @@ const clearBoardBtn = document.getElementById("clear-board-btn");
 clearBoardBtn.addEventListener("click", () => {
   if (!window.gameState || !window.socket) return;
 
-  if (!confirm("Are you sure you want to clear the board? This will remove all cards.")) return;
+  if (!confirm("Are you sure you want to clear the board and all hands?")) return;
 
-  // Clear all field slots
+  // --- Clear all field slots ---
   document.querySelectorAll(".field-slot").forEach(slot => {
     slot.innerHTML = "";
     slot.dataset.card = null;
@@ -295,7 +295,23 @@ clearBoardBtn.addEventListener("click", () => {
     window.gameState.slots[slotId] = null;
   }
 
+  // --- Clear local hand ---
+  if (Array.isArray(window.hand)) {
+    window.hand.length = 0; // clear current player's hand
+    renderHand(); // update UI
+  }
+
+  // --- Optionally clear hands for other players if tracked in gameState ---
+  if (window.gameState.hands) {
+    for (const playerId in window.gameState.hands) {
+      window.gameState.hands[playerId] = [];
+    }
+  }
+
   // Emit updated state to server
-  updateServerState({ slots: window.gameState.slots });
+  updateServerState({ 
+    slots: window.gameState.slots,
+    hands: window.gameState.hands // optional if you track all hands server-side
+  });
 });
 
