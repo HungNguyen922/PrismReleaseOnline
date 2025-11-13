@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (info.from === "hand") {
       const idx = info.cardIndex;
       if (Number.isInteger(idx) && idx >= 0 && idx < hand.length) {
-        removed = hand.splice(idx, 1)[0];
+        removed = hand.splice(idx, 1);
         console.log("Removed from hand:", removed);
         renderHand();
       } else {
@@ -251,7 +251,7 @@ function renderHand() {
     cardEl.addEventListener("dragstart", e => {
       e.dataTransfer.setData("from", "hand");
       e.dataTransfer.setData("cardIndex", index);
-      e.dataTransfer.setData("card", card");
+      e.dataTransfer.setData("card", card);
     });
 
     handArea.appendChild(cardEl);
