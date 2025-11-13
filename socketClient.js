@@ -51,3 +51,7 @@ function renderBoard(state) {
 
 window.placeCard = placeCard; // expose for your existing scripts
 window.removeCard = removeCard;
+window.socket = socket;
+window.gameId = gameId;
+window.gameState = { slots: {}, hands: {}, decks: {} };
+
