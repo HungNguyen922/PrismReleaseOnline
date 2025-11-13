@@ -290,28 +290,33 @@ clearBoardBtn.addEventListener("click", () => {
     slot.history = [];
   });
 
-  // Reset gameState slots
+  // --- Reset gameState slots ---
   for (const slotId in window.gameState.slots) {
     window.gameState.slots[slotId] = null;
   }
 
   // --- Clear local hand ---
-  if (Array.isArray(window.hand)) {
-    window.hand.length = 0; // clear current player's hand
-    renderHand(); // update UI
+  if (!window.hand) window.hand = []; // ensure hand exists
+  window.hand.length = 0;
+  renderHand(); // refresh UI
+
+  // --- Clear hands for all players in gameState ---
+  if (!window.gameState.hands) window.gameState.hands = {};
+  for (const playerId in window.gameState.hands) {
+    window.gameState.hands[playerId] = [];
   }
 
-  // --- Optionally clear hands for other players if tracked in gameState ---
-  if (window.gameState.hands) {
-    for (const playerId in window.gameState.hands) {
-      window.gameState.hands[playerId] = [];
+  // --- Reset other decks if needed ---
+  if (window.gameState.decks) {
+    for (const playerId in window.gameState.decks) {
+      window.gameState.decks[playerId] = [];
     }
   }
 
-  // Emit updated state to server
+  // --- Emit full cleared state ---
   updateServerState({ 
     slots: window.gameState.slots,
-    hands: window.gameState.hands // optional if you track all hands server-side
+    hands: window.gameState.hands,
+    decks: window.gameState.decks
   });
 });
-
