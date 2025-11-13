@@ -13,9 +13,50 @@ let gameState = {
 
 socket.emit("joinGame", gameId);
 
-socket.on("gameState", (state) => {
-  gameState = state;
-  renderBoard(gameState);
+function renderSlotFromState(slotId, card) {
+  if (!card) return;
+
+  const slot = document.getElementById(slotId);
+  if (!slot) return;
+
+  // Clear previous content
+  slot.innerHTML = "";
+
+  const cardEl = document.createElement("div");
+  cardEl.classList.add("card");
+  cardEl.setAttribute("draggable", "true");
+  cardEl.dataset.card = card;
+
+  const img = document.createElement("img");
+  img.src = "cardDatabase/" + formatCardName(card) + ".png";
+  img.alt = card;
+  img.classList.add("card-img");
+
+  cardEl.appendChild(img);
+  slot.appendChild(cardEl);
+  slot.dataset.card = card;
+
+  // Set up drag from slot
+  cardEl.addEventListener("dragstart", ev => {
+    ev.dataTransfer.setData("from", "slot");
+    ev.dataTransfer.setData("slotId", slot.id);
+    ev.dataTransfer.setData("card", card);
+  });
+}
+
+socket.on("gameState", state => {
+  window.gameState = state;
+
+  for (const slotId in state.slots) {
+    const card = state.slots[slotId];
+    if (card) {
+      renderSlotFromState(slotId, card);
+    } else {
+      const slot = document.getElementById(slotId);
+      slot.innerHTML = "";
+      slot.dataset.card = null;
+    }
+  }
 });
 
 // Example function: send new state to server
@@ -26,10 +67,6 @@ window.updateServerState = function(partialState) {
     newState: partialState
   });
 };
-
-
-
-// ====== Hooks into your UI ======
 
 // When a card is placed in a slot
 function placeCard(slotId, cardId) {
