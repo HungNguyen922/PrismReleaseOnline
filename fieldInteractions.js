@@ -115,7 +115,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // Handle from hand
       if (from === "hand") {
         const index = e.dataTransfer.getData("cardIndex");
-        card = hand.splice(index, 1);
+        card = hand.splice(index, 1)[0];
         renderHand();
         const cardId = e.dataTransfer.getData("card");
         const slotId = e.target.id;
@@ -136,7 +136,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     
       // Set new top card
-      placeCardInSlot(slot, cardId);
+      placeCardInSlot(slot, card);
     });
   });
 
