@@ -115,9 +115,9 @@ document.addEventListener("DOMContentLoaded", () => {
       // Handle from hand
       if (from === "hand") {
         const index = e.dataTransfer.getData("cardIndex");
-        card = hand.splice(index, 1)[0];
+        card = hand.splice(index, 1);
         renderHand();
-        const cardId = e.dataTransfer.getData("text/plain");
+        const cardId = e.dataTransfer.getData("card");
         const slotId = e.target.id;
         placeCard(slotId, cardId); // shared across all players now
       } 
@@ -251,6 +251,7 @@ function renderHand() {
     cardEl.addEventListener("dragstart", e => {
       e.dataTransfer.setData("from", "hand");
       e.dataTransfer.setData("cardIndex", index);
+      e.dataTransfer.setData("card", card");
     });
 
     handArea.appendChild(cardEl);
