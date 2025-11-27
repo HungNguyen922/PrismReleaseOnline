@@ -203,31 +203,62 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
-  function removeTopCardFromSlot(slot) {
-    if (!slot) return null;
-    if (!Array.isArray(slot.history)) slot.history = [];
-  
-    const topCard = slot.dataset.card || null;
-    console.log("removeTopCardFromSlot:", slot.id, "topCard:", topCard, "history before:", slot.history);
-  
-    // clear visual top
-    slot.innerHTML = "";
-    slot.removeAttribute("data-card");
-  
-    let prevCard = null;
-    if (slot.history.length > 0) {
-      prevCard = slot.history.pop();
-      placeCardInSlot(slot, prevCard);
-    }
-  
-    if (window.gameState) {
-      window.gameState.slots = window.gameState.slots || {};
-      window.gameState.slots[slot.id] = slot.dataset.card || null;
-    }
-  
-    return topCard;
+  // Remove the top card from a slot safely
+function removeTopCardFromSlot(slot) {
+  if (!slot) return null;
+
+  const topCard = slot.dataset.card || null;
+  slot.innerHTML = "";
+  slot.removeAttribute("data-card");
+
+  // Clean nulls from history
+  slot.history = (slot.history || []).filter(c => c != null);
+
+  let prevCard = null;
+  while (slot.history.length > 0) {
+    prevCard = slot.history.pop();
+    if (prevCard) break; // skip any nulls
   }
 
+  if (prevCard) {
+    placeCardInSlot(slot, prevCard);
+  }
+
+  // Update server/gameState
+  if (window.gameState && window.socket) {
+    window.gameState.slots[slot.id] = slot.dataset.card || null;
+  }
+
+  return topCard;
+}
+
+// Show all cards in a slot safely (slot viewer)
+function showSlotCards(slot) {
+  if (!slot) return;
+
+  slotViewerCards.innerHTML = "";
+
+  // Build card list: top card + filtered history
+  const cards = [];
+
+  if (slot.dataset.card) cards.push(slot.dataset.card);
+  if (slot.history && slot.history.length > 0) {
+    cards.push(...slot.history.filter(c => c != null));
+  }
+
+  if (cards.length === 0) {
+    slotViewerCards.innerHTML = "<p>No cards in this slot.</p>";
+  } else {
+    cards.forEach(card => {
+      const img = document.createElement("img");
+      img.src = "cardDatabase/" + formatCardName(card) + ".png";
+      img.alt = card;
+      slotViewerCards.appendChild(img);
+    });
+  }
+
+  slotViewerDialog.showModal();
+}
 
   // --- Setup hand drop (from slot back to hand) ---
   const handArea = document.getElementById("hand-area");
@@ -419,30 +450,3 @@ document.querySelectorAll(".field-slot").forEach(slot => {
     showSlotCards(slot);
   });
 });
-
-function showSlotCards(slot) {
-  slotViewerCards.innerHTML = "";
-
-  // Build card list: current top + history
-  const cards = [];
-
-  if (slot.dataset.card) cards.push(slot.dataset.card);
-  if (slot.history && slot.history.length > 0) {
-    cards.push(...slot.history);
-  }
-
-  // No cards?
-  if (cards.length === 0) {
-    slotViewerCards.innerHTML = "<p>No cards in this slot.</p>";
-  } else {
-    cards.forEach(card => {
-      const img = document.createElement("img");
-      img.src = "cardDatabase/" + formatCardName(card) + ".png";
-      img.alt = card;
-      slotViewerCards.appendChild(img);
-    });
-  }
-
-  slotViewerDialog.showModal();
-}
-
