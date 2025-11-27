@@ -65,12 +65,18 @@ window.updateServerState = function(partialState) {
   });
 };
 
+function placeCard(slotId, cardId) {
+  gameState.slots[slotId] = cardId;
+  updateServerState({ slots: gameState.slots });
+}
+
 // When a card is removed
 function removeCard(slotId) {
   gameState.slots[slotId] = null;
   updateServerState({ slots: gameState.slots }); // pass the updated slots
 }
 
+window.palceCard = placeCard;
 window.removeCard = removeCard;
 window.socket = socket;
 window.gameId = gameId;
