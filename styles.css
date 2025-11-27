@@ -97,6 +97,10 @@ h1, h3, p {
   background: rgba(255, 215, 0, 0.1);
 }
 
+.field-slot .card {
+  pointer-events: none;
+}
+
 .modal {
     display: none;
     position: fixed;
