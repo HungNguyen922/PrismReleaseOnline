@@ -91,6 +91,8 @@ h1, h3, p {
   display: inline-flex;
   justify-content: center;
   align-items: center;
+  position: relative;   /* ensure z-index works */
+  z-index: 10;
 }
 
 .field-slot.hover {
@@ -281,6 +283,16 @@ h1, h3, p {
   position: absolute;
   top: 35%;   /* distance from top */
   gap: 5px;
+  z-index: 0;
+  pointer-events: none;        /* make the whole area pass-through by default */
+}
+
+#deck-slot,
+#leader-slot,
+#extra-slot,
+#health-slot {
+  pointer-events: auto; /* these stay interactive (if intended) */
+  z-index: 15;
 }
 
 #deck-upload {
