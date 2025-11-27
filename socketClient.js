@@ -14,14 +14,19 @@ let gameState = {
 socket.emit("joinGame", gameId);
 
 function renderSlotFromState(slotId, card) {
-  if (!card) return;
-
   const slot = document.getElementById(slotId);
   if (!slot) return;
 
   // Clear previous content
-  slot.innerHTML = "";
+  if (!card) {
+    // Empty top card but don't destroy history
+    slot.innerHTML = "";
+    slot.dataset.card = null;
+    return;
+  }
 
+  // Set top card
+  slot.innerHTML = "";
   const cardEl = document.createElement("div");
   cardEl.classList.add("card");
   cardEl.setAttribute("draggable", "true");
@@ -48,22 +53,14 @@ socket.on("gameState", state => {
   window.gameState = state;
 
   for (const slotId in state.slots) {
-    const card = state.slots[slotId];
-    if (card) {
-      renderSlotFromState(slotId, card);
-    } else {
-      const slot = document.getElementById(slotId);
-      slot.innerHTML = "";
-      slot.dataset.card = null;
-    }
+    renderSlotFromState(slotId, state.slots[slotId]);
   }
 });
 
-// Example function: send new state to server
+// Sync state to server
 window.updateServerState = function(partialState) {
-  if (!window.socket || !window.gameId) return;
-  window.socket.emit("updateGame", {
-    gameId: window.gameId,
+  socket.emit("updateGame", {
+    gameId,
     newState: partialState
   });
 };
@@ -77,22 +74,9 @@ function placeCard(slotId, cardId) {
 
 // When a card is removed
 function removeCard(slotId) {
-  delete gameState.slots[slotId];
+  gameState.slots[slotId] = null;
   updateServerState({ slots: gameState.slots }); // pass the updated slots
 }
-
-
-// Example rendering
-function renderBoard(state) {
-  if (!state || !state.slots) return; // <- safely ignore bad data
-
-  for (const [slotId, cardId] of Object.entries(state.slots)) {
-    const slot = document.getElementById(slotId);
-    if (!slot) continue;
-    slot.innerHTML = cardId ? `<div class="card">${cardId}</div>` : "";
-  }
-}
-
 
 window.placeCard = placeCard; // expose for your existing scripts
 window.removeCard = removeCard;
