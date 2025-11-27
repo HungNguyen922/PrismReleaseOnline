@@ -80,10 +80,7 @@ h1, h3, p {
     width: 100%;
     height: auto;
     display: block;
-}
-
-.card-img {
-  pointer-events: none;
+    pointer-events: none;
 }
 
 .field-slot {
