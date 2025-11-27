@@ -165,7 +165,6 @@ document.addEventListener("DOMContentLoaded", () => {
     // 🔁 Update local + server state
     if (window.gameState && window.socket) {
       window.gameState.slots[slot.id] = card;
-      updateServerState({ slots: window.gameState.slots });
     }
   }
 
