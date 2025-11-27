@@ -182,7 +182,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (window.gameState && window.socket) {
       window.gameState.slots[slot.id] = slot.dataset.card || null;
-      updateServerState({ slots: window.gameState.slots });
     }
   
     return topCard;
@@ -205,16 +204,9 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!card || !sourceSlot) return;
 
       // Remove from slot
-      sourceSlot.innerHTML = "";
-      sourceSlot.removeAttribute("data-card");
-
-      // Reveal previous card in source slot
-      if (sourceSlot.history.length > 0) {
-        const prevCard = sourceSlot.history.pop();
-        placeCardInSlot(sourceSlot, prevCard);
-      } else {
-        sourceSlot.dataset.card = null;
-      }
+      const removed = removeTopCardFromSlot(sourceSlot);
+      hand.push(removed);
+      renderHand();
 
       // Add back to hand
       hand.push(card);
