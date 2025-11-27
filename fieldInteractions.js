@@ -146,8 +146,6 @@ document.addEventListener("DOMContentLoaded", () => {
 // Place card in slot (safe, preserves history)
 function placeCardInSlot(slot, card) {
   if (!slot) return;
-  if (!Array.isArray(slot.history)) slot.history = [];
-
   const cardEl = document.createElement("div");
   cardEl.classList.add("card");
   cardEl.setAttribute("draggable", "true");
@@ -159,26 +157,23 @@ function placeCardInSlot(slot, card) {
   img.classList.add("card-img");
   cardEl.appendChild(img);
 
-  // Replace inner content (history survives as a JS property)
   slot.innerHTML = "";
   slot.appendChild(cardEl);
   slot.dataset.card = card;
 
-  // Drag from slot
   cardEl.addEventListener("dragstart", ev => {
     ev.dataTransfer.setData("from", "slot");
     ev.dataTransfer.setData("slotId", slot.id);
     ev.dataTransfer.setData("card", card);
   });
 
-  // Local gameState update only
   if (window.gameState) {
     window.gameState.slots = window.gameState.slots || {};
     window.gameState.slots[slot.id] = card;
   }
 }
 
-// Remove the top card from slot (null-safe, history preserved)
+// Remove the top card from slot (null-safe)
 function removeTopCardFromSlot(slot) {
   if (!slot) return null;
 
@@ -186,25 +181,28 @@ function removeTopCardFromSlot(slot) {
   slot.innerHTML = "";
   slot.removeAttribute("data-card");
 
-  // Clean nulls and pop previous card
-  slot.history = (slot.history || []).filter(c => c != null);
-  let prevCard = null;
-  while (slot.history.length > 0) {
-    prevCard = slot.history.pop();
-    if (prevCard) break;
-  }
+  // Do NOT call placeCardInSlot here! Just leave history intact
+  if (!Array.isArray(slot.history)) slot.history = [];
+  slot.history = slot.history.filter(c => c != null); // clean nulls
 
-  if (prevCard) placeCardInSlot(slot, prevCard);
-
-  // Update gameState
   if (window.gameState && window.socket) {
-    window.gameState.slots[slot.id] = slot.dataset.card || null;
+    window.gameState.slots[slot.id] = null;
   }
 
   return topCard;
 }
 
-// Slot viewer
+// Pop previous card from history manually (called by your drop handler if needed)
+function popHistory(slot) {
+  if (!slot || !Array.isArray(slot.history)) return null;
+  while (slot.history.length > 0) {
+    const prev = slot.history.pop();
+    if (prev != null) return prev;
+  }
+  return null;
+}
+
+// Show slot viewer
 function showSlotCards(slot) {
   if (!slot) return;
 
@@ -212,7 +210,10 @@ function showSlotCards(slot) {
 
   const cards = [];
   if (slot.dataset.card) cards.push(slot.dataset.card);
-  if (slot.history) cards.push(...slot.history.filter(c => c != null));
+  if (Array.isArray(slot.history) && slot.history.length > 0) {
+    cards.push(...slot.history.filter(c => c != null).reverse()); 
+    // reverse: most recent on top
+  }
 
   if (cards.length === 0) {
     slotViewerCards.innerHTML = "<p>No cards in this slot.</p>";
