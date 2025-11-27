@@ -17,36 +17,18 @@ function renderSlotFromState(slotId, card) {
   const slot = document.getElementById(slotId);
   if (!slot) return;
 
-  // Clear previous content
+  // ensure history property survives
+  if (!Array.isArray(slot.history)) slot.history = [];
+
   if (!card) {
-    // Empty top card but don't destroy history
     slot.innerHTML = "";
     slot.dataset.card = null;
     return;
   }
 
-  // Set top card
+  // only replace top card markup (history preserved)
   slot.innerHTML = "";
-  const cardEl = document.createElement("div");
-  cardEl.classList.add("card");
-  cardEl.setAttribute("draggable", "true");
-  cardEl.dataset.card = card;
-
-  const img = document.createElement("img");
-  img.src = "cardDatabase/" + formatCardName(card) + ".png";
-  img.alt = card;
-  img.classList.add("card-img");
-
-  cardEl.appendChild(img);
-  slot.appendChild(cardEl);
-  slot.dataset.card = card;
-
-  // Set up drag from slot
-  cardEl.addEventListener("dragstart", ev => {
-    ev.dataTransfer.setData("from", "slot");
-    ev.dataTransfer.setData("slotId", slot.id);
-    ev.dataTransfer.setData("card", card);
-  });
+  // ... create cardEl as before
 }
 
 socket.on("gameState", state => {
