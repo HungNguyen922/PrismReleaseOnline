@@ -133,11 +133,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Push previous top card to history (filter null)
     if (destSlot.dataset.card) {
+      if (!Array.isArray(destSlot.history)) destSlot.history = [];
       destSlot.history.push(destSlot.dataset.card);
       destSlot.history = destSlot.history.filter(c => c != null);
     }
-
-    // Local render + server update
     placeCardInSlot(destSlot, card);
     placeCard(destSlot.id, card);
   });
