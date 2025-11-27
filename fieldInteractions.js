@@ -106,6 +106,7 @@ document.addEventListener("DOMContentLoaded", () => {
     slot.addEventListener("dragover", e => e.preventDefault());
     slot.addEventListener("dragleave", () => slot.classList.remove("hover"));
 
+    // inside your document.querySelectorAll(".field-slot").forEach(slot => { ... })
     slot.addEventListener("drop", e => {
       e.preventDefault();
       slot.classList.remove("hover");
@@ -113,30 +114,37 @@ document.addEventListener("DOMContentLoaded", () => {
       const from = e.dataTransfer.getData("from");
       let card;
     
-      // Handle from hand
+      // Use the slot from the closure / currentTarget — not e.target
+      const destSlotId = slot.id;            // <--- reliable
+      // const destSlot = e.currentTarget;   // optional if you prefer
+    
       if (from === "hand") {
-        const index = e.dataTransfer.getData("cardIndex");
+        const index = parseInt(e.dataTransfer.getData("cardIndex"), 10);
+        if (!Number.isInteger(index)) return;
         card = hand.splice(index, 1)[0];
         renderHand();
-        const slotId = e.target.id;
-        placeCard(slotId, card); // shared across all players now
-      } 
-      // from another slot
-      else if (from === "slot") {
+        // network update -> use placeCard (server-sync) with slot id
+        placeCard(destSlotId, card);
+        // local visual render
+        placeCardInSlot(slot, card);
+      } else if (from === "slot") {
         const sourceSlotId = e.dataTransfer.getData("slotId");
+        if (!sourceSlotId) return;
         const sourceSlot = document.getElementById(sourceSlotId);
-        card = removeTopCardFromSlot(sourceSlot);
+    
+        // remove from source (local + return card)
+        const removed = removeTopCardFromSlot(sourceSlot);
+    
+        // ensure we actually removed something
+        if (!removed) return;
+    
+        // update server: remove original slot then set new slot
+        removeCard(sourceSlotId);          // sets gameState.slots[source] = null and sends update
+        placeCard(destSlotId, removed);    // sets gameState.slots[dest] = card and sends update
+    
+        // local visuals
+        placeCardInSlot(slot, removed);
       }
-    
-      if (!card) return;
-    
-      // Push current top card to this slot's history
-      if (slot.dataset.card) {
-        slot.history.push(slot.dataset.card);
-      }
-    
-      // Set new top card
-      placeCardInSlot(slot, card);
     });
   });
 
