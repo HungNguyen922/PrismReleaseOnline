@@ -375,3 +375,43 @@ dialog::backdrop {
   font-family: 'Fjalla';
   src: url('cardAssets/FjallaOne-Regular.ttf') format('truetype');
 }
+
+.slot-viewer::backdrop {
+  background: rgba(0,0,0,0.65);
+}
+
+.slot-viewer-content {
+  position: relative;
+  background: #222;
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 80vw;
+  max-width: 700px;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.slot-viewer-close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.slot-viewer-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 15px;
+}
+
+.slot-viewer-cards img {
+  width: 120px;
+  height: auto;
+  border-radius: 8px;
+}
