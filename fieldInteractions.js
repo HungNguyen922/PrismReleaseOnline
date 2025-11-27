@@ -109,58 +109,32 @@ document.addEventListener("DOMContentLoaded", () => {
     // inside your document.querySelectorAll(".field-slot").forEach(slot => { ... })
     slot.addEventListener("drop", e => {
       e.preventDefault();
-      slot.classList.remove("hover");
-    
-      console.log("DROP event (currentTarget):", e.currentTarget.id, "target:", e.target);
-    
+      const destSlot = e.currentTarget;
       const from = e.dataTransfer.getData("from");
-      let card;
     
-      // Use the 'slot' from closure / currentTarget (reliable)
-      const destSlot = slot;
-      const destSlotId = destSlot.id;
+      let card = null;
     
       if (from === "hand") {
         const index = parseInt(e.dataTransfer.getData("cardIndex"), 10);
         if (!Number.isInteger(index)) return;
         card = hand.splice(index, 1)[0];
         renderHand();
-    
-        // push previous top into history BEFORE we overwrite it
-        if (destSlot.dataset.card) {
-          if (!Array.isArray(destSlot.history)) destSlot.history = [];
-          destSlot.history.push(destSlot.dataset.card);
-          console.log("pushed to dest history:", destSlotId, destSlot.history);
-        }
-    
-        // local render
-        placeCardInSlot(destSlot, card);
-    
-        // authoritative server update (call your single network function)
-        placeCard(destSlotId, card);
       } else if (from === "slot") {
         const sourceSlotId = e.dataTransfer.getData("slotId");
-        if (!sourceSlotId) return;
         const sourceSlot = document.getElementById(sourceSlotId);
-    
-        // remove from source (local)
-        const removed = removeTopCardFromSlot(sourceSlot);
-        if (!removed) return;
-    
-        // push previous top into dest history BEFORE overwrite
-        if (destSlot.dataset.card) {
-          if (!Array.isArray(destSlot.history)) destSlot.history = [];
-          destSlot.history.push(destSlot.dataset.card);
-          console.log("pushed to dest history:", destSlotId, destSlot.history);
-        }
-    
-        // local visuals
-        placeCardInSlot(destSlot, removed);
-    
-        // server sync: clear source then set dest
-        removeCard(sourceSlotId);         // sets gameState.slots[source]=null + updateServerState()
-        placeCard(destSlotId, removed);   // sets gameState.slots[dest]=card + updateServerState()
+        if (!sourceSlot) return;
+        card = removeTopCardFromSlot(sourceSlot);
+        removeCard(sourceSlotId);
       }
+    
+      if (!card) return;
+    
+      // push previous top to history
+      if (destSlot.dataset.card) destSlot.history.push(destSlot.dataset.card);
+    
+      // local + server update
+      placeCardInSlot(destSlot, card);
+      placeCard(destSlot.id, card);
     });
   });
 
@@ -212,7 +186,9 @@ function removeTopCardFromSlot(slot) {
   slot.removeAttribute("data-card");
 
   // Clean nulls from history
-  slot.history = (slot.history || []).filter(c => c != null);
+  slot.history = slot.history || [];
+  slot.history = slot.history.filter(c => c != null);
+
 
   let prevCard = null;
   while (slot.history.length > 0) {
