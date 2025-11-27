@@ -100,84 +100,85 @@ document.addEventListener("DOMContentLoaded", () => {
   // ==== End deck-slot integration ====
   
   // --- Setup field slots ---
-  document.querySelectorAll(".field-slot").forEach(slot => {
-    slot.history = []; // tracking gate history
-    
-    slot.addEventListener("dragover", e => e.preventDefault());
-    slot.addEventListener("dragleave", () => slot.classList.remove("hover"));
+ document.querySelectorAll(".field-slot").forEach(slot => {
+  // Ensure each slot has a history array
+  if (!Array.isArray(slot.history)) slot.history = [];
 
-    // inside your document.querySelectorAll(".field-slot").forEach(slot => { ... })
-    slot.addEventListener("drop", e => {
-      e.preventDefault();
-      const destSlot = e.currentTarget;
-      const from = e.dataTransfer.getData("from");
-    
-      let card = null;
-    
-      if (from === "hand") {
-        const index = parseInt(e.dataTransfer.getData("cardIndex"), 10);
-        if (!Number.isInteger(index)) return;
-        card = hand.splice(index, 1)[0];
-        renderHand();
-      } else if (from === "slot") {
-        const sourceSlotId = e.dataTransfer.getData("slotId");
-        const sourceSlot = document.getElementById(sourceSlotId);
-        if (!sourceSlot) return;
-        card = removeTopCardFromSlot(sourceSlot);
-        removeCard(sourceSlotId);
-      }
-    
-      if (!card) return;
-    
-      // push previous top to history
-      if (destSlot.dataset.card) destSlot.history.push(destSlot.dataset.card);
-    
-      // local + server update
-      placeCardInSlot(destSlot, card);
-      placeCard(destSlot.id, card);
-    });
+  // Dragover / dragleave
+  slot.addEventListener("dragover", e => e.preventDefault());
+  slot.addEventListener("dragleave", () => slot.classList.remove("hover"));
+
+  // Drop handler (hand or slot source)
+  slot.addEventListener("drop", e => {
+    e.preventDefault();
+    const destSlot = e.currentTarget;
+    const from = e.dataTransfer.getData("from");
+
+    let card = null;
+
+    if (from === "hand") {
+      const index = parseInt(e.dataTransfer.getData("cardIndex"), 10);
+      if (!Number.isInteger(index)) return;
+      card = hand.splice(index, 1)[0];
+      renderHand();
+    } else if (from === "slot") {
+      const sourceSlotId = e.dataTransfer.getData("slotId");
+      const sourceSlot = document.getElementById(sourceSlotId);
+      if (!sourceSlot) return;
+      card = removeTopCardFromSlot(sourceSlot);
+      removeCard(sourceSlotId);
+    }
+
+    if (!card) return;
+
+    // Push previous top card to history (filter null)
+    if (destSlot.dataset.card) {
+      destSlot.history.push(destSlot.dataset.card);
+      destSlot.history = destSlot.history.filter(c => c != null);
+    }
+
+    // Local render + server update
+    placeCardInSlot(destSlot, card);
+    placeCard(destSlot.id, card);
+  });
+});
+
+// Place card in slot (safe, preserves history)
+function placeCardInSlot(slot, card) {
+  if (!slot) return;
+  if (!Array.isArray(slot.history)) slot.history = [];
+
+  const cardEl = document.createElement("div");
+  cardEl.classList.add("card");
+  cardEl.setAttribute("draggable", "true");
+  cardEl.dataset.card = card;
+
+  const img = document.createElement("img");
+  img.src = "cardDatabase/" + formatCardName(card) + ".png";
+  img.alt = card;
+  img.classList.add("card-img");
+  cardEl.appendChild(img);
+
+  // Replace inner content (history survives as a JS property)
+  slot.innerHTML = "";
+  slot.appendChild(cardEl);
+  slot.dataset.card = card;
+
+  // Drag from slot
+  cardEl.addEventListener("dragstart", ev => {
+    ev.dataTransfer.setData("from", "slot");
+    ev.dataTransfer.setData("slotId", slot.id);
+    ev.dataTransfer.setData("card", card);
   });
 
-  function placeCardInSlot(slot, card) {
-    if (!slot) return;
-    if (!Array.isArray(slot.history)) slot.history = [];
-  
-    console.log("placeCardInSlot: slot=", slot.id, "card=", card, "history before:", slot.history);
-  
-    const cardEl = document.createElement("div");
-    cardEl.classList.add("card");
-    cardEl.setAttribute("draggable", "true");
-    cardEl.dataset.card = card;
-  
-    const img = document.createElement("img");
-    img.src = "cardDatabase/" + formatCardName(card) + ".png";
-    img.alt = card;
-    img.classList.add("card-img");
-  
-    cardEl.appendChild(img);
-  
-    // Replace inner content but preserve slot.history property (setting innerHTML doesn't remove JS properties)
-    slot.innerHTML = "";
-    slot.appendChild(cardEl);
-    slot.dataset.card = card;
-  
-    // Drag from slot
-    cardEl.addEventListener("dragstart", ev => {
-      console.log("dragstart from slot:", slot.id, "card:", card);
-      ev.dataTransfer.setData("from", "slot");
-      ev.dataTransfer.setData("slotId", slot.id);
-      ev.dataTransfer.setData("card", card);
-    });
-  
-    // local-only update to gameState (do not call update here)
-    if (window.gameState) {
-      window.gameState.slots = window.gameState.slots || {};
-      window.gameState.slots[slot.id] = card;
-    }
+  // Local gameState update only
+  if (window.gameState) {
+    window.gameState.slots = window.gameState.slots || {};
+    window.gameState.slots[slot.id] = card;
   }
+}
 
-
-  // Remove the top card from a slot safely
+// Remove the top card from slot (null-safe, history preserved)
 function removeTopCardFromSlot(slot) {
   if (!slot) return null;
 
@@ -185,22 +186,17 @@ function removeTopCardFromSlot(slot) {
   slot.innerHTML = "";
   slot.removeAttribute("data-card");
 
-  // Clean nulls from history
-  slot.history = slot.history || [];
-  slot.history = slot.history.filter(c => c != null);
-
-
+  // Clean nulls and pop previous card
+  slot.history = (slot.history || []).filter(c => c != null);
   let prevCard = null;
   while (slot.history.length > 0) {
     prevCard = slot.history.pop();
-    if (prevCard) break; // skip any nulls
+    if (prevCard) break;
   }
 
-  if (prevCard) {
-    placeCardInSlot(slot, prevCard);
-  }
+  if (prevCard) placeCardInSlot(slot, prevCard);
 
-  // Update server/gameState
+  // Update gameState
   if (window.gameState && window.socket) {
     window.gameState.slots[slot.id] = slot.dataset.card || null;
   }
@@ -208,19 +204,15 @@ function removeTopCardFromSlot(slot) {
   return topCard;
 }
 
-// Show all cards in a slot safely (slot viewer)
+// Slot viewer
 function showSlotCards(slot) {
   if (!slot) return;
 
   slotViewerCards.innerHTML = "";
 
-  // Build card list: top card + filtered history
   const cards = [];
-
   if (slot.dataset.card) cards.push(slot.dataset.card);
-  if (slot.history && slot.history.length > 0) {
-    cards.push(...slot.history.filter(c => c != null));
-  }
+  if (slot.history) cards.push(...slot.history.filter(c => c != null));
 
   if (cards.length === 0) {
     slotViewerCards.innerHTML = "<p>No cards in this slot.</p>";
