@@ -65,20 +65,12 @@ window.updateServerState = function(partialState) {
   });
 };
 
-// When a card is placed in a slot
-function placeCard(slotId, cardId) {
-  gameState.slots[slotId] = cardId;
-  updateServerState({ slots: gameState.slots }); // pass the updated slots
-}
-
-
 // When a card is removed
 function removeCard(slotId) {
   gameState.slots[slotId] = null;
   updateServerState({ slots: gameState.slots }); // pass the updated slots
 }
 
-window.placeCard = placeCard; // expose for your existing scripts
 window.removeCard = removeCard;
 window.socket = socket;
 window.gameId = gameId;
