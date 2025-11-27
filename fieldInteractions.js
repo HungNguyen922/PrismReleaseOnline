@@ -276,6 +276,7 @@ function updateHealthUI() {
   healthValue.textContent = health;
 }
 
+// functionality to clear the board after use
 const clearBoardBtn = document.getElementById("clear-board-btn");
 
 clearBoardBtn.addEventListener("click", () => {
@@ -358,4 +359,58 @@ shuffleDecksBtn.addEventListener("click", () => {
 
   alert("All decks shuffled together into a single draw pile!");
 });
+
+// === SLOT VIEWER MODAL ===
+const slotViewerDialog = document.getElementById("slot-viewer-dialog");
+const slotViewerCards = document.getElementById("slot-viewer-cards");
+const slotViewerClose = document.getElementById("slot-viewer-close");
+
+// Close when clicking the X button
+slotViewerClose.addEventListener("click", () => slotViewerDialog.close());
+
+// Close when clicking outside the modal box
+slotViewerDialog.addEventListener("click", e => {
+  const rect = slotViewerDialog.firstElementChild.getBoundingClientRect();
+  if (
+    e.clientX < rect.left ||
+    e.clientX > rect.right ||
+    e.clientY < rect.top ||
+    e.clientY > rect.bottom
+  ) {
+    slotViewerDialog.close();
+  }
+});
+
+// Attach click-to-view behavior to all field slots
+document.querySelectorAll(".field-slot").forEach(slot => {
+  slot.addEventListener("click", () => {
+    showSlotCards(slot);
+  });
+});
+
+function showSlotCards(slot) {
+  slotViewerCards.innerHTML = "";
+
+  // Build card list: current top + history
+  const cards = [];
+
+  if (slot.dataset.card) cards.push(slot.dataset.card);
+  if (slot.history && slot.history.length > 0) {
+    cards.push(...slot.history);
+  }
+
+  // No cards?
+  if (cards.length === 0) {
+    slotViewerCards.innerHTML = "<p>No cards in this slot.</p>";
+  } else {
+    cards.forEach(card => {
+      const img = document.createElement("img");
+      img.src = "cardDatabase/" + formatCardName(card) + ".png";
+      img.alt = card;
+      slotViewerCards.appendChild(img);
+    });
+  }
+
+  slotViewerDialog.showModal();
+}
 
