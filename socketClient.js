@@ -76,7 +76,7 @@ function removeCard(slotId) {
   updateServerState({ slots: gameState.slots }); // pass the updated slots
 }
 
-window.palceCard = placeCard;
+window.placeCard = placeCard;
 window.removeCard = removeCard;
 window.socket = socket;
 window.gameId = gameId;
