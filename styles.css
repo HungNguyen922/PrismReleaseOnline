@@ -100,7 +100,8 @@ h1, h3, p {
   background: rgba(255, 215, 0, 0.1);
 }
 
-.field-slot img {
+.field-slot img,
+.card-slot img{
   pointer-events: none;
 }
 
