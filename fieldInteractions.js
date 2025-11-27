@@ -22,6 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   deckSlot.addEventListener("drop", e => {
     e.preventDefault();
+    console.log("DROP TARGET:", e.target, " SLOT ID:", e.target.id);
     console.log("drop: draggedCardInfo =", draggedCardInfo);
     if (!draggedCardInfo) {
       console.warn("No dragged info, can’t open confirm");
