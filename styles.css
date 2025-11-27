@@ -82,6 +82,10 @@ h1, h3, p {
     display: block;
 }
 
+.card-img {
+  pointer-events: none;
+}
+
 .field-slot {
   width: 120px;
   height: 180px;
