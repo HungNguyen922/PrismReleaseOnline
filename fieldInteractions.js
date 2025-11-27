@@ -111,44 +111,65 @@ document.addEventListener("DOMContentLoaded", () => {
       e.preventDefault();
       slot.classList.remove("hover");
     
+      console.log("DROP event (currentTarget):", e.currentTarget.id, "target:", e.target);
+    
       const from = e.dataTransfer.getData("from");
       let card;
     
-      // Use the slot from the closure / currentTarget — not e.target
-      const destSlotId = slot.id;            // <--- reliable
-      // const destSlot = e.currentTarget;   // optional if you prefer
+      // Use the 'slot' from closure / currentTarget (reliable)
+      const destSlot = slot;
+      const destSlotId = destSlot.id;
     
       if (from === "hand") {
         const index = parseInt(e.dataTransfer.getData("cardIndex"), 10);
         if (!Number.isInteger(index)) return;
         card = hand.splice(index, 1)[0];
         renderHand();
-        // network update -> use placeCard (server-sync) with slot id
+    
+        // push previous top into history BEFORE we overwrite it
+        if (destSlot.dataset.card) {
+          if (!Array.isArray(destSlot.history)) destSlot.history = [];
+          destSlot.history.push(destSlot.dataset.card);
+          console.log("pushed to dest history:", destSlotId, destSlot.history);
+        }
+    
+        // local render
+        placeCardInSlot(destSlot, card);
+    
+        // authoritative server update (call your single network function)
         placeCard(destSlotId, card);
-        // local visual render
-        placeCardInSlot(slot, card);
       } else if (from === "slot") {
         const sourceSlotId = e.dataTransfer.getData("slotId");
         if (!sourceSlotId) return;
         const sourceSlot = document.getElementById(sourceSlotId);
     
-        // remove from source (local + return card)
+        // remove from source (local)
         const removed = removeTopCardFromSlot(sourceSlot);
-    
-        // ensure we actually removed something
         if (!removed) return;
     
-        // update server: remove original slot then set new slot
-        removeCard(sourceSlotId);          // sets gameState.slots[source] = null and sends update
-        placeCard(destSlotId, removed);    // sets gameState.slots[dest] = card and sends update
+        // push previous top into dest history BEFORE overwrite
+        if (destSlot.dataset.card) {
+          if (!Array.isArray(destSlot.history)) destSlot.history = [];
+          destSlot.history.push(destSlot.dataset.card);
+          console.log("pushed to dest history:", destSlotId, destSlot.history);
+        }
     
         // local visuals
-        placeCardInSlot(slot, removed);
+        placeCardInSlot(destSlot, removed);
+    
+        // server sync: clear source then set dest
+        removeCard(sourceSlotId);         // sets gameState.slots[source]=null + updateServerState()
+        placeCard(destSlotId, removed);   // sets gameState.slots[dest]=card + updateServerState()
       }
     });
   });
 
   function placeCardInSlot(slot, card) {
+    if (!slot) return;
+    if (!Array.isArray(slot.history)) slot.history = [];
+  
+    console.log("placeCardInSlot: slot=", slot.id, "card=", card, "history before:", slot.history);
+  
     const cardEl = document.createElement("div");
     cardEl.classList.add("card");
     cardEl.setAttribute("draggable", "true");
@@ -160,25 +181,36 @@ document.addEventListener("DOMContentLoaded", () => {
     img.classList.add("card-img");
   
     cardEl.appendChild(img);
+  
+    // Replace inner content but preserve slot.history property (setting innerHTML doesn't remove JS properties)
     slot.innerHTML = "";
     slot.appendChild(cardEl);
     slot.dataset.card = card;
   
     // Drag from slot
     cardEl.addEventListener("dragstart", ev => {
+      console.log("dragstart from slot:", slot.id, "card:", card);
       ev.dataTransfer.setData("from", "slot");
       ev.dataTransfer.setData("slotId", slot.id);
       ev.dataTransfer.setData("card", card);
     });
-
-    // 🔁 Update local + server state
-    if (window.gameState && window.socket) {
+  
+    // local-only update to gameState (do not call update here)
+    if (window.gameState) {
+      window.gameState.slots = window.gameState.slots || {};
       window.gameState.slots[slot.id] = card;
     }
   }
 
+
   function removeTopCardFromSlot(slot) {
-    const topCard = slot.dataset.card;
+    if (!slot) return null;
+    if (!Array.isArray(slot.history)) slot.history = [];
+  
+    const topCard = slot.dataset.card || null;
+    console.log("removeTopCardFromSlot:", slot.id, "topCard:", topCard, "history before:", slot.history);
+  
+    // clear visual top
     slot.innerHTML = "";
     slot.removeAttribute("data-card");
   
@@ -187,13 +219,15 @@ document.addEventListener("DOMContentLoaded", () => {
       prevCard = slot.history.pop();
       placeCardInSlot(slot, prevCard);
     }
-
-    if (window.gameState && window.socket) {
+  
+    if (window.gameState) {
+      window.gameState.slots = window.gameState.slots || {};
       window.gameState.slots[slot.id] = slot.dataset.card || null;
     }
   
     return topCard;
   }
+
 
   // --- Setup hand drop (from slot back to hand) ---
   const handArea = document.getElementById("hand-area");
@@ -213,12 +247,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Remove from slot
       const removed = removeTopCardFromSlot(sourceSlot);
-      hand.push(removed);
-      renderHand();
-
-      // Add back to hand
-      hand.push(card);
-      renderHand();
+      if (removed) {
+        hand.push(removed);
+        renderHand();
+      }
     }
   });
 });
