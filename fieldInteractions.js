@@ -130,8 +130,7 @@ document.addEventListener("DOMContentLoaded", () => {
   
     if (!card) return;
   
-    // ✅ SOCKET-SAFE HISTORY CAPTURE
-    const previous = window.gameState?.slots?.[destSlot.id];
+    const previous = destSlot.dataset.card;
     if (typeof previous === "string" && previous.trim() !== "") {
       window.slotHistories[destSlot.id].push(previous);
     }
