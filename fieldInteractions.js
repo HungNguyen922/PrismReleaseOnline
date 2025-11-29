@@ -180,6 +180,11 @@ function removeTopCardFromSlot(slot) {
   const card = slot.dataset.card;
   if (!card) return null;
 
+  // ✅ PUSH TO HISTORY BEFORE REMOVING
+  window.slotHistories ||= {};
+  window.slotHistories[slot.id] ||= [];
+  window.slotHistories[slot.id].push(card);
+
   slot.innerHTML = "";
   slot.removeAttribute("data-card");
 
