@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const deckSlot = document.getElementById("deck-slot");
   const confirmDialog = document.getElementById("confirm-dialog");
   const confirmForm = document.getElementById("confirm-form");
+  window.slotHistories = {};
 
   let draggedCardInfo = null;
 
@@ -113,31 +114,33 @@ document.addEventListener("DOMContentLoaded", () => {
     e.preventDefault();
     const destSlot = e.currentTarget;
     const from = e.dataTransfer.getData("from");
-
+  
     let card = null;
-
+  
     if (from === "hand") {
       const index = parseInt(e.dataTransfer.getData("cardIndex"), 10);
       if (!Number.isInteger(index)) return;
       card = hand.splice(index, 1)[0];
       renderHand();
-    } else if (from === "slot") {
+    } 
+    
+    else if (from === "slot") {
       const sourceSlotId = e.dataTransfer.getData("slotId");
       const sourceSlot = document.getElementById(sourceSlotId);
       if (!sourceSlot) return;
+  
       card = removeTopCardFromSlot(sourceSlot);
-      removeCard(sourceSlotId);
+      removeCard(sourceSlotId); // ✅ keep server sync
     }
-
+  
     if (!card) return;
-
-    // Push previous top card to history (filter null)
-    const previous = destSlot.dataset.card;
+  
+    // ✅ SOCKET-SAFE HISTORY CAPTURE
+    const previous = window.gameState?.slots?.[destSlot.id];
     if (typeof previous === "string" && previous.trim() !== "") {
-      if (!Array.isArray(destSlot.history)) destSlot.history = [];
-      destSlot.history.push(previous);
+      window.slotHistories[destSlot.id].push(previous);
     }
-    
+  
     placeCardInSlot(destSlot, card);
     placeCard(destSlot.id, card);
   });
@@ -146,19 +149,22 @@ document.addEventListener("DOMContentLoaded", () => {
 // Place card in slot (safe, preserves history)
 function placeCardInSlot(slot, card) {
   if (!slot) return;
+
+  slot.innerHTML = "";
+
   const cardEl = document.createElement("div");
-  cardEl.classList.add("card");
+  cardEl.className = "card";
   cardEl.setAttribute("draggable", "true");
-  cardEl.dataset.card = card;
 
   const img = document.createElement("img");
   img.src = "cardDatabase/" + formatCardName(card) + ".png";
   img.alt = card;
   img.classList.add("card-img");
-  cardEl.appendChild(img);
 
-  slot.innerHTML = "";
+  cardEl.appendChild(img);
   slot.appendChild(cardEl);
+
+  // ✅ ONLY store card data on SLOT
   slot.dataset.card = card;
 
   cardEl.addEventListener("dragstart", ev => {
@@ -168,7 +174,7 @@ function placeCardInSlot(slot, card) {
   });
 
   if (window.gameState) {
-    window.gameState.slots = window.gameState.slots || {};
+    window.gameState.slots ||= {};
     window.gameState.slots[slot.id] = card;
   }
 }
@@ -177,19 +183,17 @@ function placeCardInSlot(slot, card) {
 function removeTopCardFromSlot(slot) {
   if (!slot) return null;
 
-  const topCard = slot.dataset.card || null;
+  const card = slot.dataset.card;
+  if (!card) return null;
 
   slot.innerHTML = "";
   slot.removeAttribute("data-card");
 
-  if (!Array.isArray(slot.history)) slot.history = [];
-  slot.history = slot.history.filter(c => c != null);
-
-  if (window.gameState && window.socket) {
+  if (window.gameState && window.gameState.slots) {
     window.gameState.slots[slot.id] = null;
   }
 
-  return topCard;
+  return card;
 }
 
 // Pop previous card from history manually (called by your drop handler if needed)
@@ -208,23 +212,28 @@ function showSlotCards(slot) {
 
   slotViewerCards.innerHTML = "";
 
-  const cards = [];
-  if (slot.dataset.card) cards.push(slot.dataset.card);
-  if (Array.isArray(slot.history) && slot.history.length > 0) {
-    cards.push(...slot.history.filter(c => c != null).reverse()); 
-    // reverse: most recent on top
+  const list = [];
+
+  // Top card
+  if (slot.dataset.card)
+    list.push(slot.dataset.card);
+
+  // ✅ Use stable global history
+  const history = window.slotHistories[slot.id];
+  if (history?.length) {
+    list.push(...history.slice().reverse());
   }
 
-  if (cards.length === 0) {
-    slotViewerCards.innerHTML = "<p>No cards in this slot.</p>";
-  } else {
-    cards.forEach(card => {
-      const img = document.createElement("img");
-      img.src = "cardDatabase/" + formatCardName(card) + ".png";
-      img.alt = card;
-      slotViewerCards.appendChild(img);
-    });
+  if (list.length === 0) {
+    slotViewerCards.textContent = "No cards in this slot.";
   }
+
+  list.forEach(card => {
+    const img = document.createElement("img");
+    img.src = "cardDatabase/" + formatCardName(card) + ".png";
+    img.alt = card;
+    slotViewerCards.appendChild(img);
+  });
 
   slotViewerDialog.showModal();
 }
@@ -320,7 +329,10 @@ clearBoardBtn.addEventListener("click", () => {
   document.querySelectorAll(".field-slot").forEach(slot => {
     slot.innerHTML = "";
     slot.removeAttribute("data-card");
-    slot.history = [];
+    window.slotHistories[slot.id] = [];
+    slot.removeAttribute("data-card");
+    slot.innerHTML = "";
+
   });
 
   // --- Reset gameState slots ---
