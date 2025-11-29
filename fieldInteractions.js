@@ -132,11 +132,12 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!card) return;
 
     // Push previous top card to history (filter null)
-    if (destSlot.dataset.card) {
+    const previous = destSlot.dataset.card;
+    if (typeof previous === "string" && previous.trim() !== "") {
       if (!Array.isArray(destSlot.history)) destSlot.history = [];
-      destSlot.history.push(destSlot.dataset.card);
-      destSlot.history = destSlot.history.filter(c => c != null);
+      destSlot.history.push(previous);
     }
+    
     placeCardInSlot(destSlot, card);
     placeCard(destSlot.id, card);
   });
@@ -177,12 +178,12 @@ function removeTopCardFromSlot(slot) {
   if (!slot) return null;
 
   const topCard = slot.dataset.card || null;
+
   slot.innerHTML = "";
   slot.removeAttribute("data-card");
 
-  // Do NOT call placeCardInSlot here! Just leave history intact
   if (!Array.isArray(slot.history)) slot.history = [];
-  slot.history = slot.history.filter(c => c != null); // clean nulls
+  slot.history = slot.history.filter(c => c != null);
 
   if (window.gameState && window.socket) {
     window.gameState.slots[slot.id] = null;
@@ -318,7 +319,7 @@ clearBoardBtn.addEventListener("click", () => {
   // --- Clear all field slots ---
   document.querySelectorAll(".field-slot").forEach(slot => {
     slot.innerHTML = "";
-    slot.dataset.card = null;
+    slot.removeAttribute("data-card");
     slot.history = [];
   });
 
