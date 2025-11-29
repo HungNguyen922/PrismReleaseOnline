@@ -6,37 +6,32 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let draggedCardInfo = null;
 
-  deckSlot.addEventListener("dragenter", e => {
-    e.preventDefault();
-    // store card info globally (or in draggedCardInfo)
-    const from = e.dataTransfer.getData("from");
-    const cardIndex = e.dataTransfer.getData("cardIndex");
-    const slotId = e.dataTransfer.getData("slotId");
-    const card = e.dataTransfer.getData("card");
-    console.log("dragenter: ", { from, cardIndex, slotId, card });
-    draggedCardInfo = { from, cardIndex: parseInt(cardIndex,10), slotId, card };
-  });
-
   deckSlot.addEventListener("dragover", e => {
     e.preventDefault();
   });
 
   deckSlot.addEventListener("drop", e => {
     e.preventDefault();
-    console.log("DROP TARGET:", e.target, " SLOT ID:", e.target.id);
+  
+    draggedCardInfo = {
+      from: e.dataTransfer.getData("from"),
+      cardIndex: parseInt(e.dataTransfer.getData("cardIndex"), 10),
+      slotId: e.dataTransfer.getData("slotId"),
+      card: e.dataTransfer.getData("card")
+    };
+  
     console.log("drop: draggedCardInfo =", draggedCardInfo);
-    if (!draggedCardInfo) {
+  
+    if (!draggedCardInfo.from) {
       console.warn("No dragged info, can’t open confirm");
       return;
     }
+  
     if (confirmDialog && typeof confirmDialog.showModal === "function") {
       confirmDialog.showModal();
     } else {
-      // fallback
       const yes = window.confirm("Send this card to the bottom?");
-      if (yes) {
-        sendCardToBottom(draggedCardInfo);
-      }
+      if (yes) sendCardToBottom(draggedCardInfo);
       draggedCardInfo = null;
     }
   });
@@ -103,7 +98,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // --- Setup field slots ---
  document.querySelectorAll(".field-slot").forEach(slot => {
   // Ensure each slot has a history array
-  if (!Array.isArray(slot.history)) slot.history = [];
+  window.slotHistories[slot.id] ||= [];
 
   // Dragover / dragleave
   slot.addEventListener("dragover", e => e.preventDefault());
@@ -198,11 +193,16 @@ function removeTopCardFromSlot(slot) {
 
 // Pop previous card from history manually (called by your drop handler if needed)
 function popHistory(slot) {
-  if (!slot || !Array.isArray(slot.history)) return null;
-  while (slot.history.length > 0) {
-    const prev = slot.history.pop();
+  if (!slot) return null;
+
+  const history = window.slotHistories?.[slot.id];
+  if (!Array.isArray(history)) return null;
+
+  while (history.length > 0) {
+    const prev = history.pop();
     if (prev != null) return prev;
   }
+
   return null;
 }
 
@@ -259,6 +259,8 @@ function showSlotCards(slot) {
       if (removed) {
         hand.push(removed);
         renderHand();
+        removeCard(sourceSlotId);
+
       }
     }
   });
@@ -330,9 +332,6 @@ clearBoardBtn.addEventListener("click", () => {
     slot.innerHTML = "";
     slot.removeAttribute("data-card");
     window.slotHistories[slot.id] = [];
-    slot.removeAttribute("data-card");
-    slot.innerHTML = "";
-
   });
 
   // --- Reset gameState slots ---
