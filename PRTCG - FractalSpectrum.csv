@@ -5,12 +5,12 @@ rearrange them.","If the card beneath this is a Casting, deal 1 dmg.",A ribbon d
 Casting Stratus,Cloud,1,5,Cyan,Blue,,,,"Shove 2 Borders 1: From the Public Pile, send 1 card to the top of each bordering Gate Zone","Sequence Casting: 2 DMG; If the card played on this is a Casting, deal 2 dmg",A trained assassin who lies in wait launch his ambushes.,,1,Samurai Mafia,FractalSpectrum
 Casting Cumulus,Cloud,1,3,Cyan,Blue,,,,Ultimate; The next card played on this deals DMG equal to their POW stat,Sequence Casting: Recall 1,"If you're looking for someone, Cumulus knows a guy. He's well connected with every exchange on the Coast.",,1,Pirate,FractalSpectrum
 Casting Nimbus,Cloud,2,1,Cyan,Blue,,,,Gap 1 Faceup,Detonate Castings In-Previous 2;  Casting cards that are within the 2 cards below this one have their effects triggered,"A world class agent in infiltration, she's almosts never seen, but always brings company.",,1,City Girl,FractalSpectrum
-Carapace Coconut,Shelled,4,9,Orange,Blue,Red,Yellow,,Scrounge 1 & Set Self,,"Some call him a kleptomaniac, he thinks it's just economical",,1,Coconut Crab,FractalSpectrum
-Carapace Horseshoe,Shelled,3,5,Orange,Yellow,Blue,,,Rend 3,Block POW 5,"For being so short, he really knows how to punch up.",,1,Horseshoe Crab,FractalSpectrum
-Carapace Arrow,Shelled,4,2,Orange,Red,,,,Rend 4,2+ Rends: Shove 1 Empty Gate Zone 1 Rend,She's always talking about piercing through the heavens.,,1,Arrow Crab,FractalSpectrum
-Carapace Hermit,Shelled,2,3,Orange,Yellow,Magenta,,,Over-Rend 2: Send the top card of a draw pile to a different draw pile.,Seal Non-OYF,Hermit is not very fond of xenos.,,1,Hermit Crab,FractalSpectrum
-Carapace Spider,Shelled,5,4,Orange,Red,,,,Rend 5:  Send the top 3 cards of a draw pile to a different draw pile.,Shove 4,"Like a marionette, you'll always find Spider pulling the strings.",,2,Japanese Spider Crab,FractalSpectrum
-Floral Torch Ginger,Flower,1,5,Pink,Yellow,Green,Magenta,,Held: Plays Responsive,,"Under her guidance, her followers can reach their fullest potential.",,2,,FractalSpectrum
+Carapace Coconut,Shelled,4,9,Orange,Blue,Red,Yellow,,Scrounge 1,Set Self,"Some call him a kleptomaniac, he thinks it's just economical",,1,Coconut Crab,FractalSpectrum
+Carapace Horseshoe,Shelled,3,5,Orange,Yellow,Blue,,,Rend 3,Draw 5 from Any Rends,"For being so short, he really knows how to punch up.",,1,Horseshoe Crab,FractalSpectrum
+Carapace Arrow,Shelled,4,2,Orange,Red,,,,Rend 4,2+ Rends: Blitz 2,She's always talking about piercing through the heavens.,,1,Arrow Crab,FractalSpectrum
+Carapace Hermit,Shelled,2,3,Orange,Yellow,Magenta,,,Rend 2: Send the top card of a draw pile to a different draw pile.,Recycle Faceup Non-Starter Gates 3,Hermit is not very fond of xenos.,,1,Hermit Crab,FractalSpectrum
+Carapace Spider,Shelled,5,4,Orange,Red,,,,Rend 5:  Send the top 3 cards of a draw pile to a different draw pile.,4 Rends: +4 DMG,"Like a marionette, you'll always find Spider pulling the strings.",,2,Japanese Spider Crab,FractalSpectrum
+Floral Torch Ginger,Flower,1,5,Pink,Yellow,Green,Magenta,,"Held: Held Responses gain ""Buffer Self""",,"Under her guidance, her followers can reach their fullest potential.",,2,,FractalSpectrum
 Floral Plum Blossom,Flower,2,3,Pink,Blue,Red,,,Two-Step,Opp Non-Fill Draw< Gap Opp 2,She can get just a bit jealous sometimes.,,2,,FractalSpectrum
 Floral Sundew,Flower,1,3,Pink,Yellow,Red,,,Shove 2 Adjacents 1,Any Set Activation< Set 1 Faceup,"She might not look it, but she's the most welcoming of the Florals.",,2,,FractalSpectrum
 Floral White Lotus,Flower,1,3,Pink,,,,Quick-Set,Armor 4,Faceup: Instant Phase: Draw 1,In her introspection she knows that it is our union that makes us stronger.,,2,,FractalSpectrum
@@ -18,7 +18,7 @@ Floral Rangoon Creeper,Flower,2,2,Pink,Green,,,,Heal 3,Opp Single < Double,"If y
 Floral Hibiscus,Flower,3,2,Pink,Orange,,,,Steal 1,Opp 2-Card Combo: Steal Combo,"She may not be easily approachable, but she's definitely not selfish.",,2,,FractalSpectrum
 Tianshi Imperial Throne,Constellation,2,4,Yellow,Magenta,Blue,Violet,,Scan All Hands,"Reflect Half; When taking DMG you may burn this to block half the incoming DMG and deal half of it to the Opponent instead.
 ","From that Throne, what else could you do, but enjoy the scenery.",,2,,FractalSpectrum
-Tianshi Solid Dipper,Constellation,3,4,Yellow,Green,,,,Refresh Self,Scanned: Bounce Opponent Responses,"Let her cook? Nah, she'd eat.",,2,,FractalSpectrum
+Tianshi Solid Dipper,Constellation,3,4,Yellow,Green,,,,Scan 2 Helds,Scanned: Gap Opponent Responses,"Let her cook? Nah, she'd eat.",,2,,FractalSpectrum
 Tianshi Liquid Dipper,Constellation,2,3,Yellow,Blue,,,,Retrieve 1,Scanned: Shove Opponent Hand 1,Now here is a man that you should let cook.,,3,,FractalSpectrum
 Tianshi Butcher Shops,Constellation,3,4,Yellow,Red,,,,Gap Opponent 1,Scanned; Recycle Opponent Hand 2,"He may be brutal, but he's not one to waste food.",,3,,FractalSpectrum
 Tianshi Astrologer,Constellation,2,3,Yellow,Green,Magenta,,,Scan Opponent 3,Scanned: Heal 3,Maybe she'll fortell your future as well.,,3,,FractalSpectrum
@@ -26,8 +26,8 @@ Tianshi Woman's Bed,Constellation,2,3,Yellow,Blue,Orange,,,Scan 1 Set Slot,Scann
 Weird Death Ball,WDB,5,5,Violet,Magenta,Blue,Red,,Instant Phase: Held: Draw 1,Gap Opponent 1,Overhand or Underhand? Crash.,,3,,FractalSpectrum
 Igniting Resonance,WDB,5,5,Magenta,Violet,Cyan,,Double,Draw 1; Add the top card of any draw pile to your hand,,I can already feel the blood pumping.,,3,,FractalSpectrum
 Quaking Stun,WDB,4,4,Magenta,Violet,,,,Shove 1 onto Diagonals,Combo ATK< ATKer Remise ATKer BLK,Time it right and the opponent is hit with the nastiest paralysis.,,3,,FractalSpectrum
-Lethal Overcharge,WDB,4,4,Magenta,Violet,,,,Drought 1;,Opp ATK< Detonate Self & Buffer 1,HOLD ON JUST A LITTLE LONGER!,,3,,FractalSpectrum
-Extending Grapple,WDB,3,3,Magenta,Violet,Cyan,,,Detonate Combo Starter,Weird Death Ball Combo Starting: Attack & Shift Weird Death Ball upto 2,,,,,
+Lethal Overcharge,WDB,4,4,Magenta,Violet,,,,Rebuild onto Border,Opp ATK< Drought 1 & Buffer 1,HOLD ON JUST A LITTLE LONGER!,,3,,FractalSpectrum
+Extending Grapple,WDB,3,3,Magenta,Violet,Cyan,,Remise 3,Detonate Combo Starter,Weird Death Ball Combo Starting: Attack & Shift Weird Death Ball upto 2,,,,,
 Xeric Steppes,WDB,3,3,Magenta,,,,Quick-Set,Opponent Drought 1,Any Single< Single -1/+1,Sometimes we just need slow down and relax.,,4,,FractalSpectrum
 Jade Orphans,Tile,1,3,Cyan,Violet,Orange,Magenta,,Held: Stringing C's in Palette 1 are Jades,,"Don't underestimate her lonesome. When it all comes together, you better watch your back.",,4,Silver Wolf,FractalSpectrum
 Jade Kong,Tile,4,4,Cyan,Pink,,,,In Jade String: 3+ Jades Stringing: Jade Play Sequence: 4 DMG,"Lethal< Immortal; If your health would reach 0, this is playable as a Response so that your health cannot go below 1",4 of a Kind!,,4,Castorice,FractalSpectrum
@@ -56,10 +56,10 @@ Cut-In Seasons,Pip,2,2,Yellow,Green,Blue,Red,,"Two-Step; This card counts as bot
 numbers in a Attack or Defense","Disarm Opponent Single; When played as a response to any effect, negate that effect",,,6,,FractalSpectrum
 Unbreakable Hand,Bizarre Spirit,4,3,Blue,Magenta,Pink,Yellow,Gapless,Held: Opp Ripping Set/ Held: May Take 2 &: Disarm Rip Effect,,,,6,ZA HANDO,FractalSpectrum
 Consuming Cell,,3,2,Magenta,Orange,Blue,Yellow,"Liminal 2; If 2 Adjacent Gates form a Pseudo-Pure or Union and this card shares colors with them, you may play this card to combine those 2 gates into 1",Shift 2 Foreigns Home,,,,6,,FractalSpectrum
-Running Double,Pip,3,2,Yellow,Green,Blue,Red,Quick-Set & Double,Faceup: Detonate Plays In-Column; ,,,,7,2 Headed Dragon Doi Thong,FractalSpectrum
+One-Shot Pulse,,6,1,Blue,Green,Pink,Cyan,,6-Card Attack: Counterless & Opp HP = 1,2/3-Card Attack: Bounce 2,,,,,
 New Fortune,Food,2,3,Green,Red,Yellow,Orange,,BLK Attack,Defending: Heal 2,,,7,Dim Sum,FractalSpectrum
 Aoshi ,Space Rock,1,1,Orange,Violet,Red,Yellow,,Gift 1,Taking 4+ DMG< Armor 3 & Rend 4 from Base,,,7,Nibiru,FractalSpectrum
-Transcending Flight,Gamble Phantom,5,1,Violet,Yellow,Magenta,Orange,,Held: Effect Values are 1,Leader-Start: Opp HP = 30,,,7,壅,FractalSpectrum
+Transcending Flight,Gamble Phantom,5,1,Violet,Yellow,Magenta,Orange,,Held: Effect Values are 1,Leader-Start: Opp HP = 2*Opp HP,,,7,壅,FractalSpectrum
 Rescue Officer Third Art ,Soldier,3,4,Cyan,Orange,Yellow,,,Recall 1,Recalled DEF 3-: Draw 1,,,7,,FractalSpectrum
 Fort Sand,Structure,2,4,Orange,Green,,,,"Retrieve 1 from Scan ED 2; From the top 2 cards of your Extra Deck, add 1 card to your hand.",Countering: Gap DP 4,,,7,,FractalSpectrum
 Pele The Barren,Fire Bug,2,1,Violet,Red,Blue,,,Counterless & No Opponent Response: Recycle Self: The Opponent cannot Counter this card.,Opponent Drought 1: The Opponent draws 1 less card next time they would draw a card,,,7,Caconemobius fori,FractalSpectrum
@@ -71,7 +71,6 @@ Boxout Kangaroo,Martial Beast,3,1,Red,Blue,,,,Take 1 & 2 DMG,"Bounce 1; Send any
 Astral Molten Shell,Fire Aquatic,2,4,Blue,Red,,,,1 DMG,Responded: 1 DMG,,,8,Krakatuga,FractalSpectrum
 Barrage Rush,Martial,4,1,Red,Yellow,Magenta,,,Unload: Attack,Effect DMG< 2 DMG,,,8,"Either Stands or Missiles, lol",FractalSpectrum
 Sacred Summoning,Phantom,2,3,Pink,Yellow,Red,,,All Players Take 1,Retrieve 1; Add the top card of your Extra Deck to your Hand.,,,8,Al Elric,FractalSpectrum
-Bullet Weaving,Projectile,2,4,Violet,Pink,,,,Chaining: Leech 2,All Players Take 1,,,8,Kafka Ult,FractalSpectrum
 Fusion Cynoros,Boom Ball ,4,2,Cyan,Violet,Pink,,,Chaining: All Players Take # Chaining,Scrounge 1,,,8,,FractalSpectrum
 Borrowed Time,,2,3,Blue,Pink,,,,Take 1 & +1 Pass,Gap Opponent 1,,,8,,FractalSpectrum
 Inferno Fist,Marital Fire,3,1,Red,Pink,,,,R Prev: All Players Take 1,3- HP: Heal 15,,,9,,FractalSpectrum
@@ -81,14 +80,14 @@ Sentinel Sniper,Projectile,3,1,Red,Orange,,,Quick-Set,Faceup: Opponent Single: 1
 Pocket Anurai,Aquatic Projectile,2,2,Blue,Magenta,,,Haunt,Faceup: Instant Phase: Fragile: 1 DMG,,,,9,Greninja,FractalSpectrum
 Festering Algae Bloom,Aquatic Plant,1,3,Green,Yellow,Red,,,Heal 2,Gap 1 Faceup 2,,,9,,FractalSpectrum
 9Juhs,Aquatic,3,1,Pink,Red,Cyan,,,Overpowered: Opponent Set Self ,Not-Attacking: 1 DMG per Set,,,9,,FractalSpectrum
-Inugami Seasons,,3,4,Orange,Red,Orange,,,Over-Rend 2 Thrice,Ripped: Recall 1,,,9,,FractalSpectrum
-Rummaging Loot,,2,3,Yellow,Green,Orange,,,Rend 2: Create another draw pile using the top 2 cards of the Public Pile,Scrounge 1 / Draw 1,,,9,,FractalSpectrum
+Inugami Seasons,,3,4,Orange,Red,Orange,,,Rend 2 Twice,Ripped: Recall 1,,,9,,FractalSpectrum
+Rummaging Loot,,2,3,Yellow,Green,Orange,,,Rend 2: Create another draw pile using the top 2 cards of the Public Pile,Scrounge 1/ Draw 2,,,9,,FractalSpectrum
 Lovesick Loop,,2,4,Orange,Blue,,,,Opponent Play< Bounce Played,Shift 1 Faceup 1,,,10,kion dojima,FractalSpectrum
 Brick Storm,Projectile,2,4,Yellow,Orange,Magenta,,,Opponent Drought 2; The Opponent draws 2 less card,"Block 3; When taking DMG, you may burn this to negate 
 3 incoming DMG",,,10,,FractalSpectrum
-Heavy Reroll,Scaled Beast,1,3,Orange,Magenta,,,,"Shift 1 Border 1 Border; Move a bordering card that's
-on top of a gate, to a Gate Zone bordering it.",Reclaim;,,,10,,FractalSpectrum
-Foundation's Indestructible Scales,Scaled Beast,2,5,Orange,Orange,,,Gapless,Attacking/ Responding: Steal 1 & Recycle Self,,,,10,SCP 682,FractalSpectrum
+Heavy Reroll,Scaled Beast,1,3,Orange,Magenta,,,Responsive,"Shift 1 Border 1 Border; Move a bordering card that's
+on top of a gate, to a Gate Zone bordering it.",Reclaim & Opp Scrounge 1;,,,10,,FractalSpectrum
+Tunnel Vision Panic,,3,4,Orange,Magenta,,,Pseudo-Split,Gap DP 1,Opp Held BLKs become Gapped BLK for 1 Round,,,,,
 Dragon of the Sunken World,Scaled Beast,4,2,Yellow,Green,,,,Scan Opponent Hand 2,Depths: Haunt 1 Scanned BLK 2-,,,10,Thuong Luong,FractalSpectrum
 Divine Insight,Constellation,2,3,Yellow,Magenta,,,Quick-Set,"Block 4: When taking dmg, you may play this to negate 4 incoming dmg",Unload: Scan Opponent Hand 4;,,,10,,FractalSpectrum
 Shield of the Ogrex,Beast,2,4,Pink,Blue,,,,Fortify Opponent Hand 1;,Scrounge 1; Add 1 card on top of a gate to your hand.,,,10,Mitachurl,FractalSpectrum
@@ -96,10 +95,10 @@ Veering Lightning,Electric,1,4,Violet,Orange,,,,5+ DMG< Reflect,Kindling: Snipe 
 Iron Spire,Rock Structure,1,4,Orange,Violet,,,,Block 2,Faceup/ Held: Block Cards can +DMG,,,,,FractalSpectrum
 Surface Tension,Aquatic,0,2,Yellow,Pink,,,,Opponent Play: Disarm Non-Gated Effects,Chaining: Bounce 1 Gate 3,,,,Sundew vs Stratus ,FractalSpectrum
 Garden's Knotweed,Plant Tile,3,4,Orange,Yellow,Pink,,,Opponent Drought 1,Faceup: Disarm Adjacents,,,11,Knotweed,FractalSpectrum
-Tidal Horizon,Aquatic,3,1,Blue,Yellow,,,,Scrounge 1,Faceup/ Sequence: All Players Drawless,,,11,,FractalSpectrum
+Tidal Horizon,Aquatic,3,1,Blue,Yellow,,,,Scrounge 1,Gated/ Sequence: All Players Drawless,,,11,,FractalSpectrum
 Tact Acrozard,Boom Ball,4,2,Orange,Yellow,Green,,,Yellow Entry,Faceup: DMG Bordering: Block 2,,,11,Yodan Shifour,FractalSpectrum
 Sponge Soak,Aquatic,2,1,Yellow,Blue,,,,Held: Taking DMG: Block 1,Opponent Held Ripped< Drought Opponent 2,,,11,,FractalSpectrum
-Leaves Arisen,Plant,1,3,Green,Red,Cyan,,,Any Single: Stockpile/ Recycle/ Gap/ Set Single & 1 Held,,,,11,,FractalSpectrum
+Leaves Arisen,Plant,1,3,Green,Red,Cyan,,,Any Single: Recycle/ Gap/ Set/ Opp Stockpile Single & 1 Held,,,,11,,FractalSpectrum
 Sniff Niff,Beast,3,5,Green,Blue,Yellow,,,Draw DEF 4+'s from Scan 4,Heal 3 per Draw,,,11,Sniffer,FractalSpectrum
 Blackhole Shark,Space Fish,2,5,Green,Magenta,,,,Gap DP 2 & Attacking: Gap DP 3; Send the top 4 cards of any draw pile to the gap,Reset 1,,,11,Whale Shark,FractalSpectrum
 Antiviral Xolo,Spiky Aquatic,2,1,Green,Magenta,Pink,,,Gap DP 2,Ripped: Heal 2 & 1 Haunt Attacks,,,11,Axolotl,FractalSpectrum
@@ -113,24 +112,26 @@ Eye for an Eye,Item,1,3,Yellow,,,,,Scan 2: Look at the top 2 cards of the Public
 Rotting Heart,Item,1,5,Violet,Red,,,,Refresh 1: Send 1 card in your Hand to the bottom of the deck. Draw 1 cards.,Recycle 1 from Opponent Hand,,,12,,FractalSpectrum
 Ash to Gold,Winged Item,2,3,Red,Yellow,Orange,,,Attack< Recycle 1 Base 3,Attack< +DMG = # R's Recycled,,,12,,FractalSpectrum
 Twilight Totality,Aquatic,2,3,Blue,Magenta,,,,Opponent Draw 2,Shut-Down,,,13,,FractalSpectrum
-Explosive Date,Fire,3,2,Red,Orange,,,,Opponent Recyles 1 BLK 4+,Recycle Self,,,13,Reze,FractalSpectrum
+Explosive Date,Fire,3,2,Red,Orange,,,Opp Responsive; this can be played as a response to an opponent,Choose BLK #: Opp Recycles All Helds with that BLK,,,,13,Reze,FractalSpectrum
 Collapsing Shrine,,2,4,Magenta,Pink,,,,Rebuild onto Border,Construct: Draw 2 & Double,,,13,,FractalSpectrum
 Road of the Lost,Structure,3,1,Magenta,Yellow,,,,Gated: Absolute Entry,In-Set: Pass: Border Gate Absolute Entry,,,13,,FractalSpectrum
-Nameless Owl,Holo Winged,1,0,Orange,Yellow,,,,Armor 0 & Drought 3,Armor 0 & Drought 3,,,13,,FractalSpectrum
+Nameless Owl,Holo Winged,1,1,Orange,Yellow,,,Counterless,Armor 0 & Drought 3,,,,13,,FractalSpectrum
 Magenta Pose,Bizarre Spirit,1,4,Magenta,Yellow,,,,Opponent Play: Shift Opponent Play 1 & Play Attacks,,,,13,20th Century Boy,FractalSpectrum
-Zander Lurking,Aquatic Fish,3,5,Yellow,Blue,Violet,,,Burrow upto 2; You may send this card up to 2 cards down in its Gate,Opponent Parry< Burrow Parry Base 2,,,13,,FractalSpectrum
+Zander Lurking,Aquatic Fish,3,5,Orange,Blue,Violet,,,Burrow upto 2; You may send this card up to 2 cards down in its Gate,Opponent Parry< Burrow Parry Base 2,,,13,,FractalSpectrum
 Final Frame,Ball,3,6,Blue,Violet,,,,6- HP: Leech = HP,-1 Pass & Gap 2,,,13,Walnut Bowling,FractalSpectrum
 Lurking Bjornveggr Claw,Mythical Arctic,3,3,Blue,Yellow,Orange,,,Opp Scrounge 1 Gated 3,Shut Down 1 Gated,,,13,Polar Bear,FractalSpectrum
 Rising Phoenix,Mythical Winged,5,2,Red,Orange,,,,Draw 1,Recycle 1 from Diagonal Gates,,,14,,FractalSpectrum
 Raging Horn Nardrifa,Mythical Arctic,5,1,Violet,Red,Cyan,,,Attack: This card Attacks,Take 6,,,14,,FractalSpectrum
 Underworld King,Mythical Phantom,5,4,Green,Cyan,,,,Gap 1,Renew 1,,,14,Mordekaiser,FractalSpectrum
 Myriad Spear Strikes,Bladed,1,5,Fuchsia,Violet,,,,"Morph POW 1-5: When you play this card, choose a number 1-5, that's this card's POW.",Attacking: Gap 2,,,14,,FractalSpectrum
-Angler Sight,Aquatic,4,2,Blue,Green,Violet,,,Stockpile 1,Burrow 1 Border 2,,,14,,FractalSpectrum
+Angler Sight,Aquatic,4,2,Blue,Green,Violet,,,Burrow 1 Border 2,Attacking: Opp Stockpile 2,,,14,,FractalSpectrum
+Otter Rescue,,3,3,Blue,Green,Cyan,,,Burrow upto 2,Prev B: Set Prev,,,,,
+Kelp Codices,,1,1,Green,Blue,,,,All Players Stockpile 1,May Take 5: Scan ED & Retrieve 1 Scanned,,,,,
 Always Bet on the Strongest,Gamble,4,2,Yellow,Violet,Green,,,Guess Color & Scan 1,Scanned Guess: Drought Opponent 2,,,14,QQ Hakari Dancing,FractalSpectrum
 Tempo Moth,Winged Music,4,1,Red,Orange,Violet,,,Recycle Base 1,O Previous: Reclaim,,,14,,FractalSpectrum
 Tempo Score,Music Structure,2,5,Red,Orange,Violet,,,Two-Step,Gap Opponent 1,,,14,,FractalSpectrum
 Devouring Chainsaw,Bladed Soldier,4,3,Orange,Violet,Yellow,,,Blockless,Chain Ender: Opponent Drought 3,,,14,Denji,FractalSpectrum
-Filthy Feats,Spirit,4,5,Pink,Blue,Cyan,,,Mimic 1 Border,3+ Bounding: Attack,,,15,D4C,FractalSpectrum
+Slash and Burn,,4,2,Green,Red,,,,Opp Has 3 Sets: Recycle All Opp Sets,Draw 2,,,,,
 Boros the Archiver,,4,5,Green,Blue,,,,Mimic 1 Effect from Gap,Scrounge 1,,,15,Trayzn the Infinite,FractalSpectrum
 Tact 4 Aspects,Boom Ball,4,4,Red,Yellow,,,,Critical: Opponent Drought 4,Disarm POW 4,,,15,Jigen Dragaon,FractalSpectrum
 Heavy Hand,Item,4,6,Blue,Yellow,,,,Attacking: Burn Shove 1 onto Empty GZ,Blocked: Fill +1,,,15,,FractalSpectrum
