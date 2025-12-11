@@ -173,7 +173,7 @@ function placeCardInSlot(slot, card) {
     isDragging = true;
   });
 
-  cardEl.addEventListener("dragend, ev => {
+  cardEl.addEventListener("dragend", ev => {
     setTimeout(() => { isDragging = false; }, 0);
   });
 
@@ -300,7 +300,7 @@ function renderHand() {
       isDragging = true;
     });
 
-    cardEl.addEventListener("dragend, e => {
+    cardEl.addEventListener("dragend", e => {
       setTimeout(() => { isDragging = false; }, 0);
     });
 
