@@ -337,41 +337,24 @@ clearBoardBtn.addEventListener("click", () => {
     return;
 
   // --- Clear all field slots (UI + history) ---
+  window.slotHistories = {};
   document.querySelectorAll(".field-slot").forEach(slot => {
     slot.innerHTML = "";
     delete slot.dataset.card;               // remove any card
-    window.slotHistories[slot.id] = [];      // reset history
+    slot.classList.remove("hover");
   });
 
   // --- Reset gameState slots completely ---
-  if (window.gameState?.slots) {
-    for (const slotId in window.gameState.slots) {
-      delete window.gameState.slots[slotId];
-    }
-  }
+  if (!window.gameState) window.gameState = {};
+    window.gameState.slots = {};
+    window.gameState.drawPile = [];
+    window.gameState.decks = {};
+    window.gameState.hands = {};
 
   // --- Clear local hand and force UI refresh ---
-  window.hand = [];          // ensure hand exists
-  renderHand();
-
-  // --- Clear hands & decks in gameState (if present) ---
-  if (window.gameState?.hands) {
-    for (const pId in window.gameState.hands) {
-      window.gameState.hands[pId] = [];
-    }
-  }
-
-  if (window.gameState?.decks) {
-    for (const pId in window.gameState.decks) {
-      window.gameState.decks[pId] = [];
-    }
-  }
-
-  // --- Reset local deck / draw pile ---
-  if (window.gameState) {
-    delete window.gameState.drawPile;
-  }
+  window.hand = [];
   window.deck = [];
+  renderHand();
 
   // --- Reset other UI state if any ---
   isDragging = false;       // reset dragging flag
@@ -384,7 +367,8 @@ clearBoardBtn.addEventListener("click", () => {
   updateServerState?.({
     slots: window.gameState.slots,
     hands: window.gameState.hands,
-    decks: window.gameState.decks
+    decks: window.gameState.decks,
+    drawPile: window.gameState.drawPile
   });
 });
 
