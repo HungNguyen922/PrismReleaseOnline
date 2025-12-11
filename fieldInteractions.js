@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const deckSlot = document.getElementById("deck-slot");
   const confirmDialog = document.getElementById("confirm-dialog");
   const confirmForm = document.getElementById("confirm-form");
+  let isDragging = false;
   window.slotHistories = {};
 
   let draggedCardInfo = null;
@@ -164,7 +165,6 @@ function placeCardInSlot(slot, card) {
   // ✅ ONLY store card data on SLOT
   slot.dataset.card = card;
 
-  let isDragging = false;
   cardEl.addEventListener("dragstart", ev => {
     ev.dataTransfer.setData("from", "slot");
     ev.dataTransfer.setData("slotId", slot.id);
