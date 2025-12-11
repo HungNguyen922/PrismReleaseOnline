@@ -8,10 +8,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   deckSlot.addEventListener("dragover", e => {
     e.preventDefault();
+    slot.classList.add("hover");
   });
 
   deckSlot.addEventListener("drop", e => {
     e.preventDefault();
+    slot.classList.remove("hover");
+  });
   
     draggedCardInfo = {
       from: e.dataTransfer.getData("from"),
@@ -87,7 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!Array.isArray(deck)) {
       console.error("drawPile not defined or not array");
     } else {
-      deck.push(removed);
+      window.gameState.drawPile.push(removed);
       console.log("Card pushed to drawPile:", removed);
       updateDeckUI && updateDeckUI();
     }
@@ -165,6 +168,11 @@ function placeCardInSlot(slot, card) {
     ev.dataTransfer.setData("from", "slot");
     ev.dataTransfer.setData("slotId", slot.id);
     ev.dataTransfer.setData("card", card);
+    isDragging = true;
+  });
+
+  cardEl.addEventListener("dragend, ev => {
+    setTimeout(() => { isDragging = false; }, 0);
   });
 
   if (window.gameState) {
@@ -292,6 +300,11 @@ function renderHand() {
       e.dataTransfer.setData("from", "hand");
       e.dataTransfer.setData("cardIndex", index);
       e.dataTransfer.setData("card", card);
+      isDragging = true;
+    });
+
+    cardEl.addEventListener("dragend, e => {
+      setTimeout(() => { isDragging = false; }, 0);
     });
 
     handArea.appendChild(cardEl);
@@ -428,9 +441,10 @@ slotViewerDialog.addEventListener("click", e => {
   }
 });
 
+let isDragging = false;
 // Attach click-to-view behavior to all field slots
 document.querySelectorAll(".field-slot").forEach(slot => {
   slot.addEventListener("click", () => {
-    showSlotCards(slot);
+    if (!isDragging) showSlotCards(slot);
   });
 });
