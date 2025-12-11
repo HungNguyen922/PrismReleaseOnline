@@ -247,32 +247,31 @@ function showSlotCards(slot) {
   slotViewerDialog.showModal();
 }
 
-  // --- Setup hand drop (from slot back to hand) ---
-  const handArea = document.getElementById("hand-area");
+// --- Setup hand drop (from slot back to hand) ---
+const handArea = document.getElementById("hand-area");
 
-  handArea.addEventListener("dragover", e => e.preventDefault());
+handArea.addEventListener("dragover", e => e.preventDefault());
 
-  handArea.addEventListener("drop", e => {
-    e.preventDefault();
-    const from = e.dataTransfer.getData("from");
+handArea.addEventListener("drop", e => {
+  e.preventDefault();
+  const from = e.dataTransfer.getData("from");
 
-    if (from === "slot") {
-      const card = e.dataTransfer.getData("card");
-      const sourceSlotId = e.dataTransfer.getData("slotId");
-      const sourceSlot = document.getElementById(sourceSlotId);
+  if (from === "slot") {
+    const card = e.dataTransfer.getData("card");
+    const sourceSlotId = e.dataTransfer.getData("slotId");
+    const sourceSlot = document.getElementById(sourceSlotId);
 
-      if (!card || !sourceSlot) return;
+    if (!card || !sourceSlot) return;
 
-      // Remove from slot
-      const removed = removeTopCardFromSlot(sourceSlot);
-      if (removed) {
-        hand.push(removed);
-        renderHand();
-        removeCard(sourceSlotId);
+    // Remove from slot
+    const removed = removeTopCardFromSlot(sourceSlot);
+    if (removed) {
+      hand.push(removed);
+      renderHand();
+      removeCard(sourceSlotId);
 
-      }
     }
-  });
+  }
 });
 
 function renderHand() {
