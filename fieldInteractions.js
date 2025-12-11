@@ -8,27 +8,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
   deckSlot.addEventListener("dragover", e => {
     e.preventDefault();
-    slot.classList.add("hover");
+    deckSlot.classList.add("hover");
   });
 
   deckSlot.addEventListener("drop", e => {
     e.preventDefault();
-    slot.classList.remove("hover");
-  
+    deckSlot.classList.remove("hover");
+
     draggedCardInfo = {
       from: e.dataTransfer.getData("from"),
       cardIndex: parseInt(e.dataTransfer.getData("cardIndex"), 10),
       slotId: e.dataTransfer.getData("slotId"),
       card: e.dataTransfer.getData("card")
     };
-  
+
     console.log("drop: draggedCardInfo =", draggedCardInfo);
-  
+
     if (!draggedCardInfo.from) {
       console.warn("No dragged info, can’t open confirm");
       return;
     }
-  
+
     if (confirmDialog && typeof confirmDialog.showModal === "function") {
       confirmDialog.showModal();
     } else {
@@ -38,14 +38,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  confirmForm.addEventListener("close", e => {
+  confirmForm?.addEventListener("close", e => {
     console.log("dialog closed, returnValue =", confirmDialog.returnValue);
     console.log("draggedCardInfo at close =", draggedCardInfo);
 
     if (confirmDialog.returnValue === "ok") {
       sendCardToBottom(draggedCardInfo);
     }
-
     draggedCardInfo = null;
   });
 
