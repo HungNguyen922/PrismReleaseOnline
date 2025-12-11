@@ -133,8 +133,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!card) return;
     
       const prev = destSlot.dataset.card;
-      if (prev) {
-        // record history once, before overwriting
+      if (typeof prev === "string" && prev.trim() !== "" && prev !== "null" && prev !== "undefined") {
         window.slotHistories[destSlot.id] ||= [];
         window.slotHistories[destSlot.id].push(prev);
       }
@@ -188,7 +187,7 @@ function removeTopCardFromSlot(slot) {
   if (!slot) return null;
 
   const card = slot.dataset.card;
-  if (!card) return null;
+  if (!card || card === "" || card === "null" || card === "undefined") return null;
 
   slot.innerHTML = "";
   slot.removeAttribute("data-card");
