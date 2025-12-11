@@ -193,7 +193,7 @@ function removeTopCardFromSlot(slot) {
   delete slot.dataset.card;
 
   if (window.gameState && window.gameState.slots) {
-    window.gameState.slots[slot.id] = null;
+    delete window.gameState.slots[slot.id];
   }
 
   return card;
@@ -346,7 +346,7 @@ clearBoardBtn.addEventListener("click", () => {
 
   // --- Reset gameState slots ---
   for (const slotId in window.gameState.slots) {
-    window.gameState.slots[slotId] = null;
+    delete window.gameState.slots[slotId];
   }
 
   // --- Clear local hand ---
