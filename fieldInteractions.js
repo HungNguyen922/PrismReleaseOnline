@@ -333,42 +333,55 @@ function updateHealthUI() {
 const clearBoardBtn = document.getElementById("clear-board-btn");
 
 clearBoardBtn.addEventListener("click", () => {
-  if (!window.gameState || !window.socket) return;
+  if (!confirm("Are you sure you want to clear the board and all hands?"))
+    return;
 
-  if (!confirm("Are you sure you want to clear the board and all hands?")) return;
-
-  // --- Clear all field slots ---
+  // --- Clear all field slots (UI + history) ---
   document.querySelectorAll(".field-slot").forEach(slot => {
     slot.innerHTML = "";
-    delete slot.dataset.card;
-    window.slotHistories[slot.id] = [];
+    delete slot.dataset.card;               // remove any card
+    window.slotHistories[slot.id] = [];      // reset history
   });
 
-  // --- Reset gameState slots ---
-  for (const slotId in window.gameState.slots) {
-    delete window.gameState.slots[slotId];
-  }
-
-  // --- Clear local hand ---
-  if (!window.hand) window.hand = []; // ensure hand exists
-  window.hand.length = 0;
-  renderHand(); // refresh UI
-
-  // --- Clear hands for all players in gameState ---
-  if (!window.gameState.hands) window.gameState.hands = {};
-  for (const playerId in window.gameState.hands) {
-    window.gameState.hands[playerId] = [];
-  }
-
-  // --- Reset other decks if needed ---
-  if (window.gameState.decks) {
-    for (const playerId in window.gameState.decks) {
-      window.gameState.decks[playerId] = [];
+  // --- Reset gameState slots completely ---
+  if (window.gameState?.slots) {
+    for (const slotId in window.gameState.slots) {
+      delete window.gameState.slots[slotId];
     }
   }
 
-  // --- Emit full cleared state ---
-  updateServerState({ 
+  // --- Clear local hand and force UI refresh ---
+  window.hand = [];          // ensure hand exists
+  renderHand();
+
+  // --- Clear hands & decks in gameState (if present) ---
+  if (window.gameState?.hands) {
+    for (const pId in window.gameState.hands) {
+      window.gameState.hands[pId] = [];
+    }
+  }
+
+  if (window.gameState?.decks) {
+    for (const pId in window.gameState.decks) {
+      window.gameState.decks[pId] = [];
+    }
+  }
+
+  // --- Reset local deck / draw pile ---
+  if (window.gameState) {
+    delete window.gameState.drawPile;
+  }
+  window.deck = [];
+
+  // --- Reset other UI state if any ---
+  isDragging = false;       // reset dragging flag
+  updateHealthUI();         // if health should reset (optional)
+
+  // --- Optionally close any open modals ---
+  slotViewerDialog?.close();
+
+  // --- Emit the fully cleared state ---
+  updateServerState?.({
     slots: window.gameState.slots,
     hands: window.gameState.hands,
     decks: window.gameState.decks
