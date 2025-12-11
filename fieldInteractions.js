@@ -164,6 +164,7 @@ function placeCardInSlot(slot, card) {
 
   // ✅ ONLY store card data on SLOT
   slot.dataset.card = card;
+ 
 
   cardEl.addEventListener("dragstart", ev => {
     ev.dataTransfer.setData("from", "slot");
@@ -340,7 +341,11 @@ clearBoardBtn.addEventListener("click", () => {
   window.slotHistories = {};
   document.querySelectorAll(".field-slot").forEach(slot => {
     slot.innerHTML = "";
-    delete slot.dataset.card;               // remove any card
+    slot.removeAttribute("data-card");
+    // Remove from persistent game state
+    if (window.gameState?.slots) {
+      delete window.gameState.slots[slot.id];
+    }
     slot.classList.remove("hover");
   });
 
