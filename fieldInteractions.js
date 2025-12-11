@@ -8,27 +8,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
   deckSlot.addEventListener("dragover", e => {
     e.preventDefault();
-    deckSlot.classList.add("hover");
+    slot.classList.add("hover");
   });
 
   deckSlot.addEventListener("drop", e => {
     e.preventDefault();
-    deckSlot.classList.remove("hover");
-
+    slot.classList.remove("hover");
+  
     draggedCardInfo = {
       from: e.dataTransfer.getData("from"),
       cardIndex: parseInt(e.dataTransfer.getData("cardIndex"), 10),
       slotId: e.dataTransfer.getData("slotId"),
       card: e.dataTransfer.getData("card")
     };
-
+  
     console.log("drop: draggedCardInfo =", draggedCardInfo);
-
+  
     if (!draggedCardInfo.from) {
       console.warn("No dragged info, can’t open confirm");
       return;
     }
-
+  
     if (confirmDialog && typeof confirmDialog.showModal === "function") {
       confirmDialog.showModal();
     } else {
@@ -38,13 +38,14 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  confirmForm?.addEventListener("close", e => {
+  confirmForm.addEventListener("close", e => {
     console.log("dialog closed, returnValue =", confirmDialog.returnValue);
     console.log("draggedCardInfo at close =", draggedCardInfo);
 
     if (confirmDialog.returnValue === "ok") {
       sendCardToBottom(draggedCardInfo);
     }
+
     draggedCardInfo = null;
   });
 
@@ -97,52 +98,52 @@ document.addEventListener("DOMContentLoaded", () => {
   // ==== End deck-slot integration ====
   
   // --- Setup field slots ---
- document.querySelectorAll(".field-slot").forEach(slot => {
-  // Ensure each slot has a history array
-  window.slotHistories[slot.id] ||= [];
-
-  // Dragover / dragleave
-  slot.addEventListener("dragover", e => e.preventDefault());
-  slot.addEventListener("dragleave", () => slot.classList.remove("hover"));
-
-  // Drop handler (hand or slot source)
-  slot.addEventListener("drop", e => {
-    e.preventDefault();
-    const destSlot = e.currentTarget;
-    const from = e.dataTransfer.getData("from");
+  document.querySelectorAll(".field-slot").forEach(slot => {
+    // Ensure each slot has a history array
+    window.slotHistories[slot.id] ||= [];
   
-    let card = null;
+    // Dragover / dragleave
+    slot.addEventListener("dragover", e => e.preventDefault());
+    slot.addEventListener("dragleave", () => slot.classList.remove("hover"));
   
-    if (from === "hand") {
-      const index = parseInt(e.dataTransfer.getData("cardIndex"), 10);
-      if (!Number.isInteger(index)) return;
-      card = hand.splice(index, 1)[0];
-      renderHand();
-    } 
+    // Drop handler (hand or slot source)
+    slot.addEventListener("drop", e => {
+      e.preventDefault();
+      const destSlot = e.currentTarget;
+      const from = e.dataTransfer.getData("from");
     
-    else if (from === "slot") {
-      const sourceSlotId = e.dataTransfer.getData("slotId");
-      const sourceSlot = document.getElementById(sourceSlotId);
-      if (!sourceSlot) return;
-  
-      card = removeTopCardFromSlot(sourceSlot);
-      removeCard(sourceSlotId); // ✅ keep server sync
-    }
-  
-    if (!card) return;
-  
-    const prev = destSlot.dataset.card;
-    if (prev) {
-      // record history once, before overwriting
-      window.slotHistories[destSlot.id] ||= [];
-      window.slotHistories[destSlot.id].push(prev);
-    }
-  
-    placeCardInSlot(destSlot, card);
-    placeCard(destSlot.id, card);
+      let card = null;
+    
+      if (from === "hand") {
+        const index = parseInt(e.dataTransfer.getData("cardIndex"), 10);
+        if (!Number.isInteger(index)) return;
+        card = hand.splice(index, 1)[0];
+        renderHand();
+      } 
+      
+      else if (from === "slot") {
+        const sourceSlotId = e.dataTransfer.getData("slotId");
+        const sourceSlot = document.getElementById(sourceSlotId);
+        if (!sourceSlot) return;
+    
+        card = removeTopCardFromSlot(sourceSlot);
+        removeCard(sourceSlotId); // ✅ keep server sync
+      }
+    
+      if (!card) return;
+    
+      const prev = destSlot.dataset.card;
+      if (prev) {
+        // record history once, before overwriting
+        window.slotHistories[destSlot.id] ||= [];
+        window.slotHistories[destSlot.id].push(prev);
+      }
+    
+      placeCardInSlot(destSlot, card);
+      placeCard(destSlot.id, card);
+    });
   });
 });
-
 // Place card in slot (safe, preserves history)
 function placeCardInSlot(slot, card) {
   if (!slot) return;
@@ -248,7 +249,6 @@ function showSlotCards(slot) {
 
 // --- Setup hand drop (from slot back to hand) ---
 const handArea = document.getElementById("hand-area");
-
 handArea.addEventListener("dragover", e => e.preventDefault());
 
 handArea.addEventListener("drop", e => {
@@ -308,7 +308,6 @@ function renderHand() {
 
 // making a dynamic health tracker
 let health = 20;
-
 const healthSlot = document.getElementById("health-slot");
 const healthValue = document.getElementById("health-value");
 
