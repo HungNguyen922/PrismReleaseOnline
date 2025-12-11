@@ -351,10 +351,10 @@ clearBoardBtn.addEventListener("click", () => {
 
   // --- Reset gameState slots completely ---
   if (!window.gameState) window.gameState = {};
-    window.gameState.slots = {};
-    window.gameState.drawPile = [];
-    window.gameState.decks = {};
-    window.gameState.hands = {};
+  window.gameState.slots = {};
+  window.gameState.drawPile = [];
+  window.gameState.decks = {};
+  window.gameState.hands = {};
 
   // --- Clear local hand and force UI refresh ---
   window.hand = [];
