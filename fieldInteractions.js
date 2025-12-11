@@ -190,7 +190,7 @@ function removeTopCardFromSlot(slot) {
   if (!card || card === "" || card === "null" || card === "undefined") return null;
 
   slot.innerHTML = "";
-  slot.removeAttribute("data-card");
+  delete slot.dataset.card;
 
   if (window.gameState && window.gameState.slots) {
     window.gameState.slots[slot.id] = null;
@@ -340,7 +340,7 @@ clearBoardBtn.addEventListener("click", () => {
   // --- Clear all field slots ---
   document.querySelectorAll(".field-slot").forEach(slot => {
     slot.innerHTML = "";
-    slot.removeAttribute("data-card");
+    delete slot.dataset.card;
     window.slotHistories[slot.id] = [];
   });
 
