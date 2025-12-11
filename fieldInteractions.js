@@ -14,7 +14,6 @@ document.addEventListener("DOMContentLoaded", () => {
   deckSlot.addEventListener("drop", e => {
     e.preventDefault();
     slot.classList.remove("hover");
-  });
   
     draggedCardInfo = {
       from: e.dataTransfer.getData("from"),
@@ -166,6 +165,7 @@ function placeCardInSlot(slot, card) {
   // ✅ ONLY store card data on SLOT
   slot.dataset.card = card;
 
+  let isDragging = false;
   cardEl.addEventListener("dragstart", ev => {
     ev.dataTransfer.setData("from", "slot");
     ev.dataTransfer.setData("slotId", slot.id);
@@ -437,7 +437,6 @@ slotViewerDialog.addEventListener("click", e => {
   }
 });
 
-let isDragging = false;
 // Attach click-to-view behavior to all field slots
 document.querySelectorAll(".field-slot").forEach(slot => {
   slot.addEventListener("click", () => {
