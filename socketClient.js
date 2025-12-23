@@ -22,9 +22,8 @@ function renderSlotFromState(slotId, card) {
   if (!Array.isArray(slot.history)) slot.history = [];
 
   if (!card) {
-    // Clear visible top card but keep .history intact
     slot.innerHTML = "";
-    slot.dataset.card = null;
+    delete slot.dataset.card; // 🔥 not null
     return;
   }
 
@@ -95,9 +94,9 @@ function placeCard(slotId, cardId) {
 }
 
 function removeCard(slotId) {
-  if (!window.gameState) window.gameState = { slots: {}, hands: {}, decks: {} };
-  window.gameState.slots = window.gameState.slots || {};
-  window.gameState.slots[slotId] = null;
+  if (!window.gameState?.slots) return;
+
+  delete window.gameState.slots[slotId];
   updateServerState({ slots: window.gameState.slots });
 }
 
