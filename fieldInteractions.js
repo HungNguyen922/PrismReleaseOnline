@@ -51,6 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   function sendCardToBottom(info) {
+    /*
     console.log("sendCardToBottom called with:", info);
     let removed = null;
 
@@ -94,6 +95,7 @@ document.addEventListener("DOMContentLoaded", () => {
       console.log("Card pushed to drawPile:", removed);
       updateDeckUI && updateDeckUI();
     }
+    */
   }
 
   // ==== End deck-slot integration ====
@@ -190,17 +192,19 @@ function removeTopCardFromSlot(slot) {
   const card = slot.dataset.card;
   if (typeof card !== "string" || !card.trim()) return null;
 
+  const history = window.slotHistories?.[slot.id];
+  
   slot.innerHTML = "";
   delete slot.dataset.card;
 
-    if (Array.isArray(history) && history.length > 0) {
-      const prev = history.pop();
-      placeCardInSlot(slot, prev); // 🔥 restore underneath card
-    } else {
-      // fully empty
-      if (window.gameState?.slots) {
-        delete window.gameState.slots[slot.id];
-      }
+  if (Array.isArray(history) && history.length > 0) {
+    const prev = history.pop();
+    placeCardInSlot(slot, prev); // 🔥 restore underneath card
+  } else {
+    // fully empty
+    if (window.gameState?.slots) {
+      delete window.gameState.slots[slot.id];
+    }
   }
 
   return card;
