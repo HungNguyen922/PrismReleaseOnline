@@ -203,9 +203,6 @@ function removeTopCardFromSlot(slot) {
   } else {
     // fully empty
     removeCard(slot.id);
-    if (window.gameState?.slots) {
-      delete window.gameState.slots[slot.id];
-    }
   }
 
   return card;
