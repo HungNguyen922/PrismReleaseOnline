@@ -134,7 +134,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!card) return;
     
       const prev = destSlot.dataset.card;
-      if (prev && prev !== "null" && prev !== "undefined") {
+      if (typeof prev === "string" && prev.trim()) {
         window.slotHistories[destSlot.id] ||= [];
         window.slotHistories[destSlot.id].push(prev);
       }
@@ -193,8 +193,14 @@ function removeTopCardFromSlot(slot) {
   slot.innerHTML = "";
   delete slot.dataset.card;
 
-  if (window.gameState && window.gameState.slots) {
-    delete window.gameState.slots[slot.id];
+    if (Array.isArray(history) && history.length > 0) {
+      const prev = history.pop();
+      placeCardInSlot(slot, prev); // 🔥 restore underneath card
+    } else {
+      // fully empty
+      if (window.gameState?.slots) {
+        delete window.gameState.slots[slot.id];
+      }
   }
 
   return card;
