@@ -130,7 +130,6 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!sourceSlot) return;
     
         card = removeTopCardFromSlot(sourceSlot);
-        removeCard(sourceSlotId); // ✅ keep server sync
       }
     
       if (!card) return;
@@ -200,8 +199,10 @@ function removeTopCardFromSlot(slot) {
   if (Array.isArray(history) && history.length > 0) {
     const prev = history.pop();
     placeCardInSlot(slot, prev); // 🔥 restore underneath card
+    placeCard(slot.id, prev);
   } else {
     // fully empty
+    removeCard(slot.id);
     if (window.gameState?.slots) {
       delete window.gameState.slots[slot.id];
     }
