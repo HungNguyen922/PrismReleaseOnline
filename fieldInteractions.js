@@ -4,6 +4,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const confirmForm = document.getElementById("confirm-form");
   window.isDragging = false;
   window.slotHistories = {};
+  window.hand ||= [];
+  window.deck ||= [];
 
   let draggedCardInfo = null;
 
@@ -149,7 +151,6 @@ function placeCardInSlot(slot, card) {
   if (!slot || !card) return;
 
   // Ensure global histories exist
-  window.slotHistories ||= {};
   window.slotHistories[slot.id] ||= [];
 
   // Save the current top card to history if it exists
@@ -205,8 +206,7 @@ function removeTopCardFromSlot(slot) {
   if (typeof card !== "string" || !card.trim()) return null;
 
   const history = window.slotHistories?.[slot.id];
-  
-  clearSlot(slot);
+  clearSlot(slot, false);
 
   if (Array.isArray(history) && history.length > 0) {
     const prev = history.pop();
@@ -227,7 +227,6 @@ function clearSlot(slot, clearHistory = true) {
   delete slot.dataset.card;
 
   if (clearHistory) {
-    window.slotHistories ||= {};
     window.slotHistories[slot.id] = [];
   }
 
