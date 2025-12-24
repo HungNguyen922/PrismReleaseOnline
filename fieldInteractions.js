@@ -2,19 +2,19 @@ document.addEventListener("DOMContentLoaded", () => {
   const deckSlot = document.getElementById("deck-slot");
   const confirmDialog = document.getElementById("confirm-dialog");
   const confirmForm = document.getElementById("confirm-form");
-  let isDragging = false;
+  window.isDragging = false;
   window.slotHistories = {};
 
   let draggedCardInfo = null;
 
   deckSlot.addEventListener("dragover", e => {
     e.preventDefault();
-    slot.classList.add("hover");
+    deckSlot.classList.add("hover");
   });
 
   deckSlot.addEventListener("drop", e => {
     e.preventDefault();
-    slot.classList.remove("hover");
+    deckSlot.classList.remove("hover");
   
     draggedCardInfo = {
       from: e.dataTransfer.getData("from"),
@@ -171,11 +171,11 @@ function placeCardInSlot(slot, card) {
     ev.dataTransfer.setData("from", "slot");
     ev.dataTransfer.setData("slotId", slot.id);
     ev.dataTransfer.setData("card", card);
-    isDragging = true;
+    window.isDragging = true;
   });
 
   cardEl.addEventListener("dragend", ev => {
-    setTimeout(() => { isDragging = false; }, 0);
+    setTimeout(() => { window.isDragging = false; }, 0);
   });
 
   if (window.gameState) {
@@ -302,11 +302,11 @@ function renderHand() {
       e.dataTransfer.setData("from", "hand");
       e.dataTransfer.setData("cardIndex", index);
       e.dataTransfer.setData("card", card);
-      isDragging = true;
+      window.isDragging = true;
     });
 
     cardEl.addEventListener("dragend", e => {
-      setTimeout(() => { isDragging = false; }, 0);
+      setTimeout(() => { window.isDragging = false; }, 0);
     });
 
     handArea.appendChild(cardEl);
@@ -347,10 +347,11 @@ clearBoardBtn.addEventListener("click", () => {
   window.slotHistories = {};
   document.querySelectorAll(".field-slot").forEach(slot => {
     slot.innerHTML = "";
-    delete slot.dataset.card;  // use delete, not removeAttribute
-    slot.history = [];          // reset DOM-local history
-    slot.classList.remove("hover");
+    delete slot.dataset.card;
+    window.slotHistories[slot.id] = [];
   });
+
+
 
   // --- Clear global game state ---
   window.gameState = {
@@ -366,7 +367,7 @@ clearBoardBtn.addEventListener("click", () => {
   renderHand();
 
   // --- Reset other UI state ---
-  isDragging = false;
+  window.isDragging = false;
   updateHealthUI();
 
   // --- Close slot viewer modal ---
@@ -444,6 +445,6 @@ slotViewerDialog.addEventListener("click", e => {
 // Attach click-to-view behavior to all field slots
 document.querySelectorAll(".field-slot").forEach(slot => {
   slot.addEventListener("click", () => {
-    if (!isDragging) showSlotCards(slot);
+    if (!window.isDragging) showSlotCards(slot);
   });
 });
