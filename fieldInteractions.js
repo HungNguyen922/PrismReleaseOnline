@@ -342,48 +342,51 @@ function updateHealthUI() {
 const clearBoardBtn = document.getElementById("clear-board-btn");
 
 clearBoardBtn.addEventListener("click", () => {
-  if (!confirm("Are you sure you want to clear the board and all hands?"))
-    return;
+  if (!confirm("Are you sure you want to clear the board and all hands?")) return;
 
-  // --- Clear all field slots (UI + history) ---
+  // --- Clear all field slots ---
   window.slotHistories = {};
   document.querySelectorAll(".field-slot").forEach(slot => {
     slot.innerHTML = "";
-    slot.removeAttribute("data-card");
-    // Remove from persistent game state
-    if (window.gameState?.slots) {
-      delete window.gameState.slots[slot.id];
-    }
+    delete slot.dataset.card;  // use delete, not removeAttribute
+    slot.history = [];          // reset DOM-local history
     slot.classList.remove("hover");
   });
 
-  // --- Reset gameState slots completely ---
-  if (!window.gameState) window.gameState = {};
-  window.gameState.slots = {};
-  window.gameState.drawPile = [];
-  window.gameState.decks = {};
-  window.gameState.hands = {};
+  // --- Clear global game state ---
+  window.gameState = {
+    slots: {},
+    hands: {},
+    decks: {},
+    drawPile: []
+  };
 
-  // --- Clear local hand and force UI refresh ---
+  // --- Clear local hand & deck ---
   window.hand = [];
   window.deck = [];
   renderHand();
 
-  // --- Reset other UI state if any ---
-  isDragging = false;       // reset dragging flag
-  updateHealthUI();         // if health should reset (optional)
+  // --- Reset other UI state ---
+  isDragging = false;
+  updateHealthUI();
 
-  // --- Optionally close any open modals ---
+  // --- Close slot viewer modal ---
   slotViewerDialog?.close();
 
-  // --- Emit the fully cleared state ---
+  // --- Force server to adopt fully cleared state ---
   updateServerState?.({
     slots: window.gameState.slots,
     hands: window.gameState.hands,
     decks: window.gameState.decks,
     drawPile: window.gameState.drawPile
   });
+
+  // --- Force render all slots empty locally ---
+  document.querySelectorAll(".field-slot").forEach(slot => {
+    renderSlotFromState(slot.id, null);
+  });
 });
+
 
 const shuffleDecksBtn = document.getElementById("shuffle-decks-btn");
 
