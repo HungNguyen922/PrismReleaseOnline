@@ -14,47 +14,67 @@ socket.emit("joinGame", gameId);
  * - Preserves slot.history array if present on the element.
  * - If card is falsy, clears the top card but DOES NOT touch slot.history.
  */
-function renderSlotFromState(slotId, card) {
+function renderSlotFromState(slotId, card, fromServer = false) {
   const slot = document.getElementById(slotId);
   if (!slot) return;
 
-  // Ensure the slot has a local history array
   window.slotHistories ||= {};
   window.slotHistories[slotId] ||= [];
 
-  // If the slot already has this card, do nothing
-  if (slot.dataset.card === card) return;
+  const currentCard = slot.dataset.card;
 
-  // If no card, clear the slot
-  if (!card) {
-    slot.innerHTML = "";
-    delete slot.dataset.card;
-    return;
+  // 1️⃣ Early exit: nothing changed
+  if (currentCard === card) return;
+
+  // 2️⃣ If server sync, reset history to match server
+  if (fromServer) {
+    window.slotHistories[slotId] = [];
+  } else if (currentCard) {
+    // 3️⃣ If local move, save current top card to history
+    window.slotHistories[slotId].push(currentCard);
   }
 
-  // Otherwise, place the card in the slot using the canonical function
-  placeCardInSlot(slot, card);
+  // 4️⃣ Apply new card
+  slot.dataset.card = card || "";
+  slot.innerHTML = "";
+
+  if (card) {
+    const cardEl = document.createElement("div");
+    cardEl.className = "card";
+    cardEl.setAttribute("draggable", "true");
+
+    const img = document.createElement("img");
+    img.src = "cardDatabase/" + formatCardName(card) + ".png";
+    img.alt = card;
+    img.classList.add("card-img");
+
+    cardEl.appendChild(img);
+    slot.appendChild(cardEl);
+
+    // Drag events
+    cardEl.addEventListener("dragstart", ev => {
+      ev.dataTransfer.setData("from", "slot");
+      ev.dataTransfer.setData("slotId", slot.id);
+      ev.dataTransfer.setData("card", card);
+    });
+
+    cardEl.addEventListener("dragend", () => { window.isDragging = false; });
+  }
+
+  // Update global state if local move
+  if (!fromServer) {
+    window.gameState ||= {};
+    window.gameState.slots ||= {};
+    window.gameState.slots[slotId] = card;
+    updateServerState?.({ slots: window.gameState.slots });
+  }
 }
 
-
 socket.on("gameState", state => {
-  // Merge incoming state into existing window.gameState safely.
-  // We especially deep-merge the 'slots' object to avoid clobbering local pieces.
-  window.gameState = window.gameState || { slots: {}, hands: {}, decks: {} };
+  window.gameState = state;
 
-  if (state.slots && typeof state.slots === "object") {
-    window.gameState.slots = state.slots;
-  }
-
-  // Merge other top-level keys conservatively (replace arrays/primitives)
-  for (const key of Object.keys(state)) {
-    if (key === "slots") continue;
-    window.gameState[key] = state[key];
-  }
-
-  // Render all slots from the merged state
-  for (const slotId of Object.keys(window.gameState.slots)) {
-    renderSlotFromState(slotId, window.gameState.slots[slotId]);
+  for (const slotId of Object.keys(state.slots || {})) {
+    renderSlotFromState(slotId, state.slots[slotId], true); // fromServer = true
   }
 });
 
