@@ -379,11 +379,6 @@ clearBoardBtn.addEventListener("click", () => {
     decks: window.gameState.decks,
     drawPile: window.gameState.drawPile
   });
-
-  // --- Force render all slots empty locally ---
-  document.querySelectorAll(".field-slot").forEach(slot => {
-    renderSlotFromState(slot.id, null);
-  });
 });
 
 
