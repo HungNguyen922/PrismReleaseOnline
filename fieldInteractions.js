@@ -130,6 +130,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!sourceSlot) return;
     
         card = removeTopCardFromSlot(sourceSlot);
+        removeCard(sourtSlot.id);
       }
     
       if (!card) return;
