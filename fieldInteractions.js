@@ -220,7 +220,7 @@ function removeTopCardFromSlot(slot) {
 }
 
 // Pop previous card from history manually (called by your drop handler if needed)
-function clearSlot(slot, clearHistory = true) {
+function clearSlot(slot, clearHistory = true, skipServerUpdate = false) {
   if (!slot) return;
 
   slot.innerHTML = "";
@@ -230,7 +230,7 @@ function clearSlot(slot, clearHistory = true) {
     window.slotHistories[slot.id] = [];
   }
 
-  if (window.gameState?.slots) {
+  if (!skipServerUpdate && window.gameState?.slots) {
     delete window.gameState.slots[slot.id];
     updateServerState?.({ slots: window.gameState.slots });
   }
@@ -358,7 +358,7 @@ clearBoardBtn.addEventListener("click", () => {
 
   // Clear all field slots & histories
   window.slotHistories ||= {};
-  document.querySelectorAll(".field-slot").forEach(slot => clearSlot(slot));
+  document.querySelectorAll(".field-slot").forEach(slot => clearSlot(slot, true, true)); // skip per-slot server updates
   
   // Clear global game state
   window.gameState = {
