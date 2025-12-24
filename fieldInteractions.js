@@ -155,9 +155,10 @@ function placeCardInSlot(slot, card) {
 
   // Save the current top card to history if it exists
   const current = slot.dataset.card;
-  if (current && current.trim()) {
+  if (current && current.trim() && card) {
     window.slotHistories[slot.id].push(current);
   }
+
 
   // Clear slot DOM
   slot.innerHTML = "";
@@ -357,15 +358,15 @@ const clearBoardBtn = document.getElementById("clear-board-btn");
 clearBoardBtn.addEventListener("click", () => {
   if (!confirm("Are you sure you want to clear the board and all hands?")) return;
 
-  // --- Clear all field slots ---
-  window.slotHistories = {};
-   document.querySelectorAll(".field-slot").forEach(slot => {
-    renderSlotFromState(slot.id, null);
+  // Clear all field slots & histories
+  window.slotHistories ||= {};
+  document.querySelectorAll(".field-slot").forEach(slot => {
+    slot.innerHTML = "";
+    delete slot.dataset.card;
+    window.slotHistories[slot.id] = [];
   });
 
-
-
-  // --- Clear global game state ---
+  // Clear global game state
   window.gameState = {
     slots: {},
     hands: {},
@@ -373,24 +374,22 @@ clearBoardBtn.addEventListener("click", () => {
     drawPile: []
   };
 
-  // --- Clear local hand & deck ---
+  // Clear hand & deck
   window.hand = [];
   window.deck = [];
   renderHand();
 
-  // --- Reset other UI state ---
+  // Reset UI
   window.isDragging = false;
   updateHealthUI();
-
-  // --- Close slot viewer modal ---
   slotViewerDialog?.close();
 
-  // --- Force server to adopt fully cleared state ---
+  // Update server
   updateServerState?.({
-    slots: window.gameState.slots,
-    hands: window.gameState.hands,
-    decks: window.gameState.decks,
-    drawPile: window.gameState.drawPile
+    slots: {},
+    hands: {},
+    decks: {},
+    drawPile: []
   });
 });
 
