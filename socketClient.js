@@ -98,8 +98,8 @@ function removeCard(slotId) {
 }
 
 // expose functions for other scripts
-window.renderSlotFromState = renderSlotFromState;
 window.placeCard = placeCard;
 window.removeCard = removeCard;
+window.renderSlotFromState = renderSlotFromState;
 window.socket = socket;
 window.gameId = gameId;
