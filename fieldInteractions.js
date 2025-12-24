@@ -141,7 +141,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     
       placeCardInSlot(destSlot, card);
-      placeCard(destSlot.id, card);
     });
   });
 });
@@ -158,7 +157,6 @@ function placeCardInSlot(slot, card) {
   if (current && current.trim() && card) {
     window.slotHistories[slot.id].push(current);
   }
-
 
   // Clear slot DOM
   slot.innerHTML = "";
@@ -208,13 +206,11 @@ function removeTopCardFromSlot(slot) {
 
   const history = window.slotHistories?.[slot.id];
   
-  slot.innerHTML = "";
-  delete slot.dataset.card;
+  clearSlot(slot);
 
   if (Array.isArray(history) && history.length > 0) {
     const prev = history.pop();
     placeCardInSlot(slot, prev); // 🔥 restore underneath card
-    placeCard(slot.id, prev);
   } else {
     // fully empty
     removeCard(slot.id);
@@ -224,18 +220,21 @@ function removeTopCardFromSlot(slot) {
 }
 
 // Pop previous card from history manually (called by your drop handler if needed)
-function popHistory(slot) {
-  if (!slot) return null;
+function clearSlot(slot, clearHistory = true) {
+  if (!slot) return;
 
-  const history = window.slotHistories?.[slot.id];
-  if (!Array.isArray(history)) return null;
+  slot.innerHTML = "";
+  delete slot.dataset.card;
 
-  while (history.length > 0) {
-    const prev = history.pop();
-    if (prev != null) return prev;
+  if (clearHistory) {
+    window.slotHistories ||= {};
+    window.slotHistories[slot.id] = [];
   }
 
-  return null;
+  if (window.gameState?.slots) {
+    delete window.gameState.slots[slot.id];
+    updateServerState?.({ slots: window.gameState.slots });
+  }
 }
 
 // Show slot viewer
@@ -360,12 +359,8 @@ clearBoardBtn.addEventListener("click", () => {
 
   // Clear all field slots & histories
   window.slotHistories ||= {};
-  document.querySelectorAll(".field-slot").forEach(slot => {
-    slot.innerHTML = "";
-    delete slot.dataset.card;
-    window.slotHistories[slot.id] = [];
-  });
-
+  document.querySelectorAll(".field-slot").forEach(slot => clearSlot(slot));
+  
   // Clear global game state
   window.gameState = {
     slots: {},
