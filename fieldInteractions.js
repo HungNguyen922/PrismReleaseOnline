@@ -130,7 +130,6 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!sourceSlot) return;
     
         card = removeTopCardFromSlot(sourceSlot);
-        removeCard(sourtSlot.id);
       }
     
       if (!card) return;
@@ -276,7 +275,6 @@ handArea.addEventListener("drop", e => {
     if (removed) {
       hand.push(removed);
       renderHand();
-      removeCard(sourceSlotId);
 
     }
   }
