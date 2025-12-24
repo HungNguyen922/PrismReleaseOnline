@@ -18,39 +18,24 @@ function renderSlotFromState(slotId, card) {
   const slot = document.getElementById(slotId);
   if (!slot) return;
 
-  // Ensure the history array exists on the DOM element (client-only)
-  if (!Array.isArray(slot.history)) slot.history = [];
+  // Ensure the slot has a local history array
+  window.slotHistories ||= {};
+  window.slotHistories[slotId] ||= [];
 
+  // If the slot already has this card, do nothing
+  if (slot.dataset.card === card) return;
+
+  // If no card, clear the slot
   if (!card) {
     slot.innerHTML = "";
-    delete slot.dataset.card; // 🔥 not null
+    delete slot.dataset.card;
     return;
   }
 
-  // Build card element (same structure your UI expects)
-  slot.innerHTML = ""; // preserve JS properties like slot.history (these remain)
-  const cardEl = document.createElement("div");
-  cardEl.classList.add("card");
-  cardEl.setAttribute("draggable", "true");
-  cardEl.dataset.card = card;
-
-  const img = document.createElement("img");
-  img.src = "cardDatabase/" + formatCardName(card) + ".png";
-  img.alt = card;
-  img.classList.add("card-img");
-
-  cardEl.appendChild(img);
-  slot.appendChild(cardEl);
-  slot.dataset.card = card;
-
-  // Drag from slot: set transfer data so drops work
-  cardEl.addEventListener("dragstart", ev => {
-    // console.log("socketClient render: dragstart", slotId, card);
-    ev.dataTransfer.setData("from", "slot");
-    ev.dataTransfer.setData("slotId", slotId);
-    ev.dataTransfer.setData("card", card);
-  });
+  // Otherwise, place the card in the slot using the canonical function
+  placeCardInSlot(slot, card);
 }
+
 
 socket.on("gameState", state => {
   // Merge incoming state into existing window.gameState safely.
