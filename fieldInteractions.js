@@ -147,10 +147,22 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 // Place card in slot (safe, preserves history)
 function placeCardInSlot(slot, card) {
-  if (!slot) return;
+  if (!slot || !card) return;
 
+  // Ensure global histories exist
+  window.slotHistories ||= {};
+  window.slotHistories[slot.id] ||= [];
+
+  // Save the current top card to history if it exists
+  const current = slot.dataset.card;
+  if (current && current.trim()) {
+    window.slotHistories[slot.id].push(current);
+  }
+
+  // Clear slot DOM
   slot.innerHTML = "";
 
+  // Build the card element
   const cardEl = document.createElement("div");
   cardEl.className = "card";
   cardEl.setAttribute("draggable", "true");
@@ -163,25 +175,27 @@ function placeCardInSlot(slot, card) {
   cardEl.appendChild(img);
   slot.appendChild(cardEl);
 
-  // ✅ ONLY store card data on SLOT
+  // Store top card in dataset
   slot.dataset.card = card;
- 
 
+  // Drag events
   cardEl.addEventListener("dragstart", ev => {
     ev.dataTransfer.setData("from", "slot");
     ev.dataTransfer.setData("slotId", slot.id);
     ev.dataTransfer.setData("card", card);
-    window.isDragging = true;
   });
 
-  cardEl.addEventListener("dragend", ev => {
-    setTimeout(() => { window.isDragging = false; }, 0);
+  cardEl.addEventListener("dragend", () => {
+    setTimeout(() => { isDragging = false; }, 0);
   });
 
-  if (window.gameState) {
-    window.gameState.slots ||= {};
-    window.gameState.slots[slot.id] = card;
-  }
+  // Update global game state
+  window.gameState ||= {};
+  window.gameState.slots ||= {};
+  window.gameState.slots[slot.id] = card;
+
+  // Sync with server
+  updateServerState?.({ slots: window.gameState.slots });
 }
 
 // Remove the top card from slot (null-safe)
@@ -345,10 +359,8 @@ clearBoardBtn.addEventListener("click", () => {
 
   // --- Clear all field slots ---
   window.slotHistories = {};
-  document.querySelectorAll(".field-slot").forEach(slot => {
-    slot.innerHTML = "";
-    delete slot.dataset.card;
-    window.slotHistories[slot.id] = [];
+   document.querySelectorAll(".field-slot").forEach(slot => {
+    renderSlotFromState(slot.id, null);
   });
 
 
