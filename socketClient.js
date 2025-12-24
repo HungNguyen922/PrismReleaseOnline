@@ -58,10 +58,7 @@ socket.on("gameState", state => {
   window.gameState = window.gameState || { slots: {}, hands: {}, decks: {} };
 
   if (state.slots && typeof state.slots === "object") {
-    window.gameState.slots = {
-      ...window.gameState.slots,
-      ...state.slots
-    };
+    window.gameState.slots = state.slots;
   }
 
   // Merge other top-level keys conservatively (replace arrays/primitives)
