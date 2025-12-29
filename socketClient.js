@@ -15,12 +15,20 @@ socket.emit("joinGame", gameId);
  * - If card is falsy, clears the top card but DOES NOT touch slot.history.
  */
 function renderSlotFromState(slotId, card) {
+  // 🔒 Do not overwrite UI during a local drag-drop
+  if (window.isMoveInProgress) return;
+
   const slot = document.getElementById(slotId);
   if (!slot) return;
 
-  // If already correct, do nothing
-  if (slot.dataset.card === card) return;
+  // ✅ Already correct — do nothing
+  if (
+    card &&
+    slot.dataset.card === card &&
+    slot.children.length === 1
+  ) return;
 
+  // Clear slot
   slot.innerHTML = "";
   delete slot.dataset.card;
 
@@ -39,7 +47,7 @@ function renderSlotFromState(slotId, card) {
   slot.appendChild(cardEl);
   slot.dataset.card = card;
 
-  // dragstart only (no server writes)
+  // dragstart only — NO server updates
   cardEl.addEventListener("dragstart", ev => {
     ev.dataTransfer.setData("from", "slot");
     ev.dataTransfer.setData("slotId", slotId);
@@ -47,13 +55,26 @@ function renderSlotFromState(slotId, card) {
   });
 }
 
+
 socket.on("gameState", state => {
+  window.isMoveInProgress = false;
+
+  const prevSlots = window.gameState?.slots || {};
   window.gameState = state;
 
-  for (const slotId of Object.keys(state.slots || {})) {
-    renderSlotFromState(slotId, state.slots[slotId], true); // fromServer = true
+  // 🔥 Clear slots that no longer exist on server
+  for (const slotId in prevSlots) {
+    if (!(slotId in state.slots)) {
+      renderSlotFromState(slotId, null);
+    }
+  }
+
+  // Render current server slots
+  for (const slotId in state.slots) {
+    renderSlotFromState(slotId, state.slots[slotId]);
   }
 });
+
 
 // Sync state to server (small wrapper)
 window.updateServerState = function(partialState) {
