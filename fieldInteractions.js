@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
   window.slotHistories = {};
   window.hand ||= [];
   window.deck ||= [];
+  window.isMoveInProgress = false;
 
   let draggedCardInfo = null;
 
@@ -114,6 +115,10 @@ document.addEventListener("DOMContentLoaded", () => {
     // Drop handler (hand or slot source)
     slot.addEventListener("drop", e => {
       e.preventDefault();
+
+      if (window.isMoveInProgress) return; // 🔒 block fast moves
+      window.isMoveInProgress = true;
+      
       const destSlot = e.currentTarget;
       const from = e.dataTransfer.getData("from");
     
@@ -137,6 +142,10 @@ document.addEventListener("DOMContentLoaded", () => {
       if (card) {
         placeCardInSlot(destSlot, card);
       }
+
+      setTimeout(() => {
+        window.isMoveInProgress = false;
+      }, 100);
     });
   });
 });
