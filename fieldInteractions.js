@@ -115,57 +115,66 @@ document.addEventListener("DOMContentLoaded", () => {
     // Drop handler (hand or slot source)
     slot.addEventListener("drop", e => {
       e.preventDefault();
-
-      if (window.isMoveInProgress) return; // 🔒 block fast moves
+      if (window.isMoveInProgress) return;
+    
       window.isMoveInProgress = true;
-      
+    
       const destSlot = e.currentTarget;
       const from = e.dataTransfer.getData("from");
     
       let card = null;
+      let sourceSlotId = null;
     
       if (from === "hand") {
         const index = parseInt(e.dataTransfer.getData("cardIndex"), 10);
         if (!Number.isInteger(index)) return;
+    
         card = hand.splice(index, 1)[0];
         renderHand();
       } 
-      
       else if (from === "slot") {
-        const sourceSlotId = e.dataTransfer.getData("slotId");
+        sourceSlotId = e.dataTransfer.getData("slotId");
         const sourceSlot = document.getElementById(sourceSlotId);
         if (!sourceSlot) return;
     
-        card = removeTopCardFromSlot(sourceSlot);
+        card = removeTopCardFromSlot(sourceSlot, true); // skip server
       }
     
-      if (card) {
-        placeCardInSlot(destSlot, card);
+      if (!card) {
+        window.isMoveInProgress = false;
+        return;
       }
+    
+      // UI update
+      placeCardInSlot(destSlot, card, true); // skip server
+    
+      // 🔥 SINGLE authoritative server update
+      if (sourceSlotId) {
+        delete window.gameState.slots[sourceSlotId];
+      }
+      window.gameState.slots[destSlot.id] = card;
+    
+      updateServerState({ slots: window.gameState.slots });
 
       setTimeout(() => {
         window.isMoveInProgress = false;
-      }, 100);
+      }, 0);
     });
   });
 });
 // Place card in slot (safe, preserves history)
-function placeCardInSlot(slot, card) {
+function placeCardInSlot(slot, card, skipServerUpdate = false) {
   if (!slot || !card) return;
 
-  // Ensure global histories exist
   window.slotHistories[slot.id] ||= [];
 
-  // Save the current top card to history if it exists
   const current = slot.dataset.card;
-  if (current && current.trim() && card) {
+  if (current && current.trim()) {
     window.slotHistories[slot.id].push(current);
   }
 
-  // Clear slot DOM
   slot.innerHTML = "";
 
-  // Build the card element
   const cardEl = document.createElement("div");
   cardEl.className = "card";
   cardEl.setAttribute("draggable", "true");
@@ -177,46 +186,41 @@ function placeCardInSlot(slot, card) {
 
   cardEl.appendChild(img);
   slot.appendChild(cardEl);
-
-  // Store top card in dataset
   slot.dataset.card = card;
 
-  // Drag events
   cardEl.addEventListener("dragstart", ev => {
     ev.dataTransfer.setData("from", "slot");
     ev.dataTransfer.setData("slotId", slot.id);
     ev.dataTransfer.setData("card", card);
   });
 
-  cardEl.addEventListener("dragend", () => {
-    setTimeout(() => { isDragging = false; }, 0);
-  });
-
-  // Update global game state
-  window.gameState ||= {};
-  window.gameState.slots ||= {};
-  window.gameState.slots[slot.id] = card;
-
-  // Sync with server
-  updateServerState?.({ slots: window.gameState.slots });
+  if (!skipServerUpdate) {
+    window.gameState.slots[slot.id] = card;
+    updateServerState({ slots: window.gameState.slots });
+  }
 }
 
+
 // Remove the top card from slot (null-safe)
-function removeTopCardFromSlot(slot) {
+function removeTopCardFromSlot(slot, skipServerUpdate = false) {
   if (!slot) return null;
 
   const card = slot.dataset.card;
   if (typeof card !== "string" || !card.trim()) return null;
 
   const history = window.slotHistories?.[slot.id];
-  clearSlot(slot, false);
+
+  // UI only
+  clearSlot(slot, false, true);
 
   if (Array.isArray(history) && history.length > 0) {
     const prev = history.pop();
-    placeCardInSlot(slot, prev); // 🔥 restore underneath card
-  } else {
-    // fully empty
-    removeCard(slot.id);
+    placeCardInSlot(slot, prev, true); // 🔥 UI ONLY
+  }
+
+  if (!skipServerUpdate) {
+    delete window.gameState.slots[slot.id];
+    updateServerState({ slots: window.gameState.slots });
   }
 
   return card;
