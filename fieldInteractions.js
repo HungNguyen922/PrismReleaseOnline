@@ -134,15 +134,9 @@ document.addEventListener("DOMContentLoaded", () => {
         card = removeTopCardFromSlot(sourceSlot);
       }
     
-      if (!card) return;
-    
-      const prev = destSlot.dataset.card;
-      if (typeof prev === "string" && prev.trim()) {
-        window.slotHistories[destSlot.id] ||= [];
-        window.slotHistories[destSlot.id].push(prev);
+      if (card) {
+        placeCardInSlot(destSlot, card);
       }
-    
-      placeCardInSlot(destSlot, card);
     });
   });
 });
