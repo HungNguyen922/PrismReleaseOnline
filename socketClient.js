@@ -14,60 +14,37 @@ socket.emit("joinGame", gameId);
  * - Preserves slot.history array if present on the element.
  * - If card is falsy, clears the top card but DOES NOT touch slot.history.
  */
-function renderSlotFromState(slotId, card, fromServer = false) {
+function renderSlotFromState(slotId, card) {
   const slot = document.getElementById(slotId);
   if (!slot) return;
 
-  window.slotHistories ||= {};
-  window.slotHistories[slotId] ||= [];
+  // If already correct, do nothing
+  if (slot.dataset.card === card) return;
 
-  const currentCard = slot.dataset.card;
-
-  // 1️⃣ Early exit: nothing changed
-  if (currentCard === card) return;
-
-  // 2️⃣ If server sync, reset history to match server
-  if (fromServer) {
-    window.slotHistories[slotId] = [];
-  } else if (currentCard) {
-    // 3️⃣ If local move, save current top card to history
-    window.slotHistories[slotId].push(currentCard);
-  }
-
-  // 4️⃣ Apply new card
-  slot.dataset.card = card || "";
   slot.innerHTML = "";
+  delete slot.dataset.card;
 
-  if (card) {
-    const cardEl = document.createElement("div");
-    cardEl.className = "card";
-    cardEl.setAttribute("draggable", "true");
+  if (!card) return;
 
-    const img = document.createElement("img");
-    img.src = "cardDatabase/" + formatCardName(card) + ".png";
-    img.alt = card;
-    img.classList.add("card-img");
+  const cardEl = document.createElement("div");
+  cardEl.className = "card";
+  cardEl.setAttribute("draggable", "true");
 
-    cardEl.appendChild(img);
-    slot.appendChild(cardEl);
+  const img = document.createElement("img");
+  img.src = "cardDatabase/" + formatCardName(card) + ".png";
+  img.alt = card;
+  img.classList.add("card-img");
 
-    // Drag events
-    cardEl.addEventListener("dragstart", ev => {
-      ev.dataTransfer.setData("from", "slot");
-      ev.dataTransfer.setData("slotId", slot.id);
-      ev.dataTransfer.setData("card", card);
-    });
+  cardEl.appendChild(img);
+  slot.appendChild(cardEl);
+  slot.dataset.card = card;
 
-    cardEl.addEventListener("dragend", () => { window.isDragging = false; });
-  }
-
-  // Update global state if local move
-  if (!fromServer) {
-    window.gameState ||= {};
-    window.gameState.slots ||= {};
-    window.gameState.slots[slotId] = card;
-    updateServerState?.({ slots: window.gameState.slots });
-  }
+  // dragstart only (no server writes)
+  cardEl.addEventListener("dragstart", ev => {
+    ev.dataTransfer.setData("from", "slot");
+    ev.dataTransfer.setData("slotId", slotId);
+    ev.dataTransfer.setData("card", card);
+  });
 }
 
 socket.on("gameState", state => {
