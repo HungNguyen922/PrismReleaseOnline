@@ -15,7 +15,8 @@
     "Image": "",
     "Collection Group": "1",
     "Inspirations?": "",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Casting Cirrus",
@@ -33,7 +34,8 @@
     "Image": "",
     "Collection Group": "1",
     "Inspirations?": "Ribbon Dancer",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Casting Stratus",
@@ -51,7 +53,8 @@
     "Image": "",
     "Collection Group": "1",
     "Inspirations?": "Samurai Mafia",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Casting Cumulus",
@@ -69,7 +72,8 @@
     "Image": "",
     "Collection Group": "1",
     "Inspirations?": "Pirate",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Casting Nimbus",
@@ -87,7 +91,8 @@
     "Image": "",
     "Collection Group": "1",
     "Inspirations?": "City Girl",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Carapace Coconut",
@@ -100,12 +105,13 @@
     "Color4": "Yellow",
     "Trait": "",
     "Effect1": "Scrounge 1",
-    "Effect2": "Set Self",
+    "Effect2": "May Set Self",
     "Flavor": "Some call him a kleptomaniac, he thinks it's just economical",
     "Image": "",
     "Collection Group": "1",
     "Inspirations?": "Coconut Crab",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Carapace Horseshoe",
@@ -117,13 +123,14 @@
     "Color3": "",
     "Color4": "",
     "Trait": "",
-    "Effect1": "Rend 3",
-    "Effect2": "Splitting: Scrounge 1 Gate 5",
+    "Effect1": "Opp Rend 3 Controlled",
+    "Effect2": "Stack 5",
     "Flavor": "For being so short, he really knows how to punch up.",
     "Image": "",
     "Collection Group": "1",
     "Inspirations?": "Horseshoe Crab",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Carapace Arrow",
@@ -141,7 +148,8 @@
     "Image": "",
     "Collection Group": "1",
     "Inspirations?": "Arrow Crab",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Carapace Hermit",
@@ -159,7 +167,8 @@
     "Image": "",
     "Collection Group": "1",
     "Inspirations?": "Hermit Crab",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Carapace Spider",
@@ -172,12 +181,13 @@
     "Color4": "",
     "Trait": "",
     "Effect1": "Rend 5:  Send the top 3 cards of a draw pile to a different draw pile.",
-    "Effect2": "Stack 4",
+    "Effect2": "Splitting: Scrounge 1 Gate 4",
     "Flavor": "Like a marionette, you'll always find Spider pulling the strings.",
     "Image": "",
     "Collection Group": "2",
     "Inspirations?": "Japanese Spider Crab",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Floral Torch Ginger",
@@ -195,13 +205,14 @@
     "Image": "",
     "Collection Group": "2",
     "Inspirations?": "",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Floral Plum Blossom",
     "Tags": "Flower",
     "Power": "2",
-    "Bulk": "3",
+    "Bulk": "5",
     "Color1": "Pink",
     "Color2": "Blue",
     "Color3": "Red",
@@ -213,7 +224,8 @@
     "Image": "",
     "Collection Group": "2",
     "Inspirations?": "",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Floral Sundew",
@@ -231,7 +243,8 @@
     "Image": "",
     "Collection Group": "2",
     "Inspirations?": "",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Floral White Lotus",
@@ -249,7 +262,8 @@
     "Image": "",
     "Collection Group": "2",
     "Inspirations?": "",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Floral Rangoon Creeper",
@@ -262,12 +276,13 @@
     "Color4": "",
     "Trait": "",
     "Effect1": "Heal 3",
-    "Effect2": "Opp Single< Gap Self & Mimic 1 Faceup",
+    "Effect2": "Opp Retrieve< Gap 1 & Retrieve 1",
     "Flavor": "If you're down in your luck, Rangoon is always there to lend a hand.",
     "Image": "",
     "Collection Group": "2",
     "Inspirations?": "",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Floral Hibiscus",
@@ -285,7 +300,8 @@
     "Image": "",
     "Collection Group": "2",
     "Inspirations?": "",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Tianshi Imperial Throne",
@@ -303,7 +319,8 @@
     "Image": "",
     "Collection Group": "2",
     "Inspirations?": "",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Tianshi Solid Dipper",
@@ -321,7 +338,8 @@
     "Image": "",
     "Collection Group": "2",
     "Inspirations?": "",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Tianshi Liquid Dipper",
@@ -339,7 +357,8 @@
     "Image": "",
     "Collection Group": "3",
     "Inspirations?": "",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Tianshi Butcher Shops",
@@ -351,13 +370,14 @@
     "Color3": "",
     "Color4": "",
     "Trait": "",
-    "Effect1": "Gap Opponent 1",
+    "Effect1": "Gap Opponent 2",
     "Effect2": "Scanned; Recycle Opponent Hand 2",
     "Flavor": "He may be brutal, but he's not one to waste food.",
     "Image": "",
     "Collection Group": "3",
     "Inspirations?": "",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Tianshi Astrologer",
@@ -375,7 +395,8 @@
     "Image": "",
     "Collection Group": "3",
     "Inspirations?": "",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Tianshi Woman's Bed",
@@ -387,13 +408,14 @@
     "Color3": "Orange",
     "Color4": "",
     "Trait": "",
-    "Effect1": "Scrounge 1 from Prev 2",
+    "Effect1": "Scan All Sets / Block 2",
     "Effect2": "Scanned: Steal 1",
     "Flavor": "She prefers to keep her lovers close.",
     "Image": "",
     "Collection Group": "3",
     "Inspirations?": "",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Weird Death Ball",
@@ -406,12 +428,13 @@
     "Color4": "Red",
     "Trait": "",
     "Effect1": "Gap Opponent 1",
-    "Effect2": "Instant Phase: Held: Topdeck from Main: Draw 1",
+    "Effect2": "Instant Phase: Held: Main Topdeck: Draw 1",
     "Flavor": "Overhand or Underhand? Crash.",
     "Image": "",
     "Collection Group": "3",
     "Inspirations?": "",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Igniting Resonance",
@@ -429,7 +452,8 @@
     "Image": "",
     "Collection Group": "3",
     "Inspirations?": "",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Quaking Stun",
@@ -447,7 +471,8 @@
     "Image": "",
     "Collection Group": "3",
     "Inspirations?": "",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Lethal Overcharge",
@@ -465,7 +490,8 @@
     "Image": "",
     "Collection Group": "3",
     "Inspirations?": "",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Extending Grapple",
@@ -477,13 +503,14 @@
     "Color3": "Cyan",
     "Color4": "",
     "Trait": "",
-    "Effect1": "Remise 2 & Detonate Combo Starter",
-    "Effect2": "Weird Death Ball Combo Starting: Attack & Shift Weird Death Ball upto 2",
+    "Effect1": "Remise 2 & Detonate 1 Chaining",
+    "Effect2": "Weird Death Ball Detonated: Attack & Shift Weird Death Ball upto 2",
     "Flavor": "",
     "Image": "",
     "Collection Group": "",
     "Inspirations?": "",
-    "CardSet": ""
+    "CardSet": "",
+    "": ""
   },
   {
     "Name": "Xeric Steppes",
@@ -495,13 +522,14 @@
     "Color3": "",
     "Color4": "",
     "Trait": "Quick-Set",
-    "Effect1": "Opponent Drought 1",
+    "Effect1": "Opp Drought 1",
     "Effect2": "Any Single< Single -1/+1",
     "Flavor": "Sometimes we just need slow down and relax.",
     "Image": "",
     "Collection Group": "4",
     "Inspirations?": "",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Jade Orphans",
@@ -513,13 +541,14 @@
     "Color3": "Orange",
     "Color4": "Magenta",
     "Trait": "",
-    "Effect1": "Held: Stringing C's in Palette 1 are Jades",
-    "Effect2": "",
+    "Effect1": "Recycle Recall Base 3",
+    "Effect2": "Held: Instant Phase: May Scrounge 1 Jade from Any Gate & Opp Recall 1",
     "Flavor": "Don't underestimate her lonesome. When it all comes together, you better watch your back.",
     "Image": "",
     "Collection Group": "4",
     "Inspirations?": "Silver Wolf",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Jade Kong",
@@ -531,13 +560,33 @@
     "Color3": "",
     "Color4": "",
     "Trait": "",
-    "Effect1": "In Jade String: 3+ Jades Stringing: Jade Play Sequence: 4 DMG",
-    "Effect2": "Lethal< Immortal; If your health would reach 0, this is playable as a Response so that your health cannot go below 1",
+    "Effect1": "Latent In 4+ Jade String: Jade Play Extends This Jade String: 4 DMG",
+    "Effect2": "Lethal< Block All & HP = 1; If your health would reach 0, this is playable as a Response so that your health is now 1",
     "Flavor": "4 of a Kind!",
     "Image": "",
     "Collection Group": "4",
     "Inspirations?": "Castorice",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
+  },
+  {
+    "Name": "Hidden Jade",
+    "Tags": "Tile",
+    "Power": "4",
+    "Bulk": "4",
+    "Color1": "Cyan",
+    "Color2": "Green",
+    "Color3": "",
+    "Color4": "",
+    "Trait": "Quick-Set",
+    "Effect1": "Unload: Pseudo-Pure",
+    "Effect2": "Latent In C String: Responseless Gate ",
+    "Flavor": "They never see it coming and they won't have time to react.",
+    "Image": "",
+    "Collection Group": "4",
+    "Inspirations?": "QQ",
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Jade Pung ",
@@ -549,13 +598,14 @@
     "Color3": "",
     "Color4": "",
     "Trait": "",
-    "Effect1": "Critical: +1 DMG",
-    "Effect2": "Scrounge 1",
+    "Effect1": "Critical: +3 DMG",
+    "Effect2": "Refresh 1",
     "Flavor": "Triple Threat? How about Triple Teamed.",
     "Image": "",
     "Collection Group": "4",
     "Inspirations?": "Tribbie",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Jade Chow",
@@ -567,13 +617,14 @@
     "Color3": "",
     "Color4": "",
     "Trait": "",
-    "Effect1": "POW Step Previous ± 1: 1 DMG",
+    "Effect1": "Laddering: Snipe 1 Opp Held",
     "Effect2": "Recall 1",
     "Flavor": "Just reaping the rewards of the sequence.",
     "Image": "",
     "Collection Group": "4",
     "Inspirations?": "Seele",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Jade Eyes",
@@ -585,31 +636,14 @@
     "Color3": "",
     "Color4": "",
     "Trait": "",
-    "Effect1": "Set  1",
-    "Effect2": "Shift 1 Faceup 2",
+    "Effect1": "Kindling: Recall 1 & Double",
+    "Effect2": "Set 1",
     "Flavor": "We're halfway there now!",
     "Image": "",
     "Collection Group": "4",
     "Inspirations?": "Jade",
-    "CardSet": "FractalSpectrum"
-  },
-  {
-    "Name": "Hidden Jade",
-    "Tags": "Tile",
-    "Power": "1",
-    "Bulk": "1",
-    "Color1": "Cyan",
-    "Color2": "Green",
-    "Color3": "",
-    "Color4": "",
-    "Trait": "Quick-Set",
-    "Effect1": "Unload: Pseudo-Pure",
-    "Effect2": "In C String: Responseless Gate ",
-    "Flavor": "They never see it coming and they won't have time to react.",
-    "Image": "",
-    "Collection Group": "4",
-    "Inspirations?": "QQ",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Checkered King",
@@ -627,7 +661,8 @@
     "Image": "",
     "Collection Group": "4",
     "Inspirations?": "Rhino Beetle",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Checkered Queen",
@@ -645,7 +680,8 @@
     "Image": "",
     "Collection Group": "4",
     "Inspirations?": "Bee",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Checkered Wazir",
@@ -657,13 +693,14 @@
     "Color3": "Violet",
     "Color4": "",
     "Trait": "",
-    "Effect1": "Gap Opponent 1",
+    "Effect1": "Gap Opponent 2",
     "Effect2": "Border Shift 1",
     "Flavor": "Wazir practices death by 1000 jabs.",
     "Image": "",
     "Collection Group": "5",
     "Inspirations?": "Centipede",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Checkered Knight",
@@ -675,13 +712,14 @@
     "Color3": "Orange",
     "Color4": "",
     "Trait": "Pseudo-Split",
-    "Effect1": "Recycle 1 Adjacent 1",
-    "Effect2": "",
+    "Effect1": "Steal 1 ED",
+    "Effect2": "Responded: Border Shift 2",
     "Flavor": "He can come at you from any angle.",
     "Image": "",
     "Collection Group": "5",
     "Inspirations?": "Praying Mantis",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Checkered Ferz",
@@ -693,13 +731,14 @@
     "Color3": "Yellow",
     "Color4": "",
     "Trait": "",
-    "Effect1": "Recycle 1 Diagonal Base 1",
+    "Effect1": "Burn Shove 1",
     "Effect2": "Diagonal Shift 1",
     "Flavor": "She can Drive right past you and you wouldn't notice.",
     "Image": "",
     "Collection Group": "5",
     "Inspirations?": "Wheel Bug",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Checkered Pawn",
@@ -710,14 +749,15 @@
     "Color2": "Blue",
     "Color3": "Yellow",
     "Color4": "",
-    "Trait": "",
-    "Effect1": "Block 2",
-    "Effect2": "Sequence Checkered Doubles",
+    "Trait": "Psuedo-Construct",
+    "Effect1": "Renew 1",
+    "Effect2": "Faceup: Checkered Played: Double",
     "Flavor": "One promotion away from world domination.",
     "Image": "",
     "Collection Group": "5",
     "Inspirations?": "Ant",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Flame Spawn",
@@ -735,7 +775,8 @@
     "Image": "",
     "Collection Group": "5",
     "Inspirations?": "",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Desert Thorns",
@@ -753,7 +794,8 @@
     "Image": "",
     "Collection Group": "5",
     "Inspirations?": "",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Terra Worm",
@@ -771,7 +813,8 @@
     "Image": "",
     "Collection Group": "5",
     "Inspirations?": "",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Grassy Capy",
@@ -789,7 +832,8 @@
     "Image": "",
     "Collection Group": "5",
     "Inspirations?": "",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Vaulting Gull",
@@ -807,7 +851,8 @@
     "Image": "",
     "Collection Group": "5",
     "Inspirations?": "",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Ocean Carp",
@@ -819,13 +864,14 @@
     "Color3": "",
     "Color4": "",
     "Trait": "",
-    "Effect1": "B Leader: Shove 1 from Opponent Hand",
-    "Effect2": "Stack any Gate 2",
+    "Effect1": "B Leader: Shove Opp Hand 1",
+    "Effect2": "Burrow 1 Gated 2",
     "Flavor": "",
     "Image": "",
     "Collection Group": "6",
     "Inspirations?": "",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Fulgural Spark",
@@ -843,7 +889,8 @@
     "Image": "",
     "Collection Group": "6",
     "Inspirations?": "",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Spectral Ghost",
@@ -861,7 +908,8 @@
     "Image": "",
     "Collection Group": "6",
     "Inspirations?": "",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Shimmering Petal",
@@ -879,7 +927,8 @@
     "Image": "",
     "Collection Group": "6",
     "Inspirations?": "",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Second Chance",
@@ -897,7 +946,8 @@
     "Image": "",
     "Collection Group": "6",
     "Inspirations?": "Mahoraga",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Hidden Inventory",
@@ -915,7 +965,8 @@
     "Image": "",
     "Collection Group": "6",
     "Inspirations?": "toji",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Cut-In Seasons",
@@ -933,13 +984,14 @@
     "Image": "",
     "Collection Group": "6",
     "Inspirations?": "",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Unbreakable Hand",
     "Tags": "Bizarre Spirit",
     "Power": "4",
-    "Bulk": "3",
+    "Bulk": "5",
     "Color1": "Blue",
     "Color2": "Magenta",
     "Color3": "Pink",
@@ -951,7 +1003,8 @@
     "Image": "",
     "Collection Group": "6",
     "Inspirations?": "ZA HANDO",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Consuming Cell",
@@ -969,7 +1022,8 @@
     "Image": "",
     "Collection Group": "6",
     "Inspirations?": "",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "One-Shot Pulse",
@@ -987,7 +1041,8 @@
     "Image": "",
     "Collection Group": "",
     "Inspirations?": "",
-    "CardSet": ""
+    "CardSet": "",
+    "": ""
   },
   {
     "Name": "New Fortune",
@@ -1005,43 +1060,27 @@
     "Image": "",
     "Collection Group": "7",
     "Inspirations?": "Dim Sum",
-    "CardSet": "FractalSpectrum"
-  },
-  {
-    "Name": "",
-    "Tags": "",
-    "Power": "",
-    "Bulk": "",
-    "Color1": "",
-    "Color2": "",
-    "Color3": "",
-    "Color4": "",
-    "Trait": "",
-    "Effect1": "",
-    "Effect2": "",
-    "Flavor": "",
-    "Image": "",
-    "Collection Group": "",
-    "Inspirations?": "",
-    "CardSet": ""
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Transcending Flight",
     "Tags": "Gamble Phantom",
     "Power": "5",
-    "Bulk": "1",
+    "Bulk": "2",
     "Color1": "Violet",
     "Color2": "Yellow",
     "Color3": "Magenta",
     "Color4": "Orange",
     "Trait": "",
-    "Effect1": "Held: Home Gap 1 &: Ultimate",
-    "Effect2": "",
+    "Effect1": "Held: Play Overpowers Prev: Opp Drought 1",
+    "Effect2": "Buffer 1 Opp Held ",
     "Flavor": "",
     "Image": "",
     "Collection Group": "7",
     "Inspirations?": "壅",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": "Pinterest"
   },
   {
     "Name": "Boxout Kangaroo",
@@ -1059,7 +1098,8 @@
     "Image": "",
     "Collection Group": "8",
     "Inspirations?": "",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Astral Molten Shell",
@@ -1077,13 +1117,14 @@
     "Image": "",
     "Collection Group": "8",
     "Inspirations?": "Krakatuga",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Inferno Fist",
     "Tags": "Marital Fire",
     "Power": "3",
-    "Bulk": "1",
+    "Bulk": "5",
     "Color1": "Red",
     "Color2": "Pink",
     "Color3": "",
@@ -1095,7 +1136,8 @@
     "Image": "",
     "Collection Group": "9",
     "Inspirations?": "",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Lion Toothed Shrapnel",
@@ -1113,7 +1155,8 @@
     "Image": "",
     "Collection Group": "9",
     "Inspirations?": "",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Buzzing Flyral",
@@ -1131,12 +1174,13 @@
     "Image": "",
     "Collection Group": "9",
     "Inspirations?": "Going Viral",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Barrage Rush",
     "Tags": "Martial",
-    "Power": "4",
+    "Power": "2",
     "Bulk": "1",
     "Color1": "Red",
     "Color2": "Yellow",
@@ -1149,7 +1193,8 @@
     "Image": "",
     "Collection Group": "8",
     "Inspirations?": "Either Stands or Missiles, lol",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "9Juhs",
@@ -1162,12 +1207,13 @@
     "Color4": "",
     "Trait": "",
     "Effect1": "1 DMG per Set",
-    "Effect2": "Taking DMG: Recycle Self & Mimic Attacker",
+    "Effect2": "Taking DMG< Recycle Self & Mimic Attacker",
     "Flavor": "",
     "Image": "",
     "Collection Group": "",
     "Inspirations?": "",
-    "CardSet": ""
+    "CardSet": "",
+    "": ""
   },
   {
     "Name": "Sacred Summoning",
@@ -1185,7 +1231,8 @@
     "Image": "",
     "Collection Group": "8",
     "Inspirations?": "Al Elric",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Strong Updraft",
@@ -1197,13 +1244,14 @@
     "Color3": "",
     "Color4": "",
     "Trait": "",
-    "Effect1": "Opponent 15+ HP: +5 DMG",
+    "Effect1": "Opponent 12+ HP: +3 DMG",
     "Effect2": "Set 1",
     "Flavor": "",
     "Image": "",
     "Collection Group": "",
     "Inspirations?": "",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Tact 4 Aspects",
@@ -1215,13 +1263,14 @@
     "Color3": "",
     "Color4": "",
     "Trait": "",
-    "Effect1": "Critical: +4 DMG",
+    "Effect1": "Laddering: +4 DMG",
     "Effect2": "Parried: Parry Counterless & Opp Refreshes 4 Controlled",
     "Flavor": "",
     "Image": "",
     "Collection Group": "",
     "Inspirations?": "",
-    "CardSet": ""
+    "CardSet": "",
+    "": ""
   },
   {
     "Name": "Ash to Gold",
@@ -1239,10 +1288,11 @@
     "Image": "",
     "Collection Group": "12",
     "Inspirations?": "",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
-    "Name": "Inugami Seasons",
+    "Name": "Paradise Seasons",
     "Tags": "",
     "Power": "3",
     "Bulk": "4",
@@ -1257,7 +1307,8 @@
     "Image": "",
     "Collection Group": "9",
     "Inspirations?": "",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Rummaging Loot",
@@ -1275,13 +1326,14 @@
     "Image": "",
     "Collection Group": "9",
     "Inspirations?": "",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Sentinel Sniper",
     "Tags": "Projectile",
     "Power": "3",
-    "Bulk": "1",
+    "Bulk": "5",
     "Color1": "Red",
     "Color2": "Orange",
     "Color3": "",
@@ -1293,7 +1345,8 @@
     "Image": "",
     "Collection Group": "9",
     "Inspirations?": "SL Architect",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Explosive Date",
@@ -1306,12 +1359,13 @@
     "Color4": "",
     "Trait": "Opp Responsive; this can be played as a response to an opponent",
     "Effect1": "Choose BLK #: Opp Recycles All Helds with that BLK",
-    "Effect2": "",
+    "Effect2": "Ripped: 2 DMG",
     "Flavor": "",
     "Image": "",
     "Collection Group": "13",
     "Inspirations?": "Reze",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Rising Phoenix",
@@ -1329,7 +1383,8 @@
     "Image": "",
     "Collection Group": "14",
     "Inspirations?": "",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Slash and Burn",
@@ -1347,7 +1402,8 @@
     "Image": "",
     "Collection Group": "",
     "Inspirations?": "",
-    "CardSet": ""
+    "CardSet": "",
+    "": ""
   },
   {
     "Name": "Rotting Heart",
@@ -1365,25 +1421,27 @@
     "Image": "",
     "Collection Group": "",
     "Inspirations?": "",
-    "CardSet": ""
+    "CardSet": "",
+    "": ""
   },
   {
     "Name": "Pele The Barren",
     "Tags": "Fire Bug",
-    "Power": "2",
+    "Power": "3",
     "Bulk": "1",
     "Color1": "Violet",
     "Color2": "Red",
     "Color3": "Blue",
     "Color4": "",
     "Trait": "",
-    "Effect1": "Counterless & No Opponent Response: Recycle Self: The Opponent cannot Counter this card.",
-    "Effect2": "Opponent Drought 1: The Opponent draws 1 less card next time they would draw a card",
+    "Effect1": "Counterless & No Opp Response: Recycle Self: The Opponent cannot Counter this card.",
+    "Effect2": "Leech 1",
     "Flavor": "",
     "Image": "",
     "Collection Group": "7",
     "Inspirations?": "Caconemobius fori",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Tempo Moth",
@@ -1401,7 +1459,8 @@
     "Image": "",
     "Collection Group": "14",
     "Inspirations?": "",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Iron Spire",
@@ -1419,31 +1478,33 @@
     "Image": "",
     "Collection Group": "",
     "Inspirations?": "",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Sponge Soak",
     "Tags": "Aquatic",
     "Power": "2",
-    "Bulk": "1",
+    "Bulk": "4",
     "Color1": "Yellow",
     "Color2": "Blue",
     "Color3": "",
     "Color4": "",
     "Trait": "",
-    "Effect1": "Held: Taking DMG: Block 1",
+    "Effect1": "Held: Taking DMG: Fortify 1 Opp Held",
     "Effect2": "Opponent Held Ripped< Drought Opponent 2",
     "Flavor": "",
     "Image": "",
     "Collection Group": "11",
     "Inspirations?": "",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Devouring Chainsaw",
     "Tags": "Bladed Soldier",
     "Power": "3",
-    "Bulk": "3",
+    "Bulk": "2",
     "Color1": "Orange",
     "Color2": "Violet",
     "Color3": "Yellow",
@@ -1455,7 +1516,8 @@
     "Image": "",
     "Collection Group": "14",
     "Inspirations?": "Denji",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Mystic Wish",
@@ -1473,13 +1535,14 @@
     "Image": "",
     "Collection Group": "17",
     "Inspirations?": "Dragon Balls",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Heavy Hand",
     "Tags": "Item",
     "Power": "4",
-    "Bulk": "6",
+    "Bulk": "5",
     "Color1": "Blue",
     "Color2": "Yellow",
     "Color3": "",
@@ -1491,7 +1554,8 @@
     "Image": "",
     "Collection Group": "15",
     "Inspirations?": "",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Brick Storm",
@@ -1509,13 +1573,14 @@
     "Image": "",
     "Collection Group": "10",
     "Inspirations?": "",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Tact Acrozard",
     "Tags": "Boom Ball",
     "Power": "4",
-    "Bulk": "2",
+    "Bulk": "5",
     "Color1": "Orange",
     "Color2": "Yellow",
     "Color3": "Green",
@@ -1527,7 +1592,8 @@
     "Image": "",
     "Collection Group": "11",
     "Inspirations?": "Yodan Shifour",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Nameless Owl",
@@ -1545,13 +1611,14 @@
     "Image": "",
     "Collection Group": "13",
     "Inspirations?": "",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Veering Lightning",
     "Tags": "Electric",
     "Power": "1",
-    "Bulk": "4",
+    "Bulk": "5",
     "Color1": "Violet",
     "Color2": "Orange",
     "Color3": "",
@@ -1563,7 +1630,8 @@
     "Image": "",
     "Collection Group": "10",
     "Inspirations?": "zuko",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Eye for an Eye",
@@ -1576,12 +1644,13 @@
     "Color4": "",
     "Trait": "",
     "Effect1": "Counterless",
-    "Effect2": "Opp Response< Scrounge All Opp Responses",
+    "Effect2": "Opp Parry< Scrounge All Opp Parries",
     "Flavor": "",
     "Image": "",
     "Collection Group": "12",
     "Inspirations?": "",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Surface Tension",
@@ -1593,16 +1662,17 @@
     "Color3": "",
     "Color4": "",
     "Trait": "",
-    "Effect1": "Opponent Play< Disarm Non-Gated Effects",
+    "Effect1": "Opp Play< Disarm Non-Gated Effects",
     "Effect2": "Chaining: Bounce 1 Gate 3",
     "Flavor": "",
     "Image": "",
     "Collection Group": "",
     "Inspirations?": "Sundew vs Stratus ",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
-    "Name": "Lovesick Loop",
+    "Name": "Paradise Lovesick Loop",
     "Tags": "",
     "Power": "2",
     "Bulk": "4",
@@ -1611,13 +1681,33 @@
     "Color3": "",
     "Color4": "",
     "Trait": "",
-    "Effect1": "Opponent Play< Bounce Played",
+    "Effect1": "Opp Play< Bounce Played",
     "Effect2": "Shift 1 Faceup 1",
     "Flavor": "",
     "Image": "",
     "Collection Group": "10",
     "Inspirations?": "kion dojima",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
+  },
+  {
+    "Name": "Paradise By the Seaside",
+    "Tags": "",
+    "Power": "3",
+    "Bulk": "2",
+    "Color1": "Pink",
+    "Color2": "Orange",
+    "Color3": "Violet",
+    "Color4": "",
+    "Trait": "",
+    "Effect1": "Opp Play< Parry Opp Play & Take Play's BLK",
+    "Effect2": "Ripped: Buffer 1",
+    "Flavor": "",
+    "Image": "",
+    "Collection Group": "",
+    "Inspirations?": "",
+    "CardSet": "",
+    "": ""
   },
   {
     "Name": "Leaves Arisen",
@@ -1629,13 +1719,14 @@
     "Color3": "Cyan",
     "Color4": "",
     "Trait": "",
-    "Effect1": "Any Non-Attack Single< Recycle/ Gap/ Set Single & 1 Held",
+    "Effect1": "Any Non-Attack Single< Gap/ Recycle/ Set Single & 1 Held",
     "Effect2": "",
     "Flavor": "",
     "Image": "",
     "Collection Group": "11",
     "Inspirations?": "",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Zander Lurking",
@@ -1653,10 +1744,11 @@
     "Image": "",
     "Collection Group": "13",
     "Inspirations?": "",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
-    "Name": "Collapsing Shrine",
+    "Name": "Festering Oryzae",
     "Tags": "",
     "Power": "2",
     "Bulk": "4",
@@ -1671,7 +1763,27 @@
     "Image": "",
     "Collection Group": "13",
     "Inspirations?": "",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
+  },
+  {
+    "Name": "Festering Sunburst ",
+    "Tags": "",
+    "Power": "1",
+    "Bulk": "5",
+    "Color1": "Magenta",
+    "Color2": "Blue",
+    "Color3": "Orange",
+    "Color4": "",
+    "Trait": "Pseudo-Construct",
+    "Effect1": "No Prev: Burn Shove 1",
+    "Effect2": "Shift 1 Faceup 1",
+    "Flavor": "",
+    "Image": "",
+    "Collection Group": "",
+    "Inspirations?": "",
+    "CardSet": "",
+    "": ""
   },
   {
     "Name": "Myriad Spear Strikes",
@@ -1689,10 +1801,11 @@
     "Image": "",
     "Collection Group": "14",
     "Inspirations?": "",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
-    "Name": "Blackhole Orca",
+    "Name": "Nebula Jelly ",
     "Tags": "",
     "Power": "1",
     "Bulk": "6",
@@ -1707,10 +1820,11 @@
     "Image": "",
     "Collection Group": "",
     "Inspirations?": "",
-    "CardSet": ""
+    "CardSet": "",
+    "": ""
   },
   {
-    "Name": "Blackhole Shark",
+    "Name": "Nebula Shark",
     "Tags": "Space Fish",
     "Power": "2",
     "Bulk": "5",
@@ -1725,10 +1839,11 @@
     "Image": "",
     "Collection Group": "11",
     "Inspirations?": "Whale Shark",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
-    "Name": "Blackhole Whale",
+    "Name": "Nebula Whale",
     "Tags": "",
     "Power": "3",
     "Bulk": "4",
@@ -1737,19 +1852,20 @@
     "Color3": "",
     "Color4": "",
     "Trait": "Opp Responsive",
-    "Effect1": "Gap 1 Gate 3",
-    "Effect2": "Heal 1 / Gapped: Buffer 2",
+    "Effect1": "Gap 1 Gate 2",
+    "Effect2": "Heal 2 / Gapped: Buffer 1",
     "Flavor": "",
     "Image": "",
     "Collection Group": "",
     "Inspirations?": "",
-    "CardSet": ""
+    "CardSet": "",
+    "": ""
   },
   {
-    "Name": "Death by 1000 Cuts",
+    "Name": "Nebula Squid",
     "Tags": "Bladed",
-    "Power": "2",
-    "Bulk": "2",
+    "Power": "4",
+    "Bulk": "3",
     "Color1": "Green",
     "Color2": "Violet",
     "Color3": "",
@@ -1761,7 +1877,27 @@
     "Image": "",
     "Collection Group": "12",
     "Inspirations?": "Flying Guillotine",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
+  },
+  {
+    "Name": "Fertile Fields",
+    "Tags": "Food",
+    "Power": "2",
+    "Bulk": "4",
+    "Color1": "Green",
+    "Color2": "Fuchsia",
+    "Color3": "Red",
+    "Color4": "",
+    "Trait": "Quick-Set",
+    "Effect1": "Gap Refresh Opp 2",
+    "Effect2": "Faceup: Column Plays -1/+1",
+    "Flavor": "",
+    "Image": "",
+    "Collection Group": "12",
+    "Inspirations?": "",
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Perfect Game",
@@ -1779,10 +1915,11 @@
     "Image": "",
     "Collection Group": "12",
     "Inspirations?": "Erwin AOT",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
-    "Name": "Boros the Archiver",
+    "Name": "Underworld Archiver",
     "Tags": "",
     "Power": "4",
     "Bulk": "5",
@@ -1797,7 +1934,8 @@
     "Image": "",
     "Collection Group": "15",
     "Inspirations?": "Trayzn the Infinite",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Underworld King",
@@ -1815,7 +1953,8 @@
     "Image": "",
     "Collection Group": "14",
     "Inspirations?": "Mordekaiser",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Rescue Officer First Art ",
@@ -1827,13 +1966,14 @@
     "Color3": "Yellow",
     "Color4": "",
     "Trait": "",
-    "Effect1": "Scrounge 1",
+    "Effect1": "Scrounge 1 & Gap Opp 2",
     "Effect2": "Scrounged Overpowers Self: Scrounge 1",
     "Flavor": "",
     "Image": "",
     "Collection Group": "17",
     "Inspirations?": "Contain",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Verse's Laughing Gleam",
@@ -1851,7 +1991,8 @@
     "Image": "",
     "Collection Group": "12",
     "Inspirations?": "Sparkle",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Rescue Officer Third Art ",
@@ -1869,7 +2010,8 @@
     "Image": "",
     "Collection Group": "7",
     "Inspirations?": "",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Fort Sand",
@@ -1881,13 +2023,14 @@
     "Color3": "",
     "Color4": "",
     "Trait": "",
-    "Effect1": "Retrieve 1 from Scan ED 2; From the top 2 cards of your Extra Deck, add 1 card to your hand.",
+    "Effect1": "Retrieve 1 from Scan ED 3; From the top 2 cards of your Extra Deck, add 1 card to your hand.",
     "Effect2": "Countering: Gap DP 4",
     "Flavor": "",
     "Image": "",
     "Collection Group": "7",
     "Inspirations?": "",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Eyes of the Overseer",
@@ -1905,7 +2048,8 @@
     "Image": "",
     "Collection Group": "8",
     "Inspirations?": "Eye of Ender",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Sniff Niff",
@@ -1923,7 +2067,8 @@
     "Image": "",
     "Collection Group": "11",
     "Inspirations?": "Sniffer",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Kelp Codices",
@@ -1941,7 +2086,8 @@
     "Image": "",
     "Collection Group": "",
     "Inspirations?": "",
-    "CardSet": ""
+    "CardSet": "",
+    "": ""
   },
   {
     "Name": "Divine Insight",
@@ -1959,7 +2105,8 @@
     "Image": "",
     "Collection Group": "10",
     "Inspirations?": "",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Always Bet on the Strongest",
@@ -1977,7 +2124,8 @@
     "Image": "",
     "Collection Group": "14",
     "Inspirations?": "QQ Hakari Dancing",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "X Magistaff",
@@ -1990,18 +2138,19 @@
     "Color4": "",
     "Trait": "",
     "Effect1": "Shifted: Diagonal Shift upto 2",
-    "Effect2": "Sequence: Drought 1",
+    "Effect2": "Sequence: Drought 3",
     "Flavor": "",
     "Image": "",
     "Collection Group": "17",
     "Inspirations?": "",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Dragon of the Sunken World",
     "Tags": "Scaled Beast",
     "Power": "4",
-    "Bulk": "2",
+    "Bulk": "5",
     "Color1": "Yellow",
     "Color2": "Green",
     "Color3": "",
@@ -2013,7 +2162,8 @@
     "Image": "",
     "Collection Group": "10",
     "Inspirations?": "Thuong Luong",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Garden's Knotweed",
@@ -2025,13 +2175,52 @@
     "Color3": "Pink",
     "Color4": "",
     "Trait": "",
-    "Effect1": "Steal 1 & OPP Drought 1",
+    "Effect1": "Steal 1 & Opp Drought 1",
     "Effect2": "Faceup: Disarm Adjacents",
     "Flavor": "",
     "Image": "",
     "Collection Group": "11",
     "Inspirations?": "Knotweed",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
+  },
+  {
+    "Name": "Garden's Badgermole",
+    "Tags": "",
+    "Power": "5",
+    "Bulk": "3",
+    "Color1": "Orange",
+    "Color2": "Violet",
+    "Color3": "Pink",
+    "Color4": "",
+    "Trait": "",
+    "Effect1": "Rend 1 Border 2",
+    "Effect2": "2 Rends: Gift Opp Stockpile 1",
+    "Flavor": "",
+    "Image": "",
+    "Collection Group": "",
+    "Inspirations?": "",
+    "CardSet": "",
+    "": ""
+  },
+  {
+    "Name": "Garden's Orchid",
+    "Tags": "",
+    "Power": "6",
+    "Bulk": "2",
+    "Color1": "Orange",
+    "Color2": "Green",
+    "Color3": "Pink",
+    "Color4": "",
+    "Trait": "",
+    "Effect1": "Gap All Gates 1",
+    "Effect2": "Faceup: Stun Adjacents; While face up, all zones next to this cannot be manipulated by card effects",
+    "Flavor": "",
+    "Image": "",
+    "Collection Group": "",
+    "Inspirations?": "",
+    "CardSet": "",
+    "": ""
   },
   {
     "Name": "Onsen Asperitas",
@@ -2049,7 +2238,8 @@
     "Image": "",
     "Collection Group": "16",
     "Inspirations?": "",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Washed Over",
@@ -2067,7 +2257,8 @@
     "Image": "",
     "Collection Group": "15",
     "Inspirations?": "",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Cren",
@@ -2085,7 +2276,8 @@
     "Image": "",
     "Collection Group": "16",
     "Inspirations?": "",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Feitrhross Soothing Tusk",
@@ -2103,7 +2295,8 @@
     "Image": "",
     "Collection Group": "12",
     "Inspirations?": "",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Fish Fry Frenzy",
@@ -2121,7 +2314,8 @@
     "Image": "",
     "Collection Group": "16",
     "Inspirations?": "Goby Wishwashi",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Starfruit Showers",
@@ -2139,7 +2333,8 @@
     "Image": "",
     "Collection Group": "17",
     "Inspirations?": "Shooting Starfruit",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Mirror Monolith",
@@ -2157,13 +2352,14 @@
     "Image": "",
     "Collection Group": "16",
     "Inspirations?": "Pecanolith",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Shining Ladder",
     "Tags": "Structure",
     "Power": "2",
-    "Bulk": "1",
+    "Bulk": "5",
     "Color1": "Cyan",
     "Color2": "Red",
     "Color3": "Yellow",
@@ -2175,7 +2371,8 @@
     "Image": "",
     "Collection Group": "17",
     "Inspirations?": "",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Tempo Score",
@@ -2193,7 +2390,8 @@
     "Image": "",
     "Collection Group": "14",
     "Inspirations?": "",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Raging Horn Nardrifa",
@@ -2211,7 +2409,8 @@
     "Image": "",
     "Collection Group": "14",
     "Inspirations?": "",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Descending Lava",
@@ -2224,12 +2423,13 @@
     "Color4": "",
     "Trait": "",
     "Effect1": "Latent",
-    "Effect2": "Attacking: 1 DMG & Save 1: When this card is involved in dealing DMG, deal 1 DMG.",
+    "Effect2": "Attacking: 1 DMG & Set Draw 1: When this card is involved in dealing DMG, deal 1 DMG.",
     "Flavor": "",
     "Image": "",
     "Collection Group": "7",
     "Inspirations?": "",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "From Beyond the Fog",
@@ -2247,7 +2447,8 @@
     "Image": "",
     "Collection Group": "7",
     "Inspirations?": "",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Dual Strike",
@@ -2265,7 +2466,8 @@
     "Image": "",
     "Collection Group": "15",
     "Inspirations?": "",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Fusion Cynoros",
@@ -2283,7 +2485,8 @@
     "Image": "",
     "Collection Group": "8",
     "Inspirations?": "",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Tunnel Vision Panic",
@@ -2301,7 +2504,8 @@
     "Image": "",
     "Collection Group": "",
     "Inspirations?": "",
-    "CardSet": ""
+    "CardSet": "",
+    "": ""
   },
   {
     "Name": "Mothrenasoyisuh",
@@ -2314,12 +2518,13 @@
     "Color4": "",
     "Trait": "",
     "Effect1": "Draw 1 / Splitting: Draw 2",
-    "Effect2": "",
+    "Effect2": "Gap Base 1",
     "Flavor": "",
     "Image": "",
     "Collection Group": "17",
     "Inspirations?": "",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Heavy Reroll",
@@ -2330,14 +2535,15 @@
     "Color2": "Magenta",
     "Color3": "",
     "Color4": "",
-    "Trait": "Responsive",
+    "Trait": "OPP-Responsive",
     "Effect1": "Shift 1 Border 1 Border; Move a bordering card that's\non top of a gate, to a Gate Zone bordering it.",
     "Effect2": "Reclaim & Opp Scrounge 1;",
     "Flavor": "",
     "Image": "",
     "Collection Group": "10",
     "Inspirations?": "",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Delivery Pigeon",
@@ -2349,13 +2555,14 @@
     "Color3": "",
     "Color4": "",
     "Trait": "",
-    "Effect1": "Shift 1 Faceup 1: Choose any card on the top of a Gate and move it onto another Gate 1 spot away. ",
-    "Effect2": "Faceup: Shifts +1 DMG; While this card is \non top of a gate, shifted cards can deal +1 DMG.",
+    "Effect1": "Faceup: Shifts +1 DMG; While this card is \non top of a gate, shifted cards can deal +1 DMG.",
+    "Effect2": "Shift 1 Faceup 1 Twice: Choose any card on the top of a Gate and move it onto another Gate 1 spot away. ",
     "Flavor": "",
     "Image": "",
     "Collection Group": "17",
     "Inspirations?": "",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Short Breath",
@@ -2368,12 +2575,13 @@
     "Color4": "",
     "Trait": "",
     "Effect1": "Border Shift 1",
-    "Effect2": "Tour 5: Opponent Drought 4",
+    "Effect2": "Tour 5: Opponent Drought 6",
     "Flavor": "",
     "Image": "",
     "Collection Group": "17",
     "Inspirations?": "Exhaust/ Zheng He",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Barnacle Rock",
@@ -2391,25 +2599,8 @@
     "Image": "",
     "Collection Group": "16",
     "Inspirations?": "",
-    "CardSet": "FractalSpectrum"
-  },
-  {
-    "Name": "Borrowed Time",
-    "Tags": "",
-    "Power": "2",
-    "Bulk": "3",
-    "Color1": "Blue",
-    "Color2": "Pink",
-    "Color3": "",
-    "Color4": "",
-    "Trait": "",
-    "Effect1": "Take 1 & +1 Pass",
-    "Effect2": "Gap Opponent 1",
-    "Flavor": "",
-    "Image": "",
-    "Collection Group": "8",
-    "Inspirations?": "",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Road of the Lost",
@@ -2427,7 +2618,8 @@
     "Image": "",
     "Collection Group": "13",
     "Inspirations?": "",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Final Frame",
@@ -2445,7 +2637,27 @@
     "Image": "",
     "Collection Group": "13",
     "Inspirations?": "Walnut Bowling",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
+  },
+  {
+    "Name": "Borrowed Time",
+    "Tags": "",
+    "Power": "4",
+    "Bulk": "3",
+    "Color1": "Blue",
+    "Color2": "Pink",
+    "Color3": "",
+    "Color4": "",
+    "Trait": "",
+    "Effect1": "Take 1 & +1 Pass",
+    "Effect2": "Shove 1 Opp Helds",
+    "Flavor": "",
+    "Image": "",
+    "Collection Group": "",
+    "Inspirations?": "",
+    "CardSet": "",
+    "": ""
   },
   {
     "Name": "Titanic Jira",
@@ -2463,7 +2675,8 @@
     "Image": "",
     "Collection Group": "9",
     "Inspirations?": "Greninja",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Festering Algae Bloom",
@@ -2476,12 +2689,13 @@
     "Color4": "",
     "Trait": "",
     "Effect1": "Heal 2",
-    "Effect2": "Gap 1 Faceup 2",
+    "Effect2": "Gap 1 Faceup 3",
     "Flavor": "",
     "Image": "",
     "Collection Group": "9",
     "Inspirations?": "",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Nuevanan Dream",
@@ -2493,13 +2707,14 @@
     "Color3": "Fuchsia",
     "Color4": "",
     "Trait": "Quick-Set",
-    "Effect1": "Heal 1",
+    "Effect1": "Heal 2 & Unload: 2 Sets: Heal 4",
     "Effect2": "Instant Phase: Faceup: Set 1; While active,if you have more HP than the Opponent Set 1 card from your hand.",
     "Flavor": "",
     "Image": "",
     "Collection Group": "16",
     "Inspirations?": "",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Tact Borisas ",
@@ -2517,25 +2732,8 @@
     "Image": "",
     "Collection Group": "16",
     "Inspirations?": "",
-    "CardSet": "FractalSpectrum"
-  },
-  {
-    "Name": "Fertile Fields",
-    "Tags": "Food",
-    "Power": "2",
-    "Bulk": "4",
-    "Color1": "Green",
-    "Color2": "Fuchsia",
-    "Color3": "Red",
-    "Color4": "",
-    "Trait": "Quick-Set",
-    "Effect1": "Faceup: Plays gains Heal 1",
-    "Effect2": "Faceup: Column Plays -1/+1",
-    "Flavor": "",
-    "Image": "",
-    "Collection Group": "12",
-    "Inspirations?": "",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Twilight Totality",
@@ -2553,7 +2751,8 @@
     "Image": "",
     "Collection Group": "13",
     "Inspirations?": "",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "High Hysteria",
@@ -2571,13 +2770,14 @@
     "Image": "",
     "Collection Group": "15",
     "Inspirations?": "",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Tidal Horizon",
     "Tags": "Aquatic",
     "Power": "3",
-    "Bulk": "1",
+    "Bulk": "5",
     "Color1": "Blue",
     "Color2": "Yellow",
     "Color3": "",
@@ -2589,13 +2789,14 @@
     "Image": "",
     "Collection Group": "11",
     "Inspirations?": "",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "World of Gray",
     "Tags": "Structure",
     "Power": "2",
-    "Bulk": "3",
+    "Bulk": "5",
     "Color1": "Blue",
     "Color2": "Orange",
     "Color3": "Yellow",
@@ -2607,7 +2808,8 @@
     "Image": "",
     "Collection Group": "12",
     "Inspirations?": "",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Lurking Bjornveggr Claw",
@@ -2625,12 +2827,13 @@
     "Image": "",
     "Collection Group": "13",
     "Inspirations?": "Polar Bear",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Otter Rescue",
     "Tags": "",
-    "Power": "3",
+    "Power": "4",
     "Bulk": "3",
     "Color1": "Blue",
     "Color2": "Green",
@@ -2643,10 +2846,11 @@
     "Image": "",
     "Collection Group": "",
     "Inspirations?": "",
-    "CardSet": ""
+    "CardSet": "",
+    "": ""
   },
   {
-    "Name": "Angler Sight",
+    "Name": "Lantern Sight",
     "Tags": "Aquatic",
     "Power": "4",
     "Bulk": "2",
@@ -2661,7 +2865,8 @@
     "Image": "",
     "Collection Group": "14",
     "Inspirations?": "",
-    "CardSet": "FractalSpectrum"
+    "CardSet": "FractalSpectrum",
+    "": ""
   },
   {
     "Name": "Onsen Fog",
@@ -2679,7 +2884,8 @@
     "Image": "",
     "Collection Group": "",
     "Inspirations?": "Kunoichi",
-    "CardSet": "Prism'sEdge"
+    "CardSet": "Prism'sEdge",
+    "": ""
   },
   {
     "Name": "Onsen Mamma",
@@ -2690,14 +2896,15 @@
     "Color2": "Cyan",
     "Color3": "",
     "Color4": "",
-    "Trait": "Three-Step",
+    "Trait": "Two-Step",
     "Effect1": "Attacking: Recall 1 per Response",
     "Effect2": "",
     "Flavor": "",
     "Image": "",
     "Collection Group": "",
     "Inspirations?": "Waifu Energy",
-    "CardSet": "Prism'sEdge"
+    "CardSet": "Prism'sEdge",
+    "": ""
   },
   {
     "Name": "Onsen Virga",
@@ -2715,7 +2922,8 @@
     "Image": "",
     "Collection Group": "",
     "Inspirations?": "",
-    "CardSet": "Prism'sEdge"
+    "CardSet": "Prism'sEdge",
+    "": ""
   },
   {
     "Name": "Reign of Arrows",
@@ -2728,12 +2936,13 @@
     "Color4": "Violet",
     "Trait": "Quick-Set",
     "Effect1": "Faceup: E-DMG: Snipe E-DMG Card",
-    "Effect2": "Faceup: Any Player Taking E-DMG: May Recycle Fortify x Helds",
+    "Effect2": "Faceup: All Parries Recycle Fortify Self Instead",
     "Flavor": "",
     "Image": "",
     "Collection Group": "",
     "Inspirations?": "",
-    "CardSet": "Prism'sEdge"
+    "CardSet": "Prism'sEdge",
+    "": ""
   },
   {
     "Name": "Benevolent Angel Quang",
@@ -2751,7 +2960,8 @@
     "Image": "https://upload-os-bbs.hoyolab.com/upload/2024/12/15/75039916/dcd60be8a9c255f065408ff871129b3b_6507755258890347146.png?x-oss-process=image%2Fresize%2Cs_1000%2Fauto-orient%2C0%2Finterlace%2C1%2Fformat%2Cwebp%2Fquality%2Cq_70",
     "Collection Group": "",
     "Inspirations?": "",
-    "CardSet": "Prism'sEdge"
+    "CardSet": "Prism'sEdge",
+    "": ""
   },
   {
     "Name": "Rhythm World",
@@ -2769,7 +2979,8 @@
     "Image": "",
     "Collection Group": "",
     "Inspirations?": "",
-    "CardSet": "Prism'sEdge"
+    "CardSet": "Prism'sEdge",
+    "": ""
   },
   {
     "Name": "Ranchero Hustler",
@@ -2787,7 +2998,8 @@
     "Image": "",
     "Collection Group": "",
     "Inspirations?": "",
-    "CardSet": "Prism'sEdge"
+    "CardSet": "Prism'sEdge",
+    "": ""
   },
   {
     "Name": "Descent to Babble",
@@ -2805,7 +3017,8 @@
     "Image": "",
     "Collection Group": "",
     "Inspirations?": "",
-    "CardSet": ""
+    "CardSet": "",
+    "": ""
   },
   {
     "Name": "Eternal Dragon",
@@ -2823,7 +3036,8 @@
     "Image": "",
     "Collection Group": "",
     "Inspirations?": "Bakugan",
-    "CardSet": "Prism'sEdge"
+    "CardSet": "Prism'sEdge",
+    "": ""
   },
   {
     "Name": "Psycho Dice ",
@@ -2841,7 +3055,8 @@
     "Image": "https://x.com/VOICENOSAGYOUBA",
     "Collection Group": "",
     "Inspirations?": "Rat",
-    "CardSet": "Prism'sEdge"
+    "CardSet": "Prism'sEdge",
+    "": ""
   },
   {
     "Name": "Demon Reaper",
@@ -2859,7 +3074,8 @@
     "Image": "https://x.com/VOICENOSAGYOUBA",
     "Collection Group": "",
     "Inspirations?": "",
-    "CardSet": "Prism'sEdge"
+    "CardSet": "Prism'sEdge",
+    "": ""
   },
   {
     "Name": "Reflect Shark ",
@@ -2877,7 +3093,8 @@
     "Image": "https://x.com/VOICENOSAGYOUBA",
     "Collection Group": "",
     "Inspirations?": "",
-    "CardSet": "Prism'sEdge"
+    "CardSet": "Prism'sEdge",
+    "": ""
   },
   {
     "Name": "Everburning",
@@ -2890,12 +3107,13 @@
     "Color4": "",
     "Trait": "",
     "Effect1": "Ultimate",
-    "Effect2": "Critical: +4  DMG",
+    "Effect2": "Critical< +4  DMG",
     "Flavor": "",
     "Image": "",
     "Collection Group": "",
     "Inspirations?": "",
-    "CardSet": "Prism'sEdge"
+    "CardSet": "Prism'sEdge",
+    "": ""
   },
   {
     "Name": "Petrifying Peach",
@@ -2913,7 +3131,8 @@
     "Image": "",
     "Collection Group": "",
     "Inspirations?": "",
-    "CardSet": "Prism'sEdge"
+    "CardSet": "Prism'sEdge",
+    "": ""
   },
   {
     "Name": "Hardboiled",
@@ -2925,13 +3144,14 @@
     "Color3": "",
     "Color4": "",
     "Trait": "",
-    "Effect1": "+2 DMG / Heal +2",
-    "Effect2": "",
+    "Effect1": "Rend Base 4",
+    "Effect2": "+2 DMG / Heal +2",
     "Flavor": "",
     "Image": "",
     "Collection Group": "",
     "Inspirations?": "",
-    "CardSet": "Prism'sEdge"
+    "CardSet": "Prism'sEdge",
+    "": ""
   },
   {
     "Name": "Charge Catalyst",
@@ -2949,7 +3169,8 @@
     "Image": "",
     "Collection Group": "",
     "Inspirations?": "",
-    "CardSet": "Prism'sEdge"
+    "CardSet": "Prism'sEdge",
+    "": ""
   },
   {
     "Name": "UltraCrit, Fallen Star",
@@ -2967,7 +3188,8 @@
     "Image": "",
     "Collection Group": "",
     "Inspirations?": "",
-    "CardSet": "Prism'sEdge"
+    "CardSet": "Prism'sEdge",
+    "": ""
   },
   {
     "Name": "Evolving Genesis",
@@ -2985,7 +3207,8 @@
     "Image": "",
     "Collection Group": "",
     "Inspirations?": "",
-    "CardSet": "Prism'sEdge"
+    "CardSet": "Prism'sEdge",
+    "": ""
   },
   {
     "Name": "Panichela",
@@ -3003,7 +3226,8 @@
     "Image": "",
     "Collection Group": "",
     "Inspirations?": "",
-    "CardSet": "Prism'sEdge"
+    "CardSet": "Prism'sEdge",
+    "": ""
   },
   {
     "Name": "Looted Treasure",
@@ -3021,7 +3245,8 @@
     "Image": "",
     "Collection Group": "",
     "Inspirations?": "",
-    "CardSet": ""
+    "CardSet": "",
+    "": ""
   },
   {
     "Name": "Buried Treasure",
@@ -3039,12 +3264,13 @@
     "Image": "",
     "Collection Group": "",
     "Inspirations?": "",
-    "CardSet": "Prism'sEdge"
+    "CardSet": "Prism'sEdge",
+    "": ""
   },
   {
     "Name": "Slip Between the Crabs",
     "Tags": "Shelled",
-    "Power": "1",
+    "Power": "2",
     "Bulk": "3",
     "Color1": "Orange",
     "Color2": "Red",
@@ -3057,7 +3283,8 @@
     "Image": "",
     "Collection Group": "",
     "Inspirations?": "Yeti Crab",
-    "CardSet": "Prism'sEdge"
+    "CardSet": "Prism'sEdge",
+    "": ""
   },
   {
     "Name": "Cherry Bomb",
@@ -3075,7 +3302,8 @@
     "Image": "",
     "Collection Group": "",
     "Inspirations?": "",
-    "CardSet": ""
+    "CardSet": "",
+    "": ""
   },
   {
     "Name": "Return to Zero",
@@ -3093,7 +3321,8 @@
     "Image": "",
     "Collection Group": "",
     "Inspirations?": "",
-    "CardSet": "Prism'sEdge"
+    "CardSet": "Prism'sEdge",
+    "": ""
   },
   {
     "Name": "The Strongest Surive",
@@ -3111,7 +3340,8 @@
     "Image": "",
     "Collection Group": "",
     "Inspirations?": "",
-    "CardSet": "Prism'sEdge"
+    "CardSet": "Prism'sEdge",
+    "": ""
   },
   {
     "Name": "Up the Ante",
@@ -3123,13 +3353,14 @@
     "Color3": "Violet",
     "Color4": "",
     "Trait": "BLK 3 & 4",
-    "Effect1": "Countering: All BLKs are 1",
-    "Effect2": "In Counter String: Response String End: 1 DMG per Counter Sequence to String Loser",
+    "Effect1": "Parrying: All BLKs are 1",
+    "Effect2": "In Parry String: Parry String End: Parry Loser Takes 1 per Parry",
     "Flavor": "",
     "Image": "",
     "Collection Group": "",
     "Inspirations?": "",
-    "CardSet": "Prism'sEdge"
+    "CardSet": "Prism'sEdge",
+    "": ""
   },
   {
     "Name": "Snail's Pace",
@@ -3147,7 +3378,8 @@
     "Image": "",
     "Collection Group": "",
     "Inspirations?": "",
-    "CardSet": ""
+    "CardSet": "",
+    "": ""
   },
   {
     "Name": "Picking Up the Pieces",
@@ -3165,7 +3397,8 @@
     "Image": "",
     "Collection Group": "",
     "Inspirations?": "",
-    "CardSet": "Prism'sEdge"
+    "CardSet": "Prism'sEdge",
+    "": ""
   },
   {
     "Name": "Marine Lull",
@@ -3183,7 +3416,8 @@
     "Image": "",
     "Collection Group": "",
     "Inspirations?": "",
-    "CardSet": ""
+    "CardSet": "",
+    "": ""
   },
   {
     "Name": "Roaring Argentino",
@@ -3201,7 +3435,8 @@
     "Image": "",
     "Collection Group": "",
     "Inspirations?": "",
-    "CardSet": "Prism'sEdge"
+    "CardSet": "Prism'sEdge",
+    "": ""
   },
   {
     "Name": "Roaring Plios",
@@ -3219,7 +3454,8 @@
     "Image": "",
     "Collection Group": "",
     "Inspirations?": "",
-    "CardSet": "Prism'sEdge"
+    "CardSet": "Prism'sEdge",
+    "": ""
   },
   {
     "Name": "Roaring Megalo",
@@ -3237,79 +3473,8 @@
     "Image": "",
     "Collection Group": "",
     "Inspirations?": "",
-    "CardSet": "Prism'sEdge"
-  },
-  {
-    "Name": "Floral Valerian",
-    "Tags": "Flower",
-    "Power": "2",
-    "Bulk": "3",
-    "Color1": "Pink",
-    "Color2": "Fuchsia",
-    "Color3": "",
-    "Color4": "",
-    "Trait": "Suppress",
-    "Effect1": "Opp Responsive Gift 1",
-    "Effect2": "Heal 1",
-    "Flavor": "",
-    "Image": "",
-    "Collection Group": "",
-    "Inspirations?": "Finnish Dress",
-    "CardSet": "Prism'sEdge"
-  },
-  {
-    "Name": "Floral Hyacinth",
-    "Tags": "Flower",
-    "Power": "3",
-    "Bulk": "4",
-    "Color1": "Pink",
-    "Color2": "Cyan",
-    "Color3": "",
-    "Color4": "",
-    "Trait": "",
-    "Effect1": "Set Scrounge 1",
-    "Effect2": "BLK 4+ Burned< End Turn",
-    "Flavor": "",
-    "Image": "",
-    "Collection Group": "",
-    "Inspirations?": "Turkish Dress",
-    "CardSet": "Prism'sEdge"
-  },
-  {
-    "Name": "Homing Blaze",
-    "Tags": "",
-    "Power": "4",
-    "Bulk": "1",
-    "Color1": "Red",
-    "Color2": "Pink",
-    "Color3": "",
-    "Color4": "",
-    "Trait": "Pseudo-Pure",
-    "Effect1": "Gap Opp 1",
-    "Effect2": "Opp Play< Play 1 Held as a Response",
-    "Flavor": "",
-    "Image": "",
-    "Collection Group": "",
-    "Inspirations?": "",
-    "CardSet": ""
-  },
-  {
-    "Name": "Sweeping Tortise",
-    "Tags": "Mythical Shelled",
-    "Power": "5",
-    "Bulk": "2",
-    "Color1": "Fuchsia",
-    "Color2": "Pink",
-    "Color3": "",
-    "Color4": "",
-    "Trait": "",
-    "Effect1": "Buffer 1",
-    "Effect2": "Opponent Attack< Attack Suppressable",
-    "Flavor": "",
-    "Image": "",
-    "Collection Group": "",
-    "Inspirations?": "Chinese Sacred Beasts",
-    "CardSet": "Prism'sEdge"
+    "CardSet": "Prism'sEdge",
+    "": ""
   },
   {
     "Name": "Perfect Impostor",
@@ -3327,7 +3492,27 @@
     "Image": "",
     "Collection Group": "",
     "Inspirations?": "",
-    "CardSet": "Prism'sEdge"
+    "CardSet": "Prism'sEdge",
+    "": ""
+  },
+  {
+    "Name": "Floral Valerian",
+    "Tags": "Flower",
+    "Power": "2",
+    "Bulk": "3",
+    "Color1": "Pink",
+    "Color2": "Fuchsia",
+    "Color3": "",
+    "Color4": "",
+    "Trait": "Suppress",
+    "Effect1": "Opp Responsive Gift 1",
+    "Effect2": "Heal 1",
+    "Flavor": "",
+    "Image": "",
+    "Collection Group": "",
+    "Inspirations?": "Finnish Dress",
+    "CardSet": "Prism'sEdge",
+    "": ""
   },
   {
     "Name": "Floral Orobanche",
@@ -3345,7 +3530,27 @@
     "Image": "",
     "Collection Group": "",
     "Inspirations?": "Ancient Greek",
-    "CardSet": "Prism'sEdge"
+    "CardSet": "Prism'sEdge",
+    "": ""
+  },
+  {
+    "Name": "Floral Hyacinth",
+    "Tags": "Flower",
+    "Power": "3",
+    "Bulk": "4",
+    "Color1": "Pink",
+    "Color2": "Cyan",
+    "Color3": "",
+    "Color4": "",
+    "Trait": "",
+    "Effect1": "Set Scrounge 1",
+    "Effect2": "BLK 4+ Burned< End Turn",
+    "Flavor": "",
+    "Image": "",
+    "Collection Group": "",
+    "Inspirations?": "Turkish Dress",
+    "CardSet": "Prism'sEdge",
+    "": ""
   },
   {
     "Name": "Rewrite Fate",
@@ -3363,16 +3568,55 @@
     "Image": "",
     "Collection Group": "",
     "Inspirations?": "",
-    "CardSet": ""
+    "CardSet": "",
+    "": ""
+  },
+  {
+    "Name": "Homing Blaze",
+    "Tags": "",
+    "Power": "4",
+    "Bulk": "1",
+    "Color1": "Red",
+    "Color2": "Pink",
+    "Color3": "",
+    "Color4": "",
+    "Trait": "Pseudo-Pure",
+    "Effect1": "Gap Opp 1",
+    "Effect2": "Opp Play< Play 1 Held as a Response",
+    "Flavor": "",
+    "Image": "",
+    "Collection Group": "",
+    "Inspirations?": "",
+    "CardSet": "",
+    "": ""
+  },
+  {
+    "Name": "Sweeping Tortise",
+    "Tags": "Mythical Shelled",
+    "Power": "5",
+    "Bulk": "2",
+    "Color1": "Fuchsia",
+    "Color2": "Pink",
+    "Color3": "",
+    "Color4": "",
+    "Trait": "",
+    "Effect1": "Buffer 1",
+    "Effect2": "Opponent Attack< Attack Suppressable",
+    "Flavor": "",
+    "Image": "",
+    "Collection Group": "",
+    "Inspirations?": "Chinese Sacred Beasts",
+    "CardSet": "Prism'sEdge",
+    "": ""
   },
   {
     "Name": "High Construct",
     "Tags": "Structure",
     "Power": "2",
     "Bulk": "3",
-    "Color1": "Green",
+    "Color1": "Fuchsia",
     "Color2": "Blue",
-    "Color3": "Fuchsia",
+    "Color3": "Green",
     "Color4": "",
     "Trait": "Quick-Set",
     "Effect1": "Shift 1 Adjacent 1 Border",
@@ -3381,7 +3625,8 @@
     "Image": "",
     "Collection Group": "",
     "Inspirations?": "",
-    "CardSet": "Prism'sEdge"
+    "CardSet": "Prism'sEdge",
+    "": ""
   },
   {
     "Name": "Dark Fountain",
@@ -3399,7 +3644,8 @@
     "Image": "",
     "Collection Group": "",
     "Inspirations?": "",
-    "CardSet": ""
+    "CardSet": "",
+    "": ""
   },
   {
     "Name": "To Rule Them All",
@@ -3417,7 +3663,8 @@
     "Image": "",
     "Collection Group": "",
     "Inspirations?": "",
-    "CardSet": "Prism'sEdge"
+    "CardSet": "Prism'sEdge",
+    "": ""
   },
   {
     "Name": "Plunging Dragon",
@@ -3435,7 +3682,8 @@
     "Image": "",
     "Collection Group": "",
     "Inspirations?": "",
-    "CardSet": "Prism'sEdge"
+    "CardSet": "Prism'sEdge",
+    "": ""
   },
   {
     "Name": "Insatiable Blackhole",
@@ -3453,7 +3701,8 @@
     "Image": "",
     "Collection Group": "",
     "Inspirations?": "",
-    "CardSet": ""
+    "CardSet": "",
+    "": ""
   },
   {
     "Name": "Frenzy Herring",
@@ -3471,7 +3720,8 @@
     "Image": "",
     "Collection Group": "",
     "Inspirations?": "",
-    "CardSet": ""
+    "CardSet": "",
+    "": ""
   },
   {
     "Name": "Path to Oneself",
@@ -3489,7 +3739,8 @@
     "Image": "",
     "Collection Group": "",
     "Inspirations?": "",
-    "CardSet": "Prism'sEdge"
+    "CardSet": "Prism'sEdge",
+    "": ""
   },
   {
     "Name": "All of Nature",
@@ -3507,7 +3758,8 @@
     "Image": "",
     "Collection Group": "",
     "Inspirations?": "",
-    "CardSet": "Prism'sEdge"
+    "CardSet": "Prism'sEdge",
+    "": ""
   },
   {
     "Name": "Rampant Kudzu",
@@ -3525,7 +3777,8 @@
     "Image": "",
     "Collection Group": "",
     "Inspirations?": "",
-    "CardSet": ""
+    "CardSet": "",
+    "": ""
   },
   {
     "Name": "Rescue Officer Second Art",
@@ -3543,7 +3796,8 @@
     "Image": "",
     "Collection Group": "",
     "Inspirations?": "Secure",
-    "CardSet": "Prism'sEdge"
+    "CardSet": "Prism'sEdge",
+    "": ""
   },
   {
     "Name": "Foundation's Endless Furniture",
@@ -3561,7 +3815,8 @@
     "Image": "",
     "Collection Group": "",
     "Inspirations?": "",
-    "CardSet": "Prism'sEdge"
+    "CardSet": "Prism'sEdge",
+    "": ""
   },
   {
     "Name": "Maiden Godspeed",
@@ -3579,7 +3834,8 @@
     "Image": "",
     "Collection Group": "",
     "Inspirations?": "",
-    "CardSet": ""
+    "CardSet": "",
+    "": ""
   },
   {
     "Name": "Tearing Howl",
@@ -3597,7 +3853,8 @@
     "Image": "",
     "Collection Group": "",
     "Inspirations?": "Tearlament HAVNIS",
-    "CardSet": ""
+    "CardSet": "",
+    "": ""
   },
   {
     "Name": "Tearing Squall",
@@ -3615,7 +3872,8 @@
     "Image": "",
     "Collection Group": "",
     "Inspirations?": "Tearlament HAVNIS",
-    "CardSet": ""
+    "CardSet": "",
+    "": ""
   },
   {
     "Name": "Tearing Mewl",
@@ -3633,7 +3891,8 @@
     "Image": "",
     "Collection Group": "",
     "Inspirations?": "",
-    "CardSet": ""
+    "CardSet": "",
+    "": ""
   },
   {
     "Name": "Celestial Servant",
@@ -3651,7 +3910,8 @@
     "Image": "",
     "Collection Group": "",
     "Inspirations?": "",
-    "CardSet": ""
+    "CardSet": "",
+    "": ""
   },
   {
     "Name": "Scutes All Over",
@@ -3669,7 +3929,8 @@
     "Image": "",
     "Collection Group": "",
     "Inspirations?": "",
-    "CardSet": ""
+    "CardSet": "",
+    "": ""
   },
   {
     "Name": "Mind Mine",
@@ -3687,7 +3948,8 @@
     "Image": "",
     "Collection Group": "",
     "Inspirations?": "",
-    "CardSet": ""
+    "CardSet": "",
+    "": ""
   },
   {
     "Name": "Frenzy Sailfish",
@@ -3705,7 +3967,8 @@
     "Image": "",
     "Collection Group": "",
     "Inspirations?": "",
-    "CardSet": ""
+    "CardSet": "",
+    "": ""
   },
   {
     "Name": "Final Bang",
@@ -3723,7 +3986,8 @@
     "Image": "",
     "Collection Group": "",
     "Inspirations?": "",
-    "CardSet": "Prism'sEdge"
+    "CardSet": "Prism'sEdge",
+    "": ""
   },
   {
     "Name": "Manic Munitions",
@@ -3741,7 +4005,8 @@
     "Image": "",
     "Collection Group": "",
     "Inspirations?": "",
-    "CardSet": "Prism'sEdge"
+    "CardSet": "Prism'sEdge",
+    "": ""
   },
   {
     "Name": "Surface Reflections",
@@ -3759,7 +4024,8 @@
     "Image": "",
     "Collection Group": "",
     "Inspirations?": "",
-    "CardSet": ""
+    "CardSet": "",
+    "": ""
   },
   {
     "Name": "Invasion Tax",
@@ -3777,7 +4043,8 @@
     "Image": "",
     "Collection Group": "",
     "Inspirations?": "",
-    "CardSet": ""
+    "CardSet": "",
+    "": ""
   },
   {
     "Name": "Vampiric World",
@@ -3795,7 +4062,8 @@
     "Image": "",
     "Collection Group": "",
     "Inspirations?": "",
-    "CardSet": "Prism'sEdge"
+    "CardSet": "Prism'sEdge",
+    "": ""
   },
   {
     "Name": "In the Image of Perfection",
@@ -3813,7 +4081,8 @@
     "Image": "",
     "Collection Group": "",
     "Inspirations?": "",
-    "CardSet": "Prism'sEdge"
+    "CardSet": "Prism'sEdge",
+    "": ""
   },
   {
     "Name": "Turbo Star",
@@ -3831,7 +4100,8 @@
     "Image": "",
     "Collection Group": "",
     "Inspirations?": "",
-    "CardSet": "Prism'sEdge"
+    "CardSet": "Prism'sEdge",
+    "": ""
   },
   {
     "Name": "Terminal Conquest",
@@ -3849,7 +4119,8 @@
     "Image": "",
     "Collection Group": "",
     "Inspirations?": "",
-    "CardSet": "Prism'sEdge"
+    "CardSet": "Prism'sEdge",
+    "": ""
   },
   {
     "Name": "Macro Mackerel",
@@ -3867,7 +4138,8 @@
     "Image": "",
     "Collection Group": "",
     "Inspirations?": "",
-    "CardSet": "Prism'sEdge"
+    "CardSet": "Prism'sEdge",
+    "": ""
   },
   {
     "Name": "Art of the Second Hit",
@@ -3885,7 +4157,8 @@
     "Image": "",
     "Collection Group": "",
     "Inspirations?": "",
-    "CardSet": "Prism'sEdge"
+    "CardSet": "Prism'sEdge",
+    "": ""
   },
   {
     "Name": "Charging Battery",
@@ -3896,32 +4169,34 @@
     "Color2": "Cyan",
     "Color3": "Green",
     "Color4": "",
-    "Trait": "Remise 2",
-    "Effect1": "1 Held: Fill 5",
+    "Trait": "Remise 1",
+    "Effect1": "1 Held & Burned: Fill 5",
     "Effect2": "",
     "Flavor": "",
     "Image": "",
     "Collection Group": "",
     "Inspirations?": "",
-    "CardSet": ""
+    "CardSet": "",
+    "": ""
   },
   {
     "Name": "Harmonic Synchronicity",
     "Tags": "Music",
-    "Power": "1",
-    "Bulk": "1",
+    "Power": "2",
+    "Bulk": "5",
     "Color1": "Pink",
     "Color2": "",
     "Color3": "",
     "Color4": "",
     "Trait": "",
     "Effect1": "Recoil",
-    "Effect2": "Psuedo-Pure/ Union: Psuedo-Pure/Union Aligned Activates",
+    "Effect2": "Psuedo-Pure/ Union< Psuedo-Pure/Union Aligned Activates",
     "Flavor": "",
     "Image": "",
     "Collection Group": "",
     "Inspirations?": "",
-    "CardSet": "Prism'sEdge"
+    "CardSet": "Prism'sEdge",
+    "": ""
   },
   {
     "Name": "Driving Tiger",
@@ -3939,7 +4214,8 @@
     "Image": "",
     "Collection Group": "",
     "Inspirations?": "",
-    "CardSet": "Prism'sEdge"
+    "CardSet": "Prism'sEdge",
+    "": ""
   },
   {
     "Name": "Full Assault",
@@ -3957,7 +4233,8 @@
     "Image": "",
     "Collection Group": "",
     "Inspirations?": "",
-    "CardSet": "Prism'sEdge"
+    "CardSet": "Prism'sEdge",
+    "": ""
   },
   {
     "Name": "Flick Time Rejuvenation",
@@ -3975,7 +4252,8 @@
     "Image": "",
     "Collection Group": "",
     "Inspirations?": "",
-    "CardSet": ""
+    "CardSet": "",
+    "": ""
   },
   {
     "Name": "Checkered Archer",
@@ -3993,7 +4271,8 @@
     "Image": "",
     "Collection Group": "",
     "Inspirations?": "",
-    "CardSet": "Prism'sEdge"
+    "CardSet": "Prism'sEdge",
+    "": ""
   },
   {
     "Name": "Checkered Cannon",
@@ -4011,7 +4290,8 @@
     "Image": "",
     "Collection Group": "",
     "Inspirations?": "",
-    "CardSet": "Prism'sEdge"
+    "CardSet": "Prism'sEdge",
+    "": ""
   },
   {
     "Name": "Pendulum Elegy",
@@ -4029,7 +4309,8 @@
     "Image": "",
     "Collection Group": "",
     "Inspirations?": "",
-    "CardSet": ""
+    "CardSet": "",
+    "": ""
   },
   {
     "Name": "Stay Here",
@@ -4047,7 +4328,8 @@
     "Image": "https://x.com/VOICENOSAGYOUBA",
     "Collection Group": "",
     "Inspirations?": "kirin",
-    "CardSet": "Prism'sEdge"
+    "CardSet": "Prism'sEdge",
+    "": ""
   },
   {
     "Name": "Aloetic Cure",
@@ -4065,6 +4347,7 @@
     "Image": "",
     "Collection Group": "",
     "Inspirations?": "",
-    "CardSet": "Prism'sEdge"
+    "CardSet": "Prism'sEdge",
+    "": ""
   }
 ]
