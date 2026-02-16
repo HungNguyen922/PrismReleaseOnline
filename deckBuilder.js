@@ -121,7 +121,7 @@ function renderCards(cards) {
   }
 
   // Function to add a card to the deck
-  const MAX_EXTRA = 4;
+  const MAX_EXTRA = 5;
 
   function addToDeck(cardEl) {
   const cardName = cardEl.dataset.cardName;
