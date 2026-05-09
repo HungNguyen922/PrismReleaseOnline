@@ -7,7 +7,7 @@ import DeckPanel from "./DeckPanel";
 import CardModal from "./CardModal";
 
 import { getPalette } from "./palette";
-import { encodeDeck, decodeDeck } from "../DeckCode";
+import { encodeDeck, decodeDeck } from "./DeckCode";
 
 export default function DeckBuilder() {
   const [allCards, setAllCards] = useState([]);

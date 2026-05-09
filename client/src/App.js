@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route, NavLink } from "react-router-do
 
 import Home from "./pages/Home";
 import Gallery from "./pages/Gallery";
-import DeckBuilder from "./components/deckstuff/DeckBuilder";
+import DeckBuilder from "./components/deckbuilder/DeckBuilder";
 import GameBoard from "./pages/GameBoard";
 
 const linkStyle = ({ isActive }) => ({

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Card from "../components/Card";
-import CardModal from "../components/deckstuff/CardModal";
+import CardModal from "../components/deckbuilder/CardModal";
 
 export default function Gallery() {
   const [cards, setCards] = useState([]);
