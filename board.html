@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Prism Release Game Board</title>
+    <link rel="stylesheet" href="board.css" />
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+
+    <!-- ============================
+         TOP NAVIGATION BANNER
+    ============================= -->
+    <div class="banner">
+        <a href="index.html" class="banner-title">PR Deck Builder</a>
+        <a href="gallery.html" class="banner-btn">Gallery</a>
+        <a href="deck.html" class="banner-btn">Deck Builder</a>
+        <a href="board.html" class="banner-btn">Game Board</a>
+        <a href="maker.html" class="banner-btn">Card Maker</a>
+        <a href="printouts.html" class="banner-btn">Printout Exporter</a>
+    </div>
+
+    <!-- ============================
+          DECK LOADING
+    ============================= -->
+    <div class="deck-controls-top">
+        <input type="file" id="deck-upload" accept=".txt" />
+        <button id="upload-button">Load Deck</button>
+    </div>
+
+    <div class="content">
+
+        <!-- ============================
+             MAIN PLAYFIELD
+        ============================= -->
+        <div class="playfield-wrapper">
+            <div class="playfield">
+
+                <!-- Opponent Set Row -->
+                <div class="top-strip">
+                    <div id="opp-set-left" class="card-slot field-slot"></div>
+                    <div id="opp-set-center" class="card-slot field-slot"></div>
+                    <div id="opp-set-right" class="card-slot field-slot"></div>
+                </div>
+
+                <!-- Gate Rows -->
+                <div class="center-grid">
+                    <div id="opp-gate-left" class="card-slot field-slot"></div>
+                    <div id="opp-gate-center" class="card-slot field-slot"></div>
+                    <div id="opp-gate-right" class="card-slot field-slot"></div>
+
+                    <div id="your-gate-left" class="card-slot field-slot"></div>
+                    <div id="your-gate-center" class="card-slot field-slot"></div>
+                    <div id="your-gate-right" class="card-slot field-slot"></div>
+                </div>
+
+                <!-- Your Set Row -->
+                <div class="bottom-strip">
+                    <div id="your-set-left" class="card-slot field-slot"></div>
+                    <div id="your-set-center" class="card-slot field-slot"></div>
+                    <div id="your-set-right" class="card-slot field-slot"></div>
+                </div>
+
+            </div> <!-- end playfield -->
+        </div> <!-- end playfield-wrapper -->
+
+        <!-- PUBLIC RESOURCES -->
+        <div class="public-resources">
+            <div id="deck-slot" class="card-slot public-slot">Draw Pile</div>
+            <div id="gap-slot" class="card-slot field-slot public-slot">Graveyard</div>
+        </div>
+
+        <!-- PRIVATE RESOURCES -->
+        <div class="private-resources">
+            <div id="health-slot" class="health-bar">
+                Health: <span id="health-value">20</span>
+            </div>
+
+            <div class="private-row">
+                <div id="leader-slot" class="card-slot private-slot">Leader</div>
+                <div id="extra-slot" class="card-slot private-slot">Extra Deck</div>
+            </div>
+        </div>
+
+        <!-- BOARD CONTROLS -->
+        <div class="board-controls" style="position: fixed; right: 10px; top: 100px;">
+            <button id="clear-board-btn"
+                style="position: fixed; top: 50%; right: 0; transform: translateY(-50%);
+                       padding: 10px 15px; background-color: orange; color: white;
+                       font-weight: bold; border: none; border-radius: 5px 0 0 5px;
+                       cursor: pointer; z-index: 1000;">
+                Clear Board
+            </button>
+
+            <button id="shuffle-decks-btn">Shuffle All Decks</button>
+        </div>
+
+        <!-- HAND AREA -->
+        <div id="hand-area" class="hand"></div>
+
+        <!-- DRAW OPTIONS-->
+        <div id="draw-menu" class="draw-menu hidden">
+            <button data-action="draw">Draw X</button>
+            <button data-action="fill">Fill to X</button>
+            <button data-action="scan">Scan X</button>
+            <button data-action="stack">Stack X</button>
+        </div>
+
+        <!-- CONFIRMATION DIALOG -->
+        <dialog id="confirm-dialog">
+            <form method="dialog" id="confirm-form">
+                <p>Send this card to the bottom of the draw pile?</p>
+                <menu>
+                    <button id="confirm-ok" value="ok" type="submit">Send to bottom</button>
+                    <button id="confirm-cancel" value="cancel" type="submit">Cancel</button>
+                </menu>
+            </form>
+        </dialog>
+
+        <!-- SLOT VIEWER -->
+        <dialog id="slot-viewer-dialog" class="slot-viewer">
+            <div id="slot-viewer-content" class="slot-viewer-content">
+                <button id="slot-viewer-close" class="slot-viewer-close">✕</button>
+                <h2>Cards in Slot</h2>
+                <div id="slot-viewer-cards" class="slot-viewer-cards"></div>
+            </div>
+        </dialog>
+
+        <!-- EXTRA DECK VIEWING-->
+        <dialog id="extra-deck-dialog" class="slot-viewer">
+            <div class="slot-viewer-content">
+                <button id="extra-deck-close" class="slot-viewer-close">✕</button>
+
+                <h2 id="modal-title">Extra Deck</h2>
+                <div id="extra-deck-cards" class="slot-viewer-cards"></div>
+            </div>
+        </dialog>
+
+
+    </div> <!-- end content -->
+
+    <!-- ============================
+         SCRIPT ORDER
+    ============================= -->
+    <!-- AUTO-SCALE PLAYFIELD -->
+    <script>
+      function scalePlayfield() {
+          const wrapper = document.querySelector(".playfield-wrapper");
+          const playfield = document.querySelector(".playfield");
+
+          const available = wrapper.clientHeight;
+          const needed = playfield.scrollHeight;
+
+          const scale = Math.min(1, available / needed);
+          playfield.style.transform = `scale(${scale})`;
+      }
+
+      window.addEventListener("resize", scalePlayfield);
+      window.addEventListener("DOMContentLoaded", scalePlayfield);
+    </script>
+
+    <!-- DRAW MENU + DRAW LOGIC -->
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // EXTRA DECK CLICK HANDLER
+        document.getElementById("extra-slot").addEventListener("click", () => {
+            Game.UI.openViewModal(
+                Game.State.gameState.extraDeck,
+                "Extra Deck",
+                (index, card) => Game.Actions.drawFromExtraDeck(index)
+            );
+        });
+
+
+        // EXTRA DECK CLOSE BUTTON
+        document.getElementById("extra-deck-close").addEventListener("click", () => {
+            document.getElementById("extra-deck-dialog").close();
+        });
+
+        const deckSlot = document.getElementById("deck-slot");
+        const drawMenu = document.getElementById("draw-menu");
+
+        // Open menu
+        deckSlot.addEventListener("click", () => {
+            drawMenu.classList.remove("hidden");
+        });
+
+        // Handle menu actions
+        document.querySelectorAll("#draw-menu button").forEach(btn => {
+            btn.addEventListener("click", () => {
+                const action = btn.dataset.action;
+                handleDrawAction(action);
+                drawMenu.classList.add("hidden");
+            });
+        });
+
+        // ============================
+        // DRAW FUNCTIONS
+        // ============================
+
+        function handleDrawAction(action) {
+            if (action === "draw") {
+                const x = parseInt(prompt("Draw how many cards?"));
+                if (!isNaN(x)) drawX(x);
+            }
+
+            if (action === "fill") {
+                const x = parseInt(prompt("Fill hand to how many cards?"));
+                if (!isNaN(x)) fillToX(x);
+            }
+
+            if (action === "scan") {
+                const x = parseInt(prompt("Look at top how many cards?"));
+                if (!isNaN(x)) scanX(x);
+            }
+
+            if (action === "stack") {
+                const x = parseInt(prompt("Rearrange top how many cards?"));
+                if (!isNaN(x)) stackX(x);
+            }
+        }
+
+        function drawX(x) {
+            for (let i = 0; i < x; i++) {
+                if (Game.State.gameState.drawPile.length === 0) break;
+                Game.State.hand.push(Game.State.gameState.drawPile.shift());
+            }
+            Game.UI.renderHand();
+            Game.Server.sync({ drawPile: Game.State.gameState.drawPile, hands: { [window.socket.id]: Game.State.hand } });
+            updateDeckUI();
+        }
+
+        function fillToX(x) {
+            while (Game.State.hand.length < x && Game.State.gameState.drawPile.length > 0) {
+                Game.State.hand.push(Game.State.gameState.drawPile.shift());
+            }
+            Game.UI.renderHand();
+            Game.Server.sync({ drawPile: Game.State.gameState.drawPile, hands: { [window.socket.id]: Game.State.hand } });
+            updateDeckUI();
+        }
+
+        function scanX(x) {
+            const topCards = Game.State.gameState.drawPile.slice(0, x);
+
+            Game.UI.openViewModal(
+                topCards,
+                "Scanning",
+                (index) => {
+                    // Draw from draw pile instead of extra deck
+                    const card = Game.State.gameState.drawPile.splice(index, 1)[0];
+                    Game.State.hand.push(card);
+
+                    Game.UI.renderHand();
+                    Game.Server.sync({
+                        drawPile: Game.State.gameState.drawPile,
+                        hands: { [window.socket.id]: Game.State.hand }
+                    });
+                }
+            );
+
+            updateDeckUI();
+        }
+
+
+
+        function stackX(x) {
+            const topCards = Game.State.gameState.drawPile.slice(0, x);
+            alert("Stacking UI not implemented yet — but the function is ready.");
+            updateDeckUI();
+        }
+
+      });
+    </script>
+
+    <!-- GAME LOGIC SCRIPTS -->
+    <script src="globalApi.js"></script>
+    <script src="deckUpload.js"></script>
+    <script src="fieldInteractions.js"></script>
+    <script src="deckDraw.js"></script>
+    <script type="module" src="socketClient.js"></script>
+
+</body>
+</html>

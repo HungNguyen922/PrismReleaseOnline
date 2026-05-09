@@ -1,0 +1,20 @@
+#cardCanvas {
+  width: 20%;
+  height: 20%;
+  object-fit: cover;
+}
+
+.Palette {
+  position: absolute;
+  width: 20%;
+  height: 20%;
+}
+
+@font-face {
+  font-family: 'Fjalla';
+  src: url('cardAssets/FjallaOne-Regular.ttf') format('truetype');
+}
+
+#controls {
+  align-content: center;
+}

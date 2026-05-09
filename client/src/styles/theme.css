@@ -1,0 +1,16 @@
+:root {
+  --color-deep-navy: #21295c;
+  --color-blue-steel: #1b3b6f;
+  --color-teal-blue: #065a82;
+  --color-cyan-blue: #1c7293;
+  --color-blue-gray: #9eb3c2;
+
+  --text-light: #f5f7fa;
+  --text-muted: #c7d3dd;
+}
+
+body {
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  background: var(--color-deep-navy);
+  color: var(--text-light);
+}
