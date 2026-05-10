@@ -1,23 +1,72 @@
-// src/components/deckbuilder/DeckBuilder.jsx
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 
 import FiltersPanel from "./FiltersPanel";
 import CardLibrary from "./CardLibrary";
-import DeckPanel from "./DeckPanel";
+import DeckPanel from "./deckpanel/DeckPanel";
 import CardModal from "./CardModal";
 
-import { getPalette } from "./palette";
-import { encodeDeck, decodeDeck } from "./DeckCode";
+import { formatCardName } from "../../utils/formatCardName";
+
+// Hooks
+import useDeckState from "../../hooks/useDeckState";
+import useCardDrag from "../../hooks/useCardDrag";
+import useFilteredCards from "../../hooks/useFilteredCards";
+import useDeckValidation from "../../hooks/useDeckValidation";
+import useDragAnimation from "../../hooks/useDragAnimation";
 
 export default function DeckBuilder() {
   const [allCards, setAllCards] = useState([]);
-  const [deckMain, setDeckMain] = useState([]);
-  const [deckExtra, setDeckExtra] = useState([]);
-  const [leader, setLeader] = useState(null);
-  const [selectedCard, setSelectedCard] = useState(null);
-
   const [search, setSearch] = useState("");
   const [colorFilter, setColorFilter] = useState("All");
+  const [selectedCard, setSelectedCard] = useState(null);
+
+  // ⭐ Deck state
+  const {
+    deckMain,
+    deckExtra,
+    leader,
+    setLeader,
+    setDeckMain,
+    setDeckExtra,
+    addToMain,
+    addToExtra,
+    removeFromMain,
+    removeFromExtra,
+  } = useDeckState();
+
+  // ⭐ Highlight states
+  const [highlightMain, setHighlightMain] = useState(false);
+  const [highlightExtra, setHighlightExtra] = useState(false);
+  const [highlightLeader, setHighlightLeader] = useState(false);
+
+  // ⭐ Drag system
+  const {
+    dragCard,
+    dragPos,
+    isDragging,
+    startDrag,
+  } = useCardDrag({
+    addToMain,
+    addToExtra,
+    setLeader,
+  });
+
+  // ⭐ Smooth drag animation
+  const smoothPos = useDragAnimation(isDragging, dragPos);
+
+  // ⭐ Filtering
+  const filteredCards = useFilteredCards(allCards, search, colorFilter);
+
+  // ⭐ Validation + import/export
+  const { handleExportDeck, handleImportDeck } = useDeckValidation(
+    deckMain,
+    deckExtra,
+    leader,
+    allCards,
+    setLeader,
+    setDeckMain,
+    setDeckExtra
+  );
 
   // Load card database
   useEffect(() => {
@@ -26,138 +75,114 @@ export default function DeckBuilder() {
       .then((data) => setAllCards(data));
   }, []);
 
-  // Filtered card list
-  const filteredCards = useMemo(() => {
-    return allCards.filter((card) => {
-      const matchesSearch = card.Name.toLowerCase().includes(search.toLowerCase());
-      const palette = getPalette(card);
-      const matchesColor =
-        colorFilter === "All" || palette.includes(colorFilter);
+  // ⭐ Reset scroll when entering DeckBuilder
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
-      return matchesSearch && matchesColor;
-    });
-  }, [allCards, search, colorFilter]);
+  // ⭐ Disable page scrolling
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, []);
 
-  // Color distribution
-  const colorCounts = useMemo(() => {
-    const counts = {};
-    deckMain.forEach((card) => {
-      const palette = getPalette(card);
-      palette.forEach((c) => {
-        counts[c] = (counts[c] || 0) + 1;
-      });
-    });
-    return counts;
-  }, [deckMain]);
-
-  // Power curve
-  const powerCounts = useMemo(() => {
-    const counts = {};
-    deckMain.forEach((card) => {
-      const p = Number(card.Power);
-      if (!isNaN(p)) counts[p] = (counts[p] || 0) + 1;
-    });
-    return counts;
-  }, [deckMain]);
-
-  // Bulk curve
-  const bulkCounts = useMemo(() => {
-    const counts = {};
-    deckMain.forEach((card) => {
-      const b = Number(card.Bulk);
-      if (!isNaN(b)) counts[b] = (counts[b] || 0) + 1;
-    });
-    return counts;
-  }, [deckMain]);
-
-  // Deck actions
-  const addToMain = (card) => {
-    if (deckMain.length < 20) setDeckMain((prev) => [...prev, card]);
-  };
-
-  const addToExtra = (card) => {
-    if (deckExtra.length < 5) setDeckExtra((prev) => [...prev, card]);
-  };
-
-  const removeFromMain = (i) => {
-    setDeckMain((prev) => prev.filter((_, idx) => idx !== i));
-  };
-
-  const removeFromExtra = (i) => {
-    setDeckExtra((prev) => prev.filter((_, idx) => idx !== i));
-  };
-
-  // Export deck code
-  const handleExportDeck = () => {
-    try {
-      const code = encodeDeck({
-        leader,
-        main: deckMain,
-        extra: deckExtra,
-      });
-      navigator.clipboard.writeText(code);
-      alert(`Deck code copied:\n${code}`);
-    } catch (e) {
-      alert("Failed to export deck.");
+  // ⭐ Enable drag slot highlighting
+  useEffect(() => {
+    if (isDragging && dragCard) {
+      if (deckMain.length < 20) setHighlightMain(true);
+      if (deckExtra.length < 5) setHighlightExtra(true);
+      if (!leader) setHighlightLeader(true);
+    } else {
+      setHighlightMain(false);
+      setHighlightExtra(false);
+      setHighlightLeader(false);
     }
-  };
-
-  // Import deck code
-  const handleImportDeck = () => {
-    const code = window.prompt("Paste deck code:");
-    if (!code) return;
-
-    try {
-      const { leader: L, main, extra } = decodeDeck(code.trim(), allCards);
-      setLeader(L);
-      setDeckMain(main);
-      setDeckExtra(extra);
-    } catch (e) {
-      alert("Invalid or unsupported deck code.");
-    }
-  };
+  }, [isDragging, dragCard, deckMain.length, deckExtra.length, leader]);
 
   return (
     <div
       style={{
-        minHeight: "100vh",
-        padding: "24px",
-        background: "radial-gradient(circle at top, #1b3b6f 0, #21295c 40%, #0b1025 100%)",
-        color: "white",
+        height: "100vh",               // ⭐ full viewport height
         display: "grid",
+        gridTemplateRows: "1fr",       // ⭐ force row to stay inside viewport
         gridTemplateColumns: "260px 1.6fr 1.1fr",
         gap: "20px",
+        padding: "24px",
+        background:
+          "radial-gradient(circle at top, #1b3b6f 0, #21295c 40%, #0b1025 100%)",
+        color: "white",
+        overflow: "hidden",            // ⭐ prevent page scroll
       }}
     >
-      <FiltersPanel
-        search={search}
-        setSearch={setSearch}
-        colorFilter={colorFilter}
-        setColorFilter={setColorFilter}
-        deckMain={deckMain}
-        deckExtra={deckExtra}
-        colorCounts={colorCounts}
-        powerCounts={powerCounts}
-        bulkCounts={bulkCounts}
-      />
 
-      <CardLibrary
-        cards={filteredCards}
-        addToMain={addToMain}
-        setSelectedCard={setSelectedCard}
-      />
+      {/* ⭐ FILTERS PANEL — scrolls internally */}
+      <div style={{ height: "100%", minHeight: 0, overflowY: "auto" }}>
+        <FiltersPanel
+          search={search}
+          setSearch={setSearch}
+          colorFilter={colorFilter}
+          setColorFilter={setColorFilter}
+          deckMain={deckMain}
+          deckExtra={deckExtra}
+        />
+      </div>
 
-      <DeckPanel
-        leader={leader}
-        setLeader={setLeader}
-        deckMain={deckMain}
-        deckExtra={deckExtra}
-        removeFromMain={removeFromMain}
-        removeFromExtra={removeFromExtra}
-        onExport={handleExportDeck}
-        onImport={handleImportDeck}
-      />
+      {/* ⭐ CARD LIBRARY — scrolls internally */}
+      <div style={{ height: "100%", minHeight: 0, overflowY: "auto" }}>
+        <CardLibrary
+          cards={filteredCards}
+          addToMain={addToMain}
+          addToExtra={addToExtra}
+          setLeader={setLeader}
+          deckMain={deckMain}
+          deckExtra={deckExtra}
+          leader={leader}
+          setSelectedCard={setSelectedCard}
+          startDrag={startDrag}
+        />
+      </div>
 
+      {/* ⭐ DECK PANEL — scrolls internally */}
+      <div style={{ height: "100%", minHeight: 0, overflowY: "auto" }}>
+        <DeckPanel
+          leader={leader}
+          setLeader={setLeader}
+          deckMain={deckMain}
+          deckExtra={deckExtra}
+          removeFromMain={removeFromMain}
+          removeFromExtra={removeFromExtra}
+          onExport={handleExportDeck}
+          onImport={handleImportDeck}
+          isDragging={isDragging}
+          dragCard={dragCard}
+          highlightMain={highlightMain}
+          highlightExtra={highlightExtra}
+          highlightLeader={highlightLeader}
+          onDropMain={addToMain}
+          onDropExtra={addToExtra}
+          onDropLeader={setLeader}
+          onReorderMain={(from, to) =>
+            setDeckMain((prev) => {
+              const arr = [...prev];
+              const [moved] = arr.splice(from, 1);
+              arr.splice(to, 0, moved);
+              return arr;
+            })
+          }
+          onReorderExtra={(from, to) =>
+            setDeckExtra((prev) => {
+              const arr = [...prev];
+              const [moved] = arr.splice(from, 1);
+              arr.splice(to, 0, moved);
+              return arr;
+            })
+          }
+        />
+      </div>
+
+      {/* ⭐ Card Modal */}
       {selectedCard && (
         <CardModal
           card={selectedCard}
@@ -166,6 +191,28 @@ export default function DeckBuilder() {
           onAddExtra={() => addToExtra(selectedCard)}
           onSetLeader={() => setLeader(selectedCard)}
         />
+      )}
+
+      {/* ⭐ Ghost Card */}
+      {isDragging && dragCard && (
+        <div
+          style={{
+            position: "fixed",
+            left: smoothPos.x,
+            top: smoothPos.y,
+            pointerEvents: "none",
+            zIndex: 9999,
+            width: "120px",
+            opacity: 0.9,
+            transform: "translate(-50%, -50%)",
+          }}
+        >
+          <img
+            src={`/cardDatabase/${formatCardName(dragCard.Name)}.png`}
+            alt=""
+            style={{ width: "100%", borderRadius: "8px" }}
+          />
+        </div>
       )}
     </div>
   );

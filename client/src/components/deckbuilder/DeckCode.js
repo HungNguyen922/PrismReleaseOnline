@@ -40,7 +40,7 @@ function groupByName(cards) {
   return Array.from(map.values());
 }
 
-export function encodeDeck({ leader, main, extra }) {
+export function encodeDeck({ leader, main, extra }) { 
   const bytes = [];
 
   bytes.push(VERSION);

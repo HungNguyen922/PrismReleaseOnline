@@ -3,7 +3,8 @@ import { BrowserRouter as Router, Routes, Route, NavLink } from "react-router-do
 import Home from "./pages/Home";
 import Gallery from "./pages/Gallery";
 import DeckBuilder from "./components/deckbuilder/DeckBuilder";
-import GameBoard from "./pages/GameBoard";
+import Matchmaking from "./pages/matchmaking/MatchMaking";
+import GameBoard from "./pages/gameboard/GameBoard";
 
 const linkStyle = ({ isActive }) => ({
   padding: "8px 14px",
@@ -16,7 +17,7 @@ const linkStyle = ({ isActive }) => ({
   transition: "color 0.2s ease, border-bottom 0.2s ease",
 });
 
-function App() {
+export default function App() {
   return (
     <Router>
       <nav
@@ -102,10 +103,8 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/deck" element={<DeckBuilder />} />
-        <Route path="/board" element={<GameBoard />} />
+        <Route path="/board" element={<Matchmaking />} />
       </Routes>
     </Router>
   );
 }
-
-export default App;

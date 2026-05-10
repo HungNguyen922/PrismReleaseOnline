@@ -14,3 +14,14 @@ body {
   background: var(--color-deep-navy);
   color: var(--text-light);
 }
+
+* {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+}
+
+.zone-highlight {
+  border: 2px solid rgba(212,175,55,0.9) !important;
+  box-shadow: 0 0 12px rgba(212,175,55,0.8) !important;
+}

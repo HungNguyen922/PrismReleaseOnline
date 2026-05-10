@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { getPalette } from "./palette";
 
 export default function FiltersPanel({
@@ -6,35 +7,97 @@ export default function FiltersPanel({
   colorFilter,
   setColorFilter,
   deckMain,
-  deckExtra,
-  colorCounts,
-  powerCounts,
-  bulkCounts
 }) {
+  const total = deckMain.length || 1;
+
+  // ⭐ Compute color distribution
+  const colorCounts = useMemo(() => {
+    const counts = {};
+    deckMain.forEach((card) => {
+      const palette = getPalette(card);
+      palette.forEach((c) => {
+        counts[c] = (counts[c] || 0) + 1;
+      });
+    });
+    return counts;
+  }, [deckMain]);
+
+  // ⭐ Compute power curve
+  const powerCounts = useMemo(() => {
+    const counts = {};
+    deckMain.forEach((card) => {
+      const p = Number(card.Power);
+      if (!isNaN(p)) counts[p] = (counts[p] || 0) + 1;
+    });
+    return counts;
+  }, [deckMain]);
+
+  // ⭐ Compute bulk curve
+  const bulkCounts = useMemo(() => {
+    const counts = {};
+    deckMain.forEach((card) => {
+      const b = Number(card.Bulk);
+      if (!isNaN(b)) counts[b] = (counts[b] || 0) + 1;
+    });
+    return counts;
+  }, [deckMain]);
+
+  // ⭐ Compact bar row
+  const barRow = (label, count, color) => (
+    <div style={{ marginBottom: "6px" }}>
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <span style={{ fontSize: "0.8rem" }}>{label}</span>
+        <span style={{ fontSize: "0.8rem" }}>{count}</span>
+      </div>
+
+      <div
+        style={{
+          height: "6px",
+          background: "rgba(255,255,255,0.1)",
+          borderRadius: "4px",
+          overflow: "hidden",
+        }}
+      >
+        <div
+          style={{
+            width: `${(count / total) * 100}%`,
+            height: "100%",
+            background: color,
+            transition: "width 0.2s",
+          }}
+        />
+      </div>
+    </div>
+  );
+
   return (
-    <div style={{
-      padding: "16px",
-      borderRadius: "16px",
-      background: "rgba(10, 15, 35, 0.85)",
-      border: "1px solid rgba(212, 175, 55, 0.5)",
-      boxShadow: "0 10px 30px rgba(0,0,0,0.6)",
-      backdropFilter: "blur(10px)",
-    }}>
-      <h2 style={{ marginTop: 0 }}>Filters</h2>
+    <div
+      style={{
+        padding: "16px",
+        borderRadius: "12px",
+        background: "rgba(0,0,0,0.35)",
+        border: "1px solid rgba(255,255,255,0.1)",
+
+        // ⭐ The magic trio:
+        height: "100%",     // fill the grid row
+        minHeight: 0,       // allow shrinking inside CSS grid
+        overflowY: "auto",  // scroll internally
+      }}
+    >
+      <h2 style={{ marginBottom: "12px" }}>Filters</h2>
 
       {/* Search */}
       <input
+        type="text"
+        placeholder="Search cards..."
         value={search}
         onChange={(e) => setSearch(e.target.value)}
-        placeholder="Search..."
         style={{
           width: "100%",
-          marginBottom: "12px",
           padding: "6px 8px",
-          borderRadius: "8px",
-          border: "1px solid rgba(158,179,194,0.6)",
-          background: "rgba(5,10,25,0.9)",
-          color: "white",
+          borderRadius: "6px",
+          border: "1px solid rgba(255,255,255,0.2)",
+          marginBottom: "12px",
         }}
       />
 
@@ -44,91 +107,41 @@ export default function FiltersPanel({
         onChange={(e) => setColorFilter(e.target.value)}
         style={{
           width: "100%",
-          marginBottom: "16px",
           padding: "6px 8px",
-          borderRadius: "8px",
-          border: "1px solid rgba(158,179,194,0.6)",
-          background: "rgba(5,10,25,0.9)",
-          color: "white",
+          borderRadius: "6px",
+          border: "1px solid rgba(255,255,255,0.2)",
+          marginBottom: "16px",
         }}
       >
-        <option>All</option>
-        <option>Red</option>
-        <option>Blue</option>
-        <option>Green</option>
-        <option>Yellow</option>
-        <option>Purple</option>
+        <option value="All">All Colors</option>
+        <option value="Red">Red</option>
+        <option value="Orange">Orange</option>
+        <option value="Yellow">Yellow</option>
+        <option value="Green">Green</option>
+        <option value="Cyan">Cyan</option>
+        <option value="Blue">Blue</option>
+        <option value="Violet">Violet</option>
+        <option value="Magenta">Magenta</option>
+        <option value="Pink">Pink</option>
       </select>
 
-      {/* Deck Stats */}
-      <h3>Deck Stats</h3>
-      <p>Main: {deckMain.length} / 20</p>
-      <p>Extra: {deckExtra.length} / 5</p>
+      {/* ⭐ COLOR CURVE */}
+      <h3 style={{ marginBottom: "6px" }}>Color Curve</h3>
+      {Object.entries(colorCounts).map(([color, count]) =>
+        barRow(color, count, color.toLowerCase())
+      )}
 
-      {/* Color Distribution */}
-      {Object.entries(colorCounts).map(([color, count]) => (
-        <div key={color} style={{ display: "flex", alignItems: "center" }}>
-          <span style={{ width: "70px" }}>{color}</span>
-          <div style={{
-            flex: 1,
-            height: "6px",
-            background: "rgba(158,179,194,0.2)",
-            borderRadius: "999px",
-            overflow: "hidden",
-          }}>
-            <div style={{
-              width: `${(count / deckMain.length) * 100}%`,
-              height: "100%",
-              background: "linear-gradient(90deg, #d4af37, rgba(212,175,55,0.2))",
-            }} />
-          </div>
-          <span style={{ marginLeft: "6px" }}>{count}</span>
-        </div>
-      ))}
+      {/* ⭐ POWER CURVE */}
+      <h3 style={{ margin: "12px 0 6px" }}>Power Curve</h3>
+      {Object.entries(powerCounts)
+        .sort(([a], [b]) => Number(a) - Number(b))
+        .map(([p, count]) => barRow(`P${p}`, count, "dodgerblue"))}
 
-      {/* Power Curve */}
-      <h3 style={{ marginTop: "20px" }}>Power Curve</h3>
-      {Object.entries(powerCounts).map(([p, count]) => (
-        <div key={p} style={{ display: "flex", alignItems: "center" }}>
-          <span style={{ width: "50px" }}>P{p}</span>
-          <div style={{
-            flex: 1,
-            height: "6px",
-            background: "rgba(158,179,194,0.2)",
-            borderRadius: "999px",
-            overflow: "hidden",
-          }}>
-            <div style={{
-              width: `${(count / deckMain.length) * 100}%`,
-              height: "100%",
-              background: "linear-gradient(90deg, #d4af37, rgba(212,175,55,0.2))",
-            }} />
-          </div>
-          <span style={{ marginLeft: "6px" }}>{count}</span>
-        </div>
-      ))}
-
-      {/* Bulk Curve */}
-      <h3 style={{ marginTop: "20px" }}>Bulk Curve</h3>
-      {Object.entries(bulkCounts).map(([b, count]) => (
-        <div key={b} style={{ display: "flex", alignItems: "center" }}>
-          <span style={{ width: "50px" }}>B{b}</span>
-          <div style={{
-            flex: 1,
-            height: "6px",
-            background: "rgba(158,179,194,0.2)",
-            borderRadius: "999px",
-            overflow: "hidden",
-          }}>
-            <div style={{
-              width: `${(count / deckMain.length) * 100}%`,
-              height: "100%",
-              background: "linear-gradient(90deg, #d4af37, rgba(212,175,55,0.2))",
-            }} />
-          </div>
-          <span style={{ marginLeft: "6px" }}>{count}</span>
-        </div>
-      ))}
+      {/* ⭐ BULK CURVE */}
+      <h3 style={{ margin: "12px 0 6px" }}>Bulk Curve</h3>
+      {Object.entries(bulkCounts)
+        .sort(([a], [b]) => Number(a) - Number(b))
+        .map(([b, count]) => barRow(`B${b}`, count, "mediumseagreen"))}
     </div>
   );
 }
