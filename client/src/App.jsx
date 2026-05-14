@@ -1,19 +1,19 @@
 import { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, NavLink } from "react-router-dom";
 
-import Home from "./pages/Home";
-import Gallery from "./pages/Gallery";
-import DeckBuilder from "./components/deckbuilder/DeckBuilder";
-import DeckSelect from "./pages/deckselect/DeckSelect";
-import MatchMaking from "./pages/matchmaking/MatchMaking";
-import GameBoard from "./pages/gameboard/GameBoard";
+import Home from "./pages/Home.jsx";
+import Gallery from "./pages/Gallery.jsx";
+import DeckBuilder from "./components/deckbuilder/DeckBuilder.jsx";
+import DeckSelect from "./pages/deckselect/DeckSelect.jsx";
+import MatchMaking from "./pages/matchmaking/MatchMaking.jsx";
+import GameBoard from "./pages/gameboard/GameBoard.jsx";
 import GameServer from "./game/Game.Server.js";
 
 const linkStyle = ({ isActive }) => ({
-  padding: "8px 14px",
+  padding: "4px 10px",            // smaller buttons
   borderRadius: "4px",
   fontWeight: 600,
-  fontSize: "1.1rem",
+  fontSize: "0.9rem",             // smaller text
   textDecoration: "none",
   color: isActive ? "var(--color-cyan-blue)" : "var(--text-light)",
   borderBottom: isActive ? "2px solid var(--color-cyan-blue)" : "2px solid transparent",
@@ -32,11 +32,15 @@ export default function App() {
           borderBottom: "2px solid var(--color-teal-blue)",
           alignItems: "center",
           justifyContent: "center",
-          position: "sticky",
+          position: "fixed",
+          width: "100%",
+          left: 0,
+          right: 0,
           top: 0,
           zIndex: 10,
         }}
       >
+
         <NavLink to="/" style={linkStyle}>Home</NavLink>
         <NavLink to="/gallery" style={linkStyle}>Gallery</NavLink>
         <NavLink to="/deck" style={linkStyle}>Deck Builder</NavLink>

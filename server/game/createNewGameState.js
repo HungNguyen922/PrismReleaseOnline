@@ -1,37 +1,51 @@
 module.exports = function createNewGameState() {
   return {
-    // Turn system
-    turn: 1,
-    turnPlayer: "p1",
-
-    // Player identity (socket IDs assigned in index.js)
     players: {
-      p1: null,
-      p2: null
+      top: null,
+      bottom: null
     },
 
-    // Leaders (private)
-    leaderP1: null,
-    leaderP2: null,
-
-    // Hands (private)
-    handP1: [],
-    handP2: [],
-
-    // Temporary decks BEFORE merging
+    // Deck upload slots
     deckP1: [],
     deckP2: [],
 
-    // Shared resources AFTER merging
-    drawPile: [],   // shared deck
-    gap: [],        // shared graveyard
-    board: [],      // shared slots
+    // Hands
+    handTop: [],
+    handBottom: [],
+
+    // Gates (3 each)
+    gatesTop: [[], [], []],
+    gatesBottom: [[], [], []],
+
+    // Set zones (3 each)
+    setsTop: [null, null, null],
+    setsBottom: [null, null, null],
+
+    // Extra decks
+    extraDeckTop: [],
+    extraDeckBottom: [],
+
+    // Leader cards
+    leaderTop: null,
+    leaderBottom: null,
+
+    // Shared draw pile
+    drawPile: [],
+
+    // Deck counts
+    deckCountTop: 0,
+    deckCountBottom: 0,
+
+    // Turn system
+    turnPlayer: "p1",
+    turnPhase: "INSTANT",
+    playedCardsThisTurn: 0,
 
     // Ready flags
     p1Ready: false,
     p2Ready: false,
 
-    // Has the server merged the decks yet?
+    // Merge flag
     decksMerged: false
   };
 };

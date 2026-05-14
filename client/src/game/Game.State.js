@@ -1,15 +1,22 @@
-const GameState = {
-  // The full game state mirrored from the server
-  gameState: null,
+let currentState = null;
+const listeners = new Set();
 
-  // Replace the entire state with the server's authoritative version
-  set(newState) {
-    this.gameState = newState;
+const GameState = {
+  // Get current state
+  get() {
+    return currentState ? JSON.parse(JSON.stringify(currentState)) : null;
   },
 
-  // Convenience getter so components can read state easily
-  get() {
-    return this.gameState;
+  // Set new state and notify subscribers
+  set(newState) {
+    currentState = JSON.parse(JSON.stringify(newState));
+    listeners.forEach((fn) => fn(currentState));
+  },
+
+  // Subscribe to state changes
+  subscribe(fn) {
+    listeners.add(fn);
+    return () => listeners.delete(fn);
   }
 };
 

@@ -8,10 +8,9 @@ const SERVER_URL = "http://localhost:4000";
 if (!localStorage.getItem("playerId")) {
   localStorage.setItem("playerId", crypto.randomUUID());
 }
-
 const PLAYER_ID = localStorage.getItem("playerId");
 
-// 🔥 Persist socket across HMR reloads
+// Persist socket across HMR reloads
 if (!window.__GAME_SOCKET__) {
   window.__GAME_SOCKET__ = io(SERVER_URL, {
     transports: ["websocket"],
@@ -19,9 +18,7 @@ if (!window.__GAME_SOCKET__) {
     reconnection: true,
     reconnectionAttempts: 10,
     reconnectionDelay: 500,
-    auth: {
-      playerId: PLAYER_ID
-    }
+    auth: { playerId: PLAYER_ID }
   });
 
   window.__GAME_SOCKET__.on("connect", () => {
@@ -33,6 +30,7 @@ if (!window.__GAME_SOCKET__) {
   });
 
   window.__GAME_SOCKET__.on("gameState", (state) => {
+    console.log("Received gameState", state);
     GameState.set(state);
   });
 }
@@ -45,8 +43,8 @@ const GameServer = {
     this.socket.once("lobbyCreated", (gameId) => callback(gameId));
   },
 
-  joinLobby(gameId) {
-    this.socket.emit("joinLobby", gameId);
+  attemptJoinLobby(gameId) {
+    this.socket.emit("attemptJoinLobby", gameId);
   },
 
   quickJoin(callback) {
@@ -63,6 +61,10 @@ const GameServer = {
 
   sendPatch(gameId, patch) {
     this.socket.emit("patch", { gameId, patch });
+  },
+
+  requestGameState(gameId) {
+    this.socket.emit("requestGameState", gameId);
   }
 };
 

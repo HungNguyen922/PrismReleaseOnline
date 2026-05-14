@@ -1,65 +1,107 @@
-import { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useEffect, useState, useRef } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+
+import GameState from "../../game/Game.State";
 import GameServer from "../../game/Game.Server";
-import "./matchmaking.css";
 
 export default function MatchMaking() {
-  const navigate = useNavigate();
   const { gameId } = useParams();
+  const navigate = useNavigate();
 
-  const [lobbyPlayers, setLobbyPlayers] = useState([]);
+  const [lobby, setLobby] = useState(null);
+  const hasUploaded = useRef(false);
+  const playerId = GameServer.socket.auth.playerId;
 
+  // 1. Join the lobby as soon as we land on this page
   useEffect(() => {
-    const socket = GameServer.socket;
-    if (!socket) return;
-
-    // Ask server for current lobby state (important for refresh)
-    socket.emit("requestLobbyState", gameId);
-
-    // Only join if we are NOT already in the lobby
-    socket.emit("attemptJoinLobby", gameId);
-
-    return () => {
-      socket.emit("leaveLobby", gameId);
-    };
+    if (!gameId) return;
+    console.log("Attempting to join lobby", gameId);
+    GameServer.attemptJoinLobby(gameId);
   }, [gameId]);
 
+  // 2. Listen for lobby updates, gameCreated, startGame
   useEffect(() => {
     const socket = GameServer.socket;
-    if (!socket) return;
 
-    const handleLobbyUpdate = (data) => {
-      setLobbyPlayers(data.players);
-    };
+    socket.on("lobbyUpdate", (data) => {
+      console.log("Lobby update:", data);
+      setLobby(data);
+    });
 
-    const handleStartGame = ({ gameId: readyId }) => {
-      navigate(`/game/${readyId}`);
-    };
+    socket.on("lobbyError", (msg) => {
+      console.error("Lobby error:", msg);
+    });
 
-    socket.on("lobbyUpdate", handleLobbyUpdate);
-    socket.on("startGame", handleStartGame);
+    socket.on("gameCreated", ({ gameId }) => {
+      console.log("Game created event received for", gameId);
+
+      const deck = GameState.get()?.selectedDeck;
+      if (!deck) {
+        console.warn("No deck selected — cannot upload");
+        return;
+      }
+
+      if (!hasUploaded.current) {
+        console.log("Uploading deck for game", gameId, "as", playerId);
+        GameServer.uploadDeck(deck, gameId);
+
+        setTimeout(() => {
+          console.log("Sending playerReady for game", gameId, "as", playerId);
+          GameServer.playerReady(gameId);
+        }, 50);
+
+        hasUploaded.current = true;
+      }
+    });
+
+    socket.on("startGame", ({ gameId }) => {
+      console.log("Starting game", gameId);
+      navigate(`/game/${gameId}`);
+    });
+
+    // Request lobby state after joining
+    setTimeout(() => {
+      socket.emit("requestLobbyState", gameId);
+    }, 50);
 
     return () => {
-      socket.off("lobbyUpdate", handleLobbyUpdate);
-      socket.off("startGame", handleStartGame);
+      socket.off("lobbyUpdate");
+      socket.off("lobbyError");
+      socket.off("gameCreated");
+      socket.off("startGame");
     };
-  }, []);
+  }, [gameId, navigate, playerId]);
 
   return (
     <div className="matchmaking">
-      <h2>Lobby Code: {gameId}</h2>
+      <h1>Matchmaking</h1>
+      <p>Lobby Code: {gameId}</p>
 
-      <div className="lobby-status">
-        {lobbyPlayers.length === 1 && <p>Waiting for opponent…</p>}
-        {lobbyPlayers.length === 2 && <p>Opponent joined! Starting game…</p>}
-      </div>
-      
       <button
         onClick={() => navigator.clipboard.writeText(gameId)}
         className="copy-btn"
       >
         Copy Code
       </button>
+
+      {!lobby && <p>Loading lobby…</p>}
+
+      {lobby && (
+        <>
+          <h2>Players</h2>
+          <ul>
+            {lobby.players?.map((p) => (
+              <li key={p}>{p}</li>
+            ))}
+          </ul>
+
+          <p>
+            {lobby.players?.length === 2
+              ? "Locking in decks…"
+              : "Waiting for opponent…"}
+          </p>
+        </>
+      )}
     </div>
   );
 }

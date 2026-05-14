@@ -61,7 +61,7 @@ export default function Home() {
         </a>
 
         <a
-          href="/board"
+          href="/deckselect"
           style={{
             padding: "14px 28px",
             background: "transparent",
