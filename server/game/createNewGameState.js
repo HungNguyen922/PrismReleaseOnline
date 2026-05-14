@@ -1,5 +1,3 @@
-// server/game/createNewGameState.js
-
 module.exports = function createNewGameState() {
   return {
     // Turn system

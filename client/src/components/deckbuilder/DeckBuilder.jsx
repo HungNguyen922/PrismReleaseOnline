@@ -4,6 +4,7 @@ import FiltersPanel from "./FiltersPanel";
 import CardLibrary from "./CardLibrary";
 import DeckPanel from "./deckpanel/DeckPanel";
 import CardModal from "./CardModal";
+import allCards from "../../game/allCards";
 
 import { formatCardName } from "../../utils/formatCardName";
 
@@ -15,7 +16,8 @@ import useDeckValidation from "../../hooks/useDeckValidation";
 import useDragAnimation from "../../hooks/useDragAnimation";
 
 export default function DeckBuilder() {
-  const [allCards, setAllCards] = useState([]);
+  const [deckName, setDeckName] = useState("");
+  const [cards, setCards] = useState([]);
   const [search, setSearch] = useState("");
   const [colorFilter, setColorFilter] = useState("All");
   const [selectedCard, setSelectedCard] = useState(null);
@@ -55,24 +57,23 @@ export default function DeckBuilder() {
   const smoothPos = useDragAnimation(isDragging, dragPos);
 
   // ⭐ Filtering
-  const filteredCards = useFilteredCards(allCards, search, colorFilter);
+  const filteredCards = useFilteredCards(cards, search, colorFilter);
 
   // ⭐ Validation + import/export
   const { handleExportDeck, handleImportDeck } = useDeckValidation(
     deckMain,
     deckExtra,
     leader,
-    allCards,
+    cards,
     setLeader,
     setDeckMain,
-    setDeckExtra
+    setDeckExtra,
+    deckName,
+    setDeckName
   );
 
-  // Load card database
   useEffect(() => {
-    fetch("/allCards.json")
-      .then((res) => res.json())
-      .then((data) => setAllCards(data));
+    setCards(allCards);
   }, []);
 
   // ⭐ Reset scroll when entering DeckBuilder
@@ -147,6 +148,8 @@ export default function DeckBuilder() {
       {/* ⭐ DECK PANEL — scrolls internally */}
       <div style={{ height: "100%", minHeight: 0, overflowY: "auto" }}>
         <DeckPanel
+          deckName={deckName}
+          setDeckName={setDeckName}
           leader={leader}
           setLeader={setLeader}
           deckMain={deckMain}

@@ -1,16 +1,11 @@
 import { useEffect, useState } from "react";
 import Card from "../components/Card";
 import CardModal from "../components/deckbuilder/CardModal";
+import allCards from "../game/allCards";
 
 export default function Gallery() {
   const [cards, setCards] = useState([]);
   const [selectedIndex, setSelectedIndex] = useState(null);
-
-  useEffect(() => {
-    fetch("/allCards.json")
-      .then(res => res.json())
-      .then(data => setCards(data));
-  }, []);
 
   const openModal = (index) => setSelectedIndex(index);
   const closeModal = () => setSelectedIndex(null);
@@ -22,6 +17,10 @@ export default function Gallery() {
   const showNext = () => {
     setSelectedIndex((prev) => (prev < cards.length - 1 ? prev + 1 : 0));
   };
+
+  useEffect(() => {
+    setCards(allCards);
+  }, []);
 
   return (
     <div style={{ padding: "40px", maxWidth: "1200px", margin: "0 auto" }}>

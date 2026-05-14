@@ -1,0 +1,154 @@
+.visual-deck-view {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow: visible;
+}
+
+.deck-name {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 4px;
+  padding-left: 4px;
+  color: #fff;
+  text-shadow: 0 0 4px rgba(0,0,0,0.6);
+}
+
+/* Leader + Extra Deck Row */
+.leader-extra-row {
+  display: flex;
+  overflow: visible;
+  align-items: flex-start;
+  gap: 16px;
+  width: 100%;
+}
+
+/* Leader */
+.leader-art {
+  position: relative;
+  z-index: 1;
+}
+
+.leader-art img {
+  width: 130px;
+  height: auto;
+  border-radius: 8px;
+}
+
+/* Extra Deck Fan */
+.extra-fan {
+  display: flex;
+  overflow: visible;
+  align-items: center;
+  height: 182px;
+  position: relative;
+  z-index: 10;
+}
+
+.extra-card-wrapper {
+  width: 130px;
+  height: 182px;
+  position: relative;
+  margin-left: -70px; /* overlap */
+  transition: transform 0.15s ease;
+  z-index: 5;
+}
+
+.extra-card-wrapper:first-child {
+  margin-left: 0;
+}
+
+.extra-card-wrapper img {
+  width: 100%;
+  height: 100%;
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+.extra-card-wrapper:hover {
+  transform: translateY(-10px) scale(1.05);
+  z-index: 999;
+}
+
+/* Non-hovered markers stay underneath */
+.extra-card-wrapper:not(:hover) .copy-marker,
+.card-wrapper:not(:hover) .copy-marker {
+  z-index: 1;
+}
+
+/* Main Deck — 2 Rows, Overlapping, No Clipping */
+.main-grid {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr); /* 10 cards per row */
+  grid-auto-rows: 260px;
+  position: relative;
+  overflow: visible !important; /* prevents clipping */
+  margin-top: 10px;
+}
+
+.main-grid .card-wrapper {
+  width: 130px;
+  height: 182px;
+  position: relative;
+  justify-self: start;
+
+  /* overlap horizontally */
+  margin-left: -70px;
+
+  /* overlap vertically for row 2 */
+  margin-top: -70px;
+
+  transition: transform 0.15s ease;
+}
+
+/* First card in each row should not overlap left */
+.main-grid .card-wrapper:nth-child(10n + 1) {
+  margin-left: 0;
+}
+
+/* First row should not overlap upward */
+.main-grid .card-wrapper:nth-child(-n + 10) {
+  margin-top: 0;
+}
+
+.main-grid .card-wrapper img {
+  width: 100%;
+  height: 100%;
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+.main-grid .card-wrapper:hover {
+  transform: translateY(-10px) scale(1.05);
+  z-index: 999;
+}
+
+.card-wrapper {
+  width: 130px;
+  height: 182px;
+}
+
+.card-wrapper img {
+  width: 100%;
+  height: 100%;
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+.copy-marker {
+  position: absolute;
+  bottom: 4px;
+  left: 4px;      /* ← force top-left */
+  width: 22px;
+  height: 22px;
+  background: rgba(0, 0, 0, 0.75);
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 1000;
+}

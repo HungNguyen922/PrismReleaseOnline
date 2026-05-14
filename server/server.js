@@ -32,60 +32,123 @@ const io = new Server(server, {
 //  In-memory game storage
 // -------------------------------
 const games = {};
-// Structure:
-// games[gameId] = {
-//   state: { ... },
-//   players: { p1: socketId, p2: socketId }
-// }
+const lobbies = {}; 
 
 // -------------------------------
-//  Assign player slot (P1 or P2)
+//  Creates a GAME ID for a lobby
 // -------------------------------
-function assignPlayer(game, socketId) {
-  if (!game.players.p1) {
-    game.players.p1 = socketId;
-    return "p1";
-  }
-  if (!game.players.p2) {
-    game.players.p2 = socketId;
-    return "p2";
-  }
-  return null; // room full
+function generateGameId() {
+  return Math.random().toString(36).substring(2, 8).toUpperCase();
 }
 
 // -------------------------------
 //  Socket.IO connection
 // -------------------------------
 io.on("connection", (socket) => {
-  console.log("Player connected:", socket.id);
+  const playerId = socket.handshake.auth.playerId;
+  console.log("Player connected:", socket.id, "as", playerId);
+  // -------------------------------
+  // Create Lobby
+  // -------------------------------
+  socket.on("createLobby", () => {
+    const gameId = generateGameId();
 
-  // -------------------------------
-  //  Player joins a game room
-  // -------------------------------
-  socket.on("joinGame", (gameId) => {
+    lobbies[gameId] = {
+      players: [playerId],
+      spectators: [],
+      status: "waiting"
+    };
+
+    // host joins the lobby automatically
     socket.join(gameId);
 
-    // Create game if needed
-    if (!games[gameId]) {
-      games[gameId] = {
-        state: createNewGameState(),
-        players: { p1: null, p2: null }
-      };
+    console.log(`Lobby ${gameId} created by ${playerId}`);
+
+    socket.emit("lobbyCreated", gameId);
+
+    // Broadcast initial lobby state
+    io.to(gameId).emit("lobbyUpdate", {
+      players: lobbies[gameId].players
+    });
+  });
+  
+
+  // -----------------------------------------
+  // Attempt Join Lobby (safe for host + opponent)
+  // -----------------------------------------
+  socket.on("requestLobbyState", (gameId) => {
+    const lobby = lobbies[gameId];
+    if (lobby) {
+      socket.emit("lobbyUpdate", { players: lobby.players });
     }
+  });
 
-    const game = games[gameId];
-
-    // Assign player slot
-    const slot = assignPlayer(game, socket.id);
-    if (!slot) {
-      socket.emit("roomFull");
+  socket.on("attemptJoinLobby", (gameId) => {
+    const lobby = lobbies[gameId];
+    if (!lobby) {
+      socket.emit("lobbyError", "Lobby does not exist");
       return;
     }
 
-    console.log(`Player ${socket.id} joined ${gameId} as ${slot}`);
+    // Prevent duplicate joins (host refreshing, StrictMode, reconnects)
+    if (!lobby.players.includes(playerId)) {
+      lobby.players.push(playerId);
+      socket.join(gameId);
+      console.log(`Player ${playerId} joined lobby ${gameId}`);
+    } else {
+      console.log(`Player ${playerId} attempted duplicate join for lobby ${gameId}`);
+    }
 
-    // Send full state to the joining player
-    socket.emit("gameState", game.state);
+    // Broadcast updated lobby state
+    io.to(gameId).emit("lobbyUpdate", { players: lobby.players });
+
+    // Start game when 2 unique players are present
+    if (lobby.players.length === 2) {
+      console.log(`Lobby ${gameId} full — creating game`);
+
+      games[gameId] = {
+        state: createNewGameState(),
+        players: { p1: lobby.players[0], p2: lobby.players[1] }
+      };
+
+      io.to(gameId).emit("startGame", { gameId });
+    }
+  });
+
+  // -------------------------------
+  //  Allows user reconnection via localstorage
+  // -------------------------------
+  for (const gameId in games) {
+    const game = games[gameId];
+
+    if (game.players.p1 === playerId || game.players.p2 === playerId) {
+      socket.join(gameId);
+      socket.emit("gameState", game.state);
+      console.log(`Player ${playerId} reconnected to game ${gameId}`);
+    }
+  }
+
+  // -------------------------------
+  //  Allows user to leave a lobby
+  // -------------------------------
+  socket.on("leaveLobby", (gameId) => {
+    const lobby = lobbies[gameId];
+    if (!lobby) return;
+
+    lobby.players = lobby.players.filter(id => id !== playerId);
+    lobby.spectators = lobby.spectators?.filter(id => id !== playerId);
+
+    socket.leave(gameId);
+
+    io.to(gameId).emit("lobbyUpdate", {
+      players: lobby.players,
+      spectators: lobby.spectators
+    });
+
+    if (lobby.players.length === 0) {
+      delete lobbies[gameId];
+      console.log(`Lobby ${gameId} deleted (empty)`);
+    }
   });
 
   // -------------------------------
@@ -95,7 +158,7 @@ io.on("connection", (socket) => {
     const game = games[gameId];
     if (!game) return;
 
-    const slot = (socket.id === game.players.p1) ? "p1" : "p2";
+    const slot = (playerId === game.players.p1) ? "p1" : "p2";
 
     if (slot === "p1") game.state.deckP1 = deck;
     if (slot === "p2") game.state.deckP2 = deck;
@@ -110,7 +173,7 @@ io.on("connection", (socket) => {
     const game = games[gameId];
     if (!game) return;
 
-    const slot = (socket.id === game.players.p1) ? "p1" : "p2";
+    const slot = (playerId === game.players.p1) ? "p1" : "p2";
 
     if (slot === "p1") game.state.p1Ready = true;
     if (slot === "p2") game.state.p2Ready = true;
@@ -144,13 +207,13 @@ io.on("connection", (socket) => {
   //  Player disconnects
   // -------------------------------
   socket.on("disconnect", () => {
-    console.log("Player disconnected:", socket.id);
+    console.log("Player disconnected:", playerId);
 
     for (const gameId in games) {
       const game = games[gameId];
 
-      if (game.players.p1 === socket.id) game.players.p1 = null;
-      if (game.players.p2 === socket.id) game.players.p2 = null;
+      if (game.players.p1 === playerId) game.players.p1 = null;
+      if (game.players.p2 === playerId) game.players.p2 = null;
 
       // Delete empty games
       if (!game.players.p1 && !game.players.p2) {

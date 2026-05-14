@@ -1,0 +1,143 @@
+html, body {
+  overflow: hidden;
+  height: 100%;
+}
+
+.matchmaking {
+  flex: 1;
+  display: flex;
+  flex-direction: row;   /* ← THIS fixes your top/bottom issue */
+  height: 100vh;
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  position: relative;
+  gap: 20px;
+  overflow: visible;
+}
+
+.matchmaking-left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: visible;
+  transform: scale(0.9);
+  transform-origin: top left;
+}
+
+.lobby-code {
+  color: white;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.deck-preview {
+  display: grid;
+  grid-template-rows: auto auto 1fr 1fr; /* leader, extra title, extra grid, main grid */
+  height: 100%;
+  gap: 10px;
+  overflow: visible;
+}
+
+.deck-preview.empty {
+  opacity: 0.5;
+  text-align: center;
+  padding: 40px;
+}
+
+.matchmaking-right {
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  padding: 16px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.matchmaking-right input {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(0, 0, 0, 0.3);
+  color: white;
+}
+
+.error {
+  color: #ff6b6b;
+  font-size: 14px;
+}
+
+.ready-button {
+  position: absolute;
+  bottom: 10rem;
+  right: 5rem;
+  width: 250px;
+  height: 250px;
+
+  border-radius: 50%;
+  border: none;
+
+  background: #4caf50;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+
+  cursor: pointer;
+  transition: 0.2s ease;
+  box-shadow: 0 0 20px rgba(76, 175, 80, 0.5);
+}
+
+.ready-button:hover:not(:disabled) {
+  transform: scale(1.1);
+  background: #5edb63;
+}
+
+.ready-button:disabled {
+  background: #777;
+  cursor: default;
+  box-shadow: none;
+}
+
+.status {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  opacity: 0.8;
+  font-size: 14px;
+}
+
+.matchmaking-deckview {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow: hidden;
+}
+
+/*
+  LOBBY BUTTON STYLING
+*/
+.lobby-controls {
+  margin-bottom: 20px;
+}
+
+.lobby-controls h2 {
+  margin-bottom: 10px;
+}
+
+.join-row {
+  display: flex;
+  gap: 8px;
+  margin: 10px 0;
+}
+
+.join-row input {
+  flex: 1;
+  padding: 8px;
+  border-radius: 6px;
+  border: none;
+}

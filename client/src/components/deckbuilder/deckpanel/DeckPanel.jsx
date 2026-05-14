@@ -2,6 +2,8 @@ import LeaderZone from "./LeaderZone";
 import DeckZone from "./DeckZone";
 
 export default function DeckPanel({
+  deckName,
+  setDeckName,
   leader,
   setLeader,
   deckMain,
@@ -32,6 +34,14 @@ export default function DeckPanel({
       }}
     >
       <h2>Deck</h2>
+      <input
+        type="text"
+        value={deckName}
+        onChange={(e) => setDeckName(e.target.value)}
+        placeholder="Deck Name"
+        className="deck-name-input"
+      />
+
 
       {/* Export / Import */}
       <div style={{ display: "flex", gap: "8px", marginBottom: "12px" }}>

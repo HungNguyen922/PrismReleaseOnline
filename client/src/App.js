@@ -1,10 +1,13 @@
+import { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, NavLink } from "react-router-dom";
 
 import Home from "./pages/Home";
 import Gallery from "./pages/Gallery";
 import DeckBuilder from "./components/deckbuilder/DeckBuilder";
-import Matchmaking from "./pages/matchmaking/MatchMaking";
+import DeckSelect from "./pages/deckselect/DeckSelect";
+import MatchMaking from "./pages/matchmaking/MatchMaking";
 import GameBoard from "./pages/gameboard/GameBoard";
+import GameServer from "./game/Game.Server.js";
 
 const linkStyle = ({ isActive }) => ({
   padding: "8px 14px",
@@ -34,76 +37,25 @@ export default function App() {
           zIndex: 10,
         }}
       >
-        {/** HOME */}
-        <NavLink
-          to="/"
-          style={linkStyle}
-          onMouseEnter={(e) => {
-            e.target.style.background = "var(--color-teal-blue)";
-            e.target.style.color = "white";
-          }}
-          onMouseLeave={(e) => {
-            e.target.style.background = "transparent";
-            e.target.style.color = "";
-          }}
-        >
-          Home
-        </NavLink>
-
-        {/** GALLERY */}
-        <NavLink
-          to="/gallery"
-          style={linkStyle}
-          onMouseEnter={(e) => {
-            e.target.style.background = "var(--color-teal-blue)";
-            e.target.style.color = "white";
-          }}
-          onMouseLeave={(e) => {
-            e.target.style.background = "transparent";
-            e.target.style.color = "";
-          }}
-        >
-          Gallery
-        </NavLink>
-
-        {/** DECK BUILDER */}
-        <NavLink
-          to="/deck"
-          style={linkStyle}
-          onMouseEnter={(e) => {
-            e.target.style.background = "var(--color-teal-blue)";
-            e.target.style.color = "white";
-          }}
-          onMouseLeave={(e) => {
-            e.target.style.background = "transparent";
-            e.target.style.color = "";
-          }}
-        >
-          Deck Builder
-        </NavLink>
-
-        {/** GAME BOARD */}
-        <NavLink
-          to="/board"
-          style={linkStyle}
-          onMouseEnter={(e) => {
-            e.target.style.background = "var(--color-teal-blue)";
-            e.target.style.color = "white";
-          }}
-          onMouseLeave={(e) => {
-            e.target.style.background = "transparent";
-            e.target.style.color = "";
-          }}
-        >
-          Game Board
-        </NavLink>
+        <NavLink to="/" style={linkStyle}>Home</NavLink>
+        <NavLink to="/gallery" style={linkStyle}>Gallery</NavLink>
+        <NavLink to="/deck" style={linkStyle}>Deck Builder</NavLink>
+        <NavLink to="/deckselect" style={linkStyle}>Matchmaking</NavLink>
       </nav>
 
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/deck" element={<DeckBuilder />} />
-        <Route path="/board" element={<Matchmaking />} />
+
+        {/* Phase 1 */}
+        <Route path="/deckselect" element={<DeckSelect />} />
+
+        {/* Phase 2 */}
+        <Route path="/matchmaking/:gameId" element={<MatchMaking />} />
+
+        {/* Phase 3 */}
+        <Route path="/game/:gameId" element={<GameBoard />} />
       </Routes>
     </Router>
   );

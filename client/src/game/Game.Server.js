@@ -1,43 +1,68 @@
+// game/Game.Server.js
+import { io } from "socket.io-client";
 import GameState from "./Game.State";
 
+const SERVER_URL = "http://localhost:4000";
+
+// Persistent player identity
+if (!localStorage.getItem("playerId")) {
+  localStorage.setItem("playerId", crypto.randomUUID());
+}
+
+const PLAYER_ID = localStorage.getItem("playerId");
+
+// 🔥 Persist socket across HMR reloads
+if (!window.__GAME_SOCKET__) {
+  window.__GAME_SOCKET__ = io(SERVER_URL, {
+    transports: ["websocket"],
+    autoConnect: true,
+    reconnection: true,
+    reconnectionAttempts: 10,
+    reconnectionDelay: 500,
+    auth: {
+      playerId: PLAYER_ID
+    }
+  });
+
+  window.__GAME_SOCKET__.on("connect", () => {
+    console.log("Connected to game server:", window.__GAME_SOCKET__.id);
+  });
+
+  window.__GAME_SOCKET__.on("disconnect", () => {
+    console.log("Disconnected from game server");
+  });
+
+  window.__GAME_SOCKET__.on("gameState", (state) => {
+    GameState.set(state);
+  });
+}
+
 const GameServer = {
-  // This will be assigned by the networking hook
-  network: null,
+  socket: window.__GAME_SOCKET__,
 
-  // Called by useGameNetwork when the hook initializes
-  attachNetwork(networkAPI) {
-    this.network = networkAPI;
+  createLobby(callback) {
+    this.socket.emit("createLobby");
+    this.socket.once("lobbyCreated", (gameId) => callback(gameId));
   },
 
-  // Apply full authoritative state from server
-  applyServerState(fullState) {
-    GameState.set(fullState);
-
-    // If you have a UI update system, call it here
-    if (window.Game?.UI?.updateFromState) {
-      window.Game.UI.updateFromState(fullState);
-    }
+  joinLobby(gameId) {
+    this.socket.emit("joinLobby", gameId);
   },
 
-  // Send a patch to the server
-  sync(patch) {
-    if (!this.network) {
-      console.warn("Game.Server.sync called before network attached");
-      return;
-    }
-    this.network.sendPatch(patch);
+  quickJoin(callback) {
+    this.createLobby(callback);
   },
 
-  // Upload deck during matchmaking
-  uploadDeck(deck) {
-    if (!this.network) return;
-    this.network.uploadDeck(deck);
+  uploadDeck(deck, gameId) {
+    this.socket.emit("uploadDeck", { gameId, deck });
   },
 
-  // Ready up during matchmaking
-  readyUp() {
-    if (!this.network) return;
-    this.network.readyUp();
+  playerReady(gameId) {
+    this.socket.emit("playerReady", gameId);
+  },
+
+  sendPatch(gameId, patch) {
+    this.socket.emit("patch", { gameId, patch });
   }
 };
 
