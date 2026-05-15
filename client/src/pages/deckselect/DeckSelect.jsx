@@ -5,8 +5,7 @@ import "./deckselect.css";
 import { decodeDeck } from "../../game/DeckCode";
 import allCards from "../../game/allCards";
 import VisualDeckView from "../../components/deckview/VisualDeckView";
-import GameState from "../../game/Game.State";
-import GameServer from "../../game/Game.Server";
+import GameClient from "../../game/GameClient";
 
 export default function DeckSelect() {
   const navigate = useNavigate();
@@ -36,7 +35,8 @@ export default function DeckSelect() {
       setDecodedDeck(decoded);
       setError("");
 
-      GameState.set({ selectedDeck: decoded });
+      // Store selected deck in GameClient
+      GameClient.setState({ selectedDeck: decoded });
     } catch (err) {
       setDecodedDeck(null);
       setError("Invalid deck code");
@@ -44,13 +44,12 @@ export default function DeckSelect() {
   }
 
   function handleCreateLobby() {
-    GameServer.createLobby((id) => navigate(`/matchmaking/${id}`));
-    }
-
-  function handleQuickplay() {
-    GameServer.quickJoin((id) => navigate(`/matchmaking/${id}`));
+    GameClient.server.createLobby((id) => navigate(`/matchmaking/${id}`));
   }
 
+  function handleQuickplay() {
+    GameClient.server.createLobby((id) => navigate(`/matchmaking/${id}`));
+  }
 
   function handleJoinLobbyFinal() {
     if (!joinCode.trim() || !decodedDeck) return;

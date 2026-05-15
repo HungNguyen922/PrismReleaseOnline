@@ -1,8 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
-import GameState from "../../game/Game.State";
-import GameServer from "../../game/Game.Server";
+import GameClient from "../../game/GameClient";
 
 export default function MatchMaking() {
   const { gameId } = useParams();
@@ -10,32 +9,57 @@ export default function MatchMaking() {
 
   const [lobby, setLobby] = useState(null);
   const hasUploaded = useRef(false);
-  const playerId = GameServer.socket.auth.playerId;
 
-  // 1. Join the lobby as soon as we land on this page
+  const playerId = GameClient.state.playerId;
+  const socket = window.__GAME_SOCKET__;
+
+  // ------------------------------------------------------------
+  // 1. Join lobby immediately
+  // ------------------------------------------------------------
   useEffect(() => {
     if (!gameId) return;
+
     console.log("Attempting to join lobby", gameId);
-    GameServer.attemptJoinLobby(gameId);
+    GameClient.server.attemptJoinLobby(gameId);
   }, [gameId]);
 
-  // 2. Listen for lobby updates, gameCreated, startGame
+  // ------------------------------------------------------------
+  // 2. Stable startGame listener (never re-created)
+  // ------------------------------------------------------------
   useEffect(() => {
-    const socket = GameServer.socket;
+    if (!socket) return;
 
-    socket.on("lobbyUpdate", (data) => {
+    const handleStart = ({ gameId }) => {
+      console.log("startGame received → navigating", gameId);
+      navigate(`/game/${gameId}`);
+    };
+
+    socket.on("startGame", handleStart);
+
+    return () => {
+      socket.off("startGame", handleStart);
+    };
+  }, [socket, navigate]);
+
+  // ------------------------------------------------------------
+  // 3. Lobby updates + deck upload + ready logic
+  // ------------------------------------------------------------
+  useEffect(() => {
+    if (!socket) return;
+
+    const handleLobbyUpdate = (data) => {
       console.log("Lobby update:", data);
       setLobby(data);
-    });
+    };
 
-    socket.on("lobbyError", (msg) => {
+    const handleLobbyError = (msg) => {
       console.error("Lobby error:", msg);
-    });
+    };
 
-    socket.on("gameCreated", ({ gameId }) => {
+    const handleGameCreated = ({ gameId }) => {
       console.log("Game created event received for", gameId);
 
-      const deck = GameState.get()?.selectedDeck;
+      const deck = GameClient.state.gameState?.selectedDeck;
       if (!deck) {
         console.warn("No deck selected — cannot upload");
         return;
@@ -43,35 +67,36 @@ export default function MatchMaking() {
 
       if (!hasUploaded.current) {
         console.log("Uploading deck for game", gameId, "as", playerId);
-        GameServer.uploadDeck(deck, gameId);
+        GameClient.server.uploadDeck(deck, gameId);
 
         setTimeout(() => {
           console.log("Sending playerReady for game", gameId, "as", playerId);
-          GameServer.playerReady(gameId);
+          GameClient.server.playerReady(gameId);
         }, 50);
 
         hasUploaded.current = true;
       }
-    });
+    };
 
-    socket.on("startGame", ({ gameId }) => {
-      console.log("Starting game", gameId);
-      navigate(`/game/${gameId}`);
-    });
+    socket.on("lobbyUpdate", handleLobbyUpdate);
+    socket.on("lobbyError", handleLobbyError);
+    socket.on("gameCreated", handleGameCreated);
 
     // Request lobby state after joining
     setTimeout(() => {
-      socket.emit("requestLobbyState", gameId);
+      GameClient.server.requestGameState(gameId);
     }, 50);
 
     return () => {
-      socket.off("lobbyUpdate");
-      socket.off("lobbyError");
-      socket.off("gameCreated");
-      socket.off("startGame");
+      socket.off("lobbyUpdate", handleLobbyUpdate);
+      socket.off("lobbyError", handleLobbyError);
+      socket.off("gameCreated", handleGameCreated);
     };
-  }, [gameId, navigate, playerId]);
+  }, [socket, gameId, playerId]);
 
+  // ------------------------------------------------------------
+  // UI
+  // ------------------------------------------------------------
   return (
     <div className="matchmaking">
       <h1>Matchmaking</h1>

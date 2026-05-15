@@ -7,7 +7,7 @@ import DeckBuilder from "./components/deckbuilder/DeckBuilder.jsx";
 import DeckSelect from "./pages/deckselect/DeckSelect.jsx";
 import MatchMaking from "./pages/matchmaking/MatchMaking.jsx";
 import GameBoard from "./pages/gameboard/GameBoard.jsx";
-import GameServer from "./game/Game.Server.js";
+import GameClient from "./game/GameClient.js";
 
 const linkStyle = ({ isActive }) => ({
   padding: "4px 10px",            // smaller buttons

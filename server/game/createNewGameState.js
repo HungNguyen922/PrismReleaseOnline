@@ -1,51 +1,38 @@
 module.exports = function createNewGameState() {
   return {
     players: {
+      top: { id: null, name: null },
+      bottom: { id: null, name: null }
+    },
+
+    hands: {
+      top: [],
+      bottom: []
+    },
+
+    sets: {
+      top: [null, null, null],
+      bottom: [null, null, null]
+    },
+
+    gates: {
+      top: [[], [], []],
+      bottom: [[], [], []]
+    },
+
+    leaders: {
       top: null,
       bottom: null
     },
 
-    // Deck upload slots
-    deckP1: [],
-    deckP2: [],
+    extraDecks: {
+      top: [],
+      bottom: []
+    },
 
-    // Hands
-    handTop: [],
-    handBottom: [],
-
-    // Gates (3 each)
-    gatesTop: [[], [], []],
-    gatesBottom: [[], [], []],
-
-    // Set zones (3 each)
-    setsTop: [null, null, null],
-    setsBottom: [null, null, null],
-
-    // Extra decks
-    extraDeckTop: [],
-    extraDeckBottom: [],
-
-    // Leader cards
-    leaderTop: null,
-    leaderBottom: null,
-
-    // Shared draw pile
     drawPile: [],
+    discard: [],
 
-    // Deck counts
-    deckCountTop: 0,
-    deckCountBottom: 0,
-
-    // Turn system
-    turnPlayer: "p1",
-    turnPhase: "INSTANT",
-    playedCardsThisTurn: 0,
-
-    // Ready flags
-    p1Ready: false,
-    p2Ready: false,
-
-    // Merge flag
-    decksMerged: false
+    turnPlayer: "bottom"
   };
-};
+}

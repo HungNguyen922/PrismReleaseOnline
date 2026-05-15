@@ -13,25 +13,31 @@ module.exports = function mergeDecks(state) {
   shuffle(state.deckP2);
 
   // Draw starting hands (5 cards each)
-  state.handBottom = state.deckP1.splice(0, 5);
-  state.handTop = state.deckP2.splice(0, 5);
+  state.hands.bottom = state.deckP1.splice(0, 5);
+  state.hands.top = state.deckP2.splice(0, 5);
 
-  // Initialize other zones
-  state.gatesBottom = [[], [], []];
-  state.gatesTop = [[], [], []];
+  // Initialize gates (3 empty stacks each)
+  state.gates.bottom = [[], [], []];
+  state.gates.top = [[], [], []];
 
-  state.setsBottom = [null, null, null];
-  state.setsTop = [null, null, null];
+  // Initialize sets (3 null slots each)
+  state.sets.bottom = [null, null, null];
+  state.sets.top = [null, null, null];
 
-  state.deckCountBottom = state.deckP1.length;
-  state.deckCountTop = state.deckP2.length;
+  // Leaders (if your deck format includes them)
+  // state.leaders.bottom = state.deckP1Leader || null;
+  // state.leaders.top = state.deckP2Leader || null;
 
-  state.discardCountBottom = 0;
-  state.discardCountTop = 0;
+  // Extra decks (if included)
+  // state.extraDecks.bottom = state.deckP1Extra || [];
+  // state.extraDecks.top = state.deckP2Extra || [];
 
-  state.lifeBottom = 20;
-  state.lifeTop = 20;
+  // Shared draw pile (combine remaining cards)
+  state.drawPile = [...state.deckP1, ...state.deckP2];
 
-  state.turnPlayer = "p1"; // or randomize
+  // Clear old deck fields
+  delete state.deckP1;
+  delete state.deckP2;
+
   state.decksMerged = true;
 };

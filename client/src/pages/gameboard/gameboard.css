@@ -1,66 +1,240 @@
+/* ============================================================
+   GLOBAL RESET
+   ============================================================ */
 html, body {
   margin: 0;
   padding: 0;
-  overflow: hidden;   /* prevents ALL scrolling */
+  overflow: hidden;
   height: 100%;
+  background: #000;
 }
 
+/* ============================================================
+   GAMEBOARD GRID
+   ============================================================ */
 .gameboard {
-  margin-top: 48px;               /* pushes board below navbar */
-  height: calc(100vh - 48px);     /* fits remaining space */
-  width: 100vw;                      /* full screen width */
+  margin-top: 48px;
+  height: calc(100vh - 48px);
+  width: 100vw;
+
   display: grid;
   grid-template-rows:
-    0.8fr   /* Opponent HUD */
-    1fr     /* Opponent Sets */
-    2fr     /* Opponent Gates */
-    2fr     /* Your Gates */
-    1fr     /* Your Sets */
-    2fr;    /* Your Hand */
-  overflow: hidden;     /* no scrolling */
+    0.6fr
+    minmax(10vh, 1fr)
+    minmax(22vh, 2fr)
+    minmax(22vh, 2fr)
+    minmax(10vh, 1fr)
+    minmax(17vh, 2fr)
+    0.6fr;
+
+  overflow: hidden;
   background: radial-gradient(circle at center, #0b1b2b 0%, #02060a 60%, #000 100%);
   color: #f5f5f5;
 }
 
-/* HUDs */
-.hud {
+/* ============================================================
+   ROWS
+   ============================================================ */
+.row {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  padding: 4px 12px;
-  font-size: 0.9rem;
+  gap: 1vh;
+  overflow: visible;
 }
 
-.hud-opponent {
-  opacity: 0.8;
+/* ============================================================
+   HAND ROW — FIXED SPACING + SHRINK-WRAP
+   ============================================================ */
+.row-hand {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 0.4vh;          /* tighter spacing */
+  overflow: visible;
+  flex-wrap: nowrap;
+}
+
+/* Wrapper around each hand card */
+.slot-hand {
+  display: inline-flex;
+  justify-content: center;
+  align-items: flex-end;
+
+  width: auto;
+  height: auto;
+
+  flex: 0 0 auto;      /* ⭐ prevents stretching */
+  padding: 0;
+  margin: 0;
+}
+
+/* ============================================================
+   HAND CARD
+   ============================================================ */
+.card-hand {
+  display: inline-flex;   /* ⭐ shrink to card size */
+  justify-content: center;
+  align-items: center;
+
+  height: min(17vh, 14vw);
+  width: calc(min(17vh, 14vw) * 0.75);
+
+  flex: 0 0 auto;         /* ⭐ do not grow or shrink */
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.card-hand img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.card-hand:hover {
+  transform: translateY(-0.8vh) scale(1.03);
+  box-shadow: 0 0 2vh rgba(0,200,255,0.7);
+}
+
+/* ============================================================
+   GATE SLOTS
+   ============================================================ */
+.slot-gate {
+  height: 20vh;
+  width: calc(20vh * 0.75);
+  border-radius: 1vh;
+  border: 0.3vh solid rgba(0,200,255,0.5);
+  background: radial-gradient(circle at top, rgba(0,200,255,0.25), rgba(10,20,35,0.9));
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  flex: 0 1 auto;
+  min-height: 0;
+  min-width: 0;
+}
+
+.slot-gate img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+/* Gate stack */
+.gate-stack {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* ⭐ Clean, readable, tactile stacking */
+.gate-card {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+
+  /* The magic: each card shifts slightly more than the last */
+  top: calc(var(--i) * -0.3vh);
+  left: calc(var(--i) * 0.2vh);
+
+  /* Slight shadow for depth */
+  filter: drop-shadow(0 0.4vh 0.6vh rgba(0,0,0,0.6));
+
+  /* Ensure later cards appear on top */
+  z-index: calc(var(--i) + 1);
+}
+
+
+/* ============================================================
+   SET ZONES — SHORT, RECTANGULAR, NON-OVERLAPPING
+   ============================================================ */
+.slot-set {
+  height: 8vh;                     /* short rectangle */
+  width: calc(8vh * 1.8);          /* wide, MTGO-style */
+  border-radius: 0.6vh;
+  border: 0.25vh solid rgba(255,255,255,0.25);
+
+  background: #111;
+  overflow: hidden;                /* ⭐ crop the card */
+  position: relative;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  flex: 0 0 auto;
+}
+
+/* Cards inside set zones shrink to fit the short rectangle */
+.slot-set img {
+  width: calc(8vh * 1.8);;
+  object-fit: cover;               /* fill horizontally */
+  object-position: center;         /* ⭐ show the middle of the card */
+  pointer-events: none;            /* hover handled by wrapper */
+  transition: transform 0.2s ease;
+}
+
+.slot-set:hover img {
+  transform: scale(1.05);
+}
+
+/* Opponent set card back */
+.card-back {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 1.6vh;
+  color: rgba(255,255,255,0.8);
+  background: linear-gradient(135deg, #222, #444);
+  border-radius: inherit;
+  border: 0.25vh solid rgba(255,255,255,0.2);
+}
+
+/* ============================================================
+   HOVER PREVIEW
+   ============================================================ */
+.hover-preview {
+  position: absolute;
+  top: 10%;
+  left: 2vh;
+  z-index: 999;
+  pointer-events: none;
+}
+
+.hover-preview img {
+  height: 50vh;        /* smaller, cleaner */
+  width: auto;
+  border-radius: 1vh;
+  box-shadow: 0 0 2vh rgba(0,0,0,0.6);
+}
+
+/* ============================================================
+   HUD
+   ============================================================ */
+.hud {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.2vh;
+  font-size: 1.8vh;
 }
 
 .hud-player {
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  padding-top: 8px;
-}
-
-.hud-name {
-  font-weight: 700;
-}
-
-.hud-stats {
-  display: flex;
-  gap: 12px;
-  font-size: 0.8rem;
-}
-
-.hud-turn {
-  display: flex;
-  align-items: center;
-  gap: 12px;
+  border-top: 0.2vh solid rgba(255,255,255,0.1);
+  padding-top: 0.5vh;
 }
 
 .turn-indicator {
-  padding: 2px 8px;
+  padding: 0.4vh 1vh;
   border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  font-size: 0.8rem;
+  border: 0.2vh solid rgba(255,255,255,0.3);
+  font-size: 1.6vh;
   opacity: 0.7;
 }
 
@@ -71,197 +245,101 @@ html, body {
   opacity: 1;
 }
 
-.end-turn-button {
-  padding: 4px 10px;
+.hud-player button {
+  padding: 0.6vh 1.4vh;
   border-radius: 999px;
   border: none;
   background: #e67e22;
   color: #fff;
   font-weight: 600;
   cursor: pointer;
-  font-size: 0.8rem;
+  font-size: 1.6vh;
 }
 
-.end-turn-button:disabled {
-  background: #555;
-  cursor: default;
-}
+/* ============================================================
+   RIGHT PANEL
+   ============================================================ */
+.right-panel {
+  position: absolute;
+  right: 2vh;
+  top: 50%;
+  transform: translateY(-50%);
 
-/* Rows */
-.row {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 12px;
+  flex-direction: column;
+  gap: 2vh;
+  z-index: 50;
 }
 
-/* Gates rows: big, emphasized */
-.row-gates {
-  padding: 4px 0;
-}
-
-.row-gates-opponent {
-  transform: scale(1);
-}
-
-.row-gates-player {
-  transform: scale(1);
-}
-
-/* Sets rows: compact */
-.row-sets {
-  padding: 2px 0;
-  opacity: 0.85;
-}
-
-/* Hand row */
-.row-hand {
-  padding: 4px 0;
-  overflow-x: auto;
-}
-
-/* Slots */
-.slot {
-  width: 120px;
-  height: 160px;
-  border-radius: 10px;
-  border: 2px dashed rgba(255, 255, 255, 0.15);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(10, 20, 35, 0.8);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
-  box-sizing: border-box;
-}
-
-.slot-gate {
-  width: 150px;
-  height: 200px;
-  border-style: solid;
-  border-color: rgba(0, 200, 255, 0.5);
-  background: radial-gradient(circle at top, rgba(0, 200, 255, 0.25), rgba(10, 20, 35, 0.9));
-}
-
-.slot-set {
-  width: 90px;
-  height: 120px;
-  border-radius: 8px;
-  border-color: rgba(255, 255, 255, 0.2);
-}
-
-/* Placeholder text */
-.slot-placeholder {
-  font-size: 0.8rem;
-  opacity: 0.6;
-}
-
-/* Cards */
-.card {
-  width: 100%;
-  height: 100%;
-  border-radius: inherit;
-  overflow: hidden;
+.pile {
   position: relative;
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.8);
+  height: 12vh;
+  width: calc(12vh * 0.75);
+  border-radius: 1vh;
+  border: 0.3vh solid rgba(255,255,255,0.3);
+  background: linear-gradient(135deg, #222, #444);
+  display: flex;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
 }
 
-.card img {
+.pile-card {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  border-radius: inherit;
+  background: linear-gradient(135deg, #333, #555);
 }
 
-/* Gate cards: let art shine */
-.card-gate .card-label {
+.pile-count {
   position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 4px 6px;
-  font-size: 0.75rem;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
-}
-
-/* Set cards: compact */
-.card-set {
-  font-size: 0.7rem;
-}
-
-.card-set img {
-  filter: saturate(0.8);
-}
-
-.card-set-opponent .card-back {
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, #222, #555);
+  bottom: -1.5vh;
+  right: -1.5vh;
+  background: #111;
+  border: 0.25vh solid rgba(255,255,255,0.3);
+  border-radius: 50%;
+  width: 4vh;
+  height: 4vh;
   display: flex;
-  align-items: center;
   justify-content: center;
-  font-size: 0.75rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  opacity: 0.9;
+  align-items: center;
+  font-size: 1.6vh;
+  color: #fff;
 }
 
-/* Hand cards */
-.card-hand {
-  width: 120px;
-  height: 170px;
-  flex: 0 0 auto;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
-}
-
-.card-hand:hover {
-  transform: translateY(-8px) scale(1.03);
-  box-shadow: 0 0 18px rgba(0, 200, 255, 0.7);
-}
-
-.card-hand .card-label {
+/* ============================================================
+   BOTTOM RIGHT PANEL
+   ============================================================ */
+.bottom-right-panel {
   position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 4px 6px;
-  font-size: 0.75rem;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.85), transparent);
+  right: 2vh;
+  bottom: 2vh;
+
+  display: flex;
+  flex-direction: row;
+  gap: 2vh;
+  z-index: 50;
 }
 
-.card-hand.selected {
-  outline: 2px solid #00c8ff;
-  transform: translateY(-8px) scale(1.03);
+.leader-slot,
+.extra-slot {
+  height: 14vh;
+  width: calc(14vh * 0.75);
+  border-radius: 1vh;
+  border: 0.3vh solid rgba(255,255,255,0.3);
+  background: linear-gradient(135deg, #222, #444);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.gate-stack {
-  position: relative;
+.leader-slot img {
   width: 100%;
   height: 100%;
+  object-fit: contain;
 }
 
-.gate-card {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  top: calc(var(--i) * -4px);
-  left: calc(var(--i) * 2px);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
-  transition: transform 0.2s ease, opacity 0.2s ease;
-}
-
-.hover-preview {
-  position: absolute;
-  bottom: 25%; /* adjust to taste */
-  left: 15%;
-  transform: translateX(-50%);
-  z-index: 999;
-  pointer-events: none;
-}
-
-.hover-preview img {
-  width: 300px;
-  height: auto;
-  border-radius: 8px;
-  box-shadow: 0 0 20px rgba(0,0,0,0.6);
+.extra-count {
+  font-size: 2vh;
+  color: #fff;
 }

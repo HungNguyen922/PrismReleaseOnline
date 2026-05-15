@@ -27,19 +27,43 @@ function generateGameId() {
 }
 
 function buildStateForPlayer(gameState, playerId) {
-  const bottomId = gameState.players.bottom?.id;
-  const topId = gameState.players.top?.id;
-
-  const isBottom = playerId === bottomId;
-  const isTop = playerId === topId;
+  const isBottom = gameState.players.bottom.id === playerId;
 
   return {
     ...gameState,
 
-    // Hands: show mine, hide opponent
-    handBottom: isBottom ? gameState.handBottom : gameState.handBottom.map(() => null),
-    handTop:    isTop    ? gameState.handTop    : gameState.handTop.map(() => null),
+    hands: {
+      top: isBottom
+        ? gameState.hands.top.map(() => null)
+        : gameState.hands.top,
+
+      bottom: isBottom
+        ? gameState.hands.bottom
+        : gameState.hands.bottom.map(() => null)
+    },
+
+    sets: {
+      top: isBottom
+        ? gameState.sets.top.map(card => (card ? { ...card, hidden: true } : null))
+        : gameState.sets.top,
+
+      bottom: isBottom
+        ? gameState.sets.bottom
+        : gameState.sets.bottom.map(card => (card ? { ...card, hidden: true } : null))
+    },
+
+    gates: {
+      top: gameState.gates.top,
+      bottom: gameState.gates.bottom
+    }
   };
+}
+
+function fillToFour(state, playerSide) {
+  const hand = state.hands[playerSide];
+  while (hand.length < 4 && state.drawPile.length > 0) {
+    hand.push(state.drawPile.shift());
+  }
 }
 
 
@@ -189,7 +213,12 @@ io.on("connection", (socket) => {
     const game = games[gameId];
     if (!game) return;
 
-    applyPatch(game.state, patch);
+    const playerId = socket.handshake.auth.playerId;
+
+    applyPatch(game.state, {
+      ...patch,
+      playerId
+    });
 
     const p1Id = game.players.p1;
     const p2Id = game.players.p2;
@@ -197,8 +226,8 @@ io.on("connection", (socket) => {
     const cloned = JSON.parse(JSON.stringify(game.state));
     io.to(p1Id).emit("gameState", buildStateForPlayer(cloned, p1Id));
     io.to(p2Id).emit("gameState", buildStateForPlayer(cloned, p2Id));
-
   });
+
 
   // --- DISCONNECT ---
   socket.on("disconnect", () => {
