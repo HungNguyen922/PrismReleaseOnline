@@ -34,6 +34,8 @@ export default function DeckPanel({
       }}
     >
       <h2>Deck</h2>
+
+      {/* Deck Name */}
       <input
         type="text"
         value={deckName}
@@ -41,7 +43,6 @@ export default function DeckPanel({
         placeholder="Deck Name"
         className="deck-name-input"
       />
-
 
       {/* Export / Import */}
       <div style={{ display: "flex", gap: "8px", marginBottom: "12px" }}>

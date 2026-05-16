@@ -1,14 +1,16 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import "./deckselect.css";
 import { decodeDeck } from "../../game/DeckCode";
-import allCards from "../../game/allCards";
 import VisualDeckView from "../../components/deckview/VisualDeckView";
 import GameClient from "../../game/GameClient";
 
 export default function DeckSelect() {
   const navigate = useNavigate();
+
+  const [cards, setCards] = useState([]);          // NEW: DB cards
+  const [loadingCards, setLoadingCards] = useState(true);
 
   const [deckCode, setDeckCode] = useState("");
   const [decodedDeck, setDecodedDeck] = useState(null);
@@ -17,6 +19,22 @@ export default function DeckSelect() {
   const [joining, setJoining] = useState(false);
   const [joinCode, setJoinCode] = useState("");
 
+  // -----------------------------
+  // Load cards from database
+  // -----------------------------
+  useEffect(() => {
+    async function loadCards() {
+      const res = await fetch("/api/cards");
+      const data = await res.json();
+      setCards(data);
+      setLoadingCards(false);
+    }
+    loadCards();
+  }, []);
+
+  // -----------------------------
+  // Decode deck code
+  // -----------------------------
   function handleDeckCodeChange(e) {
     const code = e.target.value;
     setDeckCode(code);
@@ -27,15 +45,19 @@ export default function DeckSelect() {
       return;
     }
 
+    if (loadingCards) {
+      setError("Loading card database...");
+      return;
+    }
+
     try {
       const [name, encoded] = code.split("::");
-      const decoded = decodeDeck(encoded.trim(), allCards);
+      const decoded = decodeDeck(encoded.trim(), cards);   // FIXED
       decoded.name = name.trim();
 
       setDecodedDeck(decoded);
       setError("");
 
-      // Store selected deck in GameClient
       GameClient.setState({ selectedDeck: decoded });
     } catch (err) {
       setDecodedDeck(null);

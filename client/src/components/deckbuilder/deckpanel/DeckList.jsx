@@ -65,7 +65,9 @@ export default function DeckList({
             cursor: isDragging ? "pointer" : "default",
           }}
         >
-          <span>{card.Name}</span>
+          {/* ⭐ FIXED: DB uses card.name */}
+          <span>{card.name}</span>
+
           <button
             onClick={() => removeCard(i)}
             style={{

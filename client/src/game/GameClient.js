@@ -4,12 +4,10 @@ import { io } from "socket.io-client";
 const SERVER_URL = "http://localhost:4000";
 
 // ------------------------------------------------------------
-// Persistent Player Identity
+// Authenticated User Identity
 // ------------------------------------------------------------
-if (!localStorage.getItem("playerId")) {
-  localStorage.setItem("playerId", crypto.randomUUID());
-}
-const PLAYER_ID = localStorage.getItem("playerId");
+const token = localStorage.getItem("token");
+const user = JSON.parse(localStorage.getItem("user") || "{}");
 
 // ------------------------------------------------------------
 // Internal State
@@ -28,7 +26,7 @@ if (!window.__GAME_SOCKET__) {
     reconnection: true,
     reconnectionAttempts: 10,
     reconnectionDelay: 500,
-    auth: { playerId: PLAYER_ID }
+    auth: { token }
   });
 
   window.__GAME_SOCKET__.on("connect", () => {
@@ -51,9 +49,13 @@ const socket = window.__GAME_SOCKET__;
 // GameClient Object
 // ------------------------------------------------------------
 const GameClient = {
+  get user() {
+    return user;
+  },
+
   get state() {
     return {
-      playerId: PLAYER_ID,
+      user,
       playerSide,
       gameState: currentState
     };
@@ -66,24 +68,25 @@ const GameClient = {
   setState(newState) {
     currentState = JSON.parse(JSON.stringify(newState));
 
-    // Infer which side I am based on my PLAYER_ID
-    const me = PLAYER_ID;
+    const myId = user.id;
 
-    if (currentState.players?.bottom?.id === me) {
-        playerSide = "bottom";
-    } else if (currentState.players?.top?.id === me) {
-        playerSide = "top";
+    if (currentState.players?.bottom?.id === myId) {
+      playerSide = "bottom";
+    } else if (currentState.players?.top?.id === myId) {
+      playerSide = "top";
     }
 
     listeners.forEach((fn) => fn(currentState));
-    },
-
+  },
 
   subscribe(fn) {
     listeners.add(fn);
     return () => listeners.delete(fn);
   },
 
+  // ------------------------------------------------------------
+  // Server API (Unified + Correct)
+  // ------------------------------------------------------------
   server: {
     createLobby(callback) {
       socket.emit("createLobby");
@@ -92,6 +95,11 @@ const GameClient = {
 
     attemptJoinLobby(gameId) {
       socket.emit("attemptJoinLobby", gameId);
+    },
+
+    // ⭐ REQUIRED for matchmaking to work
+    requestLobbyState(gameId) {
+      socket.emit("requestLobbyState", gameId);
     },
 
     uploadDeck(deck, gameId) {
@@ -106,12 +114,13 @@ const GameClient = {
       socket.emit("patch", { gameId, patch });
     },
 
+    // Optional — some servers use this
     requestGameState(gameId) {
       socket.emit("requestGameState", gameId);
     },
 
     drawCard(gameId) {
-      socket.emit("drawCard", { gameId, playerId: PLAYER_ID });
+      socket.emit("drawCard", { gameId });
     }
   },
 

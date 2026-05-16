@@ -193,8 +193,19 @@ export default function GameBoard() {
         </div>
 
         <div className="extra-slot" onClick={() => drawCards(1, myCanonicalSide)}>
+          <div className="extra-preview">
+            {extraDeck.slice(0, 3).map((card, i) => (
+              <img
+                key={card.id}
+                src={card.image}
+                style={{ "--i": i }}
+                className="extra-card"
+              />
+            ))}
+          </div>
           <div className="extra-count">{extraDeck.length}</div>
         </div>
+
       </div>
 
       {/* Hover Preview */}

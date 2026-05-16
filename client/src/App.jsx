@@ -7,6 +7,7 @@ import DeckBuilder from "./components/deckbuilder/DeckBuilder.jsx";
 import DeckSelect from "./pages/deckselect/DeckSelect.jsx";
 import MatchMaking from "./pages/matchmaking/MatchMaking.jsx";
 import GameBoard from "./pages/gameboard/GameBoard.jsx";
+import Login from "./pages/LoginPage.jsx";
 import GameClient from "./game/GameClient.js";
 
 const linkStyle = ({ isActive }) => ({
@@ -45,22 +46,27 @@ export default function App() {
         <NavLink to="/gallery" style={linkStyle}>Gallery</NavLink>
         <NavLink to="/deck" style={linkStyle}>Deck Builder</NavLink>
         <NavLink to="/deckselect" style={linkStyle}>Matchmaking</NavLink>
+        <NavLink to="/login" style={linkStyle}>Login</NavLink>
       </nav>
 
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/gallery" element={<Gallery />} />
-        <Route path="/deck" element={<DeckBuilder />} />
+      <div style={{ paddingTop: "80px" }}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/gallery" element={<Gallery />} />
+          <Route path="/deck" element={<DeckBuilder />} />
 
-        {/* Phase 1 */}
-        <Route path="/deckselect" element={<DeckSelect />} />
+          {/* Phase 1 */}
+          <Route path="/deckselect" element={<DeckSelect />} />
 
-        {/* Phase 2 */}
-        <Route path="/matchmaking/:gameId" element={<MatchMaking />} />
+          {/* Phase 2 */}
+          <Route path="/matchmaking/:gameId" element={<MatchMaking />} />
 
-        {/* Phase 3 */}
-        <Route path="/game/:gameId" element={<GameBoard />} />
-      </Routes>
+          {/* Phase 3 */}
+          <Route path="/game/:gameId" element={<GameBoard />} />
+
+          <Route path="/login" element={<Login />} />
+        </Routes>
+      </div>
     </Router>
   );
 }

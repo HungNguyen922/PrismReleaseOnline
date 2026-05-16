@@ -1,4 +1,3 @@
-import { formatCardName } from "../../utils/formatCardName";
 import { getPalette } from "./palette";
 
 export default function CardModal({
@@ -8,7 +7,6 @@ export default function CardModal({
   onAddExtra,
   onSetLeader
 }) {
-  const fileName = formatCardName(card.Name) + ".png";
   const palette = getPalette(card);
 
   return (
@@ -36,12 +34,13 @@ export default function CardModal({
           boxShadow: "0 18px 40px rgba(0,0,0,0.9)",
           maxWidth: "800px",
           width: "90%",
+          position: "relative"
         }}
       >
         {/* Card Image */}
         <img
-          src={`/cardDatabase/${fileName}`}
-          alt={card.Name}
+          src={card.image_url}
+          alt={card.name}
           style={{
             width: "300px",
             borderRadius: "14px",
@@ -51,23 +50,23 @@ export default function CardModal({
 
         {/* Card Info */}
         <div style={{ flex: 1, color: "white" }}>
-          <h2 style={{ marginTop: 0 }}>{card.Name}</h2>
+          <h2 style={{ marginTop: 0 }}>{card.name}</h2>
 
-          <p><strong>Power:</strong> {card.Power}</p>
-          <p><strong>Bulk:</strong> {card.Bulk}</p>
+          <p><strong>Power:</strong> {card.power}</p>
+          <p><strong>Bulk:</strong> {card.bulk}</p>
 
           <p>
             <strong>Palette:</strong>{" "}
             {palette.length ? palette.join(", ") : "—"}
           </p>
 
-          <p><strong>Trait:</strong> {card.Trait || "—"}</p>
+          <p><strong>Trait:</strong> {card.trait || "—"}</p>
 
-          <p><strong>Effect 1:</strong> {card.Effect1 || "—"}</p>
-          <p><strong>Effect 2:</strong> {card.Effect2 || "—"}</p>
+          <p><strong>Effect 1:</strong> {card.effect1 || "—"}</p>
+          <p><strong>Effect 2:</strong> {card.effect2 || "—"}</p>
 
           <p style={{ opacity: 0.7 }}>
-            <strong>Release Set:</strong> {card.CardSet || "—"}
+            <strong>Release Set:</strong> {card.cardset || "—"}
           </p>
 
           {/* Buttons */}

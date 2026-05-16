@@ -31,34 +31,36 @@ function base64UrlToBytes(str) {
   return bytes;
 }
 
+// ⭐ Updated to use card.name (lowercase)
 function groupByName(cards) {
   const map = new Map();
   cards.forEach((card) => {
-    if (!map.has(card.Name)) map.set(card.Name, { card, count: 0 });
-    map.get(card.Name).count++;
+    if (!map.has(card.name)) map.set(card.name, { card, count: 0 });
+    map.get(card.name).count++;
   });
   return Array.from(map.values());
 }
 
-export function encodeDeck({ leader, main, extra }) { 
+export function encodeDeck({ leader, main, extra }) {
   const bytes = [];
 
   bytes.push(VERSION);
 
-  const leaderHash = leader ? hashCardName(leader.Name) : 0xffff;
+  // ⭐ leader.name instead of leader.Name
+  const leaderHash = leader ? hashCardName(leader.name) : 0xffff;
   bytes.push((leaderHash >> 8) & 0xff, leaderHash & 0xff);
 
   const mainGroups = groupByName(main);
   bytes.push(mainGroups.length);
   mainGroups.forEach(({ card, count }) => {
-    const h = hashCardName(card.Name);
+    const h = hashCardName(card.name);
     bytes.push((h >> 8) & 0xff, h & 0xff, count);
   });
 
   const extraGroups = groupByName(extra);
   bytes.push(extraGroups.length);
   extraGroups.forEach(({ card, count }) => {
-    const h = hashCardName(card.Name);
+    const h = hashCardName(card.name);
     bytes.push((h >> 8) & 0xff, h & 0xff, count);
   });
 
@@ -82,8 +84,10 @@ export function decodeDeck(code, allCards) {
   };
 
   const leaderHash = readU16();
+
+  // ⭐ Updated to use card.name
   const findByHash = (h) =>
-    allCards.find((c) => hashCardName(c.Name) === h) || null;
+    allCards.find((c) => hashCardName(c.name) === h) || null;
 
   const leader =
     leaderHash === 0xffff ? null : findByHash(leaderHash);

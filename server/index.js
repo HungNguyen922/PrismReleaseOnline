@@ -1,16 +1,24 @@
 // server/index.js
-const express = require("express");
-const http = require("http");
-const { Server } = require("socket.io");
-const cors = require("cors");
+import express from "express";
+import http from "http";
+import { Server } from "socket.io";
+import cors from "cors";
+import crypto from "crypto";
 
-const createNewGameState = require("./game/createNewGameState");
-const mergeDecks = require("./game/mergeDecks");
-const applyPatch = require("./game/applyPatch");
+import { authRouter, verifySocketToken } from "./auth.js";
+import { cardsRouter } from "./cards.js";
+
+import createNewGameState from "./game/createNewGameState.js";
+import mergeDecks from "./game/mergeDecks.js";
+import applyPatch from "./game/applyPatch.js";
 
 const app = express();
 app.use(cors());
 app.use(express.json());
+
+// HTTP auth + API routes
+app.use("/api", authRouter);
+app.use("/api/cards", cardsRouter);
 
 const server = http.createServer(app);
 
@@ -66,25 +74,30 @@ function fillToFour(state, playerSide) {
   }
 }
 
+// 🔐 authenticate sockets with JWT (from auth.js)
+io.use(verifySocketToken);
 
 io.on("connection", (socket) => {
-  const playerId = socket.handshake.auth.playerId;
-  console.log("Player connected:", socket.id, "as", playerId);
+  const userId = socket.user.id;
+  const username = socket.user.username;
 
-  socket.join(playerId);
+  console.log("Player connected:", socket.id, "user:", username, userId);
+
+  // join a personal room for targeted emits
+  socket.join(userId);
 
   // --- CREATE LOBBY ---
   socket.on("createLobby", () => {
-    const gameId = Math.random().toString(36).substring(2, 8).toUpperCase();
+    const gameId = generateGameId();
 
     lobbies[gameId] = {
-      players: [playerId],
+      players: [userId],
       spectators: [],
-      status: "waiting",
+      status: "waiting"
     };
 
     socket.join(gameId);
-    console.log(`Lobby ${gameId} created by ${playerId}`);
+    console.log(`Lobby ${gameId} created by ${userId}`);
 
     socket.emit("lobbyCreated", gameId);
     io.to(gameId).emit("lobbyUpdate", { players: lobbies[gameId].players });
@@ -98,10 +111,10 @@ io.on("connection", (socket) => {
       return;
     }
 
-    if (!lobby.players.includes(playerId)) {
-      lobby.players.push(playerId);
+    if (!lobby.players.includes(userId)) {
+      lobby.players.push(userId);
       socket.join(gameId);
-      console.log(`Player ${playerId} joined lobby ${gameId}`);
+      console.log(`Player ${userId} joined lobby ${gameId}`);
     }
 
     io.to(gameId).emit("lobbyUpdate", { players: lobby.players });
@@ -112,7 +125,7 @@ io.on("connection", (socket) => {
 
       games[gameId] = {
         state: createNewGameState(),
-        players: { p1: lobby.players[0], p2: lobby.players[1] },
+        players: { p1: lobby.players[0], p2: lobby.players[1] }
       };
 
       const state = games[gameId].state;
@@ -130,7 +143,10 @@ io.on("connection", (socket) => {
       socket.emit("lobbyError", "Lobby does not exist");
       return;
     }
-    socket.emit("lobbyUpdate", { players: lobby.players, spectators: lobby.spectators || [] });
+    socket.emit("lobbyUpdate", {
+      players: lobby.players,
+      spectators: lobby.spectators || []
+    });
   });
 
   // --- UPLOAD DECK (UPDATED WITH UNIQUE IDs) ---
@@ -141,17 +157,14 @@ io.on("connection", (socket) => {
       return;
     }
 
-    const slot = playerId === game.players.p1 ? "p1" : "p2";
+    const slot = userId === game.players.p1 ? "p1" : "p2";
 
-    // Normalize deck format
     const rawDeck = deck.main || deck;
-
     if (!Array.isArray(rawDeck)) {
       console.log("uploadDeck: mainDeck is not array", rawDeck);
       return;
     }
 
-    // ⭐ Assign unique IDs to every card instance
     const mainDeck = rawDeck.map(card => ({
       ...card,
       id: crypto.randomUUID()
@@ -171,14 +184,13 @@ io.on("connection", (socket) => {
       return;
     }
 
-    const slot = playerId === game.players.p1 ? "p1" : "p2";
+    const slot = userId === game.players.p1 ? "p1" : "p2";
 
     if (slot === "p1") game.state.p1Ready = true;
     if (slot === "p2") game.state.p2Ready = true;
 
     console.log(`${slot} is ready in game ${gameId}`);
 
-    // Ensure decks exist before merging
     if (!Array.isArray(game.state.deckP1) || !Array.isArray(game.state.deckP2)) {
       console.log("Decks not uploaded yet — waiting");
       return;
@@ -189,6 +201,7 @@ io.on("connection", (socket) => {
       console.log(`Decks merged for game ${gameId}`);
 
       io.to(gameId).emit("startGame", { gameId });
+
       const p1Id = game.players.p1;
       const p2Id = game.players.p2;
 
@@ -202,10 +215,11 @@ io.on("connection", (socket) => {
   socket.on("requestGameState", (gameId) => {
     const game = games[gameId];
     if (!game) return;
+
     socket.join(gameId);
-    
+
     const cloned = JSON.parse(JSON.stringify(game.state));
-    socket.emit("gameState", buildStateForPlayer(cloned, playerId));
+    socket.emit("gameState", buildStateForPlayer(cloned, userId));
   });
 
   // --- PATCH ---
@@ -213,11 +227,9 @@ io.on("connection", (socket) => {
     const game = games[gameId];
     if (!game) return;
 
-    const playerId = socket.handshake.auth.playerId;
-
     applyPatch(game.state, {
       ...patch,
-      playerId
+      playerId: userId
     });
 
     const p1Id = game.players.p1;
@@ -228,14 +240,13 @@ io.on("connection", (socket) => {
     io.to(p2Id).emit("gameState", buildStateForPlayer(cloned, p2Id));
   });
 
-
   // --- DISCONNECT ---
   socket.on("disconnect", () => {
-    console.log("Player disconnected:", playerId);
+    console.log("Player disconnected:", userId);
 
     setTimeout(() => {
       const stillConnected = [...io.sockets.sockets.values()]
-        .some(s => s.handshake.auth.playerId === playerId);
+        .some(s => s.user && s.user.id === userId);
 
       if (stillConnected) return;
 
@@ -243,8 +254,8 @@ io.on("connection", (socket) => {
         const game = games[gameId];
         if (!game) continue;
 
-        if (game.players.p1 === playerId) game.players.p1 = null;
-        if (game.players.p2 === playerId) game.players.p2 = null;
+        if (game.players.p1 === userId) game.players.p1 = null;
+        if (game.players.p2 === userId) game.players.p2 = null;
 
         if (!game.players.p1 && !game.players.p2) {
           delete games[gameId];
@@ -255,6 +266,7 @@ io.on("connection", (socket) => {
   });
 });
 
-server.listen(4000, () => {
-  console.log("Game server running on port 4000");
+const PORT = process.env.PORT || 4000;
+server.listen(PORT, () => {
+  console.log(`Game server running on port ${PORT}`);
 });

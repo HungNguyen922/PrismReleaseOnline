@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import Card from "../components/Card";
 import CardModal from "../components/deckbuilder/CardModal";
-import allCards from "../game/allCards";
 
 export default function Gallery() {
   const [cards, setCards] = useState([]);
@@ -19,7 +18,12 @@ export default function Gallery() {
   };
 
   useEffect(() => {
-    setCards(allCards);
+    async function loadCards() {
+      const res = await fetch("/api/cards");
+      const data = await res.json();
+      setCards(data);
+    }
+    loadCards();
   }, []);
 
   return (

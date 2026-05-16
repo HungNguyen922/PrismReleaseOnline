@@ -1,5 +1,5 @@
 // server/game/drawCard.js
-module.exports = function drawCard(state, playerId) {
+export default function drawCard(state, playerId) {
   // Determine which side this player is on
   const isBottom = state.players.bottom?.id === playerId;
   const isTop = state.players.top?.id === playerId;

@@ -25,3 +25,5 @@ build/
 
 # requries node to run
 allCards.js
+
+.env

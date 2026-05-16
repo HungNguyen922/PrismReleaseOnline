@@ -1,4 +1,4 @@
-module.exports = function mergeDecks(state) {
+export default function mergeDecks(state) {
   // Shuffle helper
   function shuffle(arr) {
     for (let i = arr.length - 1; i > 0; i--) {

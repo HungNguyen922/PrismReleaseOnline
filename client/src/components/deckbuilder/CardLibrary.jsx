@@ -1,5 +1,3 @@
-  import { formatCardName } from "../../utils/formatCardName";
-
 export default function CardLibrary({
   cards,
   addToMain,
@@ -32,11 +30,9 @@ export default function CardLibrary({
           gap: "16px",
         }}>
           {cards.map((card, index) => {
-            const fileName = formatCardName(card.Name) + ".png";
-
             return (
               <div
-                key={index}
+                key={card.id || index}
                 className="card-container"
                 onClick={() => setSelectedCard(card)}
                 onMouseEnter={(e) => {
@@ -56,9 +52,10 @@ export default function CardLibrary({
                   position: "relative",
                 }}
               >
+                {/* ⭐ DB now provides image_url directly */}
                 <img
-                  src={`/cardDatabase/${fileName}`}
-                  alt={card.Name}
+                  src={card.image_url}
+                  alt={card.name}
                   style={{ width: "100%", borderRadius: "8px" }}
                 />
 
@@ -156,6 +153,7 @@ export default function CardLibrary({
                   )}
                 </div>
 
+                {/* ⭐ DB uses card.name */}
                 <div
                   style={{
                     textAlign: "center",
@@ -163,7 +161,7 @@ export default function CardLibrary({
                     fontSize: "0.85rem",
                   }}
                 >
-                  {card.Name}
+                  {card.name}
                 </div>
               </div>
             );

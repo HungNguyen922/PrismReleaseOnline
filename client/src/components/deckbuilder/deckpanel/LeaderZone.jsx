@@ -26,13 +26,13 @@ export default function LeaderZone({
 
       {leader ? (
         <div style={{ marginTop: "8px", opacity: 0.9 }}>
-            {leader.Name}
+          {leader.name}
         </div>
-        ) : (
+      ) : (
         <div style={{ opacity: 0.6, marginTop: "8px" }}>
-            Drag a Leader here
+          Drag a Leader here
         </div>
-    )}
+      )}
     </div>
   );
 }

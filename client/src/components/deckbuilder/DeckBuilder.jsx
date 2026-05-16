@@ -4,9 +4,6 @@ import FiltersPanel from "./FiltersPanel";
 import CardLibrary from "./CardLibrary";
 import DeckPanel from "./deckpanel/DeckPanel";
 import CardModal from "./CardModal";
-import allCards from "../../game/allCards";
-
-import { formatCardName } from "../../utils/formatCardName";
 
 // Hooks
 import useDeckState from "../../hooks/useDeckState";
@@ -72,8 +69,14 @@ export default function DeckBuilder() {
     setDeckName
   );
 
+  // ⭐ Load cards from database
   useEffect(() => {
-    setCards(allCards);
+    async function loadCards() {
+      const res = await fetch("/api/cards");
+      const data = await res.json();
+      setCards(data);
+    }
+    loadCards();
   }, []);
 
   // ⭐ Reset scroll when entering DeckBuilder
@@ -105,20 +108,20 @@ export default function DeckBuilder() {
   return (
     <div
       style={{
-        height: "100vh",               // ⭐ full viewport height
+        height: "100vh",
         display: "grid",
-        gridTemplateRows: "1fr",       // ⭐ force row to stay inside viewport
+        gridTemplateRows: "1fr",
         gridTemplateColumns: "260px 1.6fr 1.1fr",
         gap: "20px",
         padding: "24px",
         background:
           "radial-gradient(circle at top, #1b3b6f 0, #21295c 40%, #0b1025 100%)",
         color: "white",
-        overflow: "hidden",            // ⭐ prevent page scroll
+        overflow: "hidden",
       }}
     >
 
-      {/* ⭐ FILTERS PANEL — scrolls internally */}
+      {/* ⭐ FILTERS PANEL */}
       <div style={{ height: "100%", minHeight: 0, overflowY: "auto" }}>
         <FiltersPanel
           search={search}
@@ -130,7 +133,7 @@ export default function DeckBuilder() {
         />
       </div>
 
-      {/* ⭐ CARD LIBRARY — scrolls internally */}
+      {/* ⭐ CARD LIBRARY */}
       <div style={{ height: "100%", minHeight: 0, overflowY: "auto" }}>
         <CardLibrary
           cards={filteredCards}
@@ -145,7 +148,7 @@ export default function DeckBuilder() {
         />
       </div>
 
-      {/* ⭐ DECK PANEL — scrolls internally */}
+      {/* ⭐ DECK PANEL */}
       <div style={{ height: "100%", minHeight: 0, overflowY: "auto" }}>
         <DeckPanel
           deckName={deckName}
@@ -211,8 +214,8 @@ export default function DeckBuilder() {
           }}
         >
           <img
-            src={`/cardDatabase/${formatCardName(dragCard.Name)}.png`}
-            alt=""
+            src={dragCard.image_url}
+            alt={dragCard.name}
             style={{ width: "100%", borderRadius: "8px" }}
           />
         </div>

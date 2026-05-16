@@ -1,4 +1,4 @@
-module.exports = function createNewGameState() {
+export default function createNewGameState() {
   return {
     players: {
       top: { id: null, name: null },

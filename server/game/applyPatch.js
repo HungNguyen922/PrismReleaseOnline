@@ -1,7 +1,7 @@
 // server/game/applyPatch.js
-const drawCard = require("./drawCard");
+import drawCard from "./drawCard.js";
 
-module.exports = function applyPatch(state, patch) {
+export default function applyPatch(state, patch) {
   const { type, playerId, row } = patch;
 
   // Canonical zones
@@ -24,6 +24,10 @@ module.exports = function applyPatch(state, patch) {
     // ============================================================
     case "PLAY_TO_GATE": {
     const { gateIndex, cardId, row: targetRow } = patch;
+    if (patch.row !== state.turnPlayer) {
+      console.log("Invalid PLAY_TO_GATE: not your turn");
+      return state;
+    }
 
     // hand row is determined by playerId (who is playing)
     const isBottom = state.players.bottom?.id === playerId;
@@ -48,6 +52,10 @@ module.exports = function applyPatch(state, patch) {
   // ============================================================
   case "PLAY_SET_TO_GATE": {
     const { zoneIndex, gateIndex, row: targetRow } = patch;
+    if (patch.row !== state.turnPlayer) {
+      console.log("Invalid PLAY_TO_GATE: not your turn");
+      return state;
+    }
 
     const isBottom = state.players.bottom?.id === playerId;
     const setRow = isBottom ? "bottom" : "top";
@@ -69,6 +77,10 @@ module.exports = function applyPatch(state, patch) {
     // ============================================================
     case "PLAY_COMBO_TO_GATE": {
       const { gateIndex, cardIds } = patch;
+      if (patch.row !== state.turnPlayer) {
+        console.log("Invalid PLAY_TO_GATE: not your turn");
+        return state;
+      }
 
       for (const cardId of cardIds) {
         const card = hand.find(c => c.id === cardId);
@@ -88,6 +100,10 @@ module.exports = function applyPatch(state, patch) {
     // ============================================================
     case "SET_TO_ZONE": {
       const { zoneIndex, cardId } = patch;
+      if (patch.row !== state.turnPlayer) {
+        console.log("Invalid PLAY_TO_GATE: not your turn");
+        return state;
+      }
 
       const card = hand.find(c => c.id === cardId);
       if (!card) return;
@@ -105,6 +121,10 @@ module.exports = function applyPatch(state, patch) {
     // ============================================================
     case "DRAW_CARDS": {
       const { count, row } = patch;
+      if (patch.row !== state.turnPlayer) {
+        console.log("Invalid PLAY_TO_GATE: not your turn");
+        return state;
+      }
       const hand = state.hands[row];
 
       for (let i = 0; i < count; i++) {
@@ -143,8 +163,25 @@ module.exports = function applyPatch(state, patch) {
     // END TURN
     // ============================================================
     case "END_TURN": {
-      state.turnPlayer = row === "bottom" ? "top" : "bottom";
-      break;
+      const { row } = patch;
+      if (patch.row !== state.turnPlayer) {
+        console.log("Invalid PLAY_TO_GATE: not your turn");
+        return state;
+      }
+      
+      // Only allow the current player to end their turn
+      if (state.turnPlayer !== row) {
+        console.log("Invalid END_TURN: not your turn");
+        return state;
+      }
+
+      // Swap turn
+      const next = row === "bottom" ? "top" : "bottom";
+
+      return {
+        ...state,
+        turnPlayer: next
+      };
     }
 
     default:

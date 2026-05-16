@@ -84,7 +84,7 @@ export default function MatchMaking() {
 
     // Request lobby state after joining
     setTimeout(() => {
-      GameClient.server.requestGameState(gameId);
+      GameClient.server.requestLobbyState(gameId);
     }, 50);
 
     return () => {

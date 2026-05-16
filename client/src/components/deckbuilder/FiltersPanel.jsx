@@ -22,21 +22,21 @@ export default function FiltersPanel({
     return counts;
   }, [deckMain]);
 
-  // ⭐ Compute power curve
+  // ⭐ Compute power curve (DB uses lowercase: power)
   const powerCounts = useMemo(() => {
     const counts = {};
     deckMain.forEach((card) => {
-      const p = Number(card.Power);
+      const p = Number(card.power);   // FIXED
       if (!isNaN(p)) counts[p] = (counts[p] || 0) + 1;
     });
     return counts;
   }, [deckMain]);
 
-  // ⭐ Compute bulk curve
+  // ⭐ Compute bulk curve (DB uses lowercase: bulk)
   const bulkCounts = useMemo(() => {
     const counts = {};
     deckMain.forEach((card) => {
-      const b = Number(card.Bulk);
+      const b = Number(card.bulk);   // FIXED
       if (!isNaN(b)) counts[b] = (counts[b] || 0) + 1;
     });
     return counts;
@@ -77,11 +77,9 @@ export default function FiltersPanel({
         borderRadius: "12px",
         background: "rgba(0,0,0,0.35)",
         border: "1px solid rgba(255,255,255,0.1)",
-
-        // ⭐ The magic trio:
-        height: "100%",     // fill the grid row
-        minHeight: 0,       // allow shrinking inside CSS grid
-        overflowY: "auto",  // scroll internally
+        height: "100%",
+        minHeight: 0,
+        overflowY: "auto",
       }}
     >
       <h2 style={{ marginBottom: "12px" }}>Filters</h2>
