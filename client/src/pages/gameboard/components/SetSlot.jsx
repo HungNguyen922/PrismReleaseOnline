@@ -55,7 +55,7 @@ export default function SetSlot({
           // ⭐ Opponent set cards are hidden
           <div className="card-back" aria-label="Opponent set card">Set</div>
         ) : (
-          <img src={card.image} alt={card.name} />
+          <img src={card.image_url} alt={card.name} />
         )
       ) : (
         <div className="slot-placeholder">Set</div>

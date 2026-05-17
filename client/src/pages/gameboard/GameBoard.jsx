@@ -1,3 +1,5 @@
+// FIXED GameBoard.jsx — image fields updated for DB schema
+
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
@@ -22,20 +24,16 @@ export default function GameBoard() {
   const { gameId } = useParams();
   const [state, setState] = useState(null);
 
-  // Subscribe to game state
   useEffect(() => {
     const unsub = GameClient.subscribe(setState);
     if (gameId) GameClient.server.requestGameState(gameId);
     return () => unsub();
   }, [gameId]);
 
-  // state IS the gameState now
   const gs = state;
+  const side = GameClient.state.playerSide;
+  const playerId = GameClient.user.id;
 
-  const side = GameClient.state.playerSide; // "top" or "bottom"
-  const playerId = GameClient.state.playerId;
-
-  // Hooks must run BEFORE any early return
   const mapping = useGameMapping(playerId, state);
   const hover = useGameHover();
   const actions = useGameActions(gameId, playerId, state, mapping);
@@ -43,7 +41,6 @@ export default function GameBoard() {
   const myCanonicalSide = side;
   const oppCanonicalSide = mapping.mapSide(side);
 
-  // Register draw callback
   useEffect(() => {
     if (!actions) return;
     GameActions.setDrawCallback((count) => {
@@ -51,10 +48,7 @@ export default function GameBoard() {
     });
   }, [actions, myCanonicalSide]);
 
-  // Early return AFTER hooks
-  if (!gs) {
-    return <div className="loading">Loading…</div>;
-  }
+  if (!gs) return <div className="loading">Loading…</div>;
 
   const { mirrorRow, toCanonicalIndex } = mapping;
   const { hoverCard, bindHover } = hover;
@@ -68,12 +62,9 @@ export default function GameBoard() {
     endTurn
   } = actions;
 
-  // Canonical → Visual mapping
   const myHand = gs.hands[myCanonicalSide];
-
   const myGates = mirrorRow(gs.gates[myCanonicalSide]);
   const oppGates = mirrorRow(gs.gates[oppCanonicalSide]);
-
   const mySets = mirrorRow(gs.sets[myCanonicalSide]);
   const oppSets = mirrorRow(gs.sets[oppCanonicalSide]);
 
@@ -84,14 +75,9 @@ export default function GameBoard() {
 
   const isMyTurn = gs.turnPlayer === myCanonicalSide;
 
-  // Drag routing
   function handlePlayToGate(gateIndex, row, payload) {
-    if (payload.type === "HAND_CARD") {
-      playHandToGate(gateIndex, row, payload);
-    }
-    if (payload.type === "SET_CARD") {
-      playSetToGate(gateIndex, row, payload);
-    }
+    if (payload.type === "HAND_CARD") playHandToGate(gateIndex, row, payload);
+    if (payload.type === "SET_CARD") playSetToGate(gateIndex, row, payload);
   }
 
   function handlePlayToSet(canonicalIndex, cardId) {
@@ -189,7 +175,7 @@ export default function GameBoard() {
       {/* Bottom Right */}
       <div className="bottom-right-panel">
         <div className="leader-slot">
-          {leader && <img src={leader.image} alt="Leader" />}
+          {leader && <img src={leader.image_url} alt={leader.name} />}
         </div>
 
         <div className="extra-slot" onClick={() => drawCards(1, myCanonicalSide)}>
@@ -197,7 +183,7 @@ export default function GameBoard() {
             {extraDeck.slice(0, 3).map((card, i) => (
               <img
                 key={card.id}
-                src={card.image}
+                src={card.image_url}
                 style={{ "--i": i }}
                 className="extra-card"
               />
@@ -205,13 +191,12 @@ export default function GameBoard() {
           </div>
           <div className="extra-count">{extraDeck.length}</div>
         </div>
-
       </div>
 
       {/* Hover Preview */}
       {hoverCard && (
         <div className="hover-preview">
-          <img src={hoverCard.image} alt={hoverCard.name} />
+          <img src={hoverCard.image_url} alt={hoverCard.name} />
         </div>
       )}
 

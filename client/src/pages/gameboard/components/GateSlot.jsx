@@ -7,13 +7,9 @@ export default function GateSlot({
   playToGate,
   bindHover
 }) {
-  // Top card for hover preview
   const topCard =
     stack && stack.length > 0 ? stack[stack.length - 1] : null;
 
-  // ------------------------------------------------------------
-  // DROP: Hand → Gate OR Set → Gate
-  // ------------------------------------------------------------
   function handleDrop(e) {
     e.preventDefault();
 
@@ -21,8 +17,6 @@ export default function GateSlot({
     if (!raw) return;
 
     const payload = JSON.parse(raw);
-
-    // ⭐ ALWAYS allow playing onto gates (even opponent gates)
     playToGate(canonicalIndex, row, payload);
   }
 
@@ -33,7 +27,6 @@ export default function GateSlot({
       onDrop={handleDrop}
       {...bindHover(topCard)}
     >
-      {/* Empty gate */}
       {(!stack || stack.length === 0) ? (
         <div className="slot-placeholder">Gate</div>
       ) : (
@@ -42,13 +35,17 @@ export default function GateSlot({
             card ? (
               <img
                 key={card.id}
-                src={card.image}
-                alt=""
+                src={card.image_url}        // ⭐ FIXED
+                alt={card.name}
                 className="gate-card"
                 style={{ "--i": i }}
               />
             ) : (
-              <div key={i} className="gate-card placeholder" style={{ "--i": i }}></div>
+              <div
+                key={i}
+                className="gate-card placeholder"
+                style={{ "--i": i }}
+              ></div>
             )
           )}
         </div>

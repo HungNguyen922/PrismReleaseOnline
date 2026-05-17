@@ -27,7 +27,8 @@ export default function useGameActions(gameId, playerId, state, mapping) {
     GameClient.server.sendPatch(gameId, {
       type: "DRAW_FROM_EXTRA",
       index,
-      row: rowFromSlot
+      row: rowFromSlot,
+      playerId
     });
   }
 
@@ -39,7 +40,8 @@ export default function useGameActions(gameId, playerId, state, mapping) {
       GameClient.server.sendPatch(gameId, {
         type: "SCAN_DRAW",
         index,
-        row: rowFromSlot
+        row: rowFromSlot,
+        playerId
       });
     });
   }
@@ -49,7 +51,8 @@ export default function useGameActions(gameId, playerId, state, mapping) {
       type: "PLAY_TO_GATE",
       gateIndex: canonicalGateIndex,
       cardId: payload.cards[0],
-      row: rowFromSlot
+      row: rowFromSlot,
+      playerId
     });
   }
 
@@ -58,7 +61,8 @@ export default function useGameActions(gameId, playerId, state, mapping) {
       type: "SET_TO_ZONE",
       zoneIndex: setIndex,
       cardId,
-      row: rowFromSlot
+      row: rowFromSlot,
+      playerId
     });
   }
 
@@ -67,14 +71,16 @@ export default function useGameActions(gameId, playerId, state, mapping) {
       type: "PLAY_SET_TO_GATE",
       zoneIndex: payload.zoneIndex,
       gateIndex: canonicalGateIndex,
-      row: rowFromSlot
+      row: rowFromSlot,
+      playerId
     });
   }
 
   function endTurn(rowFromSlot) {
     GameClient.server.sendPatch(gameId, {
       type: "END_TURN",
-      row: rowFromSlot
+      row: rowFromSlot,
+      playerId
     });
   }
 

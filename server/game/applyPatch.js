@@ -24,20 +24,28 @@ export default function applyPatch(state, patch) {
     // ============================================================
     case "PLAY_TO_GATE": {
     const { gateIndex, cardId, row: targetRow } = patch;
-    if (patch.row !== state.turnPlayer) {
+
+    // Who is acting?
+    const isBottom = state.players.bottom?.id === playerId;
+    const isTop = state.players.top?.id === playerId;
+    if (!isBottom && !isTop) {
+      console.log("Invalid PLAY_TO_GATE: unknown player");
+      return state;
+    }
+
+    const handRow = isBottom ? "bottom" : "top";
+
+    // Only allow the current player to act
+    if (state.turnPlayer !== handRow) {
       console.log("Invalid PLAY_TO_GATE: not your turn");
       return state;
     }
 
-    // hand row is determined by playerId (who is playing)
-    const isBottom = state.players.bottom?.id === playerId;
-    const handRow = isBottom ? "bottom" : "top";
-
     const hand = state.hands[handRow];
-    const gates = state.gates[targetRow]; // ⭐ targetRow is where the gate lives
+    const gates = state.gates[targetRow]; // targetRow is where the gate lives
 
     const card = hand.find(c => c.id === cardId);
-    if (!card) return;
+    if (!card) return state;
 
     gates[gateIndex].push(card);
 
@@ -46,6 +54,7 @@ export default function applyPatch(state, patch) {
 
     break;
   }
+
 
   // ============================================================
   // PLAY SET CARD TO GATE

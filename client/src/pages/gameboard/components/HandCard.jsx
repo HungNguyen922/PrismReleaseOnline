@@ -16,7 +16,7 @@ export default function HandCard({ card, bindHover }) {
       onDragStart={handleDragStart}
       {...bindHover(card)}
     >
-      <img src={card.image} alt={card.name} />
+      <img src={card.image_url} alt={card.name} />   {/* ⭐ FIXED */}
     </div>
   );
 }

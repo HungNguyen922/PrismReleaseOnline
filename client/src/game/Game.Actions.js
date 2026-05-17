@@ -44,7 +44,7 @@ const GameActions = {
 
     cards.forEach((card, index) => {
       const img = document.createElement("img");
-      img.src = card.image;
+      img.src = card.image_url;
       img.className = "modal-card";
       img.onclick = () => onSelect(index);
       container.appendChild(img);
